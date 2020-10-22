@@ -1,0 +1,9 @@
+@import '../../styles/host.css';
+
+:host {
+    display: block;
+}
+
+.tab-pane {
+    padding: 1rem;
+}

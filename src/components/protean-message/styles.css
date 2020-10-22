@@ -1,0 +1,11 @@
+@import '../../styles/host.css';
+
+:host {
+    display: block;
+}
+
+.message-container {
+    padding: 0.5rem 1rem;
+    background-color: #454545;
+    color: #ffffff;
+}
