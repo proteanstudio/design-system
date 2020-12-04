@@ -3,4 +3,8 @@ export interface FormattedValue {
     formattedValue: string;
 }
 
-export type FormattingFn = (value: string, format?: string) => FormattedValue;
+export type FormattingFn = (
+    value: string,
+    format?: string,
+    explicit?: boolean,
+) => FormattedValue;

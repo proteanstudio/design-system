@@ -11,8 +11,7 @@ export default function formatNumber(
     },
     explicit = false,
 ): FormattedValue {
-    let { decimals } = options;
-    decimals = decimals ?? 0;
+    let decimals = options?.decimals ?? 0;
     const thousandsSeparator = ',';
     const decimalSeparator = '.';
 
@@ -40,7 +39,7 @@ export default function formatNumber(
     return { value: valueString, formattedValue: formattedValueString };
 }
 
-function splitValue(value: string, decimals: number) {
+export function splitValue(value: string, decimals: number) {
     const integerLength = value.length - decimals;
     let integerString = value
         .substring(0, integerLength)
@@ -50,8 +49,9 @@ function splitValue(value: string, decimals: number) {
         integerString = integerString.substring(1);
     }
 
-    const decimalString =
-        value.substring(integerLength)?.padStart(decimals, '0') ?? '';
+    const decimalString = value
+        .substring(integerLength)
+        .padStart(decimals, '0');
 
     return {
         integerString,

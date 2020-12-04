@@ -57,6 +57,7 @@ input:focus + label .checkbox-symbol {
 
 :host([type='toggle']) .checkbox-symbol {
     flex-basis: 45px;
+    border-radius: 10px;
 }
 
 .toggle-path {

@@ -4,7 +4,7 @@ export default async function dispatchEvent(
     page: E2EPage,
     selector: string | string[],
     eventName: string,
-    eventInit?: EventInit,
+    eventInit?: EventInit | CustomEventInit,
 ): Promise<void> {
     let parentSelector = selector;
     let childSelectors;

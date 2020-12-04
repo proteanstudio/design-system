@@ -124,7 +124,7 @@ export class ProteanCheckbox {
         return (
             <svg
                 class="checkbox-symbol"
-                viewBox="0 0 45 22"
+                viewBox="0 0 45 20"
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"
                 focusable="false"

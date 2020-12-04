@@ -3,104 +3,102 @@ import dispatchEvent from '../../utils/test-helpers/dispatchEvent';
 
 describe('protean-input', () => {
     it('renders basic input', async () => {
-        const page = await newE2EPage();
+        const { setContent, find } = await newE2EPage();
 
-        await page.setContent('<protean-input></protean-input>');
-        const labelElement = await page.find('protean-input >>> label');
+        await setContent('<protean-input></protean-input>');
+        const labelElement = await find('protean-input >>> label');
         expect(labelElement).toBeNull();
 
-        const inputElement = await page.find('protean-input >>> input');
+        const inputElement = await find('protean-input >>> input');
 
         expect(inputElement.getAttribute('id')).toContain('protean-input-');
         expect(inputElement).toEqualAttribute('type', 'text');
-        expect(inputElement).toHaveAttribute('required');
+        expect(inputElement).toEqualAttribute('aria-required', 'true');
         expect(inputElement).not.toHaveAttribute('aria-label');
         expect(inputElement).toEqualAttribute('aria-invalid', 'false');
         expect(inputElement).toHaveAttribute('aria-describedby');
 
-        const messageContainer = await page.find(
+        const messageContainer = await find(
             'protean-input >>> .message-container',
         );
         expect(messageContainer).not.toBeNull();
     });
 
     it('handles label and optional props', async () => {
-        const page = await newE2EPage();
+        const { setContent, find, waitForChanges } = await newE2EPage();
 
-        await page.setContent('<protean-input></protean-input>');
+        await setContent('<protean-input></protean-input>');
 
-        let labelElement = await page.find('protean-input >>> label');
+        let labelElement = await find('protean-input >>> label');
         expect(labelElement).toBeNull();
 
-        const proteanInput = await page.find('protean-input');
+        const proteanInput = await find('protean-input');
 
         proteanInput.setProperty('label', 'Label text');
-        await page.waitForChanges();
+        await waitForChanges();
 
-        labelElement = await page.find('protean-input >>> label');
+        labelElement = await find('protean-input >>> label');
 
         expect(labelElement).not.toBeNull();
         expect(labelElement.textContent).toEqual('Label text');
 
-        const inputElement = await page.find('protean-input >>> input');
+        const inputElement = await find('protean-input >>> input');
 
         expect(labelElement).toEqualAttribute(
             'for',
             inputElement.getAttribute('id'),
         );
 
-        let optionalSpan = await page.find('protean-input >>> .optional-tag');
+        let optionalSpan = await find('protean-input >>> .optional-tag');
         expect(optionalSpan).toBeNull();
 
         proteanInput.setProperty('optional', true);
-        await page.waitForChanges();
+        await waitForChanges();
 
-        optionalSpan = await page.find('protean-input >>> .optional-tag');
+        optionalSpan = await find('protean-input >>> .optional-tag');
         expect(optionalSpan).not.toBeNull();
         expect(optionalSpan.textContent.trim()).toEqual('(optional)');
     });
 
     it('correctly binds aria-label', async () => {
-        const page = await newE2EPage();
+        const { setContent, waitForChanges, find } = await newE2EPage();
 
-        await page.setContent('<protean-input></protean-input>');
+        await setContent('<protean-input></protean-input>');
 
-        const inputElement = await page.find('protean-input >>> input');
+        const inputElement = await find('protean-input >>> input');
 
         expect(inputElement).not.toHaveAttribute('aria-label');
 
-        const proteanInput = await page.find('protean-input');
+        const proteanInput = await find('protean-input');
 
         proteanInput.setProperty('ariaLabel', 'aria-label text');
-        await page.waitForChanges();
+        await waitForChanges();
 
         expect(inputElement).toEqualAttribute('aria-label', 'aria-label text');
 
         proteanInput.setProperty('label', 'ariaLabel text');
-        await page.waitForChanges();
+        await waitForChanges();
 
         expect(inputElement).not.toHaveAttribute('aria-label');
     });
 
     it('handles optional binding', async () => {
-        const page = await newE2EPage();
+        const { setContent, find, waitForChanges } = await newE2EPage();
 
-        await page.setContent(
-            '<protean-input label="Label text"></protean-input>',
-        );
+        await setContent('<protean-input label="Label text"></protean-input>');
 
-        const inputElement = await page.find('protean-input >>> input');
-        let optionalSpan = await page.find('protean-input >>> .optional-tag');
+        const inputElement = await find('protean-input >>> input');
+        let optionalSpan = await find('protean-input >>> .optional-tag');
 
-        expect(inputElement).toHaveAttribute('required');
+        expect(inputElement).toEqualAttribute('aria-required', 'true');
         expect(optionalSpan).toBeNull;
 
-        const proteanInput = await page.find('protean-input');
+        const proteanInput = await find('protean-input');
 
         proteanInput.setProperty('optional', true);
-        await page.waitForChanges();
+        await waitForChanges();
 
-        expect(inputElement).not.toHaveAttribute('required');
+        expect(inputElement).toEqualAttribute('aria-required', 'false');
         expect(optionalSpan).not.toBeNull;
     });
 
@@ -197,7 +195,7 @@ describe('protean-input', () => {
         expect(messageContentContainer.textContent.trim()).toEqual('error 1');
     });
 
-    it.only('updates message container height on focus and blur', async () => {
+    it('updates message container height on focus and blur', async () => {
         const page = await newE2EPage();
 
         await page.setContent(
@@ -216,9 +214,9 @@ describe('protean-input', () => {
             'protean-input',
             element => {
                 return {
-                    messageContainerHeight: element.shadowRoot.querySelector<
-                        HTMLDivElement
-                    >('.message-container').style.height,
+                    messageContainerHeight: element.shadowRoot.querySelector<HTMLDivElement>(
+                        '.message-container',
+                    ).style.height,
                     proteanMessageHeight: `${
                         element.shadowRoot
                             .querySelector('.message-container protean-message')
@@ -262,6 +260,117 @@ describe('protean-input', () => {
         expect(messageContainerHeight).toEqual('0px');
     });
 
-    //Test scheduledAfterRender, likely in unit test
-    //Test formatting functions get called in spec, unit test each formatter individually.  Do basic test here to verify filtering
+    it('handles phone input', async () => {
+        const page = await newE2EPage();
+
+        await page.setContent(
+            '<protean-input label="Label text" type="phone"></protean-input>',
+        );
+
+        const inputElement = await page.find('protean-input >>> input');
+
+        expect(inputElement).toEqualAttribute('type', 'tel');
+
+        const proteanInput = await page.find('protean-input');
+        proteanInput.setProperty('value', '12');
+        await page.waitForChanges();
+
+        expect(await inputElement.getProperty('value')).toEqual('(12');
+
+        await inputElement.type('a');
+        await inputElement.type(' ');
+        await inputElement.type('_');
+
+        expect(await inputElement.getProperty('value')).toEqual('(12');
+
+        await inputElement.type('3');
+        await inputElement.type(')');
+
+        expect(await inputElement.getProperty('value')).toEqual('(123)');
+
+        await inputElement.type('4');
+
+        expect(await inputElement.getProperty('value')).toEqual('(123) 4');
+    });
+
+    it('handles numeric input', async () => {
+        const page = await newE2EPage();
+
+        await page.setContent(
+            '<protean-input label="Label text" type="numeric"></protean-input>',
+        );
+
+        const inputElement = await page.find('protean-input >>> input');
+
+        expect(inputElement).toEqualAttribute('type', 'tel');
+
+        const proteanInput = await page.find('protean-input');
+
+        proteanInput.setProperty('value', '12');
+        await page.waitForChanges();
+
+        expect(await inputElement.getProperty('value')).toEqual('12.00');
+
+        await inputElement.type('a');
+        await inputElement.type('!');
+        await inputElement.type('_');
+
+        expect(await inputElement.getProperty('value')).toEqual('12.00');
+
+        await inputElement.type('3');
+
+        expect(await inputElement.getProperty('value')).toEqual('120.03');
+
+        await inputElement.type('4');
+
+        expect(await inputElement.getProperty('value')).toEqual('1,200.34');
+
+        await dispatchEvent(page, ['protean-input', 'input'], 'change');
+
+        proteanInput.setProperty('format', '5dec');
+        await page.waitForChanges();
+
+        expect(await inputElement.getProperty('value')).toEqual('1,200.34000');
+    });
+
+    it('handles date input', async () => {
+        const page = await newE2EPage();
+
+        await page.setContent(
+            '<protean-input label="Label text" type="date"></protean-input>',
+        );
+
+        const inputElement = await page.find('protean-input >>> input');
+
+        expect(inputElement).toEqualAttribute('type', 'tel');
+
+        const proteanInput = await page.find('protean-input');
+
+        proteanInput.setProperty('value', '1');
+        await page.waitForChanges();
+
+        expect(await inputElement.getProperty('value')).toEqual('1');
+
+        await inputElement.type('a');
+        await inputElement.type('!');
+        await inputElement.type('_');
+
+        expect(await inputElement.getProperty('value')).toEqual('1');
+
+        await inputElement.type('2');
+        await inputElement.type('/');
+
+        expect(await inputElement.getProperty('value')).toEqual('12/');
+
+        await inputElement.type('4');
+
+        expect(await inputElement.getProperty('value')).toEqual('12/4');
+
+        await dispatchEvent(page, ['protean-input', 'input'], 'change');
+
+        proteanInput.setProperty('format', 'M/D/YY');
+        await page.waitForChanges();
+
+        expect(await inputElement.getProperty('value')).toEqual('12/4');
+    });
 });

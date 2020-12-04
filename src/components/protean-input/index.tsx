@@ -15,7 +15,7 @@ import formatPhoneNumber from '../../utils/formatting/phone';
 import { FormattedValue, FormattingFn } from '../../utils/formatting/types';
 import { createGuid } from '../../utils/utils';
 
-interface CursorData {
+export interface CursorData {
     startingPosition: number;
     valueLength: number;
     previousValueLength: number;
@@ -40,8 +40,9 @@ export class ProteanInput {
     @Prop({ reflect: true }) suppressMessages: boolean;
     @Prop() ariaLabel: string;
 
-    inputId = `protean-input-${createGuid()}`;
-    descriptionId = `protean-input-description-${createGuid()}`;
+    guid = createGuid();
+    inputId = `protean-input-${this.guid}`;
+    descriptionId = `protean-input-description-${this.guid}`;
     formattedValueObject: FormattedValue;
     cursorData: CursorData;
     scheduledAfterRender: (() => void)[] = [];
@@ -104,7 +105,11 @@ export class ProteanInput {
     }
 
     get showMessages(): boolean {
-        return this.messages && !this.suppressMessages;
+        return (
+            Array.isArray(this.messages) &&
+            this.messages.length > 0 &&
+            !this.suppressMessages
+        );
     }
 
     get messageContainer(): HTMLDivElement {
@@ -148,7 +153,7 @@ export class ProteanInput {
 
         this.inputElement.value = this.formattedValueObject.formattedValue;
 
-        this.setCursorPosition(this.cursorData);
+        this.setCursorPosition();
         if (this.value !== this.formattedValueObject.value) {
             this.input.emit({
                 value: this.formattedValueObject.value,
@@ -172,15 +177,13 @@ export class ProteanInput {
         if (!this.hostElement.onchange) {
             this.value = event.detail.value;
         }
-
-        this.inputElement.onchange;
     }
 
     @Watch('value')
     @Watch('type')
     @Watch('format')
     reformatValue(): void {
-        this.formattedValueObject = this.getFormattedValueObj(this.value);
+        this.formattedValueObject = this.getFormattedValueObj(this.value, true);
         this.inputElement.value = this.formattedValueObject.formattedValue;
     }
 
@@ -198,7 +201,10 @@ export class ProteanInput {
         }
     }
 
-    getFormattedValueObj(value: string = ''): FormattedValue {
+    getFormattedValueObj(
+        value: string = '',
+        explicit: boolean = false,
+    ): FormattedValue {
         const formattingFnMap: Dict<FormattingFn> = {
             phone: formatPhoneNumber,
             date: formatDate,
@@ -208,8 +214,8 @@ export class ProteanInput {
         const formattingFn: FormattingFn = formattingFnMap[this.type];
 
         return (
-            formattingFn?.(value, this.format) ?? {
-                value: value,
+            formattingFn?.(value, this.format, explicit) ?? {
+                value,
                 formattedValue: value,
             }
         );
@@ -222,32 +228,24 @@ export class ProteanInput {
 
         return {
             startingPosition:
-                inputElement?.selectionStart ?? formattedValueLength,
+                inputElement.selectionStart ?? formattedValueLength,
             valueLength: formattedValueLength,
-            previousValueLength: inputElement?.value.length,
+            previousValueLength: inputElement.value.length,
             hasSelection: false,
         };
     }
 
-    setCursorPosition(cursorData: CursorData) {
-        if (!cursorData.hasSelection) {
-            const inputElement = this.inputElement,
-                {
-                    valueLength,
-                    previousValueLength,
-                    startingPosition,
-                } = cursorData;
-            if (
-                startingPosition === valueLength &&
-                valueLength >= previousValueLength &&
-                'currency' === this.type
-            )
-                inputElement.setSelectionRange(valueLength, valueLength);
-            else {
-                const cursorPosition =
-                    startingPosition + (valueLength - previousValueLength);
-                inputElement.setSelectionRange(cursorPosition, cursorPosition);
-            }
+    setCursorPosition() {
+        if (!this.cursorData.hasSelection) {
+            const inputElement = this.inputElement;
+            const {
+                valueLength,
+                previousValueLength,
+                startingPosition,
+            } = this.cursorData;
+            const cursorPosition =
+                startingPosition + (valueLength - previousValueLength);
+            inputElement.setSelectionRange(cursorPosition, cursorPosition);
         }
     }
 
@@ -265,9 +263,9 @@ export class ProteanInput {
                 <input
                     id={this.inputId}
                     type={this.inputType}
-                    required={!this.optional}
+                    aria-required={`${!this.optional}`}
                     aria-label={this.inputAriaLabel}
-                    aria-invalid={this.hasErrors ? 'true' : 'false'}
+                    aria-invalid={`${this.hasErrors}`}
                     aria-describedby={this.descriptionId}
                     onChange={this.onInputChange}
                     onInput={this.onInputInput}

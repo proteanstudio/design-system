@@ -2,10 +2,35 @@
 
 :host {
     display: block;
+    margin: 1rem 0;
 }
 
 .message-container {
-    padding: 0.5rem 1rem;
-    background-color: #454545;
+    background-color: #222222;
     color: #ffffff;
+    padding: 1rem;
+    border: 1px solid;
+    border-width: 1px 1px 1px 10px;
+    border-radius: 2px;
+}
+
+.message-container.error {
+    border-color: #b70909;
+}
+
+.message-container.success {
+    border-color: #1d820f;
+}
+
+.message-container.warning {
+    border-color: #e3cc0f;
+}
+
+.message-container.info {
+    border-color: #0965b7;
+}
+
+ul {
+    margin: 0;
+    padding: 0.5rem 0 0.5rem 2rem;
 }

@@ -13,6 +13,7 @@ const formats: Dict<NumberFormatOptions> = {
 export default function formatNumeric(
     value: string,
     format: string = 'delimited',
+    explicit: boolean = false,
 ): FormattedValue {
     if (format.includes('dec')) {
         const decimals = Number(format.replace('dec', ''));
@@ -22,11 +23,11 @@ export default function formatNumeric(
             decimals,
         };
 
-        return formatNumber(value, formatObj);
+        return formatNumber(value, formatObj, explicit);
     }
 
     let formatObj: NumberFormatOptions =
         formats[format] ?? formats['delimited'];
 
-    return formatNumber(value, formatObj);
+    return formatNumber(value, formatObj, explicit);
 }

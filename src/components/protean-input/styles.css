@@ -53,6 +53,10 @@ input:focus {
     z-index: 2;
 }
 
+.message-container protean-message {
+    margin: 0;
+}
+
 .message-container ul {
     margin: 0;
     padding-left: 0.5rem;

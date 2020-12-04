@@ -6,7 +6,6 @@
   "es2015": "dist/protean-elements/protean-elements.esm.js",
   "es2017": "dist/protean-elements/protean-elements.esm.js",
   "types": "dist/custom-elements/index.d.ts",
-  "unpkg": "dist/protean-elements/protean-elements.js",
   "license": "MIT",
   "files": [
     "dist/",
@@ -17,21 +16,19 @@
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test:dev": "stencil test --spec --e2e --watch",
-    "test.watch": "stencil test --spec --e2e --watchAll",
+    "test:unit:dev": "stencil test --spec --watch",
     "generate": "stencil generate",
     "format": "prettier --check 'src/'",
     "format:fix": "prettier --write 'src/'"
   },
-  "dependencies": {
-    "@stencil/core": "^2.0.3"
-  },
   "devDependencies": {
+    "@stencil/core": "^2.3.0",
     "@types/jest": "^26.0.14",
-    "@types/node": "^14.11.10",
+    "@types/node": "^14.14.10",
     "@types/puppeteer": "^3.0.2",
     "jest": "26.4.2",
     "jest-cli": "26.4.2",
-    "prettier": "^2.1.2",
+    "prettier": "^2.2.1",
     "puppeteer": "5.2.1",
     "yarn": "^1.22.10"
   }
