@@ -1,12 +1,13 @@
 import {
     Component,
     Prop,
-    h,
+    h, //eslint-disable-line
     Event,
     EventEmitter,
     Listen,
     Element,
 } from '@stencil/core';
+import { JSXBase } from '@stencil/core/internal';
 import { createGuid } from '../../utils/utils';
 
 @Component({
@@ -15,7 +16,7 @@ import { createGuid } from '../../utils/utils';
     shadow: true,
 })
 export class ProteanCheckbox {
-    @Prop({ reflect: true, mutable: true }) checked: boolean = false;
+    @Prop({ reflect: true, mutable: true }) checked = false;
     @Prop({ reflect: true }) type: string;
     @Prop({ reflect: true }) label: string;
     @Prop({ reflect: true }) ariaLabel: string;
@@ -26,7 +27,7 @@ export class ProteanCheckbox {
     @Element() hostElement: HTMLElement;
 
     @Listen('change')
-    defaultChangeHandler(event: CustomEvent) {
+    defaultChangeHandler(event: CustomEvent): void {
         if (event.target === this.hostElement && !this.hostElement.onchange) {
             this.checked = event.detail.checked;
         }
@@ -51,13 +52,13 @@ export class ProteanCheckbox {
 
     @Event() change: EventEmitter;
 
-    onCheckboxChange = (event: Event) => {
+    onCheckboxChange = (event: Event): void => {
         this.change.emit({
             checked: (event.target as HTMLInputElement).checked,
         });
     };
 
-    render() {
+    render(): JSXBase.IntrinsicElements {
         return (
             <div class="checkbox-container">
                 <input
@@ -81,7 +82,7 @@ export class ProteanCheckbox {
         );
     }
 
-    renderStandardFill() {
+    renderStandardFill(): JSXBase.IntrinsicElements {
         if (this.indeterminate) {
             return (
                 <line
@@ -105,7 +106,7 @@ export class ProteanCheckbox {
         }
     }
 
-    renderStandard() {
+    renderStandard(): JSXBase.IntrinsicElements {
         return (
             <svg
                 class="checkbox-symbol standard"
@@ -126,7 +127,7 @@ export class ProteanCheckbox {
         );
     }
 
-    renderToggle() {
+    renderToggle(): JSXBase.IntrinsicElements {
         return (
             <svg
                 class="checkbox-symbol toggle"
@@ -147,7 +148,7 @@ export class ProteanCheckbox {
         );
     }
 
-    renderSymbol() {
+    renderSymbol(): JSXBase.IntrinsicElements {
         if (this.type === 'toggle') {
             return this.renderToggle();
         }

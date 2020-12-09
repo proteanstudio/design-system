@@ -5,13 +5,13 @@ export interface NumberFormatOptions {
 }
 
 export default function formatNumber(
-    value: string = '',
+    value = '',
     options: NumberFormatOptions = {
         decimals: 0,
     },
     explicit = false,
 ): FormattedValue {
-    let decimals = options?.decimals ?? 0;
+    const decimals = options?.decimals ?? 0;
     const thousandsSeparator = ',';
     const decimalSeparator = '.';
 
@@ -24,7 +24,10 @@ export default function formatNumber(
     }
 
     filteredValue = filteredValue.replace(/[^\d]/g, '');
-    let { integerString, decimalString } = splitValue(filteredValue, decimals);
+    const { integerString, decimalString } = splitValue(
+        filteredValue,
+        decimals,
+    );
 
     const formattedIntegerString = integerString.replace(
         /\B(?=(\d{3})+(?!\d))/g,
@@ -39,7 +42,12 @@ export default function formatNumber(
     return { value: valueString, formattedValue: formattedValueString };
 }
 
-export function splitValue(value: string, decimals: number) {
+interface SpllitValue {
+    integerString: string;
+    decimalString: string;
+}
+
+export function splitValue(value: string, decimals: number): SpllitValue {
     const integerLength = value.length - decimals;
     let integerString = value
         .substring(0, integerLength)

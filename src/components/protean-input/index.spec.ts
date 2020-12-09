@@ -310,7 +310,9 @@ describe('protean-input', () => {
 
         expect(proteanInput.value).toEqual('value');
 
-        proteanInput.onchange = () => {};
+        proteanInput.onchange = () => {
+            /*  */
+        };
         await waitForChanges();
 
         proteanInput.dispatchEvent(
@@ -358,7 +360,9 @@ describe('protean-input', () => {
             hasSelection: false,
         };
 
-        const setSelectionRangeMock = jest.fn().mockImplementation(() => {});
+        const setSelectionRangeMock = jest.fn().mockImplementation(() => {
+            /*  */
+        });
         rootInstance.inputElement.setSelectionRange = setSelectionRangeMock;
 
         rootInstance.inputElement.dispatchEvent(new Event('input'));
@@ -498,7 +502,9 @@ describe('protean-input', () => {
             hasSelection: true,
         };
 
-        const setSelectionRangeMock = jest.fn().mockImplementation(() => {});
+        const setSelectionRangeMock = jest.fn().mockImplementation(() => {
+            /*  */
+        });
         rootInstance.inputElement.setSelectionRange = setSelectionRangeMock;
 
         rootInstance.setCursorPosition();

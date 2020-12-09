@@ -250,7 +250,9 @@ describe('protean-tab-container', () => {
         await page.$eval(
             'protean-tab-container',
             (element: HTMLProteanTabContainerElement) => {
-                element.onchange = () => {}; //override default onchange
+                element.onchange = () => {
+                    /* override default onchange */
+                };
                 element.value = '2';
             },
         );

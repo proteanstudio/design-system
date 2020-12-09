@@ -1,13 +1,14 @@
 import {
     Component,
     Prop,
-    h,
+    h, //eslint-disable-line
     Element,
     State,
     Event,
     EventEmitter,
     Listen,
 } from '@stencil/core';
+import { JSXBase } from '@stencil/core/internal';
 import { createGuid } from '../../utils/utils';
 
 interface Tab {
@@ -23,7 +24,7 @@ interface Tab {
 })
 export class ProteanTabContainer {
     @Prop({ reflect: true, mutable: true }) value: string;
-    @Prop({ reflect: true }) name: string = '';
+    @Prop({ reflect: true }) name = '';
 
     @Element() hostElement: HTMLElement;
     @State() tabs: Tab[];
@@ -47,14 +48,14 @@ export class ProteanTabContainer {
     @Event({ eventName: 'change', bubbles: false }) change: EventEmitter;
 
     @Listen('change')
-    defaultChangeHandler(event: CustomEvent) {
+    defaultChangeHandler(event: CustomEvent): void {
         if (event.target === this.hostElement && !this.hostElement.onchange) {
             this.value = event.detail.value;
             this.focusActiveTab();
         }
     }
 
-    connectedCallback() {
+    connectedCallback(): void {
         const observer = new MutationObserver(this.updateTabData);
 
         observer.observe(this.hostElement, {
@@ -67,16 +68,16 @@ export class ProteanTabContainer {
         this.observer = observer;
     }
 
-    disconnectedCallback() {
+    disconnectedCallback(): void {
         this.observer.disconnect();
     }
 
-    updateTabData = () => {
+    updateTabData = (): void => {
         this.updateTabPanes();
         this.updateTabs();
     };
 
-    updateTabPanes = () => {
+    updateTabPanes = (): void => {
         this.tabPanes.forEach((tab, index) => {
             tab.selected = tab.value === this.selectedValue;
             tab.guid = this.guid;
@@ -84,7 +85,7 @@ export class ProteanTabContainer {
         });
     };
 
-    updateTabs = () => {
+    updateTabs = (): void => {
         this.tabs = Array.from(this.tabPanes).map(tab => {
             const { label, value, index } = tab;
             return {
@@ -95,7 +96,7 @@ export class ProteanTabContainer {
         });
     };
 
-    moveToAdjacentTab(currentValue: string, direction: string) {
+    moveToAdjacentTab(currentValue: string, direction: string): void {
         const currentIndex = this.tabs
             .map(tab => tab.value)
             .indexOf(currentValue);
@@ -118,7 +119,7 @@ export class ProteanTabContainer {
         this.change.emit({ value });
     }
 
-    focusActiveTab() {
+    focusActiveTab(): void {
         this.hostElement.shadowRoot
             .querySelector<HTMLButtonElement>(
                 `button[data-value="${this.selectedValue}"]`,
@@ -126,7 +127,7 @@ export class ProteanTabContainer {
             .focus();
     }
 
-    onTabClick = (event: MouseEvent) => {
+    onTabClick = (event: MouseEvent): void => {
         const value = (event.target as HTMLElement).dataset.value;
 
         if (value !== this.value) {
@@ -136,7 +137,7 @@ export class ProteanTabContainer {
         }
     };
 
-    onTabKeyup = (event: KeyboardEvent) => {
+    onTabKeyup = (event: KeyboardEvent): void => {
         const currentValue = (event.target as HTMLElement).dataset.value;
 
         if (event.key === 'ArrowRight') {
@@ -150,7 +151,7 @@ export class ProteanTabContainer {
         }
     };
 
-    render() {
+    render(): JSXBase.IntrinsicElements {
         return (
             <div class="tab-container">
                 <div class="tab-list" role="tablist">
@@ -164,7 +165,7 @@ export class ProteanTabContainer {
         );
     }
 
-    buildTabControl = (tab: Tab) => {
+    buildTabControl = (tab: Tab): JSXBase.IntrinsicElements => {
         const selected = tab.value === this.selectedValue;
         return (
             <button

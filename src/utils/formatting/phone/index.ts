@@ -13,7 +13,7 @@ const formats: Dict<PhoneNumberFormat> = {
 };
 export default function formatPhoneNumber(
     value: string,
-    format: string = 'US',
+    format = 'US',
 ): FormattedValue {
     const formatObj: PhoneNumberFormat = formats[format] ?? formats['US'];
 

@@ -16,7 +16,7 @@ describe('formatDate', () => {
     });
 
     it('trims excess characters from end of value', () => {
-        let value = '1234567890';
+        const value = '1234567890';
         expect(formatDate(value)).toEqual({
             value: '12345678',
             formattedValue: '12/34/5678',

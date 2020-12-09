@@ -1,4 +1,9 @@
-import { Component, Prop, h } from '@stencil/core';
+import {
+    Component,
+    Prop,
+    h, //eslint-disable-line
+} from '@stencil/core';
+import { JSXBase } from '@stencil/core/internal';
 
 @Component({
     tag: 'protean-tab-pane',
@@ -8,12 +13,12 @@ import { Component, Prop, h } from '@stencil/core';
 export class ProteanTabPane {
     @Prop({ reflect: true }) label: string;
     @Prop({ reflect: true }) value: string;
-    @Prop({ reflect: true }) name: string = '';
+    @Prop({ reflect: true }) name = '';
     @Prop() selected: boolean;
     @Prop() guid: number;
     @Prop() index: number;
 
-    render() {
+    render(): JSXBase.IntrinsicElements {
         return (
             <div
                 class="tab-pane"

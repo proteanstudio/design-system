@@ -13,7 +13,7 @@ describe('protean-tab-pane', () => {
         root.index = 0;
         await waitForChanges();
 
-        let innerPaneElement = root.shadowRoot.querySelector('.tab-pane');
+        const innerPaneElement = root.shadowRoot.querySelector('.tab-pane');
 
         expect(innerPaneElement).toEqualAttribute('role', 'tab-panel');
         expect(innerPaneElement).toEqualAttribute('id', 'tab-pane-1000-0');

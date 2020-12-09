@@ -1,9 +1,6 @@
 import { FormattedValue } from '../types';
 
-export default function formatGeneric(
-    value: string = '',
-    format: string = '',
-): FormattedValue {
+export default function formatGeneric(value = '', format = ''): FormattedValue {
     if (!value || !format) {
         return {
             value,
@@ -38,7 +35,7 @@ export default function formatGeneric(
             }
 
             if (knownValidatingCharacters.has(item)) {
-                let formattedChar = checkCharacter(item);
+                const formattedChar = checkCharacter(item);
                 if (formattedChar) {
                     valueIndex++;
                     return {

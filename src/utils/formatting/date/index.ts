@@ -13,7 +13,7 @@ const formats: Dict<string> = {
 
 export default function formatDate(
     value: string,
-    format: string = 'MM/DD/YYYY',
+    format = 'MM/DD/YYYY',
 ): FormattedValue {
     const fmt = formats[format] ?? formats['MM/DD/YYYY'];
 

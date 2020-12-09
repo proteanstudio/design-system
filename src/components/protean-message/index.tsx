@@ -1,4 +1,9 @@
-import { Component, Prop, h } from '@stencil/core';
+import {
+    Component,
+    Prop,
+    h, //eslint-disable-line
+} from '@stencil/core';
+import { JSXBase } from '@stencil/core/internal';
 
 @Component({
     tag: 'protean-message',
@@ -24,7 +29,7 @@ export class ProteanMessage {
         return this.level === 'status' ? 'status' : 'alert';
     }
 
-    render() {
+    render(): JSXBase.IntrinsicElements {
         return (
             <div
                 class={`message-container ${this.computedType}`}

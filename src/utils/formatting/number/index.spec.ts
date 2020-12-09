@@ -53,7 +53,7 @@ describe('formatNumber', () => {
     });
 
     it('removes non-integer characters from value', () => {
-        let value = '!@#$%^12)(*&^345{}[]:";.,<>/?|/67890';
+        const value = '!@#$%^12)(*&^345{}[]:";.,<>/?|/67890';
         expect(formatNumber(value, { decimals: 0 })).toEqual({
             value: '1234567890',
             formattedValue: '1,234,567,890',

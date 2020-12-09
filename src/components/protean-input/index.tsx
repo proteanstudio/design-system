@@ -1,13 +1,14 @@
 import {
     Component,
     Prop,
-    h,
+    h, //eslint-disable-line
     Event,
     Listen,
     Element,
     EventEmitter,
     Watch,
 } from '@stencil/core';
+import { JSXBase } from '@stencil/core/internal';
 import { Dict } from '../../types';
 import formatDate from '../../utils/formatting/date';
 import formatNumeric from '../../utils/formatting/numeric';
@@ -127,7 +128,7 @@ export class ProteanInput {
     @Event({ eventName: 'change', bubbles: false }) change: EventEmitter;
     @Event({ eventName: 'input', bubbles: false }) input: EventEmitter;
 
-    onInputChange = (event: Event) => {
+    onInputChange = (event: Event): void => {
         event.stopPropagation();
 
         this.formattedValueObject = this.getFormattedValueObj(
@@ -143,7 +144,7 @@ export class ProteanInput {
         }
     };
 
-    onInputInput = (event: Event) => {
+    onInputInput = (event: Event): void => {
         event.stopPropagation();
 
         this.formattedValueObject = this.getFormattedValueObj(
@@ -173,7 +174,7 @@ export class ProteanInput {
     };
 
     @Listen('change')
-    defaultChangeHandler(event: CustomEvent) {
+    defaultChangeHandler(event: CustomEvent): void {
         if (!this.hostElement.onchange) {
             this.value = event.detail.value;
         }
@@ -189,22 +190,19 @@ export class ProteanInput {
 
     @Watch('hints')
     @Watch('errors')
-    onMessageUpdate() {
+    onMessageUpdate(): void {
         this.scheduledAfterRender.push(() => {
             this.setMessagesHeight();
         });
     }
 
-    setMessagesHeight() {
+    setMessagesHeight(): void {
         if (this.showMessages) {
             this.messageContainer.style.height = this.messageContainerHeight;
         }
     }
 
-    getFormattedValueObj(
-        value: string = '',
-        explicit: boolean = false,
-    ): FormattedValue {
+    getFormattedValueObj(value = '', explicit = false): FormattedValue {
         const formattingFnMap: Dict<FormattingFn> = {
             phone: formatPhoneNumber,
             date: formatDate,
@@ -235,7 +233,7 @@ export class ProteanInput {
         };
     }
 
-    setCursorPosition() {
+    setCursorPosition(): void {
         if (!this.cursorData.hasSelection) {
             const inputElement = this.inputElement;
             const {
@@ -249,7 +247,7 @@ export class ProteanInput {
         }
     }
 
-    render() {
+    render(): JSXBase.IntrinsicElements {
         return (
             <div class="input-container">
                 {this.label && (
@@ -277,7 +275,7 @@ export class ProteanInput {
         );
     }
 
-    renderMessages() {
+    renderMessages(): JSXBase.IntrinsicElements {
         return (
             <div class="message-container">
                 <protean-message

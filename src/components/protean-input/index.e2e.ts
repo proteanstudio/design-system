@@ -89,7 +89,7 @@ describe('protean-input', () => {
         });
 
         const inputElement = await find('protean-input >>> input');
-        let optionalSpan = await find('protean-input >>> .optional-tag');
+        const optionalSpan = await find('protean-input >>> .optional-tag');
 
         expect(inputElement).toEqualAttribute('aria-required', 'true');
         expect(optionalSpan).toBeNull;
@@ -127,7 +127,9 @@ describe('protean-input', () => {
         expect(await proteanInput.getProperty('value')).toEqual('a');
 
         await page.$eval('protean-input', (element: HTMLElement) => {
-            element.onchange = () => {}; //override default onchange
+            element.onchange = () => {
+                /* override default onchange */
+            };
             element.shadowRoot.querySelector('input').value = 'ab';
         });
         await waitForChanges();
@@ -207,29 +209,28 @@ describe('protean-input', () => {
             bubbles: true,
         });
 
-        let { messageContainerHeight, proteanMessageHeight } = await page.$eval(
-            'protean-input',
-            element => {
-                return {
-                    messageContainerHeight: element.shadowRoot.querySelector<HTMLDivElement>(
-                        '.message-container',
-                    ).style.height,
-                    proteanMessageHeight: `${
-                        element.shadowRoot
-                            .querySelector('.message-container protean-message')
-                            .getBoundingClientRect().height
-                    }px`,
-                };
-            },
-        );
+        const heights = await page.$eval('protean-input', element => {
+            return {
+                messageContainerHeight: element.shadowRoot.querySelector<HTMLDivElement>(
+                    '.message-container',
+                ).style.height,
+                proteanMessageHeight: `${
+                    element.shadowRoot
+                        .querySelector('.message-container protean-message')
+                        .getBoundingClientRect().height
+                }px`,
+            };
+        });
         await waitForChanges();
 
-        expect(messageContainerHeight).toEqual(proteanMessageHeight);
-        expect(messageContainerHeight).not.toEqual('0px');
+        expect(heights.messageContainerHeight).toEqual(
+            heights.proteanMessageHeight,
+        );
+        expect(heights.messageContainerHeight).not.toEqual('0px');
 
         await dispatchEvent(page, ['protean-input', 'input'], 'blur');
 
-        messageContainerHeight = await page.$eval(
+        let messageContainerHeight = await page.$eval(
             'protean-input',
             element =>
                 element.shadowRoot.querySelector<HTMLDivElement>(
@@ -237,7 +238,9 @@ describe('protean-input', () => {
                 ).style.height,
         );
 
-        expect(messageContainerHeight).not.toEqual(proteanMessageHeight);
+        expect(messageContainerHeight).not.toEqual(
+            heights.proteanMessageHeight,
+        );
         expect(messageContainerHeight).toEqual('0px');
 
         proteanInput.setProperty('suppressMessages', true);
@@ -253,7 +256,9 @@ describe('protean-input', () => {
                 ).style.height,
         );
 
-        expect(messageContainerHeight).not.toEqual(proteanMessageHeight);
+        expect(messageContainerHeight).not.toEqual(
+            heights.proteanMessageHeight,
+        );
         expect(messageContainerHeight).toEqual('0px');
     });
 

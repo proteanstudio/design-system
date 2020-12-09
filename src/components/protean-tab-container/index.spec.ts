@@ -199,7 +199,9 @@ describe('protean-tab-container', () => {
         const tabControl1 = root.shadowRoot.querySelector<HTMLButtonElement>(
             '.tab-list button:first-child',
         );
-        tabControl1.focus = () => {};
+        tabControl1.focus = () => {
+            /*  */
+        };
 
         const changeMock = jest.fn();
 
