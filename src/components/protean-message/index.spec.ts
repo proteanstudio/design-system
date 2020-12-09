@@ -1,40 +1,54 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { ProteanMessage } from '.';
 
-describe('protean-input', () => {
+describe('protean-message', () => {
     it('renders', async () => {
         const { root } = await newSpecPage({
             components: [ProteanMessage],
-            html: '<protean-button>Button Text</protean-button>',
+            html:
+                '<protean-message type="error">Success Message</protean-message>',
         });
-        expect(root).toEqualHtml(`
-      <protean-button>
-        <mock:shadow-root>
-          <button type="button">
-              <div>
-                    Button Text
-              </div>
-          </button>
-        </mock:shadow-root>
-      </protean-button>
-    `);
+
+        const messageContainer = root.shadowRoot.querySelector(
+            '.message-container',
+        );
+
+        expect(messageContainer).toHaveClass('error');
+        expect(messageContainer).toEqualAttribute('role', 'alert');
     });
 
-    it('passes properties to button', async () => {
-        const { root } = await newSpecPage({
-            components: [ProteanMessage],
-            html: `<protean-button type="submit" disabled>Button Text</protean-button>`,
-        });
-        expect(root).toEqualHtml(`
-      <protean-button  type="submit" disabled>
-        <mock:shadow-root>
-          <button type="submit" disabled>
-              <div>
-                Button Text
-              </div>
-          </button>
-        </mock:shadow-root>
-      </protean-button>
-    `);
+    it('correctly computes type', async () => {
+        const instance = new ProteanMessage();
+
+        instance.type = 'foo';
+        expect(instance.computedType).toEqual('info');
+
+        instance.type = 'info';
+        expect(instance.computedType).toEqual('info');
+
+        instance.type = 'success';
+        expect(instance.computedType).toEqual('success');
+
+        instance.type = 'warning';
+        expect(instance.computedType).toEqual('warning');
+
+        instance.type = 'error';
+        expect(instance.computedType).toEqual('error');
+    });
+
+    it('correctly computes role', async () => {
+        const instance = new ProteanMessage();
+
+        instance.level = 'foo';
+        expect(instance.role).toEqual('alert');
+
+        instance.level = 'status';
+        expect(instance.role).toEqual('status');
+
+        instance.level = undefined;
+        expect(instance.role).toEqual('alert');
+
+        instance.level = 'alert';
+        expect(instance.role).toEqual('alert');
     });
 });

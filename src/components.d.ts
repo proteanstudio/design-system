@@ -12,7 +12,7 @@ export namespace Components {
         variant: string;
     }
     interface ProteanCheckbox {
-        alignment: string;
+        alignment: 'left' | 'right';
         ariaLabel: string;
         checked: boolean;
         disabled: boolean;
@@ -109,7 +109,7 @@ declare namespace LocalJSX {
         variant?: string;
     }
     interface ProteanCheckbox {
-        alignment?: string;
+        alignment?: 'left' | 'right';
         ariaLabel?: string;
         checked?: boolean;
         disabled?: boolean;

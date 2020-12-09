@@ -1,11 +1,12 @@
 import { newE2EPage } from '@stencil/core/testing';
-import dispatchEvent from '../../utils/test-helpers/dispatchEvent';
+import dispatchEvent from '../../test-helpers/dispatchEvent';
 
 describe('protean-input', () => {
     it('renders basic input', async () => {
-        const { setContent, find } = await newE2EPage();
+        const { find } = await newE2EPage({
+            html: '<protean-input></protean-input>',
+        });
 
-        await setContent('<protean-input></protean-input>');
         const labelElement = await find('protean-input >>> label');
         expect(labelElement).toBeNull();
 
@@ -25,9 +26,9 @@ describe('protean-input', () => {
     });
 
     it('handles label and optional props', async () => {
-        const { setContent, find, waitForChanges } = await newE2EPage();
-
-        await setContent('<protean-input></protean-input>');
+        const { find, waitForChanges } = await newE2EPage({
+            html: '<protean-input></protean-input>',
+        });
 
         let labelElement = await find('protean-input >>> label');
         expect(labelElement).toBeNull();
@@ -61,9 +62,9 @@ describe('protean-input', () => {
     });
 
     it('correctly binds aria-label', async () => {
-        const { setContent, waitForChanges, find } = await newE2EPage();
-
-        await setContent('<protean-input></protean-input>');
+        const { waitForChanges, find } = await newE2EPage({
+            html: '<protean-input></protean-input>',
+        });
 
         const inputElement = await find('protean-input >>> input');
 
@@ -83,9 +84,9 @@ describe('protean-input', () => {
     });
 
     it('handles optional binding', async () => {
-        const { setContent, find, waitForChanges } = await newE2EPage();
-
-        await setContent('<protean-input label="Label text"></protean-input>');
+        const { find, waitForChanges } = await newE2EPage({
+            html: '<protean-input label="Label text"></protean-input>',
+        });
 
         const inputElement = await find('protean-input >>> input');
         let optionalSpan = await find('protean-input >>> .optional-tag');
@@ -103,19 +104,19 @@ describe('protean-input', () => {
     });
 
     it('emits change event and handles defaults', async () => {
-        const page = await newE2EPage();
+        const page = await newE2EPage({
+            html: '<protean-input label="Label text"></protean-input>',
+        });
 
-        await page.setContent(
-            '<protean-input label="Label text"></protean-input>',
-        );
+        const { find, waitForChanges } = page;
 
-        const proteanInput = await page.find('protean-input');
+        const proteanInput = await find('protean-input');
         const proteanInputChange = await proteanInput.spyOnEvent('change');
 
         await page.$eval('protean-input', element => {
             element.shadowRoot.querySelector('input').value = 'a';
         }); // setProperty not working here
-        await page.waitForChanges();
+        await waitForChanges();
 
         await dispatchEvent(page, ['protean-input', 'input'], 'change');
 
@@ -129,7 +130,7 @@ describe('protean-input', () => {
             element.onchange = () => {}; //override default onchange
             element.shadowRoot.querySelector('input').value = 'ab';
         });
-        await page.waitForChanges();
+        await waitForChanges();
 
         await dispatchEvent(page, ['protean-input', 'input'], 'change');
         expect(proteanInputChange).toHaveReceivedEventDetail({
@@ -140,14 +141,12 @@ describe('protean-input', () => {
     });
 
     it('emits input event', async () => {
-        const page = await newE2EPage();
+        const { find } = await newE2EPage({
+            html: '<protean-input label="Label text"></protean-input>',
+        });
 
-        await page.setContent(
-            '<protean-input label="Label text"></protean-input>',
-        );
-
-        const inputElement = await page.find('protean-input >>> input');
-        const proteanInput = await page.find('protean-input');
+        const inputElement = await find('protean-input >>> input');
+        const proteanInput = await find('protean-input');
         const proteanInputInput = await proteanInput.spyOnEvent('input');
 
         await inputElement.type('a');
@@ -159,17 +158,15 @@ describe('protean-input', () => {
     });
 
     it('handles message content and validity', async () => {
-        const page = await newE2EPage();
+        const { find, waitForChanges } = await newE2EPage({
+            html: '<protean-input label="Label text"></protean-input>',
+        });
 
-        await page.setContent(
-            '<protean-input label="Label text"></protean-input>',
-        );
-
-        const inputElement = await page.find('protean-input >>> input');
-        const messageContentContainer = await page.find(
+        const inputElement = await find('protean-input >>> input');
+        const messageContentContainer = await find(
             'protean-input >>> .message-container ul',
         );
-        const proteanMessage = await page.find(
+        const proteanMessage = await find(
             'protean-input >>> .message-container protean-message',
         );
 
@@ -181,14 +178,14 @@ describe('protean-input', () => {
         expect(proteanMessage).toEqualAttribute('type', 'info');
         expect(proteanMessage).toEqualAttribute('level', 'status');
 
-        const proteanInput = await page.find('protean-input');
+        const proteanInput = await find('protean-input');
         proteanInput.setProperty('hints', ['hint 1']);
-        await page.waitForChanges();
+        await waitForChanges();
 
         expect(messageContentContainer.textContent.trim()).toEqual('hint 1');
 
         proteanInput.setProperty('errors', ['error 1']);
-        await page.waitForChanges();
+        await waitForChanges();
 
         expect(inputElement).toEqualAttribute('aria-invalid', true);
         expect(proteanMessage).toEqualAttribute('type', 'error');
@@ -196,15 +193,15 @@ describe('protean-input', () => {
     });
 
     it('updates message container height on focus and blur', async () => {
-        const page = await newE2EPage();
+        const page = await newE2EPage({
+            html: '<protean-input label="Label text"></protean-input>',
+        });
 
-        await page.setContent(
-            '<protean-input label="Label text"></protean-input>',
-        );
+        const { find, waitForChanges } = page;
 
-        const proteanInput = await page.find('protean-input');
+        const proteanInput = await find('protean-input');
         proteanInput.setProperty('hints', ['hint 1']);
-        await page.waitForChanges();
+        await waitForChanges();
 
         await dispatchEvent(page, ['protean-input', 'input'], 'focus', {
             bubbles: true,
@@ -225,7 +222,7 @@ describe('protean-input', () => {
                 };
             },
         );
-        await page.waitForChanges();
+        await waitForChanges();
 
         expect(messageContainerHeight).toEqual(proteanMessageHeight);
         expect(messageContainerHeight).not.toEqual('0px');
@@ -244,7 +241,7 @@ describe('protean-input', () => {
         expect(messageContainerHeight).toEqual('0px');
 
         proteanInput.setProperty('suppressMessages', true);
-        await page.waitForChanges();
+        await waitForChanges();
 
         await dispatchEvent(page, ['protean-input', 'input'], 'focus');
 
@@ -261,19 +258,18 @@ describe('protean-input', () => {
     });
 
     it('handles phone input', async () => {
-        const page = await newE2EPage();
+        const { find, waitForChanges } = await newE2EPage({
+            html:
+                '<protean-input label="Label text" type="phone"></protean-input>',
+        });
 
-        await page.setContent(
-            '<protean-input label="Label text" type="phone"></protean-input>',
-        );
-
-        const inputElement = await page.find('protean-input >>> input');
+        const inputElement = await find('protean-input >>> input');
 
         expect(inputElement).toEqualAttribute('type', 'tel');
 
-        const proteanInput = await page.find('protean-input');
+        const proteanInput = await find('protean-input');
         proteanInput.setProperty('value', '12');
-        await page.waitForChanges();
+        await waitForChanges();
 
         expect(await inputElement.getProperty('value')).toEqual('(12');
 
@@ -294,20 +290,20 @@ describe('protean-input', () => {
     });
 
     it('handles numeric input', async () => {
-        const page = await newE2EPage();
+        const page = await newE2EPage({
+            html:
+                '<protean-input label="Label text" type="numeric"></protean-input>',
+        });
+        const { find, waitForChanges } = page;
 
-        await page.setContent(
-            '<protean-input label="Label text" type="numeric"></protean-input>',
-        );
-
-        const inputElement = await page.find('protean-input >>> input');
+        const inputElement = await find('protean-input >>> input');
 
         expect(inputElement).toEqualAttribute('type', 'tel');
 
-        const proteanInput = await page.find('protean-input');
+        const proteanInput = await find('protean-input');
 
         proteanInput.setProperty('value', '12');
-        await page.waitForChanges();
+        await waitForChanges();
 
         expect(await inputElement.getProperty('value')).toEqual('12.00');
 
@@ -328,26 +324,26 @@ describe('protean-input', () => {
         await dispatchEvent(page, ['protean-input', 'input'], 'change');
 
         proteanInput.setProperty('format', '5dec');
-        await page.waitForChanges();
+        await waitForChanges();
 
         expect(await inputElement.getProperty('value')).toEqual('1,200.34000');
     });
 
     it('handles date input', async () => {
-        const page = await newE2EPage();
+        const page = await newE2EPage({
+            html:
+                '<protean-input label="Label text" type="date"></protean-input>',
+        });
+        const { find, waitForChanges } = page;
 
-        await page.setContent(
-            '<protean-input label="Label text" type="date"></protean-input>',
-        );
-
-        const inputElement = await page.find('protean-input >>> input');
+        const inputElement = await find('protean-input >>> input');
 
         expect(inputElement).toEqualAttribute('type', 'tel');
 
-        const proteanInput = await page.find('protean-input');
+        const proteanInput = await find('protean-input');
 
         proteanInput.setProperty('value', '1');
-        await page.waitForChanges();
+        await waitForChanges();
 
         expect(await inputElement.getProperty('value')).toEqual('1');
 
@@ -369,7 +365,7 @@ describe('protean-input', () => {
         await dispatchEvent(page, ['protean-input', 'input'], 'change');
 
         proteanInput.setProperty('format', 'M/D/YY');
-        await page.waitForChanges();
+        await waitForChanges();
 
         expect(await inputElement.getProperty('value')).toEqual('12/4');
     });

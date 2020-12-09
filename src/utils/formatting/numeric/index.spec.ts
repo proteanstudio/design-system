@@ -42,7 +42,7 @@ describe('formatNumeric', () => {
     });
 
     it('respects explicit number sets', () => {
-        let value = '123456.7890';
+        const value = '123456.7890';
         expect(formatNumeric(value, 'delimited', true)).toEqual({
             value: '123456.79',
             formattedValue: '123,456.79',

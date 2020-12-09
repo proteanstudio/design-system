@@ -4,7 +4,7 @@ export default async function dispatchEvent(
     page: E2EPage,
     selector: string | string[],
     eventName: string,
-    eventInit?: EventInit | CustomEventInit,
+    eventInit?: EventInit | CustomEventInit | KeyboardEventInit,
 ): Promise<void> {
     let parentSelector = selector;
     let childSelectors;
@@ -21,11 +21,22 @@ export default async function dispatchEvent(
             eventName: string,
             eventInit: EventInit,
         ) => {
+            const eventConstructorMap = {
+                keyup: KeyboardEvent,
+                change: CustomEvent,
+                input: CustomEvent,
+                blur: FocusEvent,
+                focus: FocusEvent,
+            };
+
+            const EventConstructor =
+                eventConstructorMap[eventName] ?? CustomEvent;
+
             const elementToDispatch = childSelectors
                 ? element.shadowRoot.querySelector(childSelectors)
                 : element;
 
-            const event = new Event(eventName, eventInit);
+            const event = new EventConstructor(eventName, eventInit);
             elementToDispatch.dispatchEvent(event);
         },
         childSelectors,

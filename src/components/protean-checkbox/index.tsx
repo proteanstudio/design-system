@@ -15,11 +15,11 @@ import { createGuid } from '../../utils/utils';
     shadow: true,
 })
 export class ProteanCheckbox {
-    @Prop({ reflect: true }) checked: boolean;
+    @Prop({ reflect: true, mutable: true }) checked: boolean = false;
     @Prop({ reflect: true }) type: string;
     @Prop({ reflect: true }) label: string;
     @Prop({ reflect: true }) ariaLabel: string;
-    @Prop({ reflect: true }) alignment: string = 'left';
+    @Prop({ reflect: true }) alignment: 'left' | 'right';
     @Prop({ reflect: true }) disabled: boolean;
     @Prop({ reflect: true }) indeterminate: boolean;
 
@@ -43,6 +43,12 @@ export class ProteanCheckbox {
         return this.ariaLabel ?? null;
     }
 
+    get checkboxAlignment(): string {
+        return ['left', 'right'].includes(this.alignment)
+            ? this.alignment
+            : 'left';
+    }
+
     @Event() change: EventEmitter;
 
     onCheckboxChange = (event: Event) => {
@@ -64,7 +70,7 @@ export class ProteanCheckbox {
                 />
                 <label
                     htmlFor={this.checkboxId}
-                    class={`alignment-${this.alignment}`}
+                    class={`alignment-${this.checkboxAlignment}`}
                 >
                     {this.renderSymbol()}
                     {!!this.label && (
@@ -79,7 +85,7 @@ export class ProteanCheckbox {
         if (this.indeterminate) {
             return (
                 <line
-                    class="checkbox-fill"
+                    class="checkbox-fill indeterminate"
                     x1="6"
                     y1="12"
                     x2="18"
@@ -92,7 +98,7 @@ export class ProteanCheckbox {
         if (this.checked) {
             return (
                 <polyline
-                    class="checkbox-fill"
+                    class="checkbox-fill checked"
                     points="4.76755287 13.3616687 9.85401316 18.3300512 19.438211 5.92818154"
                 ></polyline>
             );
@@ -102,7 +108,7 @@ export class ProteanCheckbox {
     renderStandard() {
         return (
             <svg
-                class="checkbox-symbol"
+                class="checkbox-symbol standard"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
                 focusable="false"
@@ -123,7 +129,7 @@ export class ProteanCheckbox {
     renderToggle() {
         return (
             <svg
-                class="checkbox-symbol"
+                class="checkbox-symbol toggle"
                 viewBox="0 0 45 20"
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"

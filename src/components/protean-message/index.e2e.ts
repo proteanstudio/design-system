@@ -2,40 +2,22 @@ import { newE2EPage } from '@stencil/core/testing';
 
 describe('protean-message', () => {
     it('renders', async () => {
-        const page = await newE2EPage();
+        const page = await newE2EPage({
+            html: '<protean-message>Message Text</protean-message>',
+        });
 
-        await page.setContent('<protean-button>Button Text</protean-button>');
-        const slotContainer = await page.find('protean-button >>> div');
-        expect(slotContainer.textContent).toEqual(`Button Text`);
-    });
+        const messageContainerElement = await page.find(
+            'protean-message >>> .message-container',
+        );
 
-    it('binds type property', async () => {
-        const page = await newE2EPage();
+        expect(messageContainerElement).toEqualAttribute('role', 'alert');
+        expect(messageContainerElement).toHaveClass('info');
 
-        await page.setContent('<protean-button>Button Text</protean-button>');
-        const proteanButton = await page.find('protean-button');
-        const innerButton = await page.find('protean-button >>> button');
+        const slotContent = await page.$eval('protean-message', message => {
+            return message.shadowRoot.querySelector('slot').assignedNodes()[0]
+                .textContent;
+        });
 
-        expect(innerButton).toEqualAttribute('type', 'button');
-
-        proteanButton.setProperty('type', 'submit');
-        await page.waitForChanges();
-
-        expect(innerButton).toEqualAttribute('type', 'submit');
-    });
-
-    it('binds disabled property', async () => {
-        const page = await newE2EPage();
-
-        await page.setContent('<protean-button>Button Text</protean-button>');
-        const proteanButton = await page.find('protean-button');
-        const innerButton = await page.find('protean-button >>> button');
-
-        expect(innerButton).not.toHaveAttribute('disabled');
-
-        proteanButton.setProperty('disabled', true);
-        await page.waitForChanges();
-
-        expect(innerButton).toHaveAttribute('disabled');
+        expect(slotContent).toEqual(`Message Text`);
     });
 });

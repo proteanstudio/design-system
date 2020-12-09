@@ -23,7 +23,9 @@ export const config: Config = {
         name: 'stencil-hydrated',
     },
     testing: {
-        // collectCoverage:  true,
+        collectCoverage: true,
+        // collectCoverageFrom: ['src/components/**/*','src/utils/*', 'src/utils/**/*'],
+        coveragePathIgnorePatterns: ['/node_modules/', 'src/test-helpers/'],
         browserDevtools: true,
         browserArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
     },

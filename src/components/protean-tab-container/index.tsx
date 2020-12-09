@@ -31,18 +31,26 @@ export class ProteanTabContainer {
     observer: MutationObserver;
     guid = createGuid();
 
-    get tabPanes() {
+    get tabPanes(): NodeListOf<HTMLProteanTabPaneElement> {
         return this.hostElement.querySelectorAll<HTMLProteanTabPaneElement>(
             `protean-tab-pane[name="${this.name}"]`,
         );
+    }
+
+    get selectedValue(): string {
+        const isValidValue =
+            this.tabs?.some(tab => tab.value === this.value) ?? true;
+
+        return isValidValue ? this.value : this.tabs[0]?.value ?? '';
     }
 
     @Event({ eventName: 'change', bubbles: false }) change: EventEmitter;
 
     @Listen('change')
     defaultChangeHandler(event: CustomEvent) {
-        if ((event.target === this.hostElement, !this.hostElement.onchange)) {
+        if (event.target === this.hostElement && !this.hostElement.onchange) {
             this.value = event.detail.value;
+            this.focusActiveTab();
         }
     }
 
@@ -55,7 +63,7 @@ export class ProteanTabContainer {
             attributes: true,
         });
 
-        this.updateTabData;
+        this.updateTabData();
         this.observer = observer;
     }
 
@@ -70,7 +78,7 @@ export class ProteanTabContainer {
 
     updateTabPanes = () => {
         this.tabPanes.forEach((tab, index) => {
-            tab.selected = tab.value === this.value;
+            tab.selected = tab.value === this.selectedValue;
             tab.guid = this.guid;
             tab.index = index;
         });
@@ -87,7 +95,7 @@ export class ProteanTabContainer {
         });
     };
 
-    moveToAdjacentTab(currentValue: string, direction = 'next') {
+    moveToAdjacentTab(currentValue: string, direction: string) {
         const currentIndex = this.tabs
             .map(tab => tab.value)
             .indexOf(currentValue);
@@ -108,15 +116,24 @@ export class ProteanTabContainer {
         }
         const value = this.tabs[nextIndex].value;
         this.change.emit({ value });
+    }
+
+    focusActiveTab() {
         this.hostElement.shadowRoot
-            .querySelector<HTMLButtonElement>(`button[data-value="${value}"]`)
-            ?.focus();
+            .querySelector<HTMLButtonElement>(
+                `button[data-value="${this.selectedValue}"]`,
+            )
+            .focus();
     }
 
     onTabClick = (event: MouseEvent) => {
-        this.change.emit({
-            value: (event.target as HTMLElement).dataset.value,
-        });
+        const value = (event.target as HTMLElement).dataset.value;
+
+        if (value !== this.value) {
+            this.change.emit({
+                value,
+            });
+        }
     };
 
     onTabKeyup = (event: KeyboardEvent) => {
@@ -137,8 +154,8 @@ export class ProteanTabContainer {
         return (
             <div class="tab-container">
                 <div class="tab-list" role="tablist">
-                    {this.tabs?.length > 1 &&
-                        this.tabs?.map(this.buildTabControl)}
+                    {this.tabs.length > 1 &&
+                        this.tabs.map(this.buildTabControl)}
                 </div>
                 <div class="tab-content">
                     <slot />
@@ -148,7 +165,7 @@ export class ProteanTabContainer {
     }
 
     buildTabControl = (tab: Tab) => {
-        const selected = tab.value === this.value;
+        const selected = tab.value === this.selectedValue;
         return (
             <button
                 role="tab"
