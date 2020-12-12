@@ -15,6 +15,25 @@ describe('protean-message', () => {
 
         expect(messageContainer).toHaveClass('error');
         expect(messageContainer).toEqualAttribute('role', 'alert');
+
+        const decorators = Array.from(
+            root.shadowRoot.querySelectorAll('.decorator'),
+        );
+
+        expect(decorators).toHaveLength(2);
+        expect(decorators[0]).toHaveClass('top');
+        expect(decorators[0]).toEqualAttribute(
+            'xmlns',
+            'http://www.w3.org/2000/svg',
+        );
+        expect(decorators[0]).toEqualAttribute('viewBox', '0 0 125 125');
+        expect(decorators[0]).toEqualAttribute('aria-hidden', 'true');
+
+        expect(decorators[1]).toHaveClass('bottom');
+
+        const statusIcon = root.shadowRoot.querySelector('protean-icon');
+
+        expect(statusIcon).toEqualAttribute('type', 'status-error-filled');
     });
 
     it('correctly computes type', async () => {
@@ -50,5 +69,24 @@ describe('protean-message', () => {
 
         instance.level = 'alert';
         expect(instance.role).toEqual('alert');
+    });
+
+    it('correctly computes icon', async () => {
+        const instance = new ProteanMessage();
+
+        instance.type = 'foo';
+        expect(instance.icon).toEqual('status-info-filled');
+
+        instance.type = 'info';
+        expect(instance.icon).toEqual('status-info-filled');
+
+        instance.type = 'success';
+        expect(instance.icon).toEqual('status-success-filled');
+
+        instance.type = 'warning';
+        expect(instance.icon).toEqual('status-warning-filled');
+
+        instance.type = 'error';
+        expect(instance.icon).toEqual('status-error-filled');
     });
 });

@@ -24,8 +24,11 @@ export const config: Config = {
     },
     testing: {
         collectCoverage: true,
-        // collectCoverageFrom: ['src/components/**/*','src/utils/*', 'src/utils/**/*'],
-        coveragePathIgnorePatterns: ['/node_modules/', 'src/test-helpers/'],
+        coveragePathIgnorePatterns: [
+            '/node_modules/',
+            'src/test-helpers/',
+            'src/components/protean-icon/icons.tsx',
+        ],
         browserDevtools: true,
         browserArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
     },

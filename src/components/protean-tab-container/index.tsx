@@ -8,7 +8,7 @@ import {
     EventEmitter,
     Listen,
 } from '@stencil/core';
-import { JSXBase } from '@stencil/core/internal';
+import { VNode } from '@stencil/core/internal';
 import { createGuid } from '../../utils/utils';
 
 interface Tab {
@@ -151,7 +151,7 @@ export class ProteanTabContainer {
         }
     };
 
-    render(): JSXBase.IntrinsicElements {
+    render(): VNode {
         return (
             <div class="tab-container">
                 <div class="tab-list" role="tablist">
@@ -165,7 +165,7 @@ export class ProteanTabContainer {
         );
     }
 
-    buildTabControl = (tab: Tab): JSXBase.IntrinsicElements => {
+    buildTabControl = (tab: Tab): VNode => {
         const selected = tab.value === this.selectedValue;
         return (
             <button

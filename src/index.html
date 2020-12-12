@@ -15,12 +15,38 @@
             @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
             :root {
+                --body-color: #fcfcfc;
+                --body-background-color: #1a1a1a;
+
                 --purple: #7209b7;
+                --protean-status-info: #0965b7; /* 5.9 #fff, 5.75 #fc, 2.94 #1a, 3.55 #00 */
+                --protean-status-info-contrast: #ffffff;
+                --protean-status-success: #1d820f; /*  4.93 #fff, 4.81 #fc, 3.52 #1a,4.25 #00 */
+                --protean-status-success-contrast: #ffffff;
+                --protean-status-warning: #e6c400; /* 1.71, fff, 1.66 #fc, 10.16 #1a, 12.26 #000 */
+                --protean-status-warning-contrast: #1a1a1a;
+                --protean-status-error: #ab0000; /* 7.68 #fff, 7.49 #fc, 2.26 #1a, 2.73 #000  */
+                --protean-status-error-contrast: #ffffff;
+
+                --protean-message-background-color: #2a2a2a;
+                --protean-message-text-color: #fcfcfc;
+                --protean-message-border-color: #353535;
+                --protean-icon-fill-primary: currentColor;
+            }
+
+            .light {
+                --protean-message-background-color: #f7f7f7;
+                --protean-message-text-color: #000000;
+                --protean-message-border-color: #e2e2e2;
+
+                --body-color: #333333;
+                --body-background-color: #fff;
             }
 
             body {
                 font-family: 'Quicksand', 'Heiti SC', sans-serif;
-                color: #333333;
+                color: var(--body-color);
+                background-color: var(--body-background-color);
             }
 
             .flex {
@@ -33,7 +59,7 @@
             }
         </style>
     </head>
-    <body>
+    <body class="">
         <protean-button variant="primary">Content</protean-button>
         <protean-button variant="secondary">Content</protean-button>
         <div class="flex">
@@ -86,7 +112,20 @@
         ></protean-checkbox>
         <protean-checkbox label="Checkbox label" checked></protean-checkbox>
         <protean-checkbox label="Checkbox label"></protean-checkbox>
-        <protean-checkbox type="toggle" label="Toggle label"></protean-checkbox>
+        <protean-checkbox
+            type="toggle"
+            label="Toggle light mode"
+            onchange="toggleLightMode(event)"
+        ></protean-checkbox>
+        <protean-icon type="status-info"></protean-icon>
+        <protean-icon type="status-info-filled"></protean-icon>
+        <protean-icon type="status-success"></protean-icon>
+        <protean-icon type="status-success-filled"></protean-icon>
+        <protean-icon type="status-warning"></protean-icon>
+        <protean-icon type="status-warning-filled"></protean-icon>
+        <protean-icon type="status-error"></protean-icon>
+        <protean-icon type="status-error-filled"></protean-icon>
+        <protean-icon type="custom" use="icons.svg#icon-design"></protean-icon>
 
         <script type="text/javascript">
             function spamErrors(event) {
@@ -97,6 +136,11 @@
                     .map((i, index) => `error ${index}`);
 
                 event.target.errors = errorList;
+            }
+
+            function toggleLightMode(event) {
+                event.target.checked = event.detail.checked;
+                document.body.classList.toggle('light');
             }
         </script>
     </body>

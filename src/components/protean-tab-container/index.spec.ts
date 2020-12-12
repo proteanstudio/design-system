@@ -4,7 +4,7 @@ import fakeMutationObserver from '../../test-helpers/polyfills/MutationObserver'
 import { ProteanTabPane } from '../protean-tab-pane';
 
 describe('protean-tab-container', () => {
-    let teardown: () => void;
+    let teardown: VoidFunction;
     beforeEach(function () {
         teardown = fakeMutationObserver();
     });

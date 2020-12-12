@@ -7,7 +7,7 @@ import {
     Listen,
     Element,
 } from '@stencil/core';
-import { JSXBase } from '@stencil/core/internal';
+import { VNode } from '@stencil/core/internal';
 import { createGuid } from '../../utils/utils';
 
 @Component({
@@ -58,7 +58,7 @@ export class ProteanCheckbox {
         });
     };
 
-    render(): JSXBase.IntrinsicElements {
+    render(): VNode {
         return (
             <div class="checkbox-container">
                 <input
@@ -82,7 +82,7 @@ export class ProteanCheckbox {
         );
     }
 
-    renderStandardFill(): JSXBase.IntrinsicElements {
+    renderStandardFill(): VNode {
         if (this.indeterminate) {
             return (
                 <line
@@ -106,13 +106,14 @@ export class ProteanCheckbox {
         }
     }
 
-    renderStandard(): JSXBase.IntrinsicElements {
+    renderStandard(): VNode {
         return (
             <svg
                 class="checkbox-symbol standard"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
                 focusable="false"
+                aria-hidden="true"
             >
                 <rect
                     class="checkbox-outline"
@@ -127,7 +128,7 @@ export class ProteanCheckbox {
         );
     }
 
-    renderToggle(): JSXBase.IntrinsicElements {
+    renderToggle(): VNode {
         return (
             <svg
                 class="checkbox-symbol toggle"
@@ -135,6 +136,7 @@ export class ProteanCheckbox {
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"
                 focusable="false"
+                aria-hidden="true"
             >
                 <line
                     class="toggle-path"
@@ -148,7 +150,7 @@ export class ProteanCheckbox {
         );
     }
 
-    renderSymbol(): JSXBase.IntrinsicElements {
+    renderSymbol(): VNode {
         if (this.type === 'toggle') {
             return this.renderToggle();
         }

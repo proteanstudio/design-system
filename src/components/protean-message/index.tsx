@@ -3,7 +3,7 @@ import {
     Prop,
     h, //eslint-disable-line
 } from '@stencil/core';
-import { JSXBase } from '@stencil/core/internal';
+import { VNode } from '@stencil/core/internal';
 
 @Component({
     tag: 'protean-message',
@@ -29,14 +29,34 @@ export class ProteanMessage {
         return this.level === 'status' ? 'status' : 'alert';
     }
 
-    render(): JSXBase.IntrinsicElements {
+    get icon(): string {
+        return `status-${this.computedType}-filled`;
+    }
+
+    render(): VNode {
         return (
             <div
                 class={`message-container ${this.computedType}`}
                 role={this.role}
             >
+                <protean-icon type={this.icon}></protean-icon>
+                {this.renderDecorator('top')}
                 <slot />
+                {this.renderDecorator('bottom')}
             </div>
+        );
+    }
+
+    renderDecorator(cssClass: string): VNode {
+        return (
+            <svg
+                class={`decorator ${cssClass}`}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 125 125"
+                aria-hidden="true"
+            >
+                <path d="M125 125V0l-16 16v94H15L0 125h125z" />
+            </svg>
         );
     }
 }

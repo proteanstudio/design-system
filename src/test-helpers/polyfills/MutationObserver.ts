@@ -1,4 +1,4 @@
-export default function fakeMutationObserver(): () => void {
+export default function fakeMutationObserver(): VoidFunction {
     const origMutationObserver = global.MutationObserver;
     function restoreMutationObserver() {
         global.MutationObserver = origMutationObserver;
@@ -7,11 +7,11 @@ export default function fakeMutationObserver(): () => void {
     /* eslint-disable */
     (global as any).MutationObserver = class {
         /* eslint enable */
-        constructor(observer: () => void) {
+        constructor(observer: VoidFunction) {
             this.observer = observer;
         }
 
-        observer: () => void;
+        observer: VoidFunction;
 
         observe(/* element: Node, options: MutationObserverInit */) {
             /*  */

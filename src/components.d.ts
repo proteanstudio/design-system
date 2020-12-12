@@ -20,6 +20,10 @@ export namespace Components {
         label: string;
         type: string;
     }
+    interface ProteanIcon {
+        type: string;
+        use: string;
+    }
     interface ProteanInput {
         ariaLabel: string;
         errors: string[];
@@ -65,6 +69,13 @@ declare global {
         prototype: HTMLProteanCheckboxElement;
         new (): HTMLProteanCheckboxElement;
     };
+    interface HTMLProteanIconElement
+        extends Components.ProteanIcon,
+            HTMLStencilElement {}
+    var HTMLProteanIconElement: {
+        prototype: HTMLProteanIconElement;
+        new (): HTMLProteanIconElement;
+    };
     interface HTMLProteanInputElement
         extends Components.ProteanInput,
             HTMLStencilElement {}
@@ -96,6 +107,7 @@ declare global {
     interface HTMLElementTagNameMap {
         'protean-button': HTMLProteanButtonElement;
         'protean-checkbox': HTMLProteanCheckboxElement;
+        'protean-icon': HTMLProteanIconElement;
         'protean-input': HTMLProteanInputElement;
         'protean-message': HTMLProteanMessageElement;
         'protean-tab-container': HTMLProteanTabContainerElement;
@@ -117,6 +129,10 @@ declare namespace LocalJSX {
         label?: string;
         onChange?: (event: CustomEvent<any>) => void;
         type?: string;
+    }
+    interface ProteanIcon {
+        type?: string;
+        use?: string;
     }
     interface ProteanInput {
         ariaLabel?: string;
@@ -153,6 +169,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         'protean-button': ProteanButton;
         'protean-checkbox': ProteanCheckbox;
+        'protean-icon': ProteanIcon;
         'protean-input': ProteanInput;
         'protean-message': ProteanMessage;
         'protean-tab-container': ProteanTabContainer;
@@ -167,6 +184,8 @@ declare module '@stencil/core' {
                 JSXBase.HTMLAttributes<HTMLProteanButtonElement>;
             'protean-checkbox': LocalJSX.ProteanCheckbox &
                 JSXBase.HTMLAttributes<HTMLProteanCheckboxElement>;
+            'protean-icon': LocalJSX.ProteanIcon &
+                JSXBase.HTMLAttributes<HTMLProteanIconElement>;
             'protean-input': LocalJSX.ProteanInput &
                 JSXBase.HTMLAttributes<HTMLProteanInputElement>;
             'protean-message': LocalJSX.ProteanMessage &

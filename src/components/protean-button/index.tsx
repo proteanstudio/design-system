@@ -3,7 +3,7 @@ import {
     Prop,
     h, //eslint-disable-line
 } from '@stencil/core';
-import { JSXBase } from '@stencil/core/internal';
+import { VNode } from '@stencil/core/internal';
 
 @Component({
     tag: 'protean-button',
@@ -15,7 +15,7 @@ export class ProteanButton {
     @Prop({ reflect: true }) type: string;
     @Prop({ reflect: true }) disabled: boolean;
 
-    render(): JSXBase.IntrinsicElements {
+    render(): VNode {
         return (
             <button type={this.type || 'button'} disabled={this.disabled}>
                 <div>

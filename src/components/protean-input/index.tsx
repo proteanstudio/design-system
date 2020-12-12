@@ -8,7 +8,7 @@ import {
     EventEmitter,
     Watch,
 } from '@stencil/core';
-import { JSXBase } from '@stencil/core/internal';
+import { VNode } from '@stencil/core/internal';
 import { Dict } from '../../types';
 import formatDate from '../../utils/formatting/date';
 import formatNumeric from '../../utils/formatting/numeric';
@@ -46,7 +46,7 @@ export class ProteanInput {
     descriptionId = `protean-input-description-${this.guid}`;
     formattedValueObject: FormattedValue;
     cursorData: CursorData;
-    scheduledAfterRender: (() => void)[] = [];
+    scheduledAfterRender: VoidFunction[] = [];
 
     @Element() hostElement: HTMLProteanInputElement;
 
@@ -247,7 +247,7 @@ export class ProteanInput {
         }
     }
 
-    render(): JSXBase.IntrinsicElements {
+    render(): VNode {
         return (
             <div class="input-container">
                 {this.label && (
@@ -275,7 +275,7 @@ export class ProteanInput {
         );
     }
 
-    renderMessages(): JSXBase.IntrinsicElements {
+    renderMessages(): VNode {
         return (
             <div class="message-container">
                 <protean-message

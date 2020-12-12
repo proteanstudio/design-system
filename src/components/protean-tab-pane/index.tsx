@@ -3,7 +3,7 @@ import {
     Prop,
     h, //eslint-disable-line
 } from '@stencil/core';
-import { JSXBase } from '@stencil/core/internal';
+import { VNode } from '@stencil/core/internal';
 
 @Component({
     tag: 'protean-tab-pane',
@@ -18,7 +18,7 @@ export class ProteanTabPane {
     @Prop() guid: number;
     @Prop() index: number;
 
-    render(): JSXBase.IntrinsicElements {
+    render(): VNode {
         return (
             <div
                 class="tab-pane"
