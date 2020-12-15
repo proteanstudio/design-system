@@ -1,12 +1,12 @@
 import {
     Component,
     Prop,
-    h, //eslint-disable-line
     Event,
     Listen,
     Element,
     EventEmitter,
     Watch,
+    h, //eslint-disable-line
 } from '@stencil/core';
 import { VNode } from '@stencil/core/internal';
 import { Dict } from '../../types';
@@ -39,7 +39,10 @@ export class ProteanInput {
     @Prop({ reflect: true }) hints: string[];
     @Prop({ reflect: true }) errors: string[];
     @Prop({ reflect: true }) suppressMessages: boolean;
+    @Prop({ reflect: true }) readonly = false;
     @Prop() ariaLabel: string;
+    @Prop() ariaHasPopup: string;
+    @Prop() ariaExpanded: boolean | undefined;
 
     guid = createGuid();
     inputId = `protean-input-${this.guid}`;
@@ -261,10 +264,17 @@ export class ProteanInput {
                 <input
                     id={this.inputId}
                     type={this.inputType}
+                    readOnly={this.readonly}
                     aria-required={`${!this.optional}`}
                     aria-label={this.inputAriaLabel}
                     aria-invalid={`${this.hasErrors}`}
                     aria-describedby={this.descriptionId}
+                    aria-haspopup={this.ariaHasPopup}
+                    aria-expanded={
+                        this.ariaExpanded === undefined
+                            ? null
+                            : `${this.ariaExpanded}`
+                    }
                     onChange={this.onInputChange}
                     onInput={this.onInputInput}
                     onFocus={this.onInputFocus}

@@ -10,7 +10,7 @@
     overflow-x: auto;
     margin: 0;
     padding: 0;
-    border-top: 1px solid #cdcdcd;
+    border-top: 1px solid var(--protean-tab-container-border-color);
     list-style: none;
 }
 
@@ -23,5 +23,5 @@
 }
 
 .tab-list button[aria-selected='true'] {
-    box-shadow: inset var(--purple) 0 3px;
+    box-shadow: inset var(--action-color) 0 5px;
 }

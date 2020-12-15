@@ -79,6 +79,14 @@ interface Icon {
 }
 
 const icons: Dict<Icon> = {
+    checkmark: {
+        markup: () => (
+            <path
+                class="stroke-primary"
+                d="M5.5 11.828L9.314 15.5 16.5 6.333"
+            />
+        ),
+    },
     'status-error': {
         markup: () => reusableIcons['error'](),
     },

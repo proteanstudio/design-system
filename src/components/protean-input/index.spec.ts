@@ -550,4 +550,19 @@ describe('protean-input', () => {
         expect(optionalSpan).not.toBeNull;
         expect(optionalSpan.textContent).toEqual(' (optional)');
     });
+
+    it('handles readonly binding', async () => {
+        const { root: proteanInput, waitForChanges } = await newSpecPage({
+            components: [ProteanInput],
+            html: '<protean-input></protean-input>',
+        });
+
+        const inputElement = proteanInput.shadowRoot.querySelector('input');
+        expect(inputElement.readOnly).toEqual(false);
+
+        proteanInput.readonly = true;
+        await waitForChanges();
+
+        expect(inputElement.readOnly).toEqual(true);
+    });
 });

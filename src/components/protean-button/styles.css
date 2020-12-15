@@ -17,27 +17,29 @@ button {
     padding: 0 1rem;
     border: 2px solid transparent;
     border-radius: 2px;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.875rem;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
         border 0.2s ease-in-out;
 }
 
 :host([variant='primary']) button {
-    background-color: var(--purple);
-    color: #ffffff;
+    background-color: var(--action-color);
+    color: var(--action-contrast-color);
 }
 
 :host([variant='secondary']) button {
     color: inherit;
-    border-color: var(--purple);
+    border-color: var(--action-color);
 }
 
 :host([variant='primary']) button:hover,
 :host([variant='primary']) button:focus,
 :host([variant='secondary']) button:hover,
 :host([variant='secondary']) button:focus {
-    background-color: #4c0d75; /* 9e0bff for dark bg */
-    color: #ffffff;
+    background-color: var(
+        --action-color
+    ); /*  #4c0d75; */ /* 9e0bff for dark bg */
+    color: var(--action-contrast-color);
     border-color: transparent;
 }

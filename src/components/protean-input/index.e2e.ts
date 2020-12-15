@@ -18,6 +18,7 @@ describe('protean-input', () => {
         expect(inputElement).not.toHaveAttribute('aria-label');
         expect(inputElement).toEqualAttribute('aria-invalid', 'false');
         expect(inputElement).toHaveAttribute('aria-describedby');
+        expect(inputElement).not.toHaveAttribute('readonly');
 
         const messageContainer = await find(
             'protean-input >>> .message-container',
@@ -101,6 +102,23 @@ describe('protean-input', () => {
 
         expect(inputElement).toEqualAttribute('aria-required', 'false');
         expect(optionalSpan).not.toBeNull;
+    });
+
+    it('handles readonly binding', async () => {
+        const { find, waitForChanges } = await newE2EPage({
+            html: '<protean-input label="Label text"></protean-input>',
+        });
+
+        const inputElement = await find('protean-input >>> input');
+
+        expect(inputElement).not.toHaveAttribute('readonly');
+
+        const proteanInput = await find('protean-input');
+
+        proteanInput.setProperty('readonly', true);
+        await waitForChanges();
+
+        expect(inputElement).toHaveAttribute('readonly');
     });
 
     it('emits change event and handles defaults', async () => {
