@@ -15,10 +15,15 @@
             @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
             :root {
-                --body-color: #fcfcfc;
+                --body-color: #fafafa;
                 --body-background-color: #1a1a1a;
 
+                --pink: #f72585;
                 --purple: #7209b7;
+                --orange: #ff5f40;
+
+                --action-color: var(--orange);
+                --action-contrast-color: #000000;
                 --protean-status-info: #0965b7; /* 5.9 #fff, 5.75 #fc, 2.94 #1a, 3.55 #00 */
                 --protean-status-info-contrast: #ffffff;
                 --protean-status-success: #1d820f; /*  4.93 #fff, 4.81 #fc, 3.52 #1a,4.25 #00 */
@@ -32,15 +37,45 @@
                 --protean-message-text-color: #fcfcfc;
                 --protean-message-border-color: #353535;
                 --protean-icon-fill-primary: currentColor;
+
+                --protean-tab-container-border-color: #535353;
+
+                --protean-dropdown-background-color: var(
+                    --body-background-color
+                );
+                --protean-dropdown-text-color: inherit;
+                --protean-dropdown-border-color: currentColor;
+                --protean-dropdown-border-width: 0 1px 1px;
+                --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(255, 255, 255, 0.5);
+                --protean-dropdown-hover-background-color: #353535;
+
+                --protean-select-separator-color: #535353;
+                --protean-optgroup-separator-color: var(
+                    --protean-select-separator-color
+                );
+
+                --protean-checkbox-toggle-path-color: #535353;
             }
 
             .light {
+                --body-color: #333333;
+                --body-background-color: #fff;
+                --action-color: var(--purple);
+                --action-contrast-color: #ffffff;
+                --protean-dropdown-background-color: #fff;
                 --protean-message-background-color: #f7f7f7;
                 --protean-message-text-color: #000000;
                 --protean-message-border-color: #e2e2e2;
+                --protean-tab-container-border-color: #cdcdcd;
 
-                --body-color: #333333;
-                --body-background-color: #fff;
+                --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.5);
+                --protean-dropdown-hover-background-color: #efefef;
+                --protean-select-separator-color: #dadada;
+                --protean-optgroup-separator-color: var(
+                    --protean-select-separator-color
+                );
+
+                --protean-checkbox-toggle-path-color: #979797;
             }
 
             body {
@@ -86,6 +121,35 @@
             <protean-input label="Label text"></protean-input>
         </div>
 
+        <div>
+            <protean-select label="Select label" value="1">
+                <protean-optgroup label="Group 1">
+                    <protean-option label="Option 1" value="1"
+                        >Option 1</protean-option
+                    >
+                    <protean-option label="Option 2" value="2"
+                        >Option 2</protean-option
+                    >
+                    <protean-option label="Option 3" value="3"
+                        >Option 3</protean-option
+                    >
+                </protean-optgroup>
+                <protean-optgroup label="Group 2">
+                    <protean-option label="Option 4" value="4"
+                        >Option 4</protean-option
+                    >
+                    <protean-option label="Option 5" value="5"
+                        >Option 5</protean-option
+                    >
+                    <protean-option label="Option 6" value="6"
+                        >Option 6</protean-option
+                    >
+                    <protean-option label="Option 7" value="7"
+                        >Option 7</protean-option
+                    >
+                </protean-optgroup>
+            </protean-select>
+        </div>
         <protean-tab-container name="test" value="2">
             <protean-tab-pane name="test" label="pane 1" value="1"
                 >pane 1 content</protean-tab-pane

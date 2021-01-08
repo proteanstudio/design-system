@@ -25,6 +25,8 @@ export namespace Components {
         use: string;
     }
     interface ProteanInput {
+        ariaExpanded: boolean | undefined;
+        ariaHasPopup: string;
         ariaLabel: string;
         errors: string[];
         format: string;
@@ -32,6 +34,7 @@ export namespace Components {
         label: string;
         maxlength: number;
         optional: boolean;
+        readonly: boolean;
         role: string;
         suppressMessages: boolean;
         type: string;
@@ -40,6 +43,19 @@ export namespace Components {
     interface ProteanMessage {
         level: string;
         type: string;
+    }
+    interface ProteanOptgroup {
+        label: string;
+    }
+    interface ProteanOption {
+        label: string;
+        selected: boolean;
+        value: string;
+    }
+    interface ProteanSelect {
+        label: string;
+        multiple: boolean;
+        value: string;
     }
     interface ProteanTabContainer {
         name: string;
@@ -90,6 +106,27 @@ declare global {
         prototype: HTMLProteanMessageElement;
         new (): HTMLProteanMessageElement;
     };
+    interface HTMLProteanOptgroupElement
+        extends Components.ProteanOptgroup,
+            HTMLStencilElement {}
+    var HTMLProteanOptgroupElement: {
+        prototype: HTMLProteanOptgroupElement;
+        new (): HTMLProteanOptgroupElement;
+    };
+    interface HTMLProteanOptionElement
+        extends Components.ProteanOption,
+            HTMLStencilElement {}
+    var HTMLProteanOptionElement: {
+        prototype: HTMLProteanOptionElement;
+        new (): HTMLProteanOptionElement;
+    };
+    interface HTMLProteanSelectElement
+        extends Components.ProteanSelect,
+            HTMLStencilElement {}
+    var HTMLProteanSelectElement: {
+        prototype: HTMLProteanSelectElement;
+        new (): HTMLProteanSelectElement;
+    };
     interface HTMLProteanTabContainerElement
         extends Components.ProteanTabContainer,
             HTMLStencilElement {}
@@ -110,6 +147,9 @@ declare global {
         'protean-icon': HTMLProteanIconElement;
         'protean-input': HTMLProteanInputElement;
         'protean-message': HTMLProteanMessageElement;
+        'protean-optgroup': HTMLProteanOptgroupElement;
+        'protean-option': HTMLProteanOptionElement;
+        'protean-select': HTMLProteanSelectElement;
         'protean-tab-container': HTMLProteanTabContainerElement;
         'protean-tab-pane': HTMLProteanTabPaneElement;
     }
@@ -135,6 +175,8 @@ declare namespace LocalJSX {
         use?: string;
     }
     interface ProteanInput {
+        ariaExpanded?: boolean | undefined;
+        ariaHasPopup?: string;
         ariaLabel?: string;
         errors?: string[];
         format?: string;
@@ -144,6 +186,7 @@ declare namespace LocalJSX {
         onChange?: (event: CustomEvent<any>) => void;
         onInput?: (event: CustomEvent<any>) => void;
         optional?: boolean;
+        readonly?: boolean;
         role?: string;
         suppressMessages?: boolean;
         type?: string;
@@ -152,6 +195,20 @@ declare namespace LocalJSX {
     interface ProteanMessage {
         level?: string;
         type?: string;
+    }
+    interface ProteanOptgroup {
+        label?: string;
+    }
+    interface ProteanOption {
+        label?: string;
+        selected?: boolean;
+        value?: string;
+    }
+    interface ProteanSelect {
+        label?: string;
+        multiple?: boolean;
+        onChange?: (event: CustomEvent<any>) => void;
+        value?: string;
     }
     interface ProteanTabContainer {
         name?: string;
@@ -172,6 +229,9 @@ declare namespace LocalJSX {
         'protean-icon': ProteanIcon;
         'protean-input': ProteanInput;
         'protean-message': ProteanMessage;
+        'protean-optgroup': ProteanOptgroup;
+        'protean-option': ProteanOption;
+        'protean-select': ProteanSelect;
         'protean-tab-container': ProteanTabContainer;
         'protean-tab-pane': ProteanTabPane;
     }
@@ -190,6 +250,12 @@ declare module '@stencil/core' {
                 JSXBase.HTMLAttributes<HTMLProteanInputElement>;
             'protean-message': LocalJSX.ProteanMessage &
                 JSXBase.HTMLAttributes<HTMLProteanMessageElement>;
+            'protean-optgroup': LocalJSX.ProteanOptgroup &
+                JSXBase.HTMLAttributes<HTMLProteanOptgroupElement>;
+            'protean-option': LocalJSX.ProteanOption &
+                JSXBase.HTMLAttributes<HTMLProteanOptionElement>;
+            'protean-select': LocalJSX.ProteanSelect &
+                JSXBase.HTMLAttributes<HTMLProteanSelectElement>;
             'protean-tab-container': LocalJSX.ProteanTabContainer &
                 JSXBase.HTMLAttributes<HTMLProteanTabContainerElement>;
             'protean-tab-pane': LocalJSX.ProteanTabPane &
