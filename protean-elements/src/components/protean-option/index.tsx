@@ -14,6 +14,7 @@ export class ProteanOption {
     @Prop({ reflect: true }) value: string;
     @Prop({ reflect: true }) label: string;
     @Prop({ reflect: true }) selected: boolean;
+    @Prop({ reflect: true }) active: boolean;
 
     render(): VNode {
         return (

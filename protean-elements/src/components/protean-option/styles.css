@@ -12,6 +12,7 @@
     font-size: 14px;
 }
 
+:host([active]) .protean-option-container,
 .protean-option-container:hover,
 .protean-option-container:focus {
     background-color: var(--protean-dropdown-hover-background-color);

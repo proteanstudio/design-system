@@ -13,6 +13,7 @@ import { VNode } from '@stencil/core/internal';
 export class ProteanMessage {
     @Prop({ reflect: true }) type: string;
     @Prop({ reflect: true }) level: string;
+    @Prop({ reflect: true }) supplemental: boolean;
 
     get computedType(): string {
         const messageTypeMap = {
@@ -39,7 +40,9 @@ export class ProteanMessage {
                 class={`message-container ${this.computedType}`}
                 role={this.role}
             >
-                <protean-icon type={this.icon}></protean-icon>
+                {!this.supplemental && (
+                    <protean-icon type={this.icon}></protean-icon>
+                )}
                 {this.renderDecorator('top')}
                 <slot />
                 {this.renderDecorator('bottom')}

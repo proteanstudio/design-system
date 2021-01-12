@@ -43,12 +43,14 @@ export namespace Components {
     }
     interface ProteanMessage {
         "level": string;
+        "supplemental": boolean;
         "type": string;
     }
     interface ProteanOptgroup {
         "label": string;
     }
     interface ProteanOption {
+        "active": boolean;
         "label": string;
         "selected": boolean;
         "value": string;
@@ -56,6 +58,7 @@ export namespace Components {
     interface ProteanSelect {
         "label": string;
         "multiple": boolean;
+        "selectedOptions": string[];
         "value": string;
     }
     interface ProteanTabContainer {
@@ -185,12 +188,14 @@ declare namespace LocalJSX {
     }
     interface ProteanMessage {
         "level"?: string;
+        "supplemental"?: boolean;
         "type"?: string;
     }
     interface ProteanOptgroup {
         "label"?: string;
     }
     interface ProteanOption {
+        "active"?: boolean;
         "label"?: string;
         "selected"?: boolean;
         "value"?: string;
@@ -199,6 +204,7 @@ declare namespace LocalJSX {
         "label"?: string;
         "multiple"?: boolean;
         "onChange"?: (event: CustomEvent<any>) => void;
+        "selectedOptions"?: string[];
         "value"?: string;
     }
     interface ProteanTabContainer {

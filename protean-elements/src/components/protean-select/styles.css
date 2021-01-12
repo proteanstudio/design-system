@@ -34,6 +34,7 @@ protean-input {
     width: calc(100% - 20px);
     margin: 0 auto;
     position: relative;
+    top: -2px;
     z-index: 3;
     background-color: var(--protean-select-separator-color);
 }

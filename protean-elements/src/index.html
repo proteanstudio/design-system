@@ -121,35 +121,62 @@
             <protean-input label="Label text"></protean-input>
         </div>
 
-        <div>
-            <protean-select label="Select label" value="1">
-                <protean-optgroup label="Group 1">
-                    <protean-option label="Option 1" value="1"
-                        >Option 1</protean-option
-                    >
-                    <protean-option label="Option 2" value="2"
-                        >Option 2</protean-option
-                    >
-                    <protean-option label="Option 3" value="3"
-                        >Option 3</protean-option
-                    >
-                </protean-optgroup>
-                <protean-optgroup label="Group 2">
-                    <protean-option label="Option 4" value="4"
-                        >Option 4</protean-option
-                    >
-                    <protean-option label="Option 5" value="5"
-                        >Option 5</protean-option
-                    >
-                    <protean-option label="Option 6" value="6"
-                        >Option 6</protean-option
-                    >
-                    <protean-option label="Option 7" value="7"
-                        >Option 7</protean-option
-                    >
-                </protean-optgroup>
-            </protean-select>
-        </div>
+        <protean-select label="Select label" value="1">
+            <protean-optgroup label="Group 1">
+                <protean-option label="Option 1" value="1"
+                    >Option 1</protean-option
+                >
+                <protean-option label="Option 2" value="2"
+                    >Option 2</protean-option
+                >
+                <protean-option label="Option 3" value="3"
+                    >Option 3</protean-option
+                >
+            </protean-optgroup>
+            <protean-optgroup label="Group 2">
+                <protean-option label="Option 4" value="4"
+                    >Option 4</protean-option
+                >
+                <protean-option label="Option 5" value="5"
+                    >Option 5</protean-option
+                >
+                <protean-option label="Option 6" value="6"
+                    >Option 6</protean-option
+                >
+                <protean-option label="Option 7" value="7"
+                    >Option 7</protean-option
+                >
+            </protean-optgroup>
+        </protean-select>
+
+        <protean-select label="Select label" multiple>
+            <protean-optgroup label="Group 1">
+                <protean-option label="Option 1" value="1"
+                    >Option 1</protean-option
+                >
+                <protean-option label="Option 2" value="2"
+                    >Option 2</protean-option
+                >
+                <protean-option label="Option 3" value="3"
+                    >Option 3</protean-option
+                >
+            </protean-optgroup>
+            <protean-optgroup label="Group 2">
+                <protean-option label="Option 4" value="4"
+                    >Option 4</protean-option
+                >
+                <protean-option label="Option 5" value="5"
+                    >Option 5</protean-option
+                >
+                <protean-option label="Option 6" value="6"
+                    >Option 6</protean-option
+                >
+                <protean-option label="Option 7" value="7"
+                    >Option 7</protean-option
+                >
+            </protean-optgroup>
+        </protean-select>
+
         <protean-tab-container name="test" value="2">
             <protean-tab-pane name="test" label="pane 1" value="1"
                 >pane 1 content</protean-tab-pane
@@ -189,7 +216,7 @@
         <protean-icon type="status-warning-filled"></protean-icon>
         <protean-icon type="status-error"></protean-icon>
         <protean-icon type="status-error-filled"></protean-icon>
-        <protean-icon type="custom" use="icons.svg#icon-design"></protean-icon>
+        <!-- <protean-icon type="custom" use="icons.svg#icon-design"></protean-icon> -->
 
         <script type="text/javascript">
             function spamErrors(event) {

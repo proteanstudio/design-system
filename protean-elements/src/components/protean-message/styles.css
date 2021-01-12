@@ -23,6 +23,13 @@
     padding: var(--symbol-size) calc(-1 * var(--icon-offset));
 }
 
+:host([supplemental]) .message-container {
+    margin: 0;
+    border-color: var(--status-color);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
 .message-container.info {
     --status-color: var(--protean-status-info);
 }
@@ -52,10 +59,20 @@
     transform: rotate(270deg);
 }
 
+:host([supplemental]) .decorator.top {
+    top: 0;
+    right: 0;
+}
+
 .decorator.bottom {
     bottom: var(--symbol-offset);
     left: var(--symbol-offset);
     transform: rotate(90deg);
+}
+
+:host([supplemental]) .decorator.bottom {
+    bottom: 0;
+    left: 0;
 }
 
 protean-icon {

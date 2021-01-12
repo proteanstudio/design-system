@@ -178,6 +178,10 @@ export class ProteanInput {
         }
     };
 
+    onLabelClick = (event: MouseEvent): void => {
+        event.stopImmediatePropagation();
+    };
+
     @Listen('change')
     defaultChangeHandler(event: CustomEvent): void {
         if (!this.hostElement.onchange) {
@@ -254,34 +258,39 @@ export class ProteanInput {
 
     render(): VNode {
         return (
-            <div class="input-container">
-                {this.label && (
-                    <label htmlFor={this.inputId}>
-                        {this.label}
-                        {this.optional && (
-                            <span class="optional-tag"> (optional)</span>
-                        )}
-                    </label>
-                )}
-                <input
-                    id={this.inputId}
-                    type={this.inputType}
-                    readOnly={this.readonly}
-                    aria-required={`${!this.optional}`}
-                    aria-label={this.inputAriaLabel}
-                    aria-invalid={`${this.hasErrors}`}
-                    aria-describedby={this.descriptionId}
-                    aria-haspopup={this.ariaHasPopup}
-                    aria-expanded={
-                        this.ariaExpanded === undefined
-                            ? null
-                            : `${this.ariaExpanded}`
-                    }
-                    onChange={this.onInputChange}
-                    onInput={this.onInputInput}
-                    onFocus={this.onInputFocus}
-                    onBlur={this.onInputBlur}
-                />
+            <div class="input-wrapper">
+                <div class="input-container">
+                    {this.label && (
+                        <label
+                            htmlFor={this.inputId}
+                            onClick={this.onLabelClick}
+                        >
+                            {this.label}
+                            {this.optional && (
+                                <span class="optional-tag"> (optional)</span>
+                            )}
+                        </label>
+                    )}
+                    <input
+                        id={this.inputId}
+                        type={this.inputType}
+                        readOnly={this.readonly}
+                        aria-required={`${!this.optional}`}
+                        aria-label={this.inputAriaLabel}
+                        aria-invalid={`${this.hasErrors}`}
+                        aria-describedby={this.descriptionId}
+                        aria-haspopup={this.ariaHasPopup}
+                        aria-expanded={
+                            this.ariaExpanded === undefined
+                                ? null
+                                : `${this.ariaExpanded}`
+                        }
+                        onChange={this.onInputChange}
+                        onInput={this.onInputInput}
+                        onFocus={this.onInputFocus}
+                        onBlur={this.onInputBlur}
+                    />
+                </div>
                 {this.renderMessages()}
             </div>
         );
@@ -293,6 +302,7 @@ export class ProteanInput {
                 <protean-message
                     type={this.hasErrors ? 'error' : 'info'}
                     level="status"
+                    supplemental={true}
                 >
                     <ul id={this.descriptionId}>
                         {this.showMessages &&
