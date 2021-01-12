@@ -18,7 +18,7 @@ const phoneValue = {
 jest.mock('../../utils/formatting/phone', () => () => phoneValue);
 
 import { ProteanInput, CursorData } from '.';
-import { FormattedValue } from '../../utils/formatting/types';
+import { FormattedValue } from '@/utils/formatting/types';
 import { newSpecPage } from '@stencil/core/testing';
 
 describe('protean-input', () => {

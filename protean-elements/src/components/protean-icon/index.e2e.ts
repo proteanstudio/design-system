@@ -1,5 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
-import suppressConsoleMethod from '../../test-helpers/suppressConsoleError';
+import suppressConsoleMethod from '@/test-helpers/suppressConsoleError';
 
 describe('protean-icon', () => {
     it('renders and pulls from icon library', async () => {

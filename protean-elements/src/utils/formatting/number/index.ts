@@ -1,4 +1,4 @@
-import { FormattedValue } from '../types';
+import { FormattedValue } from '@/utils/formatting/types';
 
 export interface NumberFormatOptions {
     decimals: number;

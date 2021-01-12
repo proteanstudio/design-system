@@ -128,8 +128,10 @@ export class ProteanInput {
         return `${height}px`;
     }
 
-    @Event({ eventName: 'change', bubbles: false }) change: EventEmitter;
-    @Event({ eventName: 'input', bubbles: false }) input: EventEmitter;
+    @Event({ eventName: 'change', bubbles: false })
+    change: EventEmitter<FormattedValue>;
+    @Event({ eventName: 'input', bubbles: false })
+    input: EventEmitter<FormattedValue>;
 
     onInputChange = (event: Event): void => {
         event.stopPropagation();

@@ -1,5 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
-import dispatchEvent from '../../test-helpers/dispatchEvent';
+import dispatchEvent from '@/test-helpers/dispatchEvent';
 
 describe('protean-checkbox', () => {
     it('renders base case', async () => {

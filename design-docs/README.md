@@ -1,4 +1,4 @@
-# docs
+# design-docs
 
 ## Project setup
 ```

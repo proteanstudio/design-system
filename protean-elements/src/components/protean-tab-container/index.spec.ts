@@ -1,7 +1,7 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { ProteanTabContainer } from '.';
-import fakeMutationObserver from '../../test-helpers/polyfills/MutationObserver';
-import { ProteanTabPane } from '../protean-tab-pane';
+import fakeMutationObserver from '@/test-helpers/polyfills/MutationObserver';
+import { ProteanTabPane } from '@/components/protean-tab-pane';
 
 describe('protean-tab-container', () => {
     let teardown: VoidFunction;

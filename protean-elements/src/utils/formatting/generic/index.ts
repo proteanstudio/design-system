@@ -1,4 +1,4 @@
-import { FormattedValue } from '../types';
+import { FormattedValue } from '@/utils/formatting/types';
 
 export default function formatGeneric(value = '', format = ''): FormattedValue {
     if (!value || !format) {
