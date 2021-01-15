@@ -9,7 +9,7 @@ import {
     Listen,
 } from '@stencil/core';
 import { VNode } from '@stencil/core/internal';
-import { createGuid } from '../../utils/utils';
+import { createGuid } from '@/utils/utils';
 
 interface Tab {
     label: string;

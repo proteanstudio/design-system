@@ -5,7 +5,7 @@ import {
     h, //eslint-disable-line
 } from '@stencil/core';
 import { VNode } from '@stencil/core/internal';
-import { createGuid } from '../../utils/utils';
+import { createGuid } from '@/utils/utils';
 
 @Component({
     tag: 'protean-optgroup',

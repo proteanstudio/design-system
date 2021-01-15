@@ -9,12 +9,12 @@ import {
     h, //eslint-disable-line
 } from '@stencil/core';
 import { VNode } from '@stencil/core/internal';
-import { Dict } from '../../types';
-import formatDate from '../../utils/formatting/date';
-import formatNumeric from '../../utils/formatting/numeric';
-import formatPhoneNumber from '../../utils/formatting/phone';
-import { FormattedValue, FormattingFn } from '../../utils/formatting/types';
-import { createGuid } from '../../utils/utils';
+import { Dict } from '@/types';
+import formatDate from '@/utils/formatting/date';
+import formatNumeric from '@/utils/formatting/numeric';
+import formatPhoneNumber from '@/utils/formatting/phone';
+import { FormattedValue, FormattingFn } from '@/utils/formatting/types';
+import { createGuid } from '@/utils/utils';
 
 export interface CursorData {
     startingPosition: number;
@@ -270,6 +270,7 @@ export class ProteanInput {
                             htmlFor={this.inputId}
                             onClick={this.onLabelClick}
                         >
+                            {/* Error icon currently requires label */}
                             {this.hasErrors && (
                                 <protean-icon
                                     type="status-error-filled"

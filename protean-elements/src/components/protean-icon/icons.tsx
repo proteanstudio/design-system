@@ -2,7 +2,7 @@ import {
     h, //eslint-disable-line
     VNode,
 } from '@stencil/core';
-import { Dict } from '../../types';
+import { Dict } from '@/types';
 
 type ReusableIcon = (modifier?: string) => VNode;
 

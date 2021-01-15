@@ -17,7 +17,7 @@ export class ProteanButton {
 
     render(): VNode {
         return (
-            <button type={this.type || 'button'} disabled={this.disabled}>
+            <button type={this.type ?? 'button'} disabled={this.disabled}>
                 <div>
                     <slot />
                 </div>
