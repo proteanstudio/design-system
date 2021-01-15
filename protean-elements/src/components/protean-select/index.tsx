@@ -20,7 +20,10 @@ export class ProteanSelect {
     @Prop({ reflect: true, mutable: true }) value: string;
     @Prop({ mutable: true }) selectedOptions: string[] = [];
     @Prop({ reflect: true }) label: string;
-    @Prop({ reflect: true }) multiple: boolean; // TODO
+    @Prop({ reflect: true }) optional: boolean;
+    @Prop({ reflect: true }) disabled: boolean;
+    @Prop({ reflect: true }) multiple: boolean;
+    @Prop() errors: string[];
 
     @State() dropdownOpen = false;
 
@@ -37,13 +40,11 @@ export class ProteanSelect {
 
     @Listen('focus')
     defaultFocusHandler(): void {
-        console.log('focus');
         this.functionQueue = [];
     }
 
     @Listen('blur')
     defaultBlurHandler(): void {
-        console.log('blur');
         this.functionQueue.push(() => this.closeDropdown());
         this.executeFunctionQueue();
     }
@@ -84,8 +85,8 @@ export class ProteanSelect {
     componentWillLoad(): void {
         const mutationObserver = new MutationObserver(this.onMutationObserved);
         mutationObserver.observe(this.hostElement, {
-            childList: !0,
-            subtree: !0,
+            childList: true,
+            subtree: true,
         });
         this.onMutationObserved();
         this.mutationObserver = mutationObserver;
@@ -136,44 +137,48 @@ export class ProteanSelect {
 
         this.dropdownOpen = false;
 
-        if (this.activeOption && !this.activeOption.selected) {
+        if (this.activeOption) {
             this.activeOption.active = false;
         }
     };
 
     executeFunctionQueue = (): void => {
         setTimeout(() => {
-            console.log('execute');
             this.functionQueue.forEach(fn => {
                 fn();
             });
         }, 200); // REPLACE with click-elsewhere, timing is inconsistent
     };
 
-    activateFirstOption(): void {
-        this.optionElements[0].active = true;
+    activateDefaultOption(): void {
+        const targetOption =
+            this.hostElement.querySelector<HTMLProteanOptionElement>(
+                'protean-option[selected]',
+            ) ?? this.optionElements[0];
+        targetOption.active = true;
     }
 
-    handleOptionNavigation(key: string): void {
+    handleOptionNavigation(
+        key: string,
+        activeOptionIndex = this.activeOptionIndex,
+    ): void {
         if (!this.dropdownOpen) {
             this.dropdownOpen = true;
-            this.activateFirstOption();
+            this.activateDefaultOption();
             return;
         }
 
         if (!this.activeOption) {
-            this.activateFirstOption();
+            this.activateDefaultOption();
             return;
         }
 
-        const activeOptionIndex = this.activeOptionIndex;
         const lastOptionIndex = this.optionElements.length - 1;
         let targetIndex = 0;
 
         switch (key) {
             case 'ArrowUp':
                 targetIndex = activeOptionIndex > 0 ? activeOptionIndex - 1 : 0;
-
                 break;
             case 'ArrowDown':
                 targetIndex =
@@ -190,6 +195,18 @@ export class ProteanSelect {
         }
 
         if (targetIndex !== this.activeOptionIndex) {
+            const targetOption = this.optionElements[targetIndex];
+
+            if (targetOption.disabled || targetOption.disabledGroup) {
+                if (
+                    targetOption !== this.optionElements[0] &&
+                    targetOption !== this.optionElements[lastOptionIndex]
+                ) {
+                    this.handleOptionNavigation(key, targetIndex);
+                }
+                return;
+            }
+
             this.activeOption.active = false;
             this.optionElements[targetIndex].active = true;
             this.activeOption.scrollIntoView({
@@ -272,11 +289,10 @@ export class ProteanSelect {
     };
 
     onOptionClick = (event: MouseEvent): void => {
-        const target = event.target as HTMLProteanOptionElement;
+        const option = event.target as HTMLProteanOptionElement;
+        if (option.localName !== 'protean-option') return;
 
-        if (target.localName !== 'protean-option') return;
-
-        this.handleSelection(target.value);
+        this.handleSelection(option.value);
     };
 
     onMutationObserved = (): void => {
@@ -293,13 +309,21 @@ export class ProteanSelect {
                 <protean-input
                     value={this.displayValue}
                     label={this.label}
+                    optional={this.optional}
+                    errors={this.errors}
+                    disabled={this.disabled}
+                    readonly
+                    suppress-messages
                     ariaHasPopup="listbox"
                     ariaExpanded={this.dropdownOpen}
                     onClick={this.onInputClick}
                     onKeyUp={this.onInputKeyUp}
                     onKeyDown={this.onInputKeyDown}
-                    readonly
                 ></protean-input>
+                <protean-icon
+                    class="dropdown-icon"
+                    type="chevron-down"
+                ></protean-icon>
                 <div
                     class="protean-select-separator"
                     hidden={!this.dropdownOpen}

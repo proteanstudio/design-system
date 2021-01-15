@@ -87,6 +87,11 @@ const icons: Dict<Icon> = {
             />
         ),
     },
+    'chevron-down': {
+        markup: () => (
+            <path class="stroke-primary" d="M2.003 8.5L12 17l10-8.5" />
+        ),
+    },
     'status-error': {
         markup: () => reusableIcons['error'](),
     },

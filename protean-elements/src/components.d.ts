@@ -29,6 +29,7 @@ export namespace Components {
         "ariaExpanded": boolean | undefined;
         "ariaHasPopup": string;
         "ariaLabel": string;
+        "disabled": boolean;
         "errors": string[];
         "format": string;
         "hints": string[];
@@ -43,21 +44,27 @@ export namespace Components {
     }
     interface ProteanMessage {
         "level": string;
-        "supplemental": boolean;
         "type": string;
+        "variant": string;
     }
     interface ProteanOptgroup {
+        "disabled": boolean;
         "label": string;
     }
     interface ProteanOption {
         "active": boolean;
+        "disabled": boolean;
+        "disabledGroup": boolean;
         "label": string;
         "selected": boolean;
         "value": string;
     }
     interface ProteanSelect {
+        "disabled": boolean;
+        "errors": string[];
         "label": string;
         "multiple": boolean;
+        "optional": boolean;
         "selectedOptions": string[];
         "value": string;
     }
@@ -172,6 +179,7 @@ declare namespace LocalJSX {
         "ariaExpanded"?: boolean | undefined;
         "ariaHasPopup"?: string;
         "ariaLabel"?: string;
+        "disabled"?: boolean;
         "errors"?: string[];
         "format"?: string;
         "hints"?: string[];
@@ -188,22 +196,28 @@ declare namespace LocalJSX {
     }
     interface ProteanMessage {
         "level"?: string;
-        "supplemental"?: boolean;
         "type"?: string;
+        "variant"?: string;
     }
     interface ProteanOptgroup {
+        "disabled"?: boolean;
         "label"?: string;
     }
     interface ProteanOption {
         "active"?: boolean;
+        "disabled"?: boolean;
+        "disabledGroup"?: boolean;
         "label"?: string;
         "selected"?: boolean;
         "value"?: string;
     }
     interface ProteanSelect {
+        "disabled"?: boolean;
+        "errors"?: string[];
         "label"?: string;
         "multiple"?: boolean;
         "onChange"?: (event: CustomEvent<any>) => void;
+        "optional"?: boolean;
         "selectedOptions"?: string[];
         "value"?: string;
     }

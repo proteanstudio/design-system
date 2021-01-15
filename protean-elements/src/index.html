@@ -121,19 +121,22 @@
             <protean-input label="Label text"></protean-input>
         </div>
 
-        <protean-select label="Select label" value="1">
+        <protean-select label="Select label" value="1" optional>
             <protean-optgroup label="Group 1">
+                <protean-option label="Option 0" value="0" disabled
+                    >Option 0</protean-option
+                >
                 <protean-option label="Option 1" value="1"
                     >Option 1</protean-option
                 >
-                <protean-option label="Option 2" value="2"
+                <protean-option label="Option 2" value="2" disabled
                     >Option 2</protean-option
                 >
                 <protean-option label="Option 3" value="3"
                     >Option 3</protean-option
                 >
             </protean-optgroup>
-            <protean-optgroup label="Group 2">
+            <protean-optgroup label="Group 2" disabled>
                 <protean-option label="Option 4" value="4"
                     >Option 4</protean-option
                 >
@@ -145,6 +148,17 @@
                 >
                 <protean-option label="Option 7" value="7"
                     >Option 7</protean-option
+                >
+            </protean-optgroup>
+            <protean-optgroup label="Group 3">
+                <protean-option label="Option 8" value="8"
+                    >Option 8</protean-option
+                >
+                <protean-option label="Option 9" value="9"
+                    >Option 9</protean-option
+                >
+                <protean-option label="Option 10" value="10" disabled
+                    >Option 10</protean-option
                 >
             </protean-optgroup>
         </protean-select>

@@ -13,6 +13,17 @@ protean-input {
     margin: 0;
 }
 
+.dropdown-icon {
+    position: absolute;
+    right: 0.75rem;
+    top: 1.5rem;
+}
+
+:host([disabled]) .dropdown-icon {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
 .protean-dropdown {
     position: absolute;
     z-index: 2;

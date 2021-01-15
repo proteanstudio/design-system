@@ -32,6 +32,7 @@ export class ProteanInput {
     @Prop({ mutable: true }) value: string;
     @Prop({ reflect: true }) type: string;
     @Prop({ reflect: true }) label: string;
+    @Prop({ reflect: true }) disabled = false;
     @Prop({ reflect: true }) role: string;
     @Prop({ reflect: true }) maxlength: number;
     @Prop({ reflect: true }) format: string;
@@ -259,12 +260,22 @@ export class ProteanInput {
     render(): VNode {
         return (
             <div class="input-wrapper">
-                <div class="input-container">
+                <div
+                    class={`input-container ${
+                        this.hasErrors ? 'has-error' : ''
+                    }`}
+                >
                     {this.label && (
                         <label
                             htmlFor={this.inputId}
                             onClick={this.onLabelClick}
                         >
+                            {this.hasErrors && (
+                                <protean-icon
+                                    type="status-error-filled"
+                                    class="error-icon"
+                                ></protean-icon>
+                            )}
                             {this.label}
                             {this.optional && (
                                 <span class="optional-tag"> (optional)</span>
@@ -274,6 +285,7 @@ export class ProteanInput {
                     <input
                         id={this.inputId}
                         type={this.inputType}
+                        disabled={this.disabled}
                         readOnly={this.readonly}
                         aria-required={`${!this.optional}`}
                         aria-label={this.inputAriaLabel}
@@ -302,7 +314,7 @@ export class ProteanInput {
                 <protean-message
                     type={this.hasErrors ? 'error' : 'info'}
                     level="status"
-                    supplemental={true}
+                    variant="inline"
                 >
                     <ul id={this.descriptionId}>
                         {this.showMessages &&

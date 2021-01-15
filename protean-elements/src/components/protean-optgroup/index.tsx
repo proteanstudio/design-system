@@ -1,6 +1,7 @@
 import {
     Component,
     Prop,
+    Element,
     h, //eslint-disable-line
 } from '@stencil/core';
 import { VNode } from '@stencil/core/internal';
@@ -13,12 +14,37 @@ import { createGuid } from '../../utils/utils';
 })
 export class ProteanOptgroup {
     @Prop({ reflect: true }) label: string;
+    @Prop({ reflect: true }) disabled: boolean;
+
+    @Element() hostElement: HTMLProteanOptgroupElement;
 
     guid: number = createGuid();
+    mutationObserver: MutationObserver;
 
     get labelId(): string {
         return `protean-optgroup-label-${this.guid}`;
     }
+
+    get optionElements(): HTMLProteanOptionElement[] {
+        return Array.from(this.hostElement.querySelectorAll('protean-option'));
+    }
+
+    componentWillLoad(): void {
+        const mutationObserver = new MutationObserver(this.onMutationObserved);
+        mutationObserver.observe(this.hostElement, {
+            childList: true,
+        });
+        this.onMutationObserved();
+        this.mutationObserver = mutationObserver;
+    }
+
+    onMutationObserved = (): void => {
+        if (this.disabled) {
+            this.optionElements.forEach(option => {
+                option.disabledGroup = true;
+            });
+        }
+    };
 
     render(): VNode {
         return (
@@ -29,7 +55,9 @@ export class ProteanOptgroup {
             >
                 {this.label && (
                     <div class="protean-optgroup-label" id={this.labelId}>
-                        <span>{this.label}</span>
+                        <div class="protean-optgroup-label-text">
+                            <span>{this.label}</span>
+                        </div>
                     </div>
                 )}
                 <div class="protean-optgroup-option-container">

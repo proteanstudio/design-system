@@ -1,7 +1,7 @@
 :host {
     width: 24px;
     height: 24px;
-    display: block;
+    display: inline-block;
 }
 
 svg {
