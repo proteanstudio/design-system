@@ -11,7 +11,7 @@ describe('protean-button', () => {
                 .textContent;
         });
 
-        expect(slotContent).toEqual(`Button Text`);
+        expect(slotContent).toEqual('Button Text');
     });
 
     it('binds type property', async () => {

@@ -20,7 +20,7 @@ export class ProteanOption {
     @Prop({ reflect: true }) disabledGroup: boolean;
 
     get isDisabled(): boolean {
-        return this.disabled || this.disabledGroup;
+        return (this.disabled || this.disabledGroup) ?? false;
     }
 
     @Listen('click')
@@ -35,7 +35,7 @@ export class ProteanOption {
             <div
                 class="protean-option-container"
                 role="option"
-                aria-selected={`${this.selected}`}
+                aria-selected={`${this.selected ?? false}`}
                 aria-disabled={`${this.isDisabled}`}
             >
                 <div class="protean-option-selected">

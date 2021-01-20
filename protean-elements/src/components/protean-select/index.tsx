@@ -18,7 +18,7 @@ import { VNode } from '@stencil/core/internal';
 })
 export class ProteanSelect {
     @Prop({ reflect: true, mutable: true }) value: string;
-    @Prop({ mutable: true }) selectedOptions: string[] = [];
+    @Prop({ mutable: true }) selectedOptions: string[];
     @Prop({ reflect: true }) label: string;
     @Prop({ reflect: true }) optional: boolean;
     @Prop({ reflect: true }) disabled: boolean;
@@ -60,13 +60,25 @@ export class ProteanSelect {
             return;
         }
 
-        this.optionElements.forEach(option => {
-            option.selected = option.value === value;
-        });
+        if (value) {
+            this.optionElements.forEach(option => {
+                option.selected = option.value === value;
+            });
+
+            return;
+        }
+
+        const preSelectedOption = this.hostElement.shadowRoot.querySelector<HTMLProteanOptionElement>(
+            'protean-option[selected]',
+        );
+
+        if (preSelectedOption) {
+            this.value = preSelectedOption.value;
+        }
     }
 
     @Watch('selectedOptions')
-    updateMultipleOptions(selectedOptions: string[] = []): void {
+    updateMultipleOptions(selectedOptions: string[]): void {
         if (!this.multiple) {
             console.error(
                 '`selectedOptions` should not be used on `protean-select` elements where `multiple` is `false`.  Use `value` instead.',
@@ -74,9 +86,17 @@ export class ProteanSelect {
             return;
         }
 
-        this.optionElements.forEach(option => {
-            option.selected = selectedOptions.includes(option.value);
-        });
+        if (selectedOptions) {
+            this.optionElements.forEach(option => {
+                option.selected = selectedOptions.includes(option.value);
+            });
+
+            return;
+        }
+
+        this.selectedOptions = this.optionElements
+            .filter(option => option.selected)
+            .map(option => option.value);
     }
 
     mutationObserver: MutationObserver;
@@ -103,9 +123,13 @@ export class ProteanSelect {
             if (selectedCount === 0) return '';
 
             if (selectedCount === 1) {
-                return this.optionElements.find(
+                const selectedOption = this.optionElements.find(
                     option => option.value === this.selectedOptions[0],
-                ).label;
+                );
+
+                return (
+                    selectedOption.label ?? selectedOption.textContent.trim()
+                );
             }
 
             return `${selectedCount} selected`;
@@ -114,7 +138,10 @@ export class ProteanSelect {
             option => option.selected,
         );
         if (selectedOption) {
-            return selectedOption.label ?? selectedOption.value;
+            return (
+                selectedOption.label ??
+                (selectedOption.textContent.trim() || selectedOption.value)
+            );
         }
 
         return this.value;
@@ -208,7 +235,7 @@ export class ProteanSelect {
             }
 
             this.activeOption.active = false;
-            this.optionElements[targetIndex].active = true;
+            targetOption.active = true;
             this.activeOption.scrollIntoView({
                 behavior: 'smooth',
                 block: 'nearest',
