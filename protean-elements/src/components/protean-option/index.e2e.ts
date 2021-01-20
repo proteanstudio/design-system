@@ -24,7 +24,7 @@ describe('protean-option', () => {
                 .textContent;
         });
 
-        expect(slotContent).toEqual(`Label 1`);
+        expect(slotContent).toEqual('Label 1');
     });
 
     it('handles disabled state', async () => {

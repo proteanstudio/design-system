@@ -2,6 +2,7 @@ import {
     Component,
     Prop,
     Element,
+    Watch,
     h, //eslint-disable-line
 } from '@stencil/core';
 import { VNode } from '@stencil/core/internal';
@@ -21,6 +22,13 @@ export class ProteanOptgroup {
     guid: number = createGuid();
     mutationObserver: MutationObserver;
 
+    @Watch('disabled')
+    propagateDisabledState(disabled = false): void {
+        this.optionElements.forEach(option => {
+            option.disabledGroup = disabled;
+        });
+    }
+
     get labelId(): string {
         return `protean-optgroup-label-${this.guid}`;
     }
@@ -39,11 +47,7 @@ export class ProteanOptgroup {
     }
 
     onMutationObserved = (): void => {
-        if (this.disabled) {
-            this.optionElements.forEach(option => {
-                option.disabledGroup = true;
-            });
-        }
+        this.propagateDisabledState(this.disabled);
     };
 
     render(): VNode {
@@ -52,6 +56,7 @@ export class ProteanOptgroup {
                 class="protean-optgroup-container"
                 role="group"
                 aria-labelled-by={this.labelId}
+                aria-disabled={`${this.disabled ?? false}`}
             >
                 {this.label && (
                     <div class="protean-optgroup-label" id={this.labelId}>
