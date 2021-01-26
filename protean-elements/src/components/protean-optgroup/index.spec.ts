@@ -1,4 +1,4 @@
-import fakeMutationObserver from '@/test-helpers/polyfills/MutationObserver';
+import fakeMutationObserver from '@/test-helpers/mocks/MutationObserver';
 import { newSpecPage } from '@stencil/core/testing';
 import { ProteanOptgroup } from '.';
 import { ProteanOption } from '@/components/protean-option';

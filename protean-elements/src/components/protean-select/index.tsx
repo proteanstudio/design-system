@@ -1,3 +1,4 @@
+import { createGuid } from '@/utils/utils';
 import {
     Component,
     Prop,
@@ -20,14 +21,88 @@ export class ProteanSelect {
     @Prop({ reflect: true, mutable: true }) value: string;
     @Prop({ mutable: true }) selectedOptions: string[];
     @Prop({ reflect: true }) label: string;
+    @Prop() ariaLabel: string;
     @Prop({ reflect: true }) optional: boolean;
     @Prop({ reflect: true }) disabled: boolean;
-    @Prop({ reflect: true }) multiple: boolean;
+    @Prop({ reflect: true }) multiple: boolean; //change to variant?
     @Prop() errors: string[];
 
     @State() dropdownOpen = false;
 
     @Event({ eventName: 'change', bubbles: false }) change: EventEmitter;
+
+    @Element() hostElement: HTMLProteanSelectElement;
+
+    guid: number = createGuid();
+    mutationObserver: MutationObserver;
+    functionQueue: VoidFunction[] = [];
+    functionQueueTimeout = 200;
+
+    componentWillLoad(): void {
+        const mutationObserver = new MutationObserver(this.onMutationObserved);
+        mutationObserver.observe(this.hostElement, {
+            childList: true,
+            subtree: true,
+        });
+        this.onMutationObserved();
+        this.mutationObserver = mutationObserver;
+    }
+
+    get selectAriaLabel(): string | null {
+        if (this.label) return null;
+
+        return this.ariaLabel ?? null;
+    }
+
+    get optionElements(): HTMLProteanOptionElement[] {
+        return Array.from(this.hostElement.querySelectorAll('protean-option'));
+    }
+
+    get displayValue(): string {
+        if (this.multiple) {
+            const selectedCount = this.selectedOptions.length;
+
+            if (selectedCount === 0) return '';
+
+            if (selectedCount === 1) {
+                const selectedOption = this.optionElements.find(
+                    option => option.value === this.selectedOptions[0],
+                );
+
+                return (
+                    selectedOption?.label ??
+                    (selectedOption?.textContent.trim() ||
+                        selectedOption?.value ||
+                        this.selectedOptions[0])
+                );
+            }
+
+            return `${selectedCount} selected`;
+        }
+        const selectedOption = this.optionElements.find(
+            option => option.selected,
+        );
+        if (selectedOption) {
+            return (
+                selectedOption.label ??
+                (selectedOption.textContent.trim() || selectedOption.value)
+            );
+        }
+
+        return this.value;
+    }
+
+    get activeOption(): HTMLProteanOptionElement | undefined {
+        return this.optionElements.find(option => option.active);
+    }
+
+    get activeOptionId(): string {
+        return this.activeOption?.id ?? '';
+    }
+
+    get activeOptionIndex(): number {
+        return this.optionElements.indexOf(this.activeOption);
+    }
 
     @Listen('change')
     defaultChangeHandler(event: CustomEvent): void {
@@ -45,14 +120,23 @@ export class ProteanSelect {
 
     @Listen('blur')
     defaultBlurHandler(): void {
-        this.functionQueue.push(() => this.closeDropdown());
+        this.functionQueue.push(() => {
+            this.closeDropdown();
+        });
         this.executeFunctionQueue();
     }
 
-    @Element() hostElement: HTMLProteanSelectElement;
+    @Watch('multiple')
+    updateOptions(): void {
+        if (this.multiple) {
+            this.updateMultipleOptions(this.selectedOptions);
+        } else {
+            this.updateSingleOptions(this.value);
+        }
+    }
 
     @Watch('value')
-    updateOptions(value: string): void {
+    updateSingleOptions(value: string): void {
         if (this.multiple) {
             console.error(
                 '`value` should not be used on `protean-select` elements where `multiple` is `true`.  Use `selectedOptions` instead.',
@@ -68,8 +152,8 @@ export class ProteanSelect {
             return;
         }
 
-        const preSelectedOption = this.hostElement.shadowRoot.querySelector<HTMLProteanOptionElement>(
-            'protean-option[selected]',
+        const preSelectedOption = this.optionElements.find(
+            option => option.selected,
         );
 
         if (preSelectedOption) {
@@ -99,66 +183,6 @@ export class ProteanSelect {
             .map(option => option.value);
     }
 
-    mutationObserver: MutationObserver;
-    functionQueue: VoidFunction[] = [];
-
-    componentWillLoad(): void {
-        const mutationObserver = new MutationObserver(this.onMutationObserved);
-        mutationObserver.observe(this.hostElement, {
-            childList: true,
-            subtree: true,
-        });
-        this.onMutationObserved();
-        this.mutationObserver = mutationObserver;
-    }
-
-    get optionElements(): HTMLProteanOptionElement[] {
-        return Array.from(this.hostElement.querySelectorAll('protean-option'));
-    }
-
-    get displayValue(): string {
-        if (this.multiple) {
-            const selectedCount = this.selectedOptions.length;
-
-            if (selectedCount === 0) return '';
-
-            if (selectedCount === 1) {
-                const selectedOption = this.optionElements.find(
-                    option => option.value === this.selectedOptions[0],
-                );
-
-                return (
-                    selectedOption.label ?? selectedOption.textContent.trim()
-                );
-            }
-
-            return `${selectedCount} selected`;
-        }
-        const selectedOption = this.optionElements.find(
-            option => option.selected,
-        );
-        if (selectedOption) {
-            return (
-                selectedOption.label ??
-                (selectedOption.textContent.trim() || selectedOption.value)
-            );
-        }
-
-        return this.value;
-    }
-
-    get activeOption(): HTMLProteanOptionElement | null {
-        return this.optionElements.find(option => option.active);
-    }
-
-    get activeOptionId(): string {
-        return this.activeOption?.id ?? '';
-    }
-
-    get activeOptionIndex(): number {
-        return this.optionElements.indexOf(this.activeOption) ?? 0;
-    }
-
     closeDropdown: VoidFunction = () => {
         if (!this.dropdownOpen) return;
 
@@ -174,14 +198,13 @@ export class ProteanSelect {
             this.functionQueue.forEach(fn => {
                 fn();
             });
-        }, 200); // REPLACE with click-elsewhere, timing is inconsistent
+        }, this.functionQueueTimeout); // REPLACE with click-elsewhere, timing is inconsistent
     };
 
     activateDefaultOption(): void {
         const targetOption =
-            this.hostElement.querySelector<HTMLProteanOptionElement>(
-                'protean-option[selected]',
-            ) ?? this.optionElements[0];
+            this.optionElements.find(option => option.selected) ??
+            this.optionElements[0]; //add protections against disabled starting point
         targetOption.active = true;
     }
 
@@ -204,14 +227,14 @@ export class ProteanSelect {
         let targetIndex = 0;
 
         switch (key) {
-            case 'ArrowUp':
-                targetIndex = activeOptionIndex > 0 ? activeOptionIndex - 1 : 0;
-                break;
             case 'ArrowDown':
                 targetIndex =
                     activeOptionIndex < lastOptionIndex
                         ? activeOptionIndex + 1
                         : activeOptionIndex;
+                break;
+            case 'ArrowUp':
+                targetIndex = activeOptionIndex > 0 ? activeOptionIndex - 1 : 0;
                 break;
             case 'Home':
                 targetIndex = 0;
@@ -298,7 +321,7 @@ export class ProteanSelect {
             return;
         }
 
-        if ([' ', 'Enter'].includes(key)) {
+        if ([' ', 'Enter'].includes(key) && this.activeOption) {
             this.handleSelection(this.activeOption.value);
             return;
         }
@@ -309,12 +332,6 @@ export class ProteanSelect {
         }
     };
 
-    onOptionKeyup = (event: KeyboardEvent): void => {
-        const target = event.target as HTMLProteanOptionElement;
-
-        if (target.localName !== 'protean-option') return;
-    };
-
     onOptionClick = (event: MouseEvent): void => {
         const option = event.target as HTMLProteanOptionElement;
         if (option.localName !== 'protean-option') return;
@@ -323,11 +340,11 @@ export class ProteanSelect {
     };
 
     onMutationObserved = (): void => {
-        if (this.multiple) {
-            this.updateMultipleOptions(this.selectedOptions);
-        } else {
-            this.updateOptions(this.value);
-        }
+        this.optionElements.forEach((option, index) => {
+            option.id = `protean-select-${this.guid}-option-${index}`;
+        });
+
+        this.updateOptions();
     };
 
     render(): VNode {
@@ -341,6 +358,7 @@ export class ProteanSelect {
                     disabled={this.disabled}
                     readonly
                     suppress-messages
+                    ariaLabel={this.selectAriaLabel}
                     ariaHasPopup="listbox"
                     ariaExpanded={this.dropdownOpen}
                     onClick={this.onInputClick}
@@ -348,7 +366,7 @@ export class ProteanSelect {
                     onKeyDown={this.onInputKeyDown}
                 ></protean-input>
                 <protean-icon
-                    class="dropdown-icon"
+                    class="protean-select-icon"
                     type="chevron-down"
                 ></protean-icon>
                 <div
@@ -370,7 +388,6 @@ export class ProteanSelect {
                 aria-activedescendant={this.activeOptionId}
                 hidden={!this.dropdownOpen}
                 onClick={this.onOptionClick}
-                onKeyUp={this.onOptionKeyup}
             >
                 <slot />
             </div>

@@ -60,6 +60,7 @@ export namespace Components {
         "value": string;
     }
     interface ProteanSelect {
+        "ariaLabel": string;
         "disabled": boolean;
         "errors": string[];
         "label": string;
@@ -212,6 +213,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface ProteanSelect {
+        "ariaLabel"?: string;
         "disabled"?: boolean;
         "errors"?: string[];
         "label"?: string;

@@ -1,6 +1,6 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { ProteanTabContainer } from '.';
-import fakeMutationObserver from '@/test-helpers/polyfills/MutationObserver';
+import fakeMutationObserver from '@/test-helpers/mocks/MutationObserver';
 import { ProteanTabPane } from '@/components/protean-tab-pane';
 
 describe('protean-tab-container', () => {

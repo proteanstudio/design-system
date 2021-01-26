@@ -13,13 +13,13 @@ protean-input {
     margin: 0;
 }
 
-.dropdown-icon {
+.protean-select-icon {
     position: absolute;
     right: 0.75rem;
     top: 1.5rem;
 }
 
-:host([disabled]) .dropdown-icon {
+:host([disabled]) .protean-select-icon {
     opacity: 0.4;
     cursor: not-allowed;
 }
