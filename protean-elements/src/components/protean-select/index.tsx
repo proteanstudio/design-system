@@ -18,7 +18,7 @@ import { VNode } from '@stencil/core/internal';
     shadow: true,
 })
 export class ProteanSelect {
-    @Prop({ reflect: true, mutable: true }) value: string;
+    @Prop({ mutable: true }) value: string;
     @Prop({ mutable: true }) selectedOptions: string[];
     @Prop({ reflect: true }) label: string;
     @Prop() ariaLabel: string;
@@ -28,6 +28,7 @@ export class ProteanSelect {
     @Prop() errors: string[];
 
     @State() dropdownOpen = false;
+    @State() activeOptionId: string;
 
     @Event({ eventName: 'change', bubbles: false }) change: EventEmitter;
 
@@ -94,10 +95,6 @@ export class ProteanSelect {
 
     get activeOption(): HTMLProteanOptionElement | undefined {
         return this.optionElements.find(option => option.active);
-    }
-
-    get activeOptionId(): string {
-        return this.activeOption?.id ?? '';
     }
 
     get activeOptionIndex(): number {
@@ -190,6 +187,7 @@ export class ProteanSelect {
 
         if (this.activeOption) {
             this.activeOption.active = false;
+            this.activeOptionId = '';
         }
     };
 
@@ -206,6 +204,7 @@ export class ProteanSelect {
             this.optionElements.find(option => option.selected) ??
             this.optionElements[0]; //add protections against disabled starting point
         targetOption.active = true;
+        this.activeOptionId = targetOption.id;
     }
 
     handleOptionNavigation(
@@ -259,6 +258,7 @@ export class ProteanSelect {
 
             this.activeOption.active = false;
             targetOption.active = true;
+            this.activeOptionId = targetOption.id;
             this.activeOption.scrollIntoView({
                 behavior: 'smooth',
                 block: 'nearest',

@@ -43,7 +43,7 @@ describe('protean-select', () => {
         expect(rootInstance.optionElements).toEqual(optionElements);
         expect(rootInstance.displayValue).toEqual('Option 2');
         expect(rootInstance.activeOption).toEqual(undefined);
-        expect(rootInstance.activeOptionId).toEqual('');
+        expect(rootInstance.activeOptionId).toEqual(undefined);
         expect(rootInstance.activeOptionIndex).toEqual(-1);
 
         const proteanInput = root.shadowRoot.querySelector('protean-input');
@@ -75,11 +75,74 @@ describe('protean-select', () => {
         expect(selectDropdown).toEqualAttribute('role', 'listbox');
         expect(selectDropdown).toEqualAttribute('aria-label', 'Select label');
         expect(selectDropdown).toEqualAttribute('tabindex', '-1');
-        expect(selectDropdown).toEqualAttribute(
-            'aria-activedescendant',
-            rootInstance.activeOptionId,
-        );
+        expect(selectDropdown).toEqualAttribute('aria-activedescendant', null);
         expect(selectDropdown).toHaveAttribute('hidden');
+    });
+
+    it('passes certain properties to inner protean input', async () => {
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
+            components: [
+                ProteanSelect,
+                ProteanOption,
+                ProteanInput,
+                ProteanIcon,
+            ],
+            html:
+                '<protean-select value="2" label="Select label" optional><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+        });
+
+        const proteanInput = root.shadowRoot.querySelector('protean-input');
+
+        expect(root.label).toEqual('Select label');
+        expect(proteanInput.label).toEqual('Select label');
+        expect(root.optional).toEqual(true);
+        expect(proteanInput.optional).toEqual(true);
+        expect(root.errors).toEqual(undefined);
+        expect(proteanInput.errors).toEqual(undefined);
+        expect(root.disabled).toEqual(undefined);
+        expect(proteanInput.disabled).toEqual(false);
+        expect(proteanInput.value).toEqual(rootInstance.displayValue);
+        expect(rootInstance.dropdownOpen).toEqual(false);
+        expect(proteanInput.ariaExpanded).toEqual(false);
+        expect(proteanInput.ariaLabel).toEqual(null);
+
+        root.label = null;
+        root.ariaLabel = 'Select aria-label';
+        root.optional = false;
+        root.errors = ['error 1'];
+        root.disabled = true;
+        rootInstance.dropdownOpen = true;
+        await waitForChanges();
+
+        expect(proteanInput.label).toEqual(null);
+        expect(proteanInput.ariaLabel).toEqual('Select aria-label');
+        expect(proteanInput.optional).toEqual(false);
+        expect(proteanInput.errors).toEqual(['error 1']);
+        expect(proteanInput.disabled).toEqual(true);
+        expect(proteanInput.ariaExpanded).toEqual(true);
+    });
+
+    it('shows separator when dropdown open', async () => {
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
+            components: [
+                ProteanSelect,
+                ProteanOption,
+                ProteanInput,
+                ProteanIcon,
+            ],
+            html:
+                '<protean-select value="2" label="Select label" optional><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+        });
+
+        const selectSeparator = root.shadowRoot.querySelector<HTMLDivElement>(
+            '.protean-select-separator',
+        );
+        expect(selectSeparator.hidden).toEqual(true);
+
+        rootInstance.dropdownOpen = true;
+        await waitForChanges();
+
+        expect(selectSeparator.hidden).toEqual(false);
     });
 
     it('initializes and fires mutationObserver on load', async () => {
@@ -207,9 +270,6 @@ describe('protean-select', () => {
             rootInstance.optionElements[1],
         );
         expect(rootInstance.activeOptionIndex).toEqual(1);
-        expect(rootInstance.activeOptionId).toEqual(
-            `protean-select-${rootInstance.guid}-option-1`,
-        );
     });
 
     it('fires default change handler', async () => {
@@ -371,7 +431,7 @@ describe('protean-select', () => {
         expect(updateMultipleOptions).toHaveBeenCalledTimes(1);
     });
 
-    it('updates options for single select', async () => {
+    it('updates options for single select and initializes value from first selected option', async () => {
         const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [
                 ProteanSelect,
@@ -407,7 +467,7 @@ describe('protean-select', () => {
         expect(root.value).toEqual(rootInstance.optionElements[1].value);
     });
 
-    it('updates options for multi select', async () => {
+    it('updates options for multi select and initializes selectedOptions from selected option elements', async () => {
         const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [
                 ProteanSelect,
@@ -558,7 +618,7 @@ describe('protean-select', () => {
     });
 
     it('handles option navigation', async () => {
-        const { rootInstance, waitForChanges } = await newSpecPage({
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [
                 ProteanSelect,
                 ProteanOption,
@@ -575,6 +635,10 @@ describe('protean-select', () => {
             option.scrollIntoView = scrollIntoViewMock;
         });
 
+        const dropdown = root.shadowRoot.querySelector(
+            '.protean-select-dropdown',
+        );
+
         rootInstance.handleOptionNavigation('ArrowDown');
         await waitForChanges();
 
@@ -582,12 +646,20 @@ describe('protean-select', () => {
         expect(rootInstance.activeOption).toEqual(
             rootInstance.optionElements[0],
         );
+        expect(dropdown).toEqualAttribute(
+            'aria-activedescendant',
+            rootInstance.optionElements[0].id,
+        );
 
         rootInstance.handleOptionNavigation('ArrowDown');
         await waitForChanges();
 
         expect(rootInstance.activeOption).toEqual(
             rootInstance.optionElements[1],
+        );
+        expect(dropdown).toEqualAttribute(
+            'aria-activedescendant',
+            rootInstance.optionElements[1].id,
         );
         expect(scrollIntoViewMock).toHaveBeenCalledTimes(1);
 
@@ -604,6 +676,10 @@ describe('protean-select', () => {
 
         expect(rootInstance.activeOption).toEqual(
             rootInstance.optionElements[0],
+        );
+        expect(dropdown).toEqualAttribute(
+            'aria-activedescendant',
+            rootInstance.optionElements[0].id,
         );
         expect(scrollIntoViewMock).toHaveBeenCalledTimes(2);
 
