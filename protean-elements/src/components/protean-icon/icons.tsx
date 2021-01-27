@@ -2,7 +2,7 @@ import {
     h, //eslint-disable-line
     VNode,
 } from '@stencil/core';
-import { Dict } from '../../types';
+import { Dict } from '@/types';
 
 type ReusableIcon = (modifier?: string) => VNode;
 
@@ -85,6 +85,11 @@ const icons: Dict<Icon> = {
                 class="stroke-primary"
                 d="M5.5 11.828L9.314 15.5 16.5 6.333"
             />
+        ),
+    },
+    'chevron-down': {
+        markup: () => (
+            <path class="stroke-primary" d="M2.003 8.5L12 17l10-8.5" />
         ),
     },
     'status-error': {

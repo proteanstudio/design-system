@@ -1,5 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
-import dispatchEvent from '../../test-helpers/dispatchEvent';
+import dispatchEvent from '@/test-helpers/dispatchEvent';
 
 describe('protean-input', () => {
     it('renders basic input', async () => {

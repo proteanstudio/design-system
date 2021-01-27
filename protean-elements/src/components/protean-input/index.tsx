@@ -9,12 +9,12 @@ import {
     h, //eslint-disable-line
 } from '@stencil/core';
 import { VNode } from '@stencil/core/internal';
-import { Dict } from '../../types';
-import formatDate from '../../utils/formatting/date';
-import formatNumeric from '../../utils/formatting/numeric';
-import formatPhoneNumber from '../../utils/formatting/phone';
-import { FormattedValue, FormattingFn } from '../../utils/formatting/types';
-import { createGuid } from '../../utils/utils';
+import { Dict } from '@/types';
+import formatDate from '@/utils/formatting/date';
+import formatNumeric from '@/utils/formatting/numeric';
+import formatPhoneNumber from '@/utils/formatting/phone';
+import { FormattedValue, FormattingFn } from '@/utils/formatting/types';
+import { createGuid } from '@/utils/utils';
 
 export interface CursorData {
     startingPosition: number;
@@ -32,6 +32,7 @@ export class ProteanInput {
     @Prop({ mutable: true }) value: string;
     @Prop({ reflect: true }) type: string;
     @Prop({ reflect: true }) label: string;
+    @Prop({ reflect: true }) disabled = false;
     @Prop({ reflect: true }) role: string;
     @Prop({ reflect: true }) maxlength: number;
     @Prop({ reflect: true }) format: string;
@@ -128,8 +129,10 @@ export class ProteanInput {
         return `${height}px`;
     }
 
-    @Event({ eventName: 'change', bubbles: false }) change: EventEmitter;
-    @Event({ eventName: 'input', bubbles: false }) input: EventEmitter;
+    @Event({ eventName: 'change', bubbles: false })
+    change: EventEmitter<FormattedValue>;
+    @Event({ eventName: 'input', bubbles: false })
+    input: EventEmitter<FormattedValue>;
 
     onInputChange = (event: Event): void => {
         event.stopPropagation();
@@ -174,6 +177,10 @@ export class ProteanInput {
         if (this.showMessages) {
             this.messageContainer.style.height = '0px';
         }
+    };
+
+    onLabelClick = (event: MouseEvent): void => {
+        event.stopImmediatePropagation();
     };
 
     @Listen('change')
@@ -252,34 +259,51 @@ export class ProteanInput {
 
     render(): VNode {
         return (
-            <div class="input-container">
-                {this.label && (
-                    <label htmlFor={this.inputId}>
-                        {this.label}
-                        {this.optional && (
-                            <span class="optional-tag"> (optional)</span>
-                        )}
-                    </label>
-                )}
-                <input
-                    id={this.inputId}
-                    type={this.inputType}
-                    readOnly={this.readonly}
-                    aria-required={`${!this.optional}`}
-                    aria-label={this.inputAriaLabel}
-                    aria-invalid={`${this.hasErrors}`}
-                    aria-describedby={this.descriptionId}
-                    aria-haspopup={this.ariaHasPopup}
-                    aria-expanded={
-                        this.ariaExpanded === undefined
-                            ? null
-                            : `${this.ariaExpanded}`
-                    }
-                    onChange={this.onInputChange}
-                    onInput={this.onInputInput}
-                    onFocus={this.onInputFocus}
-                    onBlur={this.onInputBlur}
-                />
+            <div class="input-wrapper">
+                <div
+                    class={`input-container ${
+                        this.hasErrors ? 'has-error' : ''
+                    }`}
+                >
+                    {this.label && (
+                        <label
+                            htmlFor={this.inputId}
+                            onClick={this.onLabelClick}
+                        >
+                            {/* Error icon currently requires label */}
+                            {this.hasErrors && (
+                                <protean-icon
+                                    type="status-error-filled"
+                                    class="error-icon"
+                                ></protean-icon>
+                            )}
+                            {this.label}
+                            {this.optional && (
+                                <span class="optional-tag"> (optional)</span>
+                            )}
+                        </label>
+                    )}
+                    <input
+                        id={this.inputId}
+                        type={this.inputType}
+                        disabled={this.disabled}
+                        readOnly={this.readonly}
+                        aria-required={`${!this.optional}`}
+                        aria-label={this.inputAriaLabel}
+                        aria-invalid={`${this.hasErrors}`}
+                        aria-describedby={this.descriptionId}
+                        aria-haspopup={this.ariaHasPopup}
+                        aria-expanded={
+                            this.ariaExpanded === undefined
+                                ? null
+                                : `${this.ariaExpanded}`
+                        }
+                        onChange={this.onInputChange}
+                        onInput={this.onInputInput}
+                        onFocus={this.onInputFocus}
+                        onBlur={this.onInputBlur}
+                    />
+                </div>
                 {this.renderMessages()}
             </div>
         );
@@ -291,6 +315,7 @@ export class ProteanInput {
                 <protean-message
                     type={this.hasErrors ? 'error' : 'info'}
                     level="status"
+                    variant="inline"
                 >
                     <ul id={this.descriptionId}>
                         {this.showMessages &&

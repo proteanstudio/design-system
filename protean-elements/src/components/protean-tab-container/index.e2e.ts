@@ -1,5 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
-import dispatchEvent from '../../test-helpers/dispatchEvent';
+import dispatchEvent from '@/test-helpers/dispatchEvent';
 
 describe('protean-tab-container', () => {
     it('renders tab list and correctly binds selected state', async () => {

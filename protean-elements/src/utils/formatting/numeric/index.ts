@@ -1,6 +1,6 @@
-import formatNumber, { NumberFormatOptions } from '../number';
-import { Dict } from '../../../types';
-import { FormattedValue } from '../types';
+import formatNumber, { NumberFormatOptions } from '@/utils/formatting/number';
+import { Dict } from '@/types';
+import { FormattedValue } from '@/utils/formatting/types';
 
 const formats: Dict<NumberFormatOptions> = {
     delimited: {

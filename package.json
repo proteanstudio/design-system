@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "main": "index.js",
     "repository": "git@github.com:proteanstudio/design-system.git",
-    "author": "Abdul Hamid <abdul@abdulmhamid.com>",
+    "author": "Abdul Hamid <abdul@protean.studio>",
     "license": "MIT",
     "private": true,
     "devDependencies": {

@@ -29,7 +29,7 @@ describe('protean-input', () => {
         expect(proteanInput.inputId).toContain(
             `protean-input-${proteanInput.guid}`,
         );
-        expect(proteanInput.descriptionId).toContain(
+        expect(proteanInput.descriptionId).toEqual(
             `protean-input-description-${proteanInput.guid}`,
         );
     });
@@ -162,6 +162,43 @@ describe('protean-input', () => {
         expect(proteanInput.messages).toEqual(proteanInput.hints);
     });
 
+    it('applies appropriate error class', async () => {
+        const { root: proteanInput, waitForChanges } = await newSpecPage({
+            components: [ProteanInput],
+            html: '<protean-input></protean-input>',
+        });
+
+        const inputContainer = proteanInput.shadowRoot.querySelector(
+            '.input-container',
+        );
+        expect(inputContainer).not.toHaveClass('has-error');
+
+        proteanInput.errors = ['error 1'];
+        await waitForChanges();
+
+        expect(inputContainer).toHaveClass('has-error');
+    });
+
+    it('renders error icon', async () => {
+        const { root: proteanInput, waitForChanges } = await newSpecPage({
+            components: [ProteanInput],
+            html: '<protean-input label="test label"></protean-input>',
+        });
+
+        let errorIcon: HTMLProteanIconElement = proteanInput.shadowRoot.querySelector(
+            '.error-icon',
+        );
+        expect(errorIcon).toBeNull();
+
+        proteanInput.errors = ['error 1'];
+        await waitForChanges();
+
+        errorIcon = proteanInput.shadowRoot.querySelector('.error-icon');
+
+        expect(errorIcon).not.toBeNull();
+        expect(errorIcon).toEqualAttribute('type', 'status-error-filled');
+    });
+
     it('shows messages', () => {
         const proteanInput = new ProteanInput();
 
@@ -252,6 +289,23 @@ describe('protean-input', () => {
         await waitForChanges();
         expect(setMessagesHeightMock).toHaveBeenCalledTimes(2);
         expect(rootInstance.scheduledAfterRender).toHaveLength(0);
+    });
+
+    it('prevents click propagation from input', async () => {
+        const { root: proteanInput } = await newSpecPage({
+            components: [ProteanInput],
+            html: '<protean-input label="Label text"></protean-input>',
+        });
+
+        const label = proteanInput.shadowRoot.querySelector('label');
+
+        const clickEvent = new MouseEvent('click');
+        const sIPMock = jest.fn();
+        clickEvent.stopImmediatePropagation = sIPMock;
+
+        label.dispatchEvent(clickEvent);
+
+        expect(sIPMock).toHaveBeenCalledTimes(1);
     });
 
     it('handles change event', async () => {
@@ -551,6 +605,22 @@ describe('protean-input', () => {
         expect(optionalSpan.textContent).toEqual(' (optional)');
     });
 
+    it('handles disabled binding', async () => {
+        const { root: proteanInput, waitForChanges } = await newSpecPage({
+            components: [ProteanInput],
+            html: '<protean-input></protean-input>',
+        });
+
+        const inputElement = proteanInput.shadowRoot.querySelector('input');
+        expect(proteanInput.disabled).toEqual(false);
+        expect(inputElement.disabled).toEqual(false);
+
+        proteanInput.disabled = true;
+        await waitForChanges();
+
+        expect(inputElement.disabled).toEqual(true);
+    });
+
     it('handles readonly binding', async () => {
         const { root: proteanInput, waitForChanges } = await newSpecPage({
             components: [ProteanInput],
@@ -558,11 +628,32 @@ describe('protean-input', () => {
         });
 
         const inputElement = proteanInput.shadowRoot.querySelector('input');
+        expect(proteanInput.readonly).toEqual(false);
         expect(inputElement.readOnly).toEqual(false);
 
         proteanInput.readonly = true;
         await waitForChanges();
 
         expect(inputElement.readOnly).toEqual(true);
+    });
+
+    it('handles aria-expanded binding', async () => {
+        const { root: proteanInput, waitForChanges } = await newSpecPage({
+            components: [ProteanInput],
+            html: '<protean-input></protean-input>',
+        });
+
+        const inputElement = proteanInput.shadowRoot.querySelector('input');
+        expect(inputElement).toEqualAttribute('aria-expanded', null);
+
+        proteanInput.ariaExpanded = true;
+        await waitForChanges();
+
+        expect(inputElement).toEqualAttribute('aria-expanded', 'true');
+
+        proteanInput.ariaExpanded = false;
+        await waitForChanges();
+
+        expect(inputElement).toEqualAttribute('aria-expanded', 'false');
     });
 });

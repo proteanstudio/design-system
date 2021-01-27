@@ -1,6 +1,6 @@
-import { Dict } from '../../../types';
-import formatGeneric from '../generic';
-import { FormattedValue } from '../types';
+import { Dict } from '@/types';
+import formatGeneric from '@/utils/formatting/generic';
+import { FormattedValue } from '@/utils/formatting/types';
 
 const formats: Dict<string> = {
     'MM/DD/YYYY': '00/00/0000',

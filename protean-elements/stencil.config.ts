@@ -26,10 +26,18 @@ export const config: Config = {
         collectCoverage: true,
         coveragePathIgnorePatterns: [
             '/node_modules/',
+            '(.*).d.ts',
+            '(.*).config.ts',
+            'src/index.ts',
             'src/test-helpers/',
             'src/components/protean-icon/icons.tsx',
         ],
+        collectCoverageFrom: ['**/*.{ts,tsx}'],
+        coverageDirectory: 'coverage',
         browserDevtools: true,
         browserArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
+        moduleNameMapper: {
+            '@/(.*)': '<rootDir>/src/$1',
+        },
     },
 };
