@@ -1,0 +1,27 @@
+@import '../../styles/host.css';
+
+:host {
+    display: block;
+}
+
+.tab-list {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--protean-tab-container-border-color);
+    list-style: none;
+}
+
+.tab-list button {
+    font-size: 1.125rem;
+    padding: 1rem;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.tab-list button[aria-selected='true'] {
+    box-shadow: inset var(--action-color) 0 5px;
+}

@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "allowUnreachableCode": false,
+        "declaration": false,
+        "experimentalDecorators": true,
+        "lib": ["dom", "ESNext"],
+        "moduleResolution": "node",
+        "module": "esnext",
+        "target": "esNext",
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "jsx": "react",
+        "jsxFactory": "h",
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"]
+        },
+    },
+    "include": ["src"],
+    "exclude": ["node_modules"]
+}

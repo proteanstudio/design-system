@@ -1,0 +1,51 @@
+@import '../../styles/host.css';
+
+:host {
+    display: block;
+}
+
+.select-container {
+    position: relative;
+    margin: 1rem;
+}
+
+protean-input {
+    margin: 0;
+}
+
+.protean-select-icon {
+    position: absolute;
+    right: 0.75rem;
+    top: 1.5rem;
+}
+
+:host([disabled]) .protean-select-icon {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.protean-dropdown {
+    position: absolute;
+    z-index: 2;
+    top: calc(100% - 3px);
+    width: 100%;
+    background-color: var(--protean-dropdown-background-color);
+    color: var(--protean-dropdown-text-color);
+    border-width: var(--protean-dropdown-border-width);
+    border-style: solid;
+    border-color: var(--protean-dropdown-border-color, currentColor);
+    border-radius: 0 0 2px 2px;
+    box-shadow: var(--protean-dropdown-box-shadow);
+    max-height: 250px;
+    overflow-y: scroll;
+}
+
+.protean-select-separator {
+    height: 1px;
+    width: calc(100% - 20px);
+    margin: 0 auto;
+    position: relative;
+    top: -2px;
+    z-index: 3;
+    background-color: var(--protean-select-separator-color);
+}

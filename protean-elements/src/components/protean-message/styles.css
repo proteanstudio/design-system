@@ -1,0 +1,87 @@
+@import '../../styles/host.css';
+
+:host {
+    display: block;
+    margin: 1rem 0;
+}
+
+.message-container {
+    --symbol-size: 16px;
+    --symbol-offset: -3px;
+    --icon-offset: -12px;
+
+    --status-color: #ffffff;
+    --status-color: var(--info-color);
+
+    background-color: var(--protean-message-background-color);
+    color: var(--protean-message-text-color);
+    border: 1px solid var(--protean-message-border-color);
+    border-radius: 2px;
+    position: relative;
+    margin: calc(-1 * var(--icon-offset)) calc(-1 * var(--icon-offset))
+        calc(-1 * var(--symbol-offset));
+    padding: var(--symbol-size) calc(-1 * var(--icon-offset));
+}
+
+:host([variant='inline']) .message-container {
+    margin: 0;
+    border-color: var(--status-color);
+}
+
+.message-container.info {
+    --status-color: var(--protean-status-info);
+}
+
+.message-container.success {
+    --status-color: var(--protean-status-success);
+}
+
+.message-container.warning {
+    --status-color: var(--protean-status-warning);
+}
+
+.message-container.error {
+    --status-color: var(--protean-status-error);
+}
+
+.decorator {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    fill: var(--status-color);
+}
+
+.decorator.top {
+    top: var(--symbol-offset);
+    right: var(--symbol-offset);
+    transform: rotate(270deg);
+}
+
+:host([variant='inline']) .decorator.top {
+    top: 0;
+    right: 0;
+}
+
+.decorator.bottom {
+    bottom: var(--symbol-offset);
+    left: var(--symbol-offset);
+    transform: rotate(90deg);
+}
+
+:host([variant='inline']) .decorator.bottom {
+    bottom: 0;
+    left: 0;
+}
+
+protean-icon {
+    position: absolute;
+    top: var(--icon-offset);
+    left: var(--icon-offset);
+    font-weight: 600;
+    line-height: 1;
+}
+
+::slotted(ul) {
+    margin: 0;
+    padding: 0.5rem 0 0.5rem 2rem;
+}
