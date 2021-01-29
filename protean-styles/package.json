@@ -1,6 +1,19 @@
 {
-  "name": "protean-styles",
-  "version": "0.0.1",
-  "main": "index.js",
-  "license": "MIT"
+    "name": "protean-styles",
+    "version": "0.0.1",
+    "main": "index.js",
+    "license": "MIT",
+    "files": [
+        "dist/*.css"
+    ],
+    "scripts": {
+        "scss": "sass styles/app.scss dist/css/app.css",
+        "scss:w": "sass --watch styles/app.scss dist/css/app.css",
+        "format": "prettier --check  'styles/'",
+        "format:fix": "prettier --write 'styles/'"
+    },
+    "devDependencies": {
+        "prettier": "^2.2.1",
+        "sass": "^1.32.5"
+    }
 }

@@ -315,7 +315,7 @@ export class ProteanSelect {
             'End',
         ].includes(key);
 
-        if (isNavigationKey) {
+        if (isNavigationKey && this.optionElements.length > 0) {
             event.preventDefault();
             this.handleOptionNavigation(key);
             return;

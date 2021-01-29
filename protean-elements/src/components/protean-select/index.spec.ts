@@ -1037,6 +1037,21 @@ describe('protean-select', () => {
         expect(handleOptionNavigationMock).toHaveBeenCalledTimes(4);
         expect(handleSelectionMock).toHaveBeenCalledTimes(2);
         expect(closeDropdownMock).toHaveBeenCalledTimes(1);
+
+        rootInstance.optionElements.forEach(item => {
+            item.remove();
+        });
+        await waitForChanges();
+
+        keyupEvent = new KeyboardEvent('keyup', { key: 'ArrowDown' });
+        keyupEvent.preventDefault = preventDefaultMock;
+        inputElement.dispatchEvent(keyupEvent);
+        await waitForChanges();
+
+        expect(preventDefaultMock).toHaveBeenCalledTimes(4);
+        expect(handleOptionNavigationMock).toHaveBeenCalledTimes(4);
+        expect(handleSelectionMock).toHaveBeenCalledTimes(2);
+        expect(closeDropdownMock).toHaveBeenCalledTimes(1);
     });
 
     it('calls handleSelection on option click', async () => {

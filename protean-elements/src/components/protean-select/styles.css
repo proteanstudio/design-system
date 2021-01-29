@@ -16,7 +16,7 @@ protean-input {
 .protean-select-icon {
     position: absolute;
     right: 0.75rem;
-    top: 1.5rem;
+    bottom: 0.5rem;
 }
 
 :host([disabled]) .protean-select-icon {

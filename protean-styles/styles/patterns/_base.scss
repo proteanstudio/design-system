@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', 'Heiti SC', sans-serif;
+    color: var(--body-color);
+    background-color: var(--body-background-color);
+    margin: 0;
+}
+
+.content {
+    padding: 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}

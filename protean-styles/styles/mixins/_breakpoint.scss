@@ -1,0 +1,38 @@
+@mixin breakpoint($size, $type: max) {
+    $breakpoint-s: 500px !default;
+    $breakpoint-m: 750px !default;
+    $breakpoint-l: 1000px !default;
+
+    $breakpoints: (
+        s: $breakpoint-s - 1,
+        m: $breakpoint-m - 1,
+        l: $breakpoint-l - 1,
+    );
+
+    $min-breakpoints: (
+        s: $breakpoint-s,
+        m: $breakpoint-m,
+        l: $breakpoint-l,
+    );
+
+    $value: 1 !default;
+    @if type-of($size) == 'string' {
+        @if $type == 'max' {
+            $value: map-get($breakpoints, $size);
+        } @else {
+            $value: map-get($min-breakpoints, $size);
+        }
+    } @else {
+        $value: $size;
+    }
+
+    @if ($type == 'min') {
+        @media screen and (min-width: $value) {
+            @content;
+        }
+    } @else {
+        @media screen and (max-width: $value) {
+            @content;
+        }
+    }
+}

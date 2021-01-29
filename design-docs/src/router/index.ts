@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '@/routes/home/index.vue';
+import ProteanInput from '@/routes/protean-input/index.vue';
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
         name: 'Home',
         component: Home,
+    },
+    {
+        path: '/elements/protean-input',
+        name: 'Text Fields',
+        component: ProteanInput,
     },
     //   {
     //     path: "/about",

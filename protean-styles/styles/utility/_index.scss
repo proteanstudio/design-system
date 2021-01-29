@@ -1,0 +1,29 @@
+.flex {
+    display: flex;
+}
+
+.flex-right {
+    justify-content: flex-end;
+}
+
+.hidden {
+    display: none;
+
+    &-s {
+        @include breakpoint(s) {
+            display: none;
+        }
+    }
+
+    &-m {
+        @include breakpoint(m) {
+            display: none;
+        }
+    }
+
+    &-l {
+        @include breakpoint(m, min) {
+            display: none;
+        }
+    }
+}

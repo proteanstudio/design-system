@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Quicksand', 'Heiti SC', sans-serif;
+    letter-spacing: 0.2px;
+    @include breakpoint(s) {
+        font-size: 0.875rem;
+    }
+}
+
+h1,
+.heading-1 {
+    font-weight: 400;
+    font-size: 3.5rem;
+
+    @include breakpoint(m) {
+        font-size: 2.25rem;
+    }
+}
+
+h2,
+.heading-2 {
+    font-weight: 600;
+    font-size: 2rem;
+    margin: 1rem 0 0.5rem;
+
+    @include breakpoint(m) {
+        font-size: 1.75rem;
+        margin-bottom: 0.25rem;
+    }
+}
+
+h3,
+.heading-3 {
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin: 0 0 1rem;
+    line-height: 1;
+
+    @include breakpoint(m) {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+h1,
+h2,
+h3 {
+    + p {
+        margin-top: 0;
+    }
+}
+
+a:not(.unstyled) {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    position: relative;
+
+    &::after {
+        content: '';
+        height: 3px;
+        width: 50%;
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        background-color: var(--pink);
+        transition: width 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+    }
+
+    &:focus,
+    &:hover {
+        color: #ffffff;
+
+        &::after {
+            width: 100%;
+        }
+    }
+
+    &:nth-of-type(3n + 2)::after {
+        background-color: var(--purple);
+    }
+
+    &:nth-of-type(3n)::after {
+        background-color: var(--orange);
+    }
+}
