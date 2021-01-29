@@ -2,10 +2,12 @@
   "name": "protean-elements",
   "version": "0.0.0",
   "description": "Protean Studio Elements",
-  "module": "dist/protean-elements/protean-elements.esm.js",
-  "es2015": "dist/protean-elements/protean-elements.esm.js",
-  "es2017": "dist/protean-elements/protean-elements.esm.js",
-  "types": "dist/custom-elements/index.d.ts",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.js",
+  "es2015": "./dist/protean-elements/protean-elements.esm.js",
+  "es2017": "./dist/protean-elements/protean-elements.esm.js",
+  "collection": "./dist/collection/collection-manifest.json",
+  "types": "./dist/types/components.d.ts",
   "license": "MIT",
   "files": [
     "dist/",
@@ -36,5 +38,9 @@
     "puppeteer": "5.4.1",
     "typescript": "^4.1.3",
     "yarn": "^1.22.10"
+  },
+  "publishConfig": {
+      "access": "public",
+      "registry": "https://registry.npmjs.org/"
   }
 }
