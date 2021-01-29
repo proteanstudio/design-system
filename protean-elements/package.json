@@ -1,6 +1,6 @@
 {
   "name": "protean-elements",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Protean Studio Elements",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.js",
@@ -40,7 +40,7 @@
     "yarn": "^1.22.10"
   },
   "publishConfig": {
-      "access": "public",
-      "registry": "https://registry.npmjs.org/"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
