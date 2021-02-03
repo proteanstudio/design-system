@@ -9,6 +9,6 @@ applyPolyfills().then(() => {
 
 const app = createApp(Root);
 
-app.config.isCustomElement = tag => tag.includes('protean-select');
+app.config.isCustomElement = tag => tag.indexOf('protean-') !== -1;
 
 app.use(router).mount('#app');

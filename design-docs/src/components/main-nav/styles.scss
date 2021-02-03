@@ -2,11 +2,11 @@
     flex: 0 0 200px;
     padding: 1.5rem;
     border-right: 1px solid #353535;
-    height: 100%;
-    min-height: 100vh;
+    position: relative;
+
 
     .nav-group {
-        margin-bottom: 2rem;
+        margin-bottom: 2rem;;
     }
 
     ul {
@@ -21,4 +21,9 @@
             display: none;
         }
     }
+
+    /* .light-mode-toggle {
+        position: sticky;
+        top: calc(100vh - 60px);
+    } */
 }

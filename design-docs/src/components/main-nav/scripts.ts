@@ -40,4 +40,12 @@ export default class MainNav extends Vue {
 
         return routes;
     }
+    /* 
+    lightModeEnabled = document.body.classList.contains('light');
+
+    toggleLightMode(event: CustomEvent): void {
+        this.lightModeEnabled = event.detail.checked;
+
+        document.body.classList.toggle('light');
+    } */
 }

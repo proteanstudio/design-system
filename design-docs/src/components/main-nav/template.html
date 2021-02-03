@@ -1,10 +1,17 @@
 <nav class="main-nav">
     <div v-for="(group, index) in sortedRoutes" class="nav-group">
-        <h2 class="heading-3 ">{{group.title}}</h2>
+        <h2 class="heading-3">{{group.title}}</h2>
         <ul :aria-label="group.title">
             <li v-for="item in group.children">
                 <router-link :to="item.path">{{item.name}}</router-link>
             </li>
         </ul>
     </div>
+    <!-- <protean-checkbox
+        class="light-mode-toggle"
+        label="Light mode"
+        type="toggle"
+        :checked="lightModeEnabled"
+        @change="toggleLightMode"
+    ></protean-checkbox> -->
 </nav>

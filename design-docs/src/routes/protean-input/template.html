@@ -1,30 +1,132 @@
-<h1>Design docs, eventually</h1>
+<h1>Text field</h1>
+<p>
+    Text input fields allow users to enter information. This element supports
+    several input formatting options.
+</p>
 
+<h2 data-in-page-anchor="overview">Overview</h2>
+<div class="overview-content">
+    <div class="overview-demo">
+        <protean-input
+            label="Field label"
+            :type="demoType"
+            :errors="demoErrors"
+            :optional="demoOptional"
+            :disabled="demoDisabled"
+            @input="spamErrors"
+        ></protean-input>
+    </div>
+    <div class="overview-demo-controls">
+        <protean-checkbox
+            label="Show validation errors"
+            type="toggle"
+            :checked="demoShowErrors"
+            @change="demoShowErrors = $event.detail.checked"
+        ></protean-checkbox>
+        <protean-checkbox
+            label="Show as optional"
+            type="toggle"
+            :checked="demoOptional"
+            @change="demoOptional = $event.detail.checked"
+        ></protean-checkbox>
+        <protean-checkbox
+            label="Show as disabled"
+            type="toggle"
+            :checked="demoDisabled"
+            @change="demoDisabled = $event.detail.checked"
+        ></protean-checkbox>
+        <protean-select
+            @change="demoType = $event.detail.value"
+            :value="demoType"
+            label="Input type"
+        >
+            <protean-option
+                v-for="{value, label} in demoTypes"
+                :value="value"
+                :label="label"
+                >{{label}}</protean-option
+            >
+        </protean-select>
+    </div>
+    <div class="overview-demo-snippet">
+        <code-snippet
+            :substitutions="[demoType, demoOptional ? ' optional' : '', demoDisabled ? ' disabled' : '']"
+        >
+            {{`<protean-input
+                label="Field label"
+                type="{0}"
+                {1}{2}
+            ></protean-input
+            >`}}
+        </code-snippet>
+    </div>
+</div>
+<h2 data-in-page-anchor="best-practices">Best practices</h2>
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum minima
+    beatae dolores qui assumenda distinctio est, repellat architecto tempore
+    illo iste pariatur debitis repellendus accusantium explicabo eum ex dolorem
+    ullam? Provident officiis voluptatem in sit expedita consequatur ad
+    voluptatibus nisi repellat tempore? Ex et ducimus ea distinctio deserunt.
+    Aliquam a doloribus eligendi ratione porro vel consequuntur eaque sunt
+    corrupti molestiae accusamus harum reprehenderit, fugit repudiandae? Quaerat
+    fugit laudantium sunt libero consectetur reprehenderit temporibus id
+    cupiditate dolorem recusandae, ut voluptates sequi. Officia, maiores ad
+    asperiores iure commodi dolore aut aspernatur ut consectetur amet distinctio
+    eius nesciunt ullam sapiente architecto fugit adipisci!
+</p>
+<h2 data-in-page-anchor="api">API</h2>
+<p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. A consectetur
+    quidem dolor culpa ducimus nemo dolore excepturi itaque provident omnis
+    nobis vitae illo quos sit, voluptatum vel non. Eligendi aperiam atque fuga
+    quo repudiandae adipisci saepe qui laboriosam. Eos voluptatem voluptatibus
+    animi dolore natus, praesentium ad vero optio! Ea sunt autem non, libero
+    adipisci eius cumque suscipit. Magnam at nihil laudantium fugit nam,
+    corrupti odit? Quam reprehenderit vel, nihil quia, eius placeat eligendi
+    dignissimos velit eum perspiciatis animi fuga fugit, eaque veniam ipsum.
+    Voluptas, perspiciatis doloremque. Nihil laborum consequuntur possimus totam
+    est vel error exercitationem praesentium id, maxime non sit placeat veniam
+    facere ab aspernatur illum quod deserunt et qui cupiditate quas asperiores!
+    Rem ea laborum esse quas repellat quis optio, officia ab tempora
+    reprehenderit soluta laboriosam. Fugit, eligendi. Expedita labore sapiente
+    nihil maiores dicta eveniet qui quam accusantium, incidunt suscipit nulla
+    voluptatum sint eos libero sit illo dolorum, consequuntur itaque? Eligendi
+    commodi voluptatibus quae non, recusandae, ullam ipsum nesciunt veritatis
+    voluptate velit dolorum quam fuga reiciendis? Eius nobis rerum ullam enim
+    doloribus unde ipsum ad assumenda ipsa beatae? Perspiciatis quisquam aperiam
+    eos, rem animi, obcaecati consequuntur eveniet error laborum, voluptatum ex
+    sunt maiores cupiditate blanditiis sequi? Tempore ipsum sapiente harum velit
+    doloribus asperiores nisi corrupti magnam commodi facere animi nostrum
+    ducimus, sint est ex voluptates laboriosam, eveniet beatae illum
+    voluptatibus consequatur nulla officia accusantium! Velit beatae iste
+    temporibus dolor, quam expedita animi dolores explicabo molestiae soluta
+    magni odio. Totam esse ad accusamus ullam nisi et reprehenderit reiciendis
+    illum ab?
+</p>
 
-<protean-select label="Select label" multiple>
-    <protean-optgroup label="Group 1">
-        <protean-option label="Option 1" value="1" selected
-            >Option 1</protean-option
-        >
-        <protean-option label="Option 2" value="2"
-            >Option 2</protean-option
-        >
-        <protean-option label="Option 3" value="3" selected
-            >Option 3</protean-option
-        >
-    </protean-optgroup>
-    <protean-optgroup label="Group 2">
-        <protean-option label="Option 4" value="4"
-            >Option 4</protean-option
-        >
-        <protean-option label="Option 5" value="5"
-            >Option 5</protean-option
-        >
-        <protean-option label="Option 6" value="6"
-            >Option 6</protean-option
-        >
-        <protean-option label="Option 7" value="7"
-            >Option 7</protean-option
-        >
-    </protean-optgroup>
-</protean-select>
+<h2 data-in-page-anchor="foo">Foo</h2>
+<p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. In odit sunt,
+    officiis vero eligendi aspernatur recusandae corrupti assumenda doloremque?
+    Quas pariatur maxime adipisci officiis dolorum laudantium modi illo
+    blanditiis. Ea assumenda, earum in molestias non modi? Illo accusamus quod,
+    nesciunt dolorem voluptas sequi, sint ducimus nemo autem ut cumque nisi.
+    Cumque labore officiis eius est praesentium quasi fugiat animi ex,
+    laboriosam, accusamus ipsum aspernatur ratione similique, soluta explicabo
+    nesciunt quibusdam. Praesentium voluptas veniam dicta quibusdam, maxime
+    debitis consequuntur asperiores eaque exercitationem alias saepe facilis
+    labore maiores ea expedita eos accusantium! Eius ipsa, quam nulla porro
+    temporibus repellat praesentium ex blanditiis architecto ipsum deserunt.
+    Fugiat facere dicta eaque rerum porro, ratione consequuntur tenetur mollitia
+    accusamus veniam iste non! Corrupti veritatis inventore accusantium, dolores
+    reprehenderit aspernatur aut voluptates numquam non minus deserunt maxime,
+    iste porro rem perferendis necessitatibus reiciendis! Magni exercitationem
+    omnis sequi iure qui sit maxime neque earum voluptatum consequuntur.
+    Veritatis recusandae ipsum vero enim eaque repellat ex culpa alias. Magnam
+    eligendi at cumque distinctio perferendis, repellat dignissimos maiores a
+    esse! Perferendis expedita ex tempore, vero omnis non harum perspiciatis
+    corporis ea? Asperiores quos eos nihil temporibus tenetur neque eligendi,
+    nobis dolor at quasi perspiciatis veritatis eum sapiente labore provident
+    voluptatum?
+</p>
