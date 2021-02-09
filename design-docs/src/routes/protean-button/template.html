@@ -1,0 +1,108 @@
+<h1>Button</h1>
+<p>
+    Use buttons to indicate an action on the current view. Don’t use these to navigate to a new view.
+</p>
+
+<h2 data-in-page-anchor="overview">Overview</h2>
+<div class="overview-content">
+    <div class="overview-demo">
+        <protean-button
+            class="overview-demo-element"
+            :variant="demoVariant"
+            :disabled="demoDisabled"
+        >
+        <div v-html="demoContent"></div>
+    </protean-button>
+    </div>
+    <div class="overview-demo-controls">
+        <protean-checkbox
+            label="Show as disabled"
+            type="toggle"
+            :checked="demoDisabled"
+            @change="demoDisabled = $event.detail.checked"
+        ></protean-checkbox>
+        <protean-select
+            @change="demoVariant = $event.detail.value"
+            :value="demoVariant"
+            label="Button variant"
+        >
+            <protean-option
+                value="primary"
+                label="primary"
+            >
+                primary
+            </protean-option>
+            <protean-option
+                value="secondary"
+                label="secondary"
+            >
+                secondary
+            </protean-option>
+            <protean-option
+                value="icon"
+                label="icon"
+            >
+                icon
+            </protean-option>
+        </protean-select>
+    </div>
+    <div class="overview-demo-snippet">
+        <code-snippet
+            :substitutions='[demoVariant, demoDisabled ? " disabled" : "", demoContent]'
+        >
+            {{`<protean-button variant="{0}"{1}>
+            {2}
+        </protean-button>
+            `}}
+        </code-snippet>
+    </div>
+</div>
+<h2 data-in-page-anchor="best-practices">Best practices</h2>
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum minima
+    beatae dolores qui assumenda distinctio est, repellat architecto tempore
+    illo iste pariatur debitis repellendus accusantium explicabo eum ex dolorem
+    ullam? Provident officiis voluptatem in sit expedita consequatur ad
+    voluptatibus nisi repellat tempore? Ex et ducimus ea distinctio deserunt.
+    Aliquam a doloribus eligendi ratione porro vel consequuntur eaque sunt
+    corrupti molestiae accusamus harum reprehenderit, fugit repudiandae? Quaerat
+    fugit laudantium sunt libero consectetur reprehenderit temporibus id
+    cupiditate dolorem recusandae, ut voluptates sequi. Officia, maiores ad
+    asperiores iure commodi dolore aut aspernatur ut consectetur amet distinctio
+    eius nesciunt ullam sapiente architecto fugit adipisci!
+</p>
+<h2 data-in-page-anchor="api">API</h2>
+<h3>Properties</h3>
+<div>
+    In the following examples, <code>element</code> refers to an instance of
+    <code>protean-button</code> (i.e.
+    <code>element = document.querySelector('protean-button#myButton')</code>).
+</div>
+<ul class="prop-list">
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">variant</h4>
+            <div class="prop-type"><code>"primary"</code> | <code>"secondary</code> | <code>"icon"</code></div>
+            <div class="prop-attribute">Attribute name: <code>variant</code></div>
+            <div class="prop-desc">The visual style of the button. <code>icon</code> buttons should only be used in conjuction with <code>protean-icon</code>.</div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.variant = 'primary';
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">disabled</h4>
+            <div class="prop-type"><code>boolean</code></div>
+            <div class="prop-attribute">Attribute name: <code>disabled</code></div>
+            <div class="prop-desc">Disables button interaction.</div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.disabled = true;
+            </code-snippet>
+        </div>
+    </li>
+</ul>

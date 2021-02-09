@@ -1,6 +1,12 @@
+@import '~protean-styles/styles/mixins';
+
 .secondary-nav {
     flex: 0 0 150px;
     padding: 1rem;
+
+    @include breakpoint(m) {
+        display: none;
+    }
 
     ul {
         margin: 0;

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '@/routes/home/index.vue';
 import ProteanInput from '@/routes/protean-input/index.vue';
+import ProteanButton from '@/routes/protean-button/index.vue';
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -9,9 +10,20 @@ const routes: Array<RouteRecordRaw> = [
         component: Home,
     },
     {
+        path: '/elements/protean-button',
+        name: 'Button',
+        component: ProteanButton,
+    },
+    {
         path: '/elements/protean-input',
-        name: 'Text Fields',
+        name: 'Text Field',
         component: ProteanInput,
+    },
+    {
+        // will match everything
+        path: '/:pathMatch(.*)*',
+        name: 'not-found',
+        component: Home,
     },
     //   {
     //     path: "/about",

@@ -7,47 +7,76 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
 export default class ProteanInput extends Vue {
     demoTypes = [
         {
-            value: 'text',
-            label: 'Text (default)',
+            label: 'Native',
+            children: [
+                {
+                    value: 'text',
+                    label: 'Text (default)',
+                },
+                {
+                    value: 'tel',
+                    label: 'tel',
+                },
+                {
+                    value: 'number',
+                    label: 'number',
+                },
+                {
+                    value: 'password',
+                    label: 'password',
+                },
+                {
+                    value: 'search',
+                    label: 'search',
+                },
+            ],
         },
         {
-            value: 'tel',
-            label: 'tel',
-        },
-        {
-            value: 'phone',
-            label: 'phone',
-        },
-        {
-            value: 'numeric',
-            label: 'numeric',
-        },
-        {
-            value: 'date',
-            label: 'date',
-        },
-        {
-            value: 'number',
-            label: 'number',
-        },
-        {
-            value: 'password',
-            label: 'password',
-        },
-        {
-            value: 'search',
-            label: 'search',
-        },
-        {
-            value: 'email',
-            label: 'email',
+            label: 'Formatted',
+            children: [
+                {
+                    value: 'phone',
+                    label: 'phone',
+                },
+                {
+                    value: 'numeric',
+                    label: 'numeric',
+                },
+                {
+                    value: 'date',
+                    label: 'date',
+                },
+            ],
         },
     ];
     demoType = 'text';
-    demoErrorsList: string[] = [];
+    demoHints = ['Hint #1', 'Hint #2'];
+    demoErrorsList = ['Error #1'];
     demoShowErrors = false;
+    demoSuppressMessages = false;
     demoOptional = false;
     demoDisabled = false;
+    demoReadonly = false;
+    // demoMaxlength = 20; // currrently unbound
+    demoFormat = '';
+    demoNumericFormats = ['delimited', '3dec'];
+    dateFormats = [
+        'MM/DD/YYYY',
+        'M/D/YYYY',
+        'MM/DD/YY',
+        'M/D/YY',
+        'MM/YY',
+        'M/YY',
+    ];
+    apiFormat = 'date';
+
+    get demoFormats(): string[] | undefined {
+        if (this.demoType === 'numeric') return this.demoNumericFormats;
+
+        if (this.demoType === 'date') return this.dateFormats;
+
+        return;
+    }
 
     get demoErrors(): string[] {
         if (this.demoShowErrors) return this.demoErrorsList;
@@ -60,7 +89,7 @@ export default class ProteanInput extends Vue {
 
         const errorList = new Array(arrayLength)
             .fill('')
-            .map((i, index) => `error ${index}`);
+            .map((i, index) => `Error #${index}`);
 
         this.demoErrorsList = errorList;
     }

@@ -7,13 +7,14 @@ export default class CodeSnippet extends Vue {
     @Prop() substitutions: string[] = [];
 
     mounted(): void {
-        this.snippet = this.$el.querySelector('code').innerHTML.trim();
+        this.snippet = this.$el.querySelector('code').innerText.trim();
         this.resetInnerContent();
     }
 
     snippet = '';
     openingRegex = /{|\]|(<|&lt;)(?=[a-z])/g;
     closingRegex = /(<|&lt;)\/|}|]/g;
+    showCopyConfirmation = false;
 
     get canCopy(): boolean {
         return !!navigator.clipboard;
@@ -52,6 +53,8 @@ export default class CodeSnippet extends Vue {
         return snippet.split('\n').reduce((acc, line) => {
             const trimmedLine = line.trim();
 
+            if (!trimmedLine) return acc;
+
             const hasClosingTag = !!trimmedLine.match(this.closingRegex);
             const hasOpeningTag = !!trimmedLine.match(this.openingRegex);
             const hasElse = !!trimmedLine.match('else');
@@ -68,5 +71,15 @@ export default class CodeSnippet extends Vue {
 
             return acc + indent + trimmedLine + '\n';
         }, '');
+    }
+
+    copySnippet(): void {
+        navigator.clipboard.writeText(this.parsedSnippet).then(() => {
+            this.showCopyConfirmation = true;
+
+            setTimeout(() => {
+                this.showCopyConfirmation = false;
+            }, 1500);
+        });
     }
 }

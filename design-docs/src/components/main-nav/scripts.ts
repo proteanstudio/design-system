@@ -33,11 +33,14 @@ export default class MainNav extends Vue {
                 },
             )
             .reduce((acc, item) => {
+                if (item.name === 'not-found') return acc;
+
                 const targetGroupIndex = item.path.includes('elements') ? 1 : 0;
                 acc[targetGroupIndex].children.push(item);
                 return acc;
             }, groupedStructure);
 
+        console.log(routes);
         return routes;
     }
     /* 

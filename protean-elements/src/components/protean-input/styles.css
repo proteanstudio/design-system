@@ -63,6 +63,10 @@ input {
     box-shadow: none;
 }
 
+:host(:not([label])) input {
+    height: 56px;
+}
+
 input:focus {
     outline: none;
 }

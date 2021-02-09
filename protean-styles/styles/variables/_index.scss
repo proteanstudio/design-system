@@ -1,4 +1,5 @@
 :root {
+    --font-family: 'Quicksand', 'Heiti SC', sans-serif;
     --body-color: #fafafa;
     --body-background-color: #1a1a1a;
 
@@ -8,6 +9,13 @@
 
     --action-color: var(--orange);
     --action-contrast-color: #000000;
+    --action-hover-color: #f83e19;
+    --action-hover-contrast-color: var(--action-contrast-color);
+
+    --touch-zone-size: 42px;
+
+    --code-background-color: #393939;
+
     --protean-status-info: #0965b7; /* 5.9 #fff, 5.75 #fc, 2.94 #1a, 3.55 #00 */
     --protean-status-info-contrast: #ffffff;
     --protean-status-success: #1d820f; /*  4.93 #fff, 4.81 #fc, 3.52 #1a,4.25 #00 */
@@ -16,6 +24,26 @@
     --protean-status-warning-contrast: #1a1a1a;
     --protean-status-error: #ab0000; /* 7.68 #fff, 7.49 #fc, 2.26 #1a, 2.73 #000  */
     --protean-status-error-contrast: #ffffff;
+
+    --protean-button-primary-background-color: var(--action-color);
+    --protean-button-primary-text-color: var(--action-contrast-color);
+    --protean-button-primary-border-color: transparent;
+    --protean-button-primary-hover-background-color: var(--action-hover-color);
+    --protean-button-primary-hover-text-color: var(--action-hover-contrast-color);
+    --protean-button-primary-hover-border-color: transparent;
+
+    --protean-button-secondary-background-color: transparent;
+    --protean-button-secondary-text-color: inherit;
+    --protean-button-secondary-border-color: var(--action-color);
+    --protean-button-secondary-hover-background-color: var(--protean-button-primary-hover-background-color);
+    --protean-button-secondary-hover-text-color: var(--protean-button-primary-hover-text-color);
+    --protean-button-secondary-hover-border-color: var(--protean-button-primary-hover-border-color);
+
+    --protean-button-icon-background-color: transparent;
+    --protean-button-icon-stroke-color: currentColor;
+    --protean-button-icon-hover-background-color: rgba(255, 95, 64, 0.2);
+    --protean-button-icon-stroke-color: currentColor;
+
 
     --protean-message-background-color: #2a2a2a;
     --protean-message-text-color: #fcfcfc;
@@ -42,11 +70,17 @@
     --body-background-color: #fff;
     --action-color: var(--purple);
     --action-contrast-color: #ffffff;
+    --action-hover-color: #5a0d8d;
+
+    --code-background-color: #f2f2f2;
+
     --protean-dropdown-background-color: #fff;
     --protean-message-background-color: #f7f7f7;
     --protean-message-text-color: #000000;
     --protean-message-border-color: #e2e2e2;
     --protean-tab-container-border-color: #cdcdcd;
+
+    --protean-button-icon-hover-background-color: rgba(114, 9, 183, 0.2);
 
     --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.5);
     --protean-dropdown-hover-background-color: #efefef;

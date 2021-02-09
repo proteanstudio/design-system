@@ -8,20 +8,31 @@
 <div class="overview-content">
     <div class="overview-demo">
         <protean-input
+            class="overview-demo-element"
             label="Field label"
             :type="demoType"
+            :hints="demoHints"
             :errors="demoErrors"
+            :suppressMessages="demoSuppressMessages"
             :optional="demoOptional"
             :disabled="demoDisabled"
+            :readonly="demoReadonly"
+            :format="demoFormat"
             @input="spamErrors"
         ></protean-input>
     </div>
     <div class="overview-demo-controls">
         <protean-checkbox
-            label="Show validation errors"
+            label="Populate validation errors"
             type="toggle"
             :checked="demoShowErrors"
             @change="demoShowErrors = $event.detail.checked"
+        ></protean-checkbox>
+        <protean-checkbox
+            label="Hide hints and errors"
+            type="toggle"
+            :checked="demoSuppressMessages"
+            @change="demoSuppressMessages = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Show as optional"
@@ -35,29 +46,59 @@
             :checked="demoDisabled"
             @change="demoDisabled = $event.detail.checked"
         ></protean-checkbox>
+        <protean-checkbox
+            label="Show as readonly"
+            type="toggle"
+            :checked="demoReadonly"
+            @change="demoReadonly = $event.detail.checked"
+        ></protean-checkbox>
+        <!-- <protean-input
+            label="Input maxlength"
+            type="tel"
+            :value="demoMaxlength"
+            @change="demoMaxlength = $event.detail.value"
+        ></protean-input> -->
         <protean-select
             @change="demoType = $event.detail.value"
             :value="demoType"
             label="Input type"
         >
-            <protean-option
-                v-for="{value, label} in demoTypes"
-                :value="value"
+            <protean-optgroup
+                v-for="{label, children} in demoTypes"
                 :label="label"
-                >{{label}}</protean-option
+            >
+                <protean-option
+                    v-for="{value, label} in children"
+                    :value="value"
+                    :label="label"
+                    >{{label}}</protean-option
+                >
+            </protean-optgroup>
+        </protean-select>
+        <protean-select
+            :value="demoFormat"
+            label="Input format"
+            v-if="demoFormats"
+            @change="demoFormat = $event.detail.value"
+        >
+            <protean-option
+                v-for="format in demoFormats"
+                :value="format"
+                :label="format"
+                >{{format}}</protean-option
             >
         </protean-select>
     </div>
     <div class="overview-demo-snippet">
         <code-snippet
-            :substitutions="[demoType, demoOptional ? ' optional' : '', demoDisabled ? ' disabled' : '']"
+            :substitutions='[demoType, demoFormat ? `\n format="${demoFormat}"` : "",   demoSuppressMessages ? "\n suppress-messages" : "",demoOptional ? "\n optional" : "", demoDisabled ? "\n disabled" : "", demoReadonly ? "\n readonly" : ""]'
         >
             {{`<protean-input
                 label="Field label"
                 type="{0}"
-                {1}{2}
-            ></protean-input
-            >`}}
+                {1}{2}{3}{4}{5}
+            ></protean-input>
+            `}}
         </code-snippet>
     </div>
 </div>
@@ -76,57 +117,314 @@
     eius nesciunt ullam sapiente architecto fugit adipisci!
 </p>
 <h2 data-in-page-anchor="api">API</h2>
-<p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. A consectetur
-    quidem dolor culpa ducimus nemo dolore excepturi itaque provident omnis
-    nobis vitae illo quos sit, voluptatum vel non. Eligendi aperiam atque fuga
-    quo repudiandae adipisci saepe qui laboriosam. Eos voluptatem voluptatibus
-    animi dolore natus, praesentium ad vero optio! Ea sunt autem non, libero
-    adipisci eius cumque suscipit. Magnam at nihil laudantium fugit nam,
-    corrupti odit? Quam reprehenderit vel, nihil quia, eius placeat eligendi
-    dignissimos velit eum perspiciatis animi fuga fugit, eaque veniam ipsum.
-    Voluptas, perspiciatis doloremque. Nihil laborum consequuntur possimus totam
-    est vel error exercitationem praesentium id, maxime non sit placeat veniam
-    facere ab aspernatur illum quod deserunt et qui cupiditate quas asperiores!
-    Rem ea laborum esse quas repellat quis optio, officia ab tempora
-    reprehenderit soluta laboriosam. Fugit, eligendi. Expedita labore sapiente
-    nihil maiores dicta eveniet qui quam accusantium, incidunt suscipit nulla
-    voluptatum sint eos libero sit illo dolorum, consequuntur itaque? Eligendi
-    commodi voluptatibus quae non, recusandae, ullam ipsum nesciunt veritatis
-    voluptate velit dolorum quam fuga reiciendis? Eius nobis rerum ullam enim
-    doloribus unde ipsum ad assumenda ipsa beatae? Perspiciatis quisquam aperiam
-    eos, rem animi, obcaecati consequuntur eveniet error laborum, voluptatum ex
-    sunt maiores cupiditate blanditiis sequi? Tempore ipsum sapiente harum velit
-    doloribus asperiores nisi corrupti magnam commodi facere animi nostrum
-    ducimus, sint est ex voluptates laboriosam, eveniet beatae illum
-    voluptatibus consequatur nulla officia accusantium! Velit beatae iste
-    temporibus dolor, quam expedita animi dolores explicabo molestiae soluta
-    magni odio. Totam esse ad accusamus ullam nisi et reprehenderit reiciendis
-    illum ab?
-</p>
+<h3>Properties</h3>
+<div>
+    In the following examples, <code>element</code> refers to an instance of
+    <code>protean-input</code> (i.e.
+    <code>element = document.querySelector('protean-input#myInput')</code>).
+</div>
+<ul class="prop-list">
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">value</h4>
+            <div class="prop-type"><code>string</code></div>
+            <div class="prop-desc">The value of the input.</div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.value = '02/09/2021';
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">label</h4>
+            <div class="prop-type"><code>string</code></div>
+            <div class="prop-attribute">Attribute name: <code>label</code></div>
+            <div class="prop-desc">The visible label for the input.</div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.label = 'Field label';
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">ariaLabel</h4>
+            <div class="prop-type"><code>string</code></div>
+            <div class="prop-desc">
+                The label read by assistive technologies for the input. Note:
+                when <code>label</code> is set, this value will not be bound to
+                the field.
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.label = 'Field label';
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">type</h4>
+            <div class="prop-type">
+                <code>"text"</code> (default) | <code>"tel"</code> |
+                <code>"number"</code> | <code>"password"</code> |
+                <code>"search"</code> | <code>"phone"</code> |
+                <code>"numeric"</code> |
+                <code>"date"</code>
+            </div>
+            <div class="prop-attribute">Attribute name: <code>type</code></div>
+            <div class="prop-desc">
+                The type of input used. <code>phone</code>, <code>date</code>,
+                and <code>numeric</code> types provide text formatting and have
+                some settable <code>format</code>s.
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.type = 'tel';
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">format</h4>
+            <div class="prop-type">
+                <code>string</code>
+            </div>
+            <div class="prop-attribute">
+                Attribute name: <code>format</code>
+            </div>
+            <div class="prop-desc">
+                The format of the visible text in the input field. Allowed
+                values are dependent on type selection. Note that the visible
+                value may differ from what is set onto the
+                <code>value</code> property; when <code>value</code> is set
+                programmatically, it will automatically be formatted.
+            </div>
+        </div>
+        <div class="prop-example">
+            <div class="prop-extras">
+                <h5><code>numeric</code> formats:</h5>
+                <ul>
+                    <li><code>delimited</code></li>
+                    <li>
+                        <code>Ndec</code> where <code>N</code> is a count of
+                        numbers after the decimal.
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h5><code>date</code> formats:</h5>
+                <ul>
+                    <li v-for="format in dateFormats">
+                        <code>{{format}}</code>
+                    </li>
+                </ul>
+            </div>
+            <!-- <protean-select label="Formats for" :value="apiFormat" @change="apiFormat = $event.detail.value">
+                <protean-option value="date" label="date">date</protean-option>
+                <protean-option value="numeric" label="numeric">numeric</protean-option>
+            </protean-select> -->
+            <code-snippet language="javascript">
+                element.type = 'date'; element.format = 'M/D/YY';
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">optional</h4>
+            <div class="prop-type">
+                <code>boolean</code>
+            </div>
+            <div class="prop-attribute">
+                Attribute name: <code>optional</code>
+            </div>
+            <div class="prop-desc">
+                Marks the field as optional to the user by appending
+                "(optional)" to the visible <code>label</code> and to assistive
+                technologies by setting <code>aria-required="false"</code>.
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.optional = true;
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">hints</h4>
+            <div class="prop-type">
+                <code>string[]</code>
+            </div>
+            <div class="prop-desc">
+                An array of hints made visible to the user when the field is
+                focused - hints are also read by assistive technologies.
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.hints = [ 'Hint #1', ' Hint #2' ];
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">errors</h4>
+            <div class="prop-type">
+                <code>string[]</code>
+            </div>
+            <div class="prop-desc">
+                An array of errors made visible to the user when the field is
+                focused. When populated, the field border is changed, an error
+                icon is added, and assistive technologies are alerted to the
+                invalid state of the field. Errors take precedence over hints.
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.errors = [ 'Error #1', ' Error #2' ];
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">suppressMessages</h4>
+            <div class="prop-type">
+                <code>boolean</code>
+            </div>
+            <div class="prop-attribute">
+                Attribute name: <code>suppress-messages</code>
+            </div>
+            <div class="prop-desc">
+                Dictates the visibility of <code>hint</code> or
+                <code>error</code> messages when the field is focused. Other
+                error state indicators are not affected by this property.
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.suppressMessages = true;
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">disabled</h4>
+            <div class="prop-type">
+                <code>boolean</code>
+            </div>
+            <div class="prop-attribute">
+                Attribute name: <code>disabled</code>
+            </div>
+            <div class="prop-desc">
+                Disables the field and prevents user interaction.
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.disabled = true;
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">readonly</h4>
+            <div class="prop-type">
+                <code>boolean</code>
+            </div>
+            <div class="prop-attribute">
+                Attribute name: <code>readonly</code>
+            </div>
+            <div class="prop-desc">
+                Prevents editing but, unlike <code>disabled</code>, allows the
+                field to be focused.
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.readonly = true;
+            </code-snippet>
+        </div>
+    </li>
+</ul>
 
-<h2 data-in-page-anchor="foo">Foo</h2>
-<p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. In odit sunt,
-    officiis vero eligendi aspernatur recusandae corrupti assumenda doloremque?
-    Quas pariatur maxime adipisci officiis dolorum laudantium modi illo
-    blanditiis. Ea assumenda, earum in molestias non modi? Illo accusamus quod,
-    nesciunt dolorem voluptas sequi, sint ducimus nemo autem ut cumque nisi.
-    Cumque labore officiis eius est praesentium quasi fugiat animi ex,
-    laboriosam, accusamus ipsum aspernatur ratione similique, soluta explicabo
-    nesciunt quibusdam. Praesentium voluptas veniam dicta quibusdam, maxime
-    debitis consequuntur asperiores eaque exercitationem alias saepe facilis
-    labore maiores ea expedita eos accusantium! Eius ipsa, quam nulla porro
-    temporibus repellat praesentium ex blanditiis architecto ipsum deserunt.
-    Fugiat facere dicta eaque rerum porro, ratione consequuntur tenetur mollitia
-    accusamus veniam iste non! Corrupti veritatis inventore accusantium, dolores
-    reprehenderit aspernatur aut voluptates numquam non minus deserunt maxime,
-    iste porro rem perferendis necessitatibus reiciendis! Magni exercitationem
-    omnis sequi iure qui sit maxime neque earum voluptatum consequuntur.
-    Veritatis recusandae ipsum vero enim eaque repellat ex culpa alias. Magnam
-    eligendi at cumque distinctio perferendis, repellat dignissimos maiores a
-    esse! Perferendis expedita ex tempore, vero omnis non harum perspiciatis
-    corporis ea? Asperiores quos eos nihil temporibus tenetur neque eligendi,
-    nobis dolor at quasi perspiciatis veritatis eum sapiente labore provident
-    voluptatum?
-</p>
+<h3>Events</h3>
+
+<ul class="prop-list">
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">change</h4>
+            <div class="prop-desc">
+                Fires when the field loses focus after having its value updated.
+
+                <h5>Event detail</h5>
+                <code-snippet language="typescript">
+                    {{`event: {
+                        detail: {
+                            value: string,
+                            formattedValue: string,
+                            }
+                        }
+                    `}}
+                </code-snippet>
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                {{`
+                    function onChange(event) {
+                        this.value = event.detail.value;
+                }
+                `}}
+            </code-snippet>
+            <code-snippet language="html">
+                {{`
+                    <protean-input
+                        label="My input field label"
+                        onchange="onChange(event)"
+                    ></protean-input>
+                `}}
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">input</h4>
+            <div class="prop-desc">
+                Fires when the user modifies the field value. Useful for inline field validation.
+
+                <h5>Event detail</h5>
+                <code-snippet language="typescript">
+                    {{`event: {
+                        detail: {
+                            value: string,
+                            formattedValue: string,
+                            }
+                        }
+                    `}}
+                </code-snippet>
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                {{`
+                    function onInput(event) {
+                        this.value = event.detail.value;
+                }
+                `}}
+            </code-snippet>
+            <code-snippet language="html">
+                {{`
+                    <protean-input
+                        label="My input field label"
+                        oninput="onInput(event)"
+                    ></protean-input>
+                `}}
+            </code-snippet>
+        </div>
+    </li>
+</ul>

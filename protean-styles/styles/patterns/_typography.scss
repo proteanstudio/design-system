@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 body {
-    font-family: 'Quicksand', 'Heiti SC', sans-serif;
+    font-family: var(--font-family);
     letter-spacing: 0.2px;
     @include breakpoint(s) {
         font-size: 0.875rem;
@@ -100,4 +100,9 @@ nav li {
             background-color: var(--orange);
         }
     }
+}
+
+code {
+    font-size: 1rem;
+    background-color: var(--code-background-color);
 }

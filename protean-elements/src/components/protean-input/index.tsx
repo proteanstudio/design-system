@@ -34,7 +34,7 @@ export class ProteanInput {
     @Prop({ reflect: true }) label: string;
     @Prop({ reflect: true }) disabled = false;
     @Prop({ reflect: true }) role: string;
-    @Prop({ reflect: true }) maxlength: number;
+    @Prop({ reflect: true }) maxlength: number; //FIX THIS
     @Prop({ reflect: true }) format: string;
     @Prop({ reflect: true }) optional: boolean;
     @Prop({ reflect: true }) hints: string[];
@@ -51,6 +51,7 @@ export class ProteanInput {
     formattedValueObject: FormattedValue;
     cursorData: CursorData;
     scheduledAfterRender: VoidFunction[] = [];
+    isFocused = false;
 
     @Element() hostElement: HTMLProteanInputElement;
 
@@ -170,10 +171,12 @@ export class ProteanInput {
     };
 
     onInputFocus = (): void => {
+        this.isFocused = true;
         this.setMessagesHeight();
     };
 
     onInputBlur = (): void => {
+        this.isFocused = false;
         if (this.showMessages) {
             this.messageContainer.style.height = '0px';
         }
@@ -201,9 +204,11 @@ export class ProteanInput {
     @Watch('hints')
     @Watch('errors')
     onMessageUpdate(): void {
-        this.scheduledAfterRender.push(() => {
-            this.setMessagesHeight();
-        });
+        if (this.isFocused) {
+            this.scheduledAfterRender.push(() => {
+                this.setMessagesHeight();
+            });
+        }
     }
 
     setMessagesHeight(): void {
