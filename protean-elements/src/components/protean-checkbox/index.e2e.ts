@@ -63,7 +63,7 @@ describe('protean-checkbox', () => {
         expect(checkboxSymbol).not.toHaveClass('toggle');
 
         const proteanCheckbox = await find('protean-checkbox');
-        proteanCheckbox.setProperty('type', 'toggle');
+        proteanCheckbox.setProperty('variant', 'toggle');
         await waitForChanges();
 
         checkboxSymbol = await find('protean-checkbox >>> .checkbox-symbol');

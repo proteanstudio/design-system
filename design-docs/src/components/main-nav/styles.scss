@@ -1,12 +1,16 @@
 .main-nav {
     flex: 0 0 200px;
-    padding: 1.5rem;
     border-right: 1px solid #353535;
     position: relative;
 
+    .nav-content {
+        position: sticky;
+        top: 0;
+        padding: 1.5rem;
+    }
 
     .nav-group {
-        margin-bottom: 2rem;;
+        margin-bottom: 2rem;
     }
 
     ul {

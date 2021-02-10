@@ -1,0 +1,127 @@
+<h1>Notification</h1>
+<p>
+    Use notifications to...
+</p>
+
+<h2 data-in-page-anchor="overview">Overview</h2>
+<div class="overview-content">
+    <div class="overview-demo">
+        <protean-message
+            class="overview-demo-element"
+            :type="demoType"
+            :variant="demoVariant"
+        >
+            Message info:
+            <ul>
+                <li>Message detail #1</li>
+                <li>Message detail #2</li>
+                <li>Message detail #3</li>
+            </ul>
+        </protean-message>
+    </div>
+    <div class="overview-demo-controls">
+        <protean-select
+            label="Message type"
+            :value="demoType"
+            @change="demoType = $event.detail.value"
+        >
+            <protean-option
+                v-for="type in demoTypes"
+                :label="type"
+                :value="type"
+            >{{type}}</protean-option>
+        </protean-select>
+        <protean-checkbox
+            label="Show as status message"
+            variant="toggle"
+            :checked="demoIsStatus"
+            @change="demoIsStatus = $event.detail.checked"
+        ></protean-checkbox>
+        <!-- <protean-checkbox
+            label="Show as inline message"
+            variant="toggle"
+            :checked="demoIsInline"
+            @change="demoIsInline = $event.detail.checked"
+        ></protean-checkbox> -->
+    </div>
+    <div class="overview-demo-snippet">
+        <code-snippet
+            :substitutions='[demoType, demoLevel]'
+        >
+            {{`
+            <protean-message
+                class="overview-demo-element"
+                type="{0}"
+                level="{1}"
+            >
+                Message info:
+                <ul>
+                    <li>Message detail #1</li>
+                    <li>Message detail #2</li>
+                    <li>Message detail #3</li>
+                </ul>
+            </protean-message>
+            `}}
+        </code-snippet>
+    </div>
+</div>
+<h2 data-in-page-anchor="best-practices">Best practices</h2>
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum minima
+    beatae dolores qui assumenda distinctio est, repellat architecto tempore
+    illo iste pariatur debitis repellendus accusantium explicabo eum ex dolorem
+    ullam? Provident officiis voluptatem in sit expedita consequatur ad
+    voluptatibus nisi repellat tempore? Ex et ducimus ea distinctio deserunt.
+    Aliquam a doloribus eligendi ratione porro vel consequuntur eaque sunt
+    corrupti molestiae accusamus harum reprehenderit, fugit repudiandae? Quaerat
+    fugit laudantium sunt libero consectetur reprehenderit temporibus id
+    cupiditate dolorem recusandae, ut voluptates sequi. Officia, maiores ad
+    asperiores iure commodi dolore aut aspernatur ut consectetur amet distinctio
+    eius nesciunt ullam sapiente architecto fugit adipisci!
+</p>
+<h2 data-in-page-anchor="api">API</h2>
+<h3>Properties</h3>
+<div>
+    In the following examples, <code>element</code> refers to an instance of
+    <code>protean-message</code> (i.e.
+    <code>element = document.querySelector('protean-message#myMessage')</code>).
+</div>
+<ul class="prop-list">
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">type</h4>
+            <div class="prop-type">
+                <code>"info"</code> (default) | 
+                <code>"success"</code> | 
+                <code>"warning"</code> | 
+                <code>"error"</code>
+            </div>
+            <div class="prop-attribute">
+                Attribute name: <code>type</code>
+            </div>
+            <div class="prop-desc">
+                The visual style of the message. Controls the icon and color used to communicate the intent of the message.
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.type = 'success';
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">level</h4>
+            <div class="prop-type"><code>"alert"</code> (default) | <code>"status"</code></div>
+            <div class="prop-attribute">
+                Attribute name: <code>level</code>
+            </div>
+            <div class="prop-desc">Controls the <code>role</code> assigned to the message list, dictating the verbosity of assistive technologies.</div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.level = 'status';
+            </code-snippet>
+        </div>
+    </li>
+</ul>

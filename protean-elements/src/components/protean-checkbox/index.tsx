@@ -17,9 +17,9 @@ import { createGuid } from '@/utils/utils';
 })
 export class ProteanCheckbox {
     @Prop({ reflect: true, mutable: true }) checked = false;
-    @Prop({ reflect: true }) type: string;
+    @Prop({ reflect: true }) variant: string;
     @Prop({ reflect: true }) label: string;
-    @Prop({ reflect: true }) ariaLabel: string;
+    @Prop() ariaLabel: string;
     @Prop({ reflect: true }) alignment: 'left' | 'right';
     @Prop({ reflect: true }) disabled: boolean;
     @Prop({ reflect: true }) indeterminate: boolean;
@@ -53,7 +53,7 @@ export class ProteanCheckbox {
     @Event() change: EventEmitter;
 
     onCheckboxChange = (event: Event): void => {
-        this.change.emit({
+        !this.disabled && this.change.emit({
             checked: (event.target as HTMLInputElement).checked,
         });
     };
@@ -151,7 +151,7 @@ export class ProteanCheckbox {
     }
 
     renderSymbol(): VNode {
-        if (this.type === 'toggle') {
+        if (this.variant === 'toggle') {
             return this.renderToggle();
         }
 

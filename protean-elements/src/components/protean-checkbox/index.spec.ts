@@ -139,7 +139,7 @@ describe('protean-message', () => {
         expect(checkboxSymbol).toHaveClass('standard');
         expect(checkboxSymbol).not.toHaveClass('toggle');
 
-        root.type = 'toggle';
+        root.variant = 'toggle';
         await waitForChanges();
 
         checkboxSymbol = root.shadowRoot.querySelector('.checkbox-symbol');

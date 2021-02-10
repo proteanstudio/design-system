@@ -1,0 +1,215 @@
+<h1>Checkbox</h1>
+<p>
+    Use checkboxes and toggles to...
+</p>
+
+<h2 data-in-page-anchor="overview">Overview</h2>
+<div class="overview-content">
+    <div class="overview-demo">
+        <protean-checkbox
+            class="overview-demo-element"
+            label="Checkbox label"
+            :variant="demoVariant"
+            :checked="demoChecked"
+            :disabled="demoDisabled"
+            :alignment="demoAlignment"
+            :indeterminate="demoIndeterminate"
+            @change="demoChecked = $event.detail.checked"
+        >
+        </protean-checkbox>
+    </div>
+    <div class="overview-demo-controls">
+        <protean-checkbox
+            label="Show as toggle"
+            variant="toggle"
+            :checked="demoIsToggle"
+            @change="demoIsToggle = $event.detail.checked"
+        ></protean-checkbox>
+        <protean-checkbox
+            label="Show as disabled"
+            variant="toggle"
+            :checked="demoDisabled"
+            @change="demoDisabled = $event.detail.checked"
+        ></protean-checkbox>
+        <protean-checkbox
+            label="Align to the right"
+            variant="toggle"
+            :checked="demoIsRightAligned"
+            @change="demoIsRightAligned = $event.detail.checked"
+        ></protean-checkbox>
+        <protean-checkbox
+            label="Show as indeterminate"
+            variant="toggle"
+            :checked="demoIndeterminate"
+            :disabled="demoIsToggle"
+            @change="demoIndeterminate = $event.detail.checked"
+        ></protean-checkbox>
+    </div>
+    <div class="overview-demo-snippet">
+        <code-snippet
+            :substitutions='[demoVariant ? `\n variant="${demoVariant}"`: "", demoChecked ? "\n checked" : "", demoDisabled ? "\n disabled" : "",  demoIndeterminate && !demoIsToggle ? "\n indeterminate" : "", demoAlignment]'
+        >
+            {{`<protean-checkbox {0}{1}{2}{3}
+                alignment="{4}"
+                ></protean-checkbox>
+            `}}
+        </code-snippet>
+    </div>
+</div>
+<h2 data-in-page-anchor="best-practices">Best practices</h2>
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum minima
+    beatae dolores qui assumenda distinctio est, repellat architecto tempore
+    illo iste pariatur debitis repellendus accusantium explicabo eum ex dolorem
+    ullam? Provident officiis voluptatem in sit expedita consequatur ad
+    voluptatibus nisi repellat tempore? Ex et ducimus ea distinctio deserunt.
+    Aliquam a doloribus eligendi ratione porro vel consequuntur eaque sunt
+    corrupti molestiae accusamus harum reprehenderit, fugit repudiandae? Quaerat
+    fugit laudantium sunt libero consectetur reprehenderit temporibus id
+    cupiditate dolorem recusandae, ut voluptates sequi. Officia, maiores ad
+    asperiores iure commodi dolore aut aspernatur ut consectetur amet distinctio
+    eius nesciunt ullam sapiente architecto fugit adipisci!
+</p>
+<h2 data-in-page-anchor="api">API</h2>
+<h3>Properties</h3>
+<div>
+    In the following examples, <code>element</code> refers to an instance of
+    <code>protean-checkbox</code> (i.e.
+    <code>element = document.querySelector('protean-checkbox#myCheckbox')</code>).
+</div>
+<ul class="prop-list">
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">variant</h4>
+            <div class="prop-type"><code>"checkbox"</code> (default) | <code>"toggle"</code></div>
+            <div class="prop-attribute">Attribute name: <code>variant</code></div>
+            <div class="prop-desc">The visual style of the checkbox.</div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.variant = 'toggle';
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">checked</h4>
+            <div class="prop-type"><code>boolean</code></div>
+            <div class="prop-attribute">Attribute name: <code>checked</code></div>
+            <div class="prop-desc">The checked state of the checkbox.</div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.checked = true;
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">label</h4>
+            <div class="prop-type"><code>string</code></div>
+            <div class="prop-attribute">Attribute name: <code>label</code></div>
+            <div class="prop-desc">The visible label for the checkbox.</div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.label = 'Field label';
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">ariaLabel</h4>
+            <div class="prop-type"><code>string</code></div>
+            <div class="prop-desc">
+                The label read by assistive technologies for the checkbox. Note:
+                when <code>label</code> is set, this value will not be bound to
+                the field.
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.ariaLabel = 'Field aria-label';
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">disabled</h4>
+            <div class="prop-type"><code>boolean</code></div>
+            <div class="prop-attribute">Attribute name: <code>disabled</code></div>
+            <div class="prop-desc">Disables checkbox interaction.</div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.disabled = true;
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">alignment</h4>
+            <div class="prop-type"><code>"left"</code> (default) | <code>"right"</code></div>
+            <div class="prop-attribute">Attribute name: <code>alignment</code></div>
+            <div class="prop-desc">The placement of the checkbox relative to its label</div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.alignment = "right";
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">indeterminate</h4>
+            <div class="prop-type"><code>boolean</code></div>
+            <div class="prop-attribute">Attribute name: <code>indeterminate</code></div>
+            <div class="prop-desc">Shows the checkbox in an indeterminate state. Best used to indicate partial selection of options on a checkbox that controls all others in a group. Does not apply to toggles.</div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.indeterminate = true;
+            </code-snippet>
+        </div>
+    </li>
+</ul>
+
+<h3>Event</h3>
+
+<ul class="prop-list">
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">change</h4>
+            <div class="prop-desc">
+                Fires when the checkbox is toggle.
+
+                <h5>Event detail</h5>
+                <code-snippet language="typescript">
+                    {{`event: {
+                        detail: {
+                            checked: boolean,
+                            }
+                        }
+                    `}}
+                </code-snippet>
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                {{`
+                    function onChange(event) {
+                        this.checked = event.detail.checked;
+                }
+                `}}
+            </code-snippet>
+            <code-snippet language="html">
+                {{`
+                    <protean-checkbox
+                        label="My checkbox label"
+                        onchange="onChange(event)"
+                    ></protean-checkbox>
+                `}}
+            </code-snippet>
+        </div>
+    </li>
+</ul>

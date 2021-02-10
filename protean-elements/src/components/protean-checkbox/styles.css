@@ -11,9 +11,10 @@
 }
 
 label {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     cursor: pointer;
+    min-height: 24px;
 }
 
 :host([alignment='right']) label {
@@ -55,7 +56,7 @@ input:focus + label .checkbox-symbol {
     stroke-width: 3;
 }
 
-:host([type='toggle']) .checkbox-symbol {
+:host([variant='toggle']) .checkbox-symbol {
     flex-basis: 45px;
     border-radius: 10px;
 }

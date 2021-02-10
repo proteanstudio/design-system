@@ -1,7 +1,12 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import Home from '@/routes/home/index.vue';
-import ProteanInput from '@/routes/protean-input/index.vue';
-import ProteanButton from '@/routes/protean-button/index.vue';
+
+const Home = () => import('@/routes/home/index.vue');
+const ProteanInput = () => import('@/routes/protean-input/index.vue');
+const ProteanButton = () => import('@/routes/protean-button/index.vue');
+const ProteanCheckbox = () => import('@/routes/protean-checkbox/index.vue');
+const ProteanMessage = () => import('@/routes/protean-message/index.vue');
+const ProteanSelect = () => import('@/routes/protean-select/index.vue');
+const ProteanTabs = () => import('@/routes/protean-tab-container/index.vue');
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -15,9 +20,29 @@ const routes: Array<RouteRecordRaw> = [
         component: ProteanButton,
     },
     {
+        path: '/elements/protean-checkbox',
+        name: 'Checkbox',
+        component: ProteanCheckbox,
+    },
+    {
         path: '/elements/protean-input',
         name: 'Text Field',
         component: ProteanInput,
+    },
+    {
+        path: '/elements/protean-select',
+        name: 'Select',
+        component: ProteanSelect,
+    },
+    {
+        path: '/elements/protean-message',
+        name: 'Notification',
+        component: ProteanMessage,
+    },
+    {
+        path: '/elements/protean-tab-container',
+        name: 'Tabs',
+        component: ProteanTabs,
     },
     {
         // will match everything

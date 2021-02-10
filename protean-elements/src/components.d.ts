@@ -19,7 +19,7 @@ export namespace Components {
         "disabled": boolean;
         "indeterminate": boolean;
         "label": string;
-        "type": string;
+        "variant": string;
     }
     interface ProteanIcon {
         "type": string;
@@ -170,7 +170,7 @@ declare namespace LocalJSX {
         "indeterminate"?: boolean;
         "label"?: string;
         "onChange"?: (event: CustomEvent<any>) => void;
-        "type"?: string;
+        "variant"?: string;
     }
     interface ProteanIcon {
         "type"?: string;

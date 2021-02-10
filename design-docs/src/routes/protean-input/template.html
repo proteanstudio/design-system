@@ -24,31 +24,31 @@
     <div class="overview-demo-controls">
         <protean-checkbox
             label="Populate validation errors"
-            type="toggle"
+            variant="toggle"
             :checked="demoShowErrors"
             @change="demoShowErrors = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Hide hints and errors"
-            type="toggle"
+            variant="toggle"
             :checked="demoSuppressMessages"
             @change="demoSuppressMessages = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Show as optional"
-            type="toggle"
+            variant="toggle"
             :checked="demoOptional"
             @change="demoOptional = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Show as disabled"
-            type="toggle"
+            variant="toggle"
             :checked="demoDisabled"
             @change="demoDisabled = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Show as readonly"
-            type="toggle"
+            variant="toggle"
             :checked="demoReadonly"
             @change="demoReadonly = $event.detail.checked"
         ></protean-checkbox>
@@ -161,7 +161,7 @@
         </div>
         <div class="prop-example">
             <code-snippet language="javascript">
-                element.label = 'Field label';
+                element.ariaLabel = 'Field aria-label';
             </code-snippet>
         </div>
     </li>
