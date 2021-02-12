@@ -299,14 +299,11 @@ export class ProteanSelect {
     };
 
     onInputKeyDown = (event: KeyboardEvent): void => {
-        if (event.key === 'Tab' && this.dropdownOpen) {
+        const key = event.key;
+        if (key === 'Tab' && this.dropdownOpen) {
             event.preventDefault();
             return;
         }
-    };
-
-    onInputKeyUp = (event: KeyboardEvent): void => {
-        const key = event.key;
 
         const isNavigationKey = [
             'ArrowUp',
@@ -322,6 +319,7 @@ export class ProteanSelect {
         }
 
         if ([' ', 'Enter'].includes(key) && this.activeOption) {
+            event.preventDefault();
             this.handleSelection(this.activeOption.value);
             return;
         }
@@ -362,7 +360,6 @@ export class ProteanSelect {
                     ariaHasPopup="listbox"
                     ariaExpanded={this.dropdownOpen}
                     onClick={this.onInputClick}
-                    onKeyUp={this.onInputKeyUp}
                     onKeyDown={this.onInputKeyDown}
                 ></protean-input>
                 <protean-icon

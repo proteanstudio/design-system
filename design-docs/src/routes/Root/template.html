@@ -1,4 +1,4 @@
-<div role="banner" class="mobile-banner">
+<header class="mobile-banner">
     <protean-button
         variant="icon"
         class="off-canvas-toggle"
@@ -14,10 +14,9 @@
             alt="Protean Studio Design System"
         />
     </router-link>
-    <div class="banner-spacer"></div>
-</div>
+</header>
 <main-nav :showOffCanvas="showOffCanvas" />
-<main class="content">
+<main class="content" tabindex="-1">
     <div>
         <router-view />
     </div>

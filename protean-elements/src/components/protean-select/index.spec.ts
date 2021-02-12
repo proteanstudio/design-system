@@ -921,7 +921,7 @@ describe('protean-select', () => {
         expect(preventDefaultMock).toHaveBeenCalledTimes(1);
     });
 
-    it('handles input keyup', async () => {
+    it('handles input keydown', async () => {
         const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [
                 ProteanSelect,
@@ -934,8 +934,8 @@ describe('protean-select', () => {
         });
 
         const preventDefaultMock = jest.fn();
-        let keyupEvent = new KeyboardEvent('keyup', { key: 'foo' });
-        keyupEvent.preventDefault = preventDefaultMock;
+        let keydownEvent = new KeyboardEvent('keydown', { key: 'foo' });
+        keydownEvent.preventDefault = preventDefaultMock;
 
         const handleOptionNavigationMock = jest.fn();
         const handleSelectionMock = jest.fn();
@@ -947,7 +947,7 @@ describe('protean-select', () => {
 
         const inputElement = root.shadowRoot.querySelector('protean-input');
 
-        inputElement.dispatchEvent(keyupEvent);
+        inputElement.dispatchEvent(keydownEvent);
         await waitForChanges();
 
         expect(preventDefaultMock).toHaveBeenCalledTimes(0);
@@ -955,9 +955,9 @@ describe('protean-select', () => {
         expect(handleSelectionMock).toHaveBeenCalledTimes(0);
         expect(closeDropdownMock).toHaveBeenCalledTimes(0);
 
-        keyupEvent = new KeyboardEvent('keyup', { key: 'ArrowUp' });
-        keyupEvent.preventDefault = preventDefaultMock;
-        inputElement.dispatchEvent(keyupEvent);
+        keydownEvent = new KeyboardEvent('keydown', { key: 'ArrowUp' });
+        keydownEvent.preventDefault = preventDefaultMock;
+        inputElement.dispatchEvent(keydownEvent);
         await waitForChanges();
 
         expect(preventDefaultMock).toHaveBeenCalledTimes(1);
@@ -965,9 +965,9 @@ describe('protean-select', () => {
         expect(handleSelectionMock).toHaveBeenCalledTimes(0);
         expect(closeDropdownMock).toHaveBeenCalledTimes(0);
 
-        keyupEvent = new KeyboardEvent('keyup', { key: 'ArrowDown' });
-        keyupEvent.preventDefault = preventDefaultMock;
-        inputElement.dispatchEvent(keyupEvent);
+        keydownEvent = new KeyboardEvent('keydown', { key: 'ArrowDown' });
+        keydownEvent.preventDefault = preventDefaultMock;
+        inputElement.dispatchEvent(keydownEvent);
         await waitForChanges();
 
         expect(preventDefaultMock).toHaveBeenCalledTimes(2);
@@ -975,9 +975,9 @@ describe('protean-select', () => {
         expect(handleSelectionMock).toHaveBeenCalledTimes(0);
         expect(closeDropdownMock).toHaveBeenCalledTimes(0);
 
-        keyupEvent = new KeyboardEvent('keyup', { key: 'Home' });
-        keyupEvent.preventDefault = preventDefaultMock;
-        inputElement.dispatchEvent(keyupEvent);
+        keydownEvent = new KeyboardEvent('keydown', { key: 'Home' });
+        keydownEvent.preventDefault = preventDefaultMock;
+        inputElement.dispatchEvent(keydownEvent);
         await waitForChanges();
 
         expect(preventDefaultMock).toHaveBeenCalledTimes(3);
@@ -985,9 +985,9 @@ describe('protean-select', () => {
         expect(handleSelectionMock).toHaveBeenCalledTimes(0);
         expect(closeDropdownMock).toHaveBeenCalledTimes(0);
 
-        keyupEvent = new KeyboardEvent('keyup', { key: 'End' });
-        keyupEvent.preventDefault = preventDefaultMock;
-        inputElement.dispatchEvent(keyupEvent);
+        keydownEvent = new KeyboardEvent('keydown', { key: 'End' });
+        keydownEvent.preventDefault = preventDefaultMock;
+        inputElement.dispatchEvent(keydownEvent);
         await waitForChanges();
 
         expect(preventDefaultMock).toHaveBeenCalledTimes(4);
@@ -995,9 +995,9 @@ describe('protean-select', () => {
         expect(handleSelectionMock).toHaveBeenCalledTimes(0);
         expect(closeDropdownMock).toHaveBeenCalledTimes(0);
 
-        keyupEvent = new KeyboardEvent('keyup', { key: ' ' });
-        keyupEvent.preventDefault = preventDefaultMock;
-        inputElement.dispatchEvent(keyupEvent);
+        keydownEvent = new KeyboardEvent('keydown', { key: ' ' });
+        keydownEvent.preventDefault = preventDefaultMock;
+        inputElement.dispatchEvent(keydownEvent);
         await waitForChanges();
 
         expect(preventDefaultMock).toHaveBeenCalledTimes(4);
@@ -1008,9 +1008,9 @@ describe('protean-select', () => {
         rootInstance.activateDefaultOption();
         await waitForChanges();
 
-        keyupEvent = new KeyboardEvent('keyup', { key: ' ' });
-        keyupEvent.preventDefault = preventDefaultMock;
-        inputElement.dispatchEvent(keyupEvent);
+        keydownEvent = new KeyboardEvent('keydown', { key: ' ' });
+        keydownEvent.preventDefault = preventDefaultMock;
+        inputElement.dispatchEvent(keydownEvent);
         await waitForChanges();
 
         expect(preventDefaultMock).toHaveBeenCalledTimes(4);
@@ -1018,9 +1018,9 @@ describe('protean-select', () => {
         expect(handleSelectionMock).toHaveBeenCalledTimes(1);
         expect(closeDropdownMock).toHaveBeenCalledTimes(0);
 
-        keyupEvent = new KeyboardEvent('keyup', { key: 'Enter' });
-        keyupEvent.preventDefault = preventDefaultMock;
-        inputElement.dispatchEvent(keyupEvent);
+        keydownEvent = new KeyboardEvent('keydown', { key: 'Enter' });
+        keydownEvent.preventDefault = preventDefaultMock;
+        inputElement.dispatchEvent(keydownEvent);
         await waitForChanges();
 
         expect(preventDefaultMock).toHaveBeenCalledTimes(4);
@@ -1028,9 +1028,9 @@ describe('protean-select', () => {
         expect(handleSelectionMock).toHaveBeenCalledTimes(2);
         expect(closeDropdownMock).toHaveBeenCalledTimes(0);
 
-        keyupEvent = new KeyboardEvent('keyup', { key: 'Escape' });
-        keyupEvent.preventDefault = preventDefaultMock;
-        inputElement.dispatchEvent(keyupEvent);
+        keydownEvent = new KeyboardEvent('keydown', { key: 'Escape' });
+        keydownEvent.preventDefault = preventDefaultMock;
+        inputElement.dispatchEvent(keydownEvent);
         await waitForChanges();
 
         expect(preventDefaultMock).toHaveBeenCalledTimes(4);
@@ -1043,9 +1043,9 @@ describe('protean-select', () => {
         });
         await waitForChanges();
 
-        keyupEvent = new KeyboardEvent('keyup', { key: 'ArrowDown' });
-        keyupEvent.preventDefault = preventDefaultMock;
-        inputElement.dispatchEvent(keyupEvent);
+        keydownEvent = new KeyboardEvent('keydown', { key: 'ArrowDown' });
+        keydownEvent.preventDefault = preventDefaultMock;
+        inputElement.dispatchEvent(keydownEvent);
         await waitForChanges();
 
         expect(preventDefaultMock).toHaveBeenCalledTimes(4);

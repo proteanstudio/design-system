@@ -398,7 +398,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'ArrowDown' },
         );
 
@@ -430,7 +430,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'ArrowUp' },
         );
 
@@ -462,7 +462,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'ArrowDown' },
         );
 
@@ -477,7 +477,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'ArrowDown' },
         );
 
@@ -491,7 +491,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'ArrowDown' },
         );
 
@@ -524,7 +524,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'ArrowUp' },
         );
 
@@ -535,7 +535,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'ArrowUp' },
         );
 
@@ -545,7 +545,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'ArrowUp' },
         );
 
@@ -574,7 +574,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'Home' },
         );
 
@@ -585,7 +585,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'Home' },
         );
 
@@ -595,7 +595,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'Home' },
         );
 
@@ -624,7 +624,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'Home' },
         );
 
@@ -635,7 +635,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'End' },
         );
 
@@ -645,7 +645,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'End' },
         );
 
@@ -678,7 +678,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'ArrowDown' },
         );
 
@@ -688,7 +688,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'ArrowDown' },
         );
 
@@ -697,7 +697,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'ArrowDown' },
         );
 
@@ -706,7 +706,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'ArrowDown' },
         );
 
@@ -735,7 +735,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'ArrowDown' },
         );
 
@@ -745,7 +745,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: ' ' },
         );
 
@@ -756,13 +756,13 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'ArrowDown' },
         );
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'ArrowDown' },
         );
 
@@ -770,7 +770,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'Enter' },
         );
 
@@ -797,7 +797,7 @@ describe('protean-select', () => {
         await dispatchEvent(
             page,
             ['protean-select', 'protean-input'],
-            'keyup',
+            'keydown',
             { key: 'Escape' },
         );
 

@@ -64,6 +64,13 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
     history: createWebHashHistory(), //createWebHistory preferred long term, hash prevents 404
     routes,
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return { ...savedPosition };
+        } else {
+            return { top: 0 };
+        }
+    },
 });
 
 export default router;

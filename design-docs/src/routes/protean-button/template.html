@@ -12,7 +12,8 @@
             :disabled="demoDisabled"
             :ariaLabel="demoAriaLabel"
         >
-        <div v-html="demoContent"></div>
+        <protean-icon v-if="demoVariant === 'icon'" type="chevron-down"></protean-icon>
+        <span v-else>Button text</span>
     </protean-button>
     </div>
     <div class="overview-demo-controls">

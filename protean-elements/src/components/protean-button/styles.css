@@ -67,7 +67,8 @@ button > div {
     --protean-icon-stroke-primary: var(--protean-button-icon-stroke-color);
 }
 
-:host(:not([disabled])[variant='icon']) button:hover {
+:host(:not([disabled])[variant='icon']) button:hover,
+:host(:not([disabled])[variant='icon']) button:focus {
     background-color: var(--protean-button-icon-hover-background-color);
     --protean-icon-hover-stroke-primary: var(--protean-button-icon-stroke-color);
 }

@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "start": "vue-cli-service serve",
-        "build": "vue-cli-service build --modern && rm -rf ../docs && mkdir ../docs && cp -R dist/ ../docs",
+        "build": "vue-cli-service build --modern && rm -rf ../docs && mkdir ../docs && cp -R dist/ ../docs && cp ../CNAME ../docs",
         "test:unit": "vue-cli-service test:unit",
         "lint": "vue-cli-service lint",
         "format": "prettier -c 'src/**'",
