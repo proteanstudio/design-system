@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 
 const Home = () => import('@/routes/home/index.vue');
 const ProteanInput = () => import('@/routes/protean-input/index.vue');
@@ -62,7 +62,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-    history: createWebHistory(process.env.BASE_URL),
+    history: createWebHashHistory(), //createWebHistory preferred long term, hash prevents 404
     routes,
 });
 

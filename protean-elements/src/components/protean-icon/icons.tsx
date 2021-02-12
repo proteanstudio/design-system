@@ -89,8 +89,28 @@ const icons: Dict<Icon> = {
     },
     'chevron-down': {
         markup: () => (
-            <path class="stroke-primary" d="M2.003 8.5L12 17l10-8.5" />
+            <path class="stroke-primary" d="M2.003 7.5L12 16l10-8.5" />
         ),
+    },
+    'chevron-left': {
+        markup: () => (
+            <path class="stroke-primary" d="M16.251 1.752l-8.5 9.997 8.5 10" />
+        ),
+    },
+    'chevron-right': {
+        markup: () => (
+            <path class="stroke-primary" d="M7.751 21.748l8.5-9.997-8.5-10" />
+        ),
+    },
+    'chevron-up': {
+        markup: () => (
+            <path class="stroke-primary" d="M2.003 16L12 7.5 22 16" />
+        ),
+    },
+    menu: {
+        markup: () => (
+            <path class="stroke-primary" d="M1.5 12.5h21M1.5 18.5h21M1.5 6.5h21"/>
+        )
     },
     'status-error': {
         markup: () => reusableIcons['error'](),

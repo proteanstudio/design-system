@@ -10,6 +10,7 @@
             class="overview-demo-element"
             :variant="demoVariant"
             :disabled="demoDisabled"
+            :ariaLabel="demoAriaLabel"
         >
         <div v-html="demoContent"></div>
     </protean-button>
@@ -84,7 +85,7 @@
             <h4 class="prop-name">variant</h4>
             <div class="prop-type"><code>"primary"</code> | <code>"secondary</code> | <code>"icon"</code></div>
             <div class="prop-attribute">Attribute name: <code>variant</code></div>
-            <div class="prop-desc">The visual style of the button. <code>icon</code> buttons should only be used in conjuction with <code>protean-icon</code>.</div>
+            <div class="prop-desc">The visual style of the button. <code>icon</code> buttons should only be used in conjuction with <code>protean-icon</code> and should be used with an ariaLabel.</div>
         </div>
         <div class="prop-example">
             <code-snippet language="javascript">
@@ -102,6 +103,21 @@
         <div class="prop-example">
             <code-snippet language="javascript">
                 element.disabled = true;
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">ariaLabel</h4>
+            <div class="prop-type"><code>string</code></div>
+            <div class="prop-desc">
+                The label read by assistive technologies for the input. Note:
+                This should not be set when the button has text rendered in it.
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.ariaLabel = 'Field aria-label';
             </code-snippet>
         </div>
     </li>

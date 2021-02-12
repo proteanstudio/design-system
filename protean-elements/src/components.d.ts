@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { FormattedValue } from "@/utils/formatting/types";
 export namespace Components {
     interface ProteanButton {
+        "ariaLabel": string;
         "disabled": boolean;
         "type": string;
         "variant": string;
@@ -158,6 +159,7 @@ declare global {
 }
 declare namespace LocalJSX {
     interface ProteanButton {
+        "ariaLabel"?: string;
         "disabled"?: boolean;
         "type"?: string;
         "variant"?: string;

@@ -4,6 +4,8 @@
     </code>
     <div class="copy-container">
         <code v-show="showCopyConfirmation" class="copy-confirmation">Copied to clipboard</code>
-        <protean-button variant="icon" @click="copySnippet"><protean-icon type="chevron-down" /></protean-button>
+        <protean-button ariaLabel="Copy code snippet" variant="icon" @click="copySnippet">
+            <protean-icon type="chevron-down" />
+        </protean-button>
     </div>
 </pre>

@@ -14,10 +14,15 @@ export class ProteanButton {
     @Prop({ reflect: true }) variant: string;
     @Prop({ reflect: true }) type: string;
     @Prop({ reflect: true }) disabled: boolean;
+    @Prop() ariaLabel: string;
 
     render(): VNode {
         return (
-            <button type={this.type ?? 'button'} disabled={this.disabled}>
+            <button
+                type={this.type ?? 'button'} 
+                disabled={this.disabled}
+                aria-label={this.ariaLabel}
+            >
                 <div>
                     <slot />
                 </div>

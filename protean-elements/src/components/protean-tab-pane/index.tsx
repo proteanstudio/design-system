@@ -22,7 +22,7 @@ export class ProteanTabPane {
         return (
             <div
                 class="tab-pane"
-                role="tab-panel"
+                role="tabpanel"
                 id={`tab-pane-${this.guid}-${this.index}`}
                 aria-label={this.label}
                 tabIndex={0}

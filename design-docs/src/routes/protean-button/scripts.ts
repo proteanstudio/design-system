@@ -14,4 +14,10 @@ export default class ProteanButton extends Vue {
 
         return 'Button text';
     }
+
+    get demoAriaLabel(): string | undefined {
+        if (this.demoVariant === 'icon') return 'Button aria-label';
+
+        return;
+    }
 }

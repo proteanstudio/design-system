@@ -4,3 +4,9 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+
+declare module 'highlight.js/lib/core';
+declare module 'highlight.js/lib/languages/javascript';
+declare module 'highlight.js/lib/languages/typescript';
+declare module 'highlight.js/lib/languages/xml';

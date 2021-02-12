@@ -12,12 +12,15 @@
 button {
     color: inherit;
     cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     height: var(--touch-zone-size, 42px);
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
         border 0.2s ease-in-out;
+}
+
+button > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 :host([variant='primary']) button,

@@ -15,7 +15,7 @@ describe('protean-tab-pane', () => {
 
         await waitForChanges();
 
-        expect(innerPaneElement).toEqualAttribute('role', 'tab-panel');
+        expect(innerPaneElement).toEqualAttribute('role', 'tabpanel');
         expect(innerPaneElement).toEqualAttribute('id', 'tab-pane-1000-0');
         expect(innerPaneElement).toEqualAttribute('aria-label', 'Pane 1');
         expect(innerPaneElement).toEqualAttribute('tabindex', '0');

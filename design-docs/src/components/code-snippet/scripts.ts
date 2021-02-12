@@ -1,6 +1,13 @@
 import { Vue } from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import hljs from 'highlight.js';
+import hljs from 'highlight.js/lib/core';
+import javascript from 'highlight.js/lib/languages/javascript';
+import typescript from 'highlight.js/lib/languages/typescript';
+import html from 'highlight.js/lib/languages/xml';
+
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('typescript', typescript);
+hljs.registerLanguage('html', html);
 
 export default class CodeSnippet extends Vue {
     @Prop() language = 'html';
