@@ -3,7 +3,7 @@
 
 <h2 data-in-page-anchor="overview">Overview</h2>
 <div class="overview-content">
-    <div class="overview-demo">
+    <div class="overview-demo no-controls">
         <protean-tab-container
             :name="demoName"
             :value="demoValue"
@@ -44,14 +44,14 @@
             >
         </protean-tab-container>
     </div>
-    <div class="overview-demo-controls">
+    <!-- <div class="overview-demo-controls">
         <protean-checkbox
             label="Show with nested tabs"
             variant="toggle"
             :checked="demoShowChildTab"
             @change="toggleNestedTabs"
         ></protean-checkbox>
-    </div>
+    </div> -->
     <div class="overview-demo-snippet">
         <code-snippet
             :substitutions='[demoName, demoValue, nestedTabSnippet]'
@@ -168,7 +168,7 @@
             <h4 class="prop-name">name</h4>
             <div class="prop-type"><code>string</code></div>
             <div class="prop-attribute">Attribute name: <code>name</code></div>
-            <div class="prop-desc">The name of the tab-pane - used to isolate groups of tab-containers and tab-panes when nested tabs are used.</div>
+            <div class="prop-desc">The name of the tab-pane - used to isolate groups of tab-containers and tab-panes when nested tabs are needed.</div>
         </div>
         <div class="prop-example">
             <code-snippet language="javascript">

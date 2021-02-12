@@ -10,6 +10,11 @@
     @include breakpoint(l) {
         margin-right: 0;
     }
+
+    &.no-controls {
+        margin-right: 0;
+        margin-bottom: 0;
+    }
 }
 
 .overview-demo-element {
