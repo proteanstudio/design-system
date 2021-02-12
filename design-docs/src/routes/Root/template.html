@@ -1,4 +1,13 @@
-<main-nav />
+<div role="banner" class="mobile-banner">
+    <protean-button variant="icon" class="off-canvas-toggle" @click="showOffCanvas = !showOffCanvas">
+        <protean-icon type="chevron-down"></protean-icon>
+    </protean-button>
+    <router-link to="/" class="home-link unstyled">
+        <img src="@/assets/images/logo-white-text.svg" class="protean-logo" alt="Protean Studio Design System">
+    </router-link>
+    <div class="banner-spacer"></div>
+</div>
+<main-nav :showOffCanvas="showOffCanvas" />
 <main class="content">
     <div>
         <router-view />

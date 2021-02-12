@@ -65,7 +65,7 @@ export default class CodeSnippet extends Vue {
 
             const indent = this.createIndentationString(indentCount + 1);
 
-            if (hasOpeningTag && !hasClosingTag && !hasElse) {
+            if ((hasOpeningTag && !hasClosingTag) || hasElse) {
                 indentCount++;
             }
 

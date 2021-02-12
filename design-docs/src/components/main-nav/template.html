@@ -1,5 +1,8 @@
-<nav class="main-nav">
+<nav class="main-nav" :class="{'show-off-canvas': showOffCanvas} ">
     <div class="nav-content">
+        <router-link to="/" class="home-link unstyled">
+            <img src="@/assets/images/logo-symbol.svg" alt="Protean Studio Design System">
+        </router-link>
         <div v-for="(group, index) in sortedRoutes" class="nav-group">
             <h2 class="heading-3">{{group.title}}</h2>
             <ul :aria-label="group.title">

@@ -2,15 +2,16 @@
 
 :host {
     display: block;
+    margin: 1rem;
 }
 
 .select-container {
     position: relative;
-    margin: 1rem;
 }
 
 protean-input {
     margin: 0;
+    cursor: pointer;
 }
 
 .protean-select-icon {

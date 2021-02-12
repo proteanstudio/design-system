@@ -20,11 +20,11 @@ import { VNode } from '@stencil/core/internal';
 export class ProteanSelect {
     @Prop({ mutable: true }) value: string;
     @Prop({ mutable: true }) selectedOptions: string[];
+    @Prop({ reflect: true }) multiple: boolean; //change to variant?
     @Prop({ reflect: true }) label: string;
     @Prop() ariaLabel: string;
     @Prop({ reflect: true }) optional: boolean;
     @Prop({ reflect: true }) disabled: boolean;
-    @Prop({ reflect: true }) multiple: boolean; //change to variant?
     @Prop() errors: string[];
 
     @State() dropdownOpen = false;

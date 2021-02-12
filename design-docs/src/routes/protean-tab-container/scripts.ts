@@ -5,18 +5,37 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
     components: { CodeSnippet },
 })
 export default class ProteanTabs extends Vue {
-    demoChecked = false;
-    demoIsToggle = false;
-    demoIsRightAligned = false;
-    demoDisabled = false;
-    demoIndeterminate = false;
+    demoValue = 'tab1';
+    demoName = 'demo-name';
+    demoChildName = 'demo-child-name';
+    demoShowChildTab = false;
 
-    get demoVariant(): string | undefined {
-        if (this.demoIsToggle) return 'toggle';
-
-        return;
+    get nestedTabSnippet(): string {
+        if (this.demoShowChildTab) {
+            const tabString = Array(3)
+                .fill('')
+                .reduce((acc, i, index) => {
+                    const count = index + 1;
+                    return `${acc}
+                    <protean-tab-pane
+                    name="${this.demoChildName}"
+                    label="Child ${count}" 
+                    value="childtab${count}"
+                    >
+                    Child Tab ${count} Content
+                    </protean-tab-pane>`;
+                }, '');
+            return `\n<protean-tab-container
+                name="${this.demoChildName}"
+                >
+                ${tabString}
+            </protean-tab-container>\n`;
+        }
+        return '';
     }
-    get demoAlignment(): string {
-        return this.demoIsRightAligned ? 'right' : 'left';
+    toggleNestedTabs(event: CustomEvent): void {
+        this.demoShowChildTab = event.detail.checked;
+
+        this.demoValue = 'tab1';
     }
 }

@@ -5,18 +5,141 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
     components: { CodeSnippet },
 })
 export default class ProteanSelect extends Vue {
-    demoChecked = false;
-    demoIsToggle = false;
-    demoIsRightAligned = false;
+    demoOptgroupOptions = [
+        {
+            label: 'Group 1',
+            children: [
+                {
+                    value: '1',
+                    label: 'Option 1',
+                },
+                {
+                    value: '2',
+                    label: 'Option 2',
+                },
+                {
+                    value: '3',
+                    label: 'Option 3',
+                },
+            ],
+        },
+        {
+            label: 'Group 2',
+            children: [
+                {
+                    value: '4',
+                    label: 'Option 4',
+                },
+                {
+                    value: '5',
+                    label: 'Option 5',
+                },
+            ],
+        },
+        {
+            label: 'Group 3',
+            children: [
+                {
+                    value: '6',
+                    label: 'Option 6',
+                },
+                {
+                    value: '7',
+                    label: 'Option 7',
+                },
+                {
+                    value: '8',
+                    label: 'Option 8',
+                },
+            ],
+        },
+    ];
+    demoFlatOptions = [
+        {
+            value: '1',
+            label: 'Option 1',
+        },
+        {
+            value: '2',
+            label: 'Option 2',
+        },
+        {
+            value: '3',
+            label: 'Option 3',
+        },
+        {
+            value: '4',
+            label: 'Option 4',
+        },
+        {
+            value: '5',
+            label: 'Option 5',
+        },
+        {
+            value: '6',
+            label: 'Option 6',
+        },
+        {
+            value: '7',
+            label: 'Option 7',
+        },
+        {
+            value: '8',
+            label: 'Option 8',
+        },
+    ];
+    demoWithOptGroups = false;
+    demoValue = '';
+    demoSelectedOptions: string[] = [];
+    demoMultiple = false;
+    demoType = 'text';
+    demoErrorsList = ['Error #1'];
+    demoShowErrors = false;
+    demoOptional = false;
     demoDisabled = false;
-    demoIndeterminate = false;
 
-    get demoVariant(): string | undefined {
-        if (this.demoIsToggle) return 'toggle';
+    get demoErrors(): string[] {
+        if (this.demoShowErrors) return this.demoErrorsList;
 
-        return;
+        return [];
     }
-    get demoAlignment(): string {
-        return this.demoIsRightAligned ? 'right' : 'left';
+
+    get snippetOptions(): string {
+        if (this.demoWithOptGroups) {
+            return this.demoOptgroupOptions.reduce((acc, group) => {
+                const children = this.buildOptionString(group.children);
+
+                return `${acc}\n<protean-optgroup label="${group.label}">\n ${children}</protean-optgroup>`;
+            }, '');
+        }
+
+        return this.buildOptionString(this.demoFlatOptions);
+    }
+
+    buildOptionString(options: { label: string; value: string }[]): string {
+        return options.reduce((innerAcc, { label, value }) => {
+            const childStr = `
+                <protean-option value="${value}" label="${label}">${label}</protean-option>`;
+
+            return innerAcc + childStr + '\n';
+        }, '');
+    }
+
+    spamErrors(): void {
+        const arrayLength = Math.round(Math.random() * 9 + 1);
+
+        const errorList = new Array(arrayLength)
+            .fill('')
+            .map((i, index) => `Error #${index}`);
+
+        this.demoErrorsList = errorList;
+    }
+
+    changeHandler(event: CustomEvent): void {
+        if (this.demoMultiple) {
+            this.demoSelectedOptions = event.detail.selectedOptions;
+        } else {
+            this.demoValue = event.detail.value;
+        }
     }
 }

@@ -26,7 +26,7 @@ const routes: Array<RouteRecordRaw> = [
     },
     {
         path: '/elements/protean-input',
-        name: 'Text Field',
+        name: 'Input',
         component: ProteanInput,
     },
     {
@@ -36,7 +36,7 @@ const routes: Array<RouteRecordRaw> = [
     },
     {
         path: '/elements/protean-message',
-        name: 'Notification',
+        name: 'Message',
         component: ProteanMessage,
     },
     {

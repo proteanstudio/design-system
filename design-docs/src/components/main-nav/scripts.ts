@@ -1,4 +1,5 @@
 import { Vue } from 'vue-class-component';
+import { Prop } from 'vue-property-decorator';
 
 interface MainNavItem {
     path: string;
@@ -11,6 +12,7 @@ interface MainNavGroup {
 }
 
 export default class MainNav extends Vue {
+    @Prop() showOffCanvas = false;
     get sortedRoutes(): MainNavGroup[] {
         const groupedStructure: MainNavGroup[] = [
             {
@@ -40,7 +42,6 @@ export default class MainNav extends Vue {
                 return acc;
             }, groupedStructure);
 
-        console.log(routes);
         return routes;
     }
     /* 

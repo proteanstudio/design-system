@@ -1,29 +1,79 @@
 <h1>Select</h1>
-<p>
-    But actually checkboxes.
-</p>
+<p>Use selects to...</p>
 
 <h2 data-in-page-anchor="overview">Overview</h2>
 <div class="overview-content">
     <div class="overview-demo">
-        <protean-checkbox
+        <protean-select
+            v-if="demoWithOptGroups"
             class="overview-demo-element"
-            label="Checkbox label"
-            :variant="demoVariant"
-            :checked="demoChecked"
+            label="Select label"
+            :multiple="demoMultiple"
+            :value="demoValue"
+            :selectedOptions="demoSelectedOptions"
+            :errors="demoErrors"
+            :optional="demoOptional"
             :disabled="demoDisabled"
-            :alignment="demoAlignment"
-            :indeterminate="demoIndeterminate"
-            @change="demoChecked = $event.detail.checked"
+            :format="demoFormat"
+            @change="changeHandler"
         >
-        </protean-checkbox>
+            <protean-optgroup
+                v-for="{label, children} in demoOptgroupOptions"
+                :label="label"
+            >
+                <protean-option
+                    v-for="{value, label} in children"
+                    :value="value"
+                    :label="label"
+                    >{{label}}</protean-option
+                >
+            </protean-optgroup>
+        </protean-select>
+        <protean-select
+            v-else
+            class="overview-demo-element"
+            label="Select label"
+            :multiple="demoMultiple"
+            :value="demoValue"
+            :selectedOptions="demoSelectedOptions"
+            :errors="demoErrors"
+            :optional="demoOptional"
+            :disabled="demoDisabled"
+            :format="demoFormat"
+            @change="changeHandler"
+        >
+            <protean-option
+                v-for="{value, label} in demoFlatOptions"
+                :value="value"
+                :label="label"
+                >{{label}}</protean-option
+            >
+        </protean-select>
     </div>
     <div class="overview-demo-controls">
         <protean-checkbox
-            label="Show as toggle"
+            label="Show with optgroups"
             variant="toggle"
-            :checked="demoIsToggle"
-            @change="demoIsToggle = $event.detail.checked"
+            :checked="demoWithOptGroups"
+            @change="demoWithOptGroups = $event.detail.checked"
+        ></protean-checkbox>
+        <protean-checkbox
+            label="Show as multiselect"
+            variant="toggle"
+            :checked="demoMultiple"
+            @change="demoMultiple = $event.detail.checked"
+        ></protean-checkbox>
+        <protean-checkbox
+            label="Show with validation errors"
+            variant="toggle"
+            :checked="demoShowErrors"
+            @change="demoShowErrors = $event.detail.checked"
+        ></protean-checkbox>
+        <protean-checkbox
+            label="Show as optional"
+            variant="toggle"
+            :checked="demoOptional"
+            @change="demoOptional = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Show as disabled"
@@ -31,27 +81,12 @@
             :checked="demoDisabled"
             @change="demoDisabled = $event.detail.checked"
         ></protean-checkbox>
-        <protean-checkbox
-            label="Align to the right"
-            variant="toggle"
-            :checked="demoIsRightAligned"
-            @change="demoIsRightAligned = $event.detail.checked"
-        ></protean-checkbox>
-        <protean-checkbox
-            label="Show as indeterminate"
-            variant="toggle"
-            :checked="demoIndeterminate"
-            :disabled="demoIsToggle"
-            @change="demoIndeterminate = $event.detail.checked"
-        ></protean-checkbox>
     </div>
     <div class="overview-demo-snippet">
-        <code-snippet
-            :substitutions='[demoVariant ? `\n variant="${demoVariant}"`: "", demoChecked ? "\n checked" : "", demoDisabled ? "\n disabled" : "",  demoIndeterminate && !demoIsToggle ? "\n indeterminate" : "", demoAlignment]'
-        >
-            {{`<protean-checkbox {0}{1}{2}{3}
-                alignment="{4}"
-                ></protean-checkbox>
+        <code-snippet :substitutions='[demoMultiple ? " multiple" : "", demoOptional ? " optional" : "", demoDisabled ? " disabled" : "", snippetOptions]'>
+            {{`<protean-select{0}{1}{2}>
+                {3}
+            </protean-select>
             `}}
         </code-snippet>
     </div>
@@ -71,36 +106,47 @@
     eius nesciunt ullam sapiente architecto fugit adipisci!
 </p>
 <h2 data-in-page-anchor="api">API</h2>
-<h3>Properties</h3>
+<h3>Select Properties</h3>
 <div>
     In the following examples, <code>element</code> refers to an instance of
-    <code>protean-checkbox</code> (i.e.
-    <code>element = document.querySelector('protean-checkbox#myCheckbox')</code>).
+    <code>protean-select</code> (i.e.
+    <code>element = document.querySelector('protean-select#mySelect')</code>).
 </div>
 <ul class="prop-list">
     <li class="prop-item">
         <div class="prop-info">
-            <h4 class="prop-name">variant</h4>
-            <div class="prop-type"><code>"checkbox"</code> (default) | <code>"toggle"</code></div>
-            <div class="prop-attribute">Attribute name: <code>variant</code></div>
-            <div class="prop-desc">The visual style of the checkbox.</div>
+            <h4 class="prop-name">value</h4>
+            <div class="prop-type"><code>string</code></div>
+            <div class="prop-desc">The value of the select when not using a <code>multiple</code> select. Should match the <code>value</code> of one of the nested options.</div>
         </div>
         <div class="prop-example">
             <code-snippet language="javascript">
-                element.variant = 'toggle';
+                element.value = 'option1';
             </code-snippet>
         </div>
     </li>
     <li class="prop-item">
         <div class="prop-info">
-            <h4 class="prop-name">checked</h4>
-            <div class="prop-type"><code>boolean</code></div>
-            <div class="prop-attribute">Attribute name: <code>checked</code></div>
-            <div class="prop-desc">The checked state of the checkbox.</div>
+            <h4 class="prop-name">selectedOptions</h4>
+            <div class="prop-type"><code>string[]</code></div>
+            <div class="prop-desc">The list of selected options when using a <code>multiple</code> select. Individual items should match the <code>value</code>s of one of the nested options.</div>
         </div>
         <div class="prop-example">
             <code-snippet language="javascript">
-                element.checked = true;
+                element.selectedOptions = ['option1', 'option2'];
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">multiple</h4>
+            <div class="prop-type"><code>boolean</code></div>
+            <div class="prop-attribute">Attribute name: <code>multiple</code></div>
+            <div class="prop-desc">Allows selection of multiple options</div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.multiple = true;
             </code-snippet>
         </div>
     </li>
@@ -109,7 +155,7 @@
             <h4 class="prop-name">label</h4>
             <div class="prop-type"><code>string</code></div>
             <div class="prop-attribute">Attribute name: <code>label</code></div>
-            <div class="prop-desc">The visible label for the checkbox.</div>
+            <div class="prop-desc">The visible label for the select.</div>
         </div>
         <div class="prop-example">
             <code-snippet language="javascript">
@@ -122,7 +168,7 @@
             <h4 class="prop-name">ariaLabel</h4>
             <div class="prop-type"><code>string</code></div>
             <div class="prop-desc">
-                The label read by assistive technologies for the checkbox. Note:
+                The label read by assistive technologies for the select. Note:
                 when <code>label</code> is set, this value will not be bound to
                 the field.
             </div>
@@ -135,10 +181,138 @@
     </li>
     <li class="prop-item">
         <div class="prop-info">
+            <h4 class="prop-name">optional</h4>
+            <div class="prop-type">
+                <code>boolean</code>
+            </div>
+            <div class="prop-attribute">
+                Attribute name: <code>optional</code>
+            </div>
+            <div class="prop-desc">
+                Marks the field as optional to the user by appending
+                "(optional)" to the visible <code>label</code> and to assistive
+                technologies by setting <code>aria-required="false"</code>.
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.optional = true;
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">errors</h4>
+            <div class="prop-type">
+                <code>string[]</code>
+            </div>
+            <div class="prop-desc">
+                A list of errors used to show the field in an error state. The contents of the errors are not visible to the user.
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.errors = [ 'Error #1', ' Error #2' ];
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
             <h4 class="prop-name">disabled</h4>
-            <div class="prop-type"><code>boolean</code></div>
-            <div class="prop-attribute">Attribute name: <code>disabled</code></div>
-            <div class="prop-desc">Disables checkbox interaction.</div>
+            <div class="prop-type">
+                <code>boolean</code>
+            </div>
+            <div class="prop-attribute">
+                Attribute name: <code>disabled</code>
+            </div>
+            <div class="prop-desc">
+                Disables the field and prevents user interaction.
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.disabled = true;
+            </code-snippet>
+        </div>
+    </li>
+</ul>
+
+<h3>Optgroup Properties</h3>
+<ul class="prop-list">
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">label</h4>
+            <div class="prop-type"><code>string</code></div>
+            <div class="prop-attribute">Attribute name: <code>label</code></div>
+            <div class="prop-desc">The visible label for the group.</div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.label = 'Group label';
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">disabled</h4>
+            <div class="prop-type">
+                <code>boolean</code>
+            </div>
+            <div class="prop-attribute">
+                Attribute name: <code>disabled</code>
+            </div>
+            <div class="prop-desc">
+                Disables the group and prevents any options with it from being selected.
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.disabled = true;
+            </code-snippet>
+        </div>
+    </li>
+</ul>
+
+<h3>Option Properties</h3>
+<ul class="prop-list">
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">value</h4>
+            <div class="prop-type"><code>string</code></div>
+            <div class="prop-attribute">Attribute name: <code>value</code></div>
+            <div class="prop-desc">The value of the option. This value is emitted when the option is selected.</div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.value = 'option1';
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">label</h4>
+            <div class="prop-type"><code>string</code></div>
+            <div class="prop-attribute">Attribute name: <code>label</code></div>
+            <div class="prop-desc">The text shown in the select when this option is selected. If not populated, the select will fall back to the option's inner text and further to its value.</div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.label = 'Group label';
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">disabled</h4>
+            <div class="prop-type">
+                <code>boolean</code>
+            </div>
+            <div class="prop-attribute">
+                Attribute name: <code>disabled</code>
+            </div>
+            <div class="prop-desc">
+                Disables the options and prevents it from being selected.
+            </div>
         </div>
         <div class="prop-example">
             <code-snippet language="javascript">
@@ -148,27 +322,25 @@
     </li>
     <li class="prop-item">
         <div class="prop-info">
-            <h4 class="prop-name">alignment</h4>
-            <div class="prop-type"><code>"left"</code> (default) | <code>"right"</code></div>
-            <div class="prop-attribute">Attribute name: <code>alignment</code></div>
-            <div class="prop-desc">The placement of the checkbox relative to its label</div>
+            <h4 class="prop-name">selected</h4>
+            <div class="prop-type">
+                <code>boolean</code>
+            </div>
+            <div class="prop-attribute">
+                Attribute name: <code>selected</code>
+            </div>
+            <div class="prop-desc">
+                Indicates whether an option is selected. Can be used to pre-select options on render but once <code>value</code> or <code>selectedOptions</code> is set on the select, the properties of the select override any user-defined properties on the option.
+            </div>
         </div>
         <div class="prop-example">
-            <code-snippet language="javascript">
-                element.alignment = "right";
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">indeterminate</h4>
-            <div class="prop-type"><code>boolean</code></div>
-            <div class="prop-attribute">Attribute name: <code>indeterminate</code></div>
-            <div class="prop-desc">Shows the checkbox in an indeterminate state. Best used to indicate partial selection of options on a checkbox that controls all others in a group. Does not apply to toggles.</div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.indeterminate = true;
+            <code-snippet language="html">
+                {{`<protean-option
+                        selected
+                        value="1" 
+                        label="Option 1">
+                        Option 1
+                    </protean-option>`}}
             </code-snippet>
         </div>
     </li>
@@ -181,33 +353,35 @@
         <div class="prop-info">
             <h4 class="prop-name">change</h4>
             <div class="prop-desc">
-                Fires when the checkbox is toggle.
+                Fires when an option is selected.
 
                 <h5>Event detail</h5>
                 <code-snippet language="typescript">
                     {{`event: {
                         detail: {
-                            checked: boolean,
-                            }
-                        }
-                    `}}
+                            value?: string,
+                            selectedOptions?: string[],
+                    }
+                } `}}
                 </code-snippet>
             </div>
         </div>
         <div class="prop-example">
             <code-snippet language="javascript">
-                {{`
-                    function onChange(event) {
-                        this.checked = event.detail.checked;
-                }
-                `}}
+                {{`function onChange(event) {
+                    if (this.multiple) {
+                        this.selectedOptions = event.detail.selectedOptions;
+                    } else {
+                        this.value = event.detail.value;
+                    }
+                }`}}
             </code-snippet>
             <code-snippet language="html">
                 {{`
-                    <protean-checkbox
-                        label="My checkbox label"
-                        onchange="onChange(event)"
-                    ></protean-checkbox>
+                <protean-select
+                    label="My select field label"
+                    onchange="onChange(event)"
+                ></protean-select>
                 `}}
             </code-snippet>
         </div>
