@@ -53,7 +53,7 @@ export class ProteanCheckbox {
     @Event() change: EventEmitter;
 
     onCheckboxChange = (event: Event): void => {
-        !this.disabled && this.change.emit({
+        this.change.emit({
             checked: (event.target as HTMLInputElement).checked,
         });
     };
@@ -66,6 +66,7 @@ export class ProteanCheckbox {
                     type="checkbox"
                     id={this.checkboxId}
                     aria-label={this.checkboxAriaLabel}
+                    disabled={this.disabled}
                     checked={this.checked || this.indeterminate}
                     onChange={this.onCheckboxChange}
                 />
