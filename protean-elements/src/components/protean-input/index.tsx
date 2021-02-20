@@ -33,7 +33,6 @@ export class ProteanInput {
     @Prop({ reflect: true }) type: string;
     @Prop({ reflect: true }) label: string;
     @Prop({ reflect: true }) disabled = false;
-    @Prop({ reflect: true }) role: string;
     @Prop({ reflect: true }) maxlength: number; //FIX THIS
     @Prop({ reflect: true }) format: string;
     @Prop({ reflect: true }) optional: boolean;
@@ -41,6 +40,7 @@ export class ProteanInput {
     @Prop({ reflect: true }) errors: string[];
     @Prop({ reflect: true }) suppressMessages: boolean;
     @Prop({ reflect: true }) readonly = false;
+    @Prop() ariaRole: string;
     @Prop() ariaLabel: string;
     @Prop() ariaHasPopup: string;
     @Prop() ariaExpanded: boolean | undefined;
@@ -81,6 +81,7 @@ export class ProteanInput {
             password: 'password',
             search: 'search',
             email: 'email',
+            button: 'button'
         };
 
         return inputTypeMap[this.type] ?? 'text';
@@ -128,6 +129,12 @@ export class ProteanInput {
             .getBoundingClientRect().height;
 
         return `${height}px`;
+    }
+
+    get ariaRequired(): string | null {
+        if (this.ariaHasPopup === 'listbox') return null;
+
+        return `${!this.optional}`;
     }
 
     @Event({ eventName: 'change', bubbles: false })
@@ -293,7 +300,8 @@ export class ProteanInput {
                         type={this.inputType}
                         disabled={this.disabled}
                         readOnly={this.readonly}
-                        aria-required={`${!this.optional}`}
+                        role={this.ariaRole}
+                        aria-required={this.ariaRequired}
                         aria-label={this.inputAriaLabel}
                         aria-invalid={`${this.hasErrors}`}
                         aria-describedby={this.descriptionId}

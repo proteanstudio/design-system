@@ -15,7 +15,7 @@
         />
     </router-link>
 </header>
-<main-nav :showOffCanvas="showOffCanvas" />
+<main-nav :showOffCanvas="showOffCanvas" @hideOffCanvas="showOffCanvas = false" />
 <main class="content" tabindex="-1">
     <div>
         <router-view />

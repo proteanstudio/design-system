@@ -61,6 +61,7 @@ input {
     font-size: 1rem;
     color: inherit;
     box-shadow: none;
+    text-align: left;
 }
 
 :host(:not([label])) input {

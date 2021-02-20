@@ -1,5 +1,5 @@
-import { Vue } from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Options, Vue } from 'vue-class-component';
+import { Prop, Emit } from 'vue-property-decorator';
 
 interface MainNavItem {
     path: string;
@@ -11,8 +11,12 @@ interface MainNavGroup {
     children: MainNavItem[];
 }
 
+@Options({
+    emits: ['hide-off-canvas'],
+})
 export default class MainNav extends Vue {
     @Prop() showOffCanvas = false;
+
     get sortedRoutes(): MainNavGroup[] {
         const groupedStructure: MainNavGroup[] = [
             {
@@ -44,6 +48,7 @@ export default class MainNav extends Vue {
 
         return routes;
     }
+
     /* 
     lightModeEnabled = document.body.classList.contains('light');
 

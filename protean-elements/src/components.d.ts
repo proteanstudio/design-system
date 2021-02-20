@@ -22,6 +22,8 @@ export namespace Components {
         "label": string;
         "variant": string;
     }
+    interface ProteanClickElsewhere {
+    }
     interface ProteanIcon {
         "type": string;
         "use": string;
@@ -30,6 +32,7 @@ export namespace Components {
         "ariaExpanded": boolean | undefined;
         "ariaHasPopup": string;
         "ariaLabel": string;
+        "ariaRole": string;
         "disabled": boolean;
         "errors": string[];
         "format": string;
@@ -38,7 +41,6 @@ export namespace Components {
         "maxlength": number;
         "optional": boolean;
         "readonly": boolean;
-        "role": string;
         "suppressMessages": boolean;
         "type": string;
         "value": string;
@@ -96,6 +98,12 @@ declare global {
         prototype: HTMLProteanCheckboxElement;
         new (): HTMLProteanCheckboxElement;
     };
+    interface HTMLProteanClickElsewhereElement extends Components.ProteanClickElsewhere, HTMLStencilElement {
+    }
+    var HTMLProteanClickElsewhereElement: {
+        prototype: HTMLProteanClickElsewhereElement;
+        new (): HTMLProteanClickElsewhereElement;
+    };
     interface HTMLProteanIconElement extends Components.ProteanIcon, HTMLStencilElement {
     }
     var HTMLProteanIconElement: {
@@ -147,6 +155,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "protean-button": HTMLProteanButtonElement;
         "protean-checkbox": HTMLProteanCheckboxElement;
+        "protean-click-elsewhere": HTMLProteanClickElsewhereElement;
         "protean-icon": HTMLProteanIconElement;
         "protean-input": HTMLProteanInputElement;
         "protean-message": HTMLProteanMessageElement;
@@ -174,6 +183,9 @@ declare namespace LocalJSX {
         "onChange"?: (event: CustomEvent<any>) => void;
         "variant"?: string;
     }
+    interface ProteanClickElsewhere {
+        "onChange"?: (event: CustomEvent<any>) => void;
+    }
     interface ProteanIcon {
         "type"?: string;
         "use"?: string;
@@ -182,6 +194,7 @@ declare namespace LocalJSX {
         "ariaExpanded"?: boolean | undefined;
         "ariaHasPopup"?: string;
         "ariaLabel"?: string;
+        "ariaRole"?: string;
         "disabled"?: boolean;
         "errors"?: string[];
         "format"?: string;
@@ -192,7 +205,6 @@ declare namespace LocalJSX {
         "onInput"?: (event: CustomEvent<FormattedValue>) => void;
         "optional"?: boolean;
         "readonly"?: boolean;
-        "role"?: string;
         "suppressMessages"?: boolean;
         "type"?: string;
         "value"?: string;
@@ -241,6 +253,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "protean-button": ProteanButton;
         "protean-checkbox": ProteanCheckbox;
+        "protean-click-elsewhere": ProteanClickElsewhere;
         "protean-icon": ProteanIcon;
         "protean-input": ProteanInput;
         "protean-message": ProteanMessage;
@@ -257,6 +270,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "protean-button": LocalJSX.ProteanButton & JSXBase.HTMLAttributes<HTMLProteanButtonElement>;
             "protean-checkbox": LocalJSX.ProteanCheckbox & JSXBase.HTMLAttributes<HTMLProteanCheckboxElement>;
+            "protean-click-elsewhere": LocalJSX.ProteanClickElsewhere & JSXBase.HTMLAttributes<HTMLProteanClickElsewhereElement>;
             "protean-icon": LocalJSX.ProteanIcon & JSXBase.HTMLAttributes<HTMLProteanIconElement>;
             "protean-input": LocalJSX.ProteanInput & JSXBase.HTMLAttributes<HTMLProteanInputElement>;
             "protean-message": LocalJSX.ProteanMessage & JSXBase.HTMLAttributes<HTMLProteanMessageElement>;

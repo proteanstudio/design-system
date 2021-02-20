@@ -6,6 +6,7 @@
 }
 
 .select-container {
+    display: block;
     position: relative;
 }
 

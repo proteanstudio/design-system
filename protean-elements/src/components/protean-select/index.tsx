@@ -36,8 +36,6 @@ export class ProteanSelect {
 
     guid: number = createGuid();
     mutationObserver: MutationObserver;
-    functionQueue: VoidFunction[] = [];
-    functionQueueTimeout = 200;
 
     componentWillLoad(): void {
         const mutationObserver = new MutationObserver(this.onMutationObserved);
@@ -110,19 +108,6 @@ export class ProteanSelect {
         this.value = event.detail.value;
     }
 
-    @Listen('focus')
-    defaultFocusHandler(): void {
-        this.functionQueue = [];
-    }
-
-    @Listen('blur')
-    defaultBlurHandler(): void {
-        this.functionQueue.push(() => {
-            this.closeDropdown();
-        });
-        this.executeFunctionQueue();
-    }
-
     @Watch('multiple')
     updateOptions(): void {
         if (this.multiple) {
@@ -189,14 +174,6 @@ export class ProteanSelect {
             this.activeOption.active = false;
             this.activeOptionId = '';
         }
-    };
-
-    executeFunctionQueue = (): void => {
-        setTimeout(() => {
-            this.functionQueue.forEach(fn => {
-                fn();
-            });
-        }, this.functionQueueTimeout); // REPLACE with click-elsewhere, timing is inconsistent
     };
 
     activateDefaultOption(): void {
@@ -294,6 +271,11 @@ export class ProteanSelect {
         this.change.emit({ selectedOptions });
     }
 
+    onClickElsewhere = (event: CustomEvent): void => {
+        event.stopImmediatePropagation();
+        this.closeDropdown();
+    };
+
     onInputClick: VoidFunction = () => {
         this.dropdownOpen = !this.dropdownOpen;
     };
@@ -347,15 +329,18 @@ export class ProteanSelect {
 
     render(): VNode {
         return (
-            <div class="select-container">
+            <protean-click-elsewhere
+                onChange={this.onClickElsewhere}
+                class="select-container"
+            >
                 <protean-input
                     value={this.displayValue}
                     label={this.label}
                     optional={this.optional}
                     errors={this.errors}
                     disabled={this.disabled}
-                    readonly
                     suppress-messages
+                    type="button"
                     ariaLabel={this.selectAriaLabel}
                     ariaHasPopup="listbox"
                     ariaExpanded={this.dropdownOpen}
@@ -371,7 +356,7 @@ export class ProteanSelect {
                     hidden={!this.dropdownOpen}
                 ></div>
                 {this.renderDropdown()}
-            </div>
+            </protean-click-elsewhere>
         );
     }
 
@@ -382,11 +367,13 @@ export class ProteanSelect {
                 role="listbox"
                 aria-label={this.label}
                 tabIndex={-1}
+                aria-required={`${!this.optional}`}
+                aria-multiselectable={`${this.multiple}`}
                 aria-activedescendant={this.activeOptionId}
                 hidden={!this.dropdownOpen}
                 onClick={this.onOptionClick}
             >
-                <slot />
+                <slot></slot>
             </div>
         );
     }

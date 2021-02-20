@@ -1,0 +1,92 @@
+* {
+    box-sizing: border-box;
+}
+
+input,
+button {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+:host(.sr),
+:host(.sr) button {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+}
+
+.sr,
+.sr button {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+}
+
+.hidden {
+    display: none;
+}
+
+:host([hidden]) {
+    display: none;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+
+:host {
+    display: block;
+}
+
+.protean-optgroup-label {
+    position: relative; /* sticky later */
+    z-index: 1;
+    top: 0;
+    display: flex;
+    align-items: center;
+    min-height: 2.5rem;
+    font-weight: 500;
+    background-color: var(--protean-dropdown-background-color);
+}
+
+.protean-optgroup-label::before {
+    content: '';
+    width: calc(100% - 30px);
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    background-color: var(--protean-optgroup-separator-color);
+}
+
+.protean-optgroup-label-text {
+    display: inline-block;
+    margin-left: 1.5rem;
+    padding: 0 0.5rem;
+    background-color: var(--protean-dropdown-background-color);
+    position: relative;
+    font-style: italic;
+}
+
+:host([disabled]) .protean-optgroup-label-text span {
+    opacity: 0.4;
+}

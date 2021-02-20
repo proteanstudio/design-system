@@ -174,7 +174,6 @@ export class ProteanTabContainer {
                 aria-selected={`${selected}`}
                 tabIndex={selected ? 0 : -1}
                 data-value={tab.value}
-                aria-controls={`tab-pane-${this.guid}-${tab.index}`} //adjust aria re https://www.w3.org/TR/html-aria/
                 id={`tab-${this.guid}-${tab.index}`}
                 onClick={this.onTabClick}
                 onKeyUp={this.onTabKeyup}

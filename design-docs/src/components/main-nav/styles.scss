@@ -6,6 +6,10 @@
     }
 }
 
+[role="group"] {
+    pointer-events: none;
+}
+
 .main-nav {
     flex: 0 0 200px;
     background-color: var(--body-background-color);
@@ -44,6 +48,7 @@
     }
 
     .nav-content {
+        display: block;
         position: sticky;
         top: 0;
         padding: 1.5rem;

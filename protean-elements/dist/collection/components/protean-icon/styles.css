@@ -1,0 +1,74 @@
+:host {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+}
+
+svg {
+    fill: none;
+    stroke-linecap: var(--protean-icon-stroke-linecap, round);
+    stroke-linejoin: var(--protean-icon-stroke-linejoin, round);
+    stroke-width: var(--protean-icon-stroke-width, 1.5);
+}
+
+.stroke-primary {
+    stroke: var(--protean-icon-stroke-primary, currentColor);
+}
+
+.stroke-secondary {
+    stroke: var(
+        --protean-icon-stroke-secondary,
+        var(--protean-icon-stroke-primary)
+    );
+}
+
+.fill-primary {
+    fill: var(--protean-icon-fill-primary, none);
+}
+
+.fill-secondary {
+    fill: var(--protean-icon-fill-secondary, var(--protean-icon-fill-primary));
+}
+
+:host([type='status-info']) {
+    --protean-icon-stroke-primary: var(--protean-status-info);
+    --protean-icon-fill-secondary: var(--protean-status-info);
+}
+
+:host([type='status-info-filled']) {
+    --protean-icon-stroke-primary: var(--protean-status-info);
+    --protean-icon-fill-primary: var(--protean-status-info);
+    --protean-icon-fill-secondary: var(--protean-status-info-contrast);
+}
+
+:host([type='status-success']) {
+    --protean-icon-stroke-primary: var(--protean-status-success);
+}
+
+:host([type='status-success-filled']) {
+    --protean-icon-stroke-primary: var(--protean-status-success);
+    --protean-icon-fill-primary: var(--protean-status-success);
+    --protean-icon-stroke-secondary: var(--protean-status-success-contrast);
+}
+
+:host([type='status-warning']) {
+    --protean-icon-stroke-primary: var(--protean-status-warning);
+    --protean-icon-fill-secondary: var(--protean-status-warning);
+}
+
+:host([type='status-warning-filled']) {
+    --protean-icon-stroke-primary: var(--protean-status-warning);
+    --protean-icon-fill-primary: var(--protean-status-warning);
+    --protean-icon-fill-secondary: var(--protean-status-warning-contrast);
+}
+
+:host([type='status-error']) {
+    --protean-icon-stroke-primary: var(--protean-status-error);
+    --protean-icon-fill-secondary: var(--protean-status-error);
+}
+
+:host([type='status-error-filled']) {
+    --protean-icon-stroke-primary: var(--protean-status-error);
+    --protean-icon-fill-primary: var(--protean-status-error);
+    --protean-icon-fill-secondary: var(--protean-status-error-contrast);
+}

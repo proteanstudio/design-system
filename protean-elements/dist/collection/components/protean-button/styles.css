@@ -1,0 +1,127 @@
+* {
+    box-sizing: border-box;
+}
+
+input,
+button {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+:host(.sr),
+:host(.sr) button {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+}
+
+.sr,
+.sr button {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+}
+
+.hidden {
+    display: none;
+}
+
+:host([hidden]) {
+    display: none;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+
+:host {
+    display: inline-block;
+}
+
+:host([disabled]) button {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+button {
+    color: inherit;
+    cursor: pointer;
+    height: var(--touch-zone-size, 42px);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
+        border 0.2s ease-in-out;
+}
+
+button > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+:host([variant='primary']) button,
+:host([variant='secondary']) button {
+    padding: 0 1rem;
+    border: 2px solid;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+:host([variant='primary']) button {
+    background-color: var(--protean-button-primary-background-color, #ff5f40);
+    color: var(--protean-button-primary-text-color, #000000);
+    border-color: var(--protean-button-primary-border-color, transparent);
+}
+
+:host([variant='secondary']) button {
+    background-color: var(
+        --protean-button-secondary-background-color,
+        transparent
+    );
+    color: var(--protean-button-secondary-text-color, inherit);
+    border-color: var(--protean-button-secondary-border-color, #ff5f40);
+}
+
+:host(:not([disabled])[variant='primary']) button:hover,
+:host(:not([disabled])[variant='primary']) button:focus {
+    background-color: var(--protean-button-primary-hover-background-color, #f83e19);
+    color: var(--protean-button-primary-hover-text-color, #000000);
+    border-color: var(--protean-button-primary-hover-border-color, transparent);
+}
+
+:host(:not([disabled])[variant='secondary']) button:hover,
+:host(:not([disabled])[variant='secondary']) button:focus {
+    background-color: var(--protean-button-secondary-hover-background-color, #f83e19);
+    color: var(--protean-button-secondary-hover-text-color, #000000);
+    border-color: var(--protean-button-secondary-hover-border-color, transparent);
+}
+
+:host([variant='icon']) button {
+    width: var(--touch-zone-size);
+    background-color: var(--protean-button-icon-background-color);
+    --protean-icon-stroke-primary: var(--protean-button-icon-stroke-color);
+}
+
+:host(:not([disabled])[variant='icon']) button:hover,
+:host(:not([disabled])[variant='icon']) button:focus {
+    background-color: var(--protean-button-icon-hover-background-color);
+    --protean-icon-hover-stroke-primary: var(--protean-button-icon-stroke-color);
+}

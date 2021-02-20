@@ -78,6 +78,10 @@
                 --protean-checkbox-toggle-path-color: #979797;
             }
 
+            [role='group'] {
+                pointer-events: none;
+            }
+
             body {
                 font-family: 'Quicksand', 'Heiti SC', sans-serif;
                 color: var(--body-color);
@@ -122,71 +126,96 @@
         </div>
 
         <protean-select label="Select label" optional>
-            <protean-optgroup label="Group 1">
-                <protean-option label="Option 0" value="0" disabled
-                    >Option 0</protean-option
-                >
-                <protean-option value="1" selected>Option 1</protean-option>
-                <protean-option label="Option 2" value="2" disabled
-                    >Option 2</protean-option
-                >
-                <protean-option label="Option 3" value="3"
-                    >Option 3</protean-option
-                >
-            </protean-optgroup>
-            <protean-optgroup label="Group 2" disabled>
-                <protean-option label="Option 4" value="4"
-                    >Option 4</protean-option
-                >
-                <protean-option label="Option 5" value="5"
-                    >Option 5</protean-option
-                >
-                <protean-option label="Option 6" value="6"
-                    >Option 6</protean-option
-                >
-                <protean-option label="Option 7" value="7"
-                    >Option 7</protean-option
-                >
-            </protean-optgroup>
-            <protean-optgroup label="Group 3">
-                <protean-option label="Option 8" value="8"
-                    >Option 8</protean-option
-                >
-                <protean-option label="Option 9" value="9"
-                    >Option 9</protean-option
-                >
-                <protean-option label="Option 10" value="10" disabled
-                    >Option 10</protean-option
-                >
-            </protean-optgroup>
+            <!-- <protean-optgroup label="Group 1"> -->
+            <protean-option label="Option 0" value="0" disabled
+                >Option 0</protean-option
+            >
+            <protean-option value="1" selected>Option 1</protean-option>
+            <protean-option label="Option 2" value="2" disabled
+                >Option 2</protean-option
+            >
+            <protean-option label="Option 3" value="3">Option 3</protean-option>
+            <!-- </protean-optgroup> -->
+            <!-- <protean-optgroup label="Group 2" disabled> -->
+            <protean-option label="Option 4" value="4">Option 4</protean-option>
+            <protean-option label="Option 5" value="5">Option 5</protean-option>
+            <protean-option label="Option 6" value="6">Option 6</protean-option>
+            <protean-option label="Option 7" value="7">Option 7</protean-option>
+            <!-- </protean-optgroup> -->
+            <!-- <protean-optgroup label="Group 3"> -->
+            <protean-option label="Option 8" value="8">Option 8</protean-option>
+            <protean-option label="Option 9" value="9">Option 9</protean-option>
+            <protean-option label="Option 10" value="10" disabled
+                >Option 10</protean-option
+            >
+            <!-- </protean-optgroup> -->
         </protean-select>
 
         <protean-select label="Select label" multiple>
             <protean-optgroup label="Group 1">
-                <protean-option label="Option 1" value="1" selected
-                    >Option 1</protean-option
-                >
-                <protean-option label="Option 2" value="2"
-                    >Option 2</protean-option
-                >
-                <protean-option label="Option 3" value="3" selected
-                    >Option 3</protean-option
-                >
+                <protean-option label="Option 1" value="1" selected>
+                    <span>Option 1</span>
+                </protean-option>
+                <protean-option label="Option 2" value="2">
+                    <span>Option 2</span>
+                </protean-option>
+                <protean-option label="Option 3" value="3" selected>
+                    <span>Option 3</span>
+                </protean-option>
             </protean-optgroup>
             <protean-optgroup label="Group 2">
-                <protean-option label="Option 4" value="4"
-                    >Option 4</protean-option
-                >
-                <protean-option label="Option 5" value="5"
-                    >Option 5</protean-option
-                >
-                <protean-option label="Option 6" value="6"
-                    >Option 6</protean-option
-                >
-                <protean-option label="Option 7" value="7"
-                    >Option 7</protean-option
-                >
+                <protean-option label="Option 4" value="4">
+                    <span>Option 4</span>
+                </protean-option>
+                <protean-option label="Option 5" value="5">
+                    <span>Option 5</span>
+                </protean-option>
+                <protean-option label="Option 6" value="6">
+                    <span>Option 6</span>
+                </protean-option>
+                <protean-option label="Option 7" value="7">
+                    <span>Option 7</span>
+                </protean-option>
             </protean-optgroup>
+        </protean-select>
+
+        <protean-select label="Select label" multiple>
+            <ul role="group" label="Group 1" aria-labelledby="group1">
+                <li role="presentation" id="group1">Group 1</li>
+                <li class="protean-option-container" role="option">Option 1</li>
+                <li class="protean-option-container" role="option">Option 2</li>
+                <li class="protean-option-container" role="option">Option 3</li>
+            </ul>
+            <ul role="group" label="Group 2" aria-labelledby="group1">
+                <li role="presentation" id="group2">Group 2</li>
+                <li class="protean-option-container" role="option">Option 4</li>
+                <li class="protean-option-container" role="option">Option 5</li>
+                <li class="protean-option-container" role="option">Option 6</li>
+                <li class="protean-option-container" role="option">Option 7</li>
+            </ul>
+        </protean-select>
+
+        <protean-select label="Select label" multiple>
+            <ul role="group" aria-labelledby="cat1">
+                <li role="presentation" id="cat1">Land</li>
+                <li id="ss_elem_1" role="option">Cat</li>
+                <li id="ss_elem_2" role="option">Dog</li>
+                <li id="ss_elem_3" role="option">Tiger</li>
+                <li id="ss_elem_4" role="option">Reindeer</li>
+                <li id="ss_elem_5" role="option">Raccoon</li>
+            </ul>
+            <ul role="group" aria-labelledby="cat2">
+                <li role="presentation" id="cat2">Water</li>
+                <li id="ss_elem_6" role="option">Dolphin</li>
+                <li id="ss_elem_7" role="option">Flounder</li>
+                <li id="ss_elem_8" role="option">Eel</li>
+            </ul>
+            <ul role="group" aria-labelledby="cat3">
+                <li role="presentation" id="cat3">Air</li>
+                <li id="ss_elem_9" role="option">Falcon</li>
+                <li id="ss_elem_10" role="option">Winged Horse</li>
+                <li id="ss_elem_11" role="option">Owl</li>
+            </ul>
         </protean-select>
 
         <protean-tab-container name="test" value="2">
@@ -230,6 +259,13 @@
         <protean-icon type="status-error-filled"></protean-icon>
         <!-- <protean-icon type="custom" use="icons.svg#icon-design"></protean-icon> -->
 
+        <protean-click-elsewhere onchange="onClickElsewhere(event)">
+            <!-- <protean-input label="Click elsewhere focal"></protean-input> -->
+            <protean-button variant="primary"
+                >Click elsewhere focal</protean-button
+            >
+        </protean-click-elsewhere>
+
         <script type="text/javascript">
             function spamErrors(event) {
                 const arrayLength = Math.round(Math.random() * 9 + 1);
@@ -244,6 +280,10 @@
             function toggleLightMode(event) {
                 event.target.checked = event.detail.checked;
                 document.body.classList.toggle('light');
+            }
+
+            function onClickElsewhere(event) {
+                console.log('click-elsewhere', event);
             }
         </script>
     </body>

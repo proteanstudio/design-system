@@ -1,0 +1,62 @@
+* {
+    box-sizing: border-box;
+}
+
+input,
+button {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+:host(.sr),
+:host(.sr) button {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+}
+
+.sr,
+.sr button {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+}
+
+.hidden {
+    display: none;
+}
+
+:host([hidden]) {
+    display: none;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+
+:host {
+    display: block;
+}
+
+.tab-pane {
+    padding: 1rem;
+}
