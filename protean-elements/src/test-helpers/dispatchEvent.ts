@@ -23,10 +23,12 @@ export default async function dispatchEvent(
         ) => {
             const eventConstructorMap = {
                 keyup: KeyboardEvent,
+                keydown: KeyboardEvent,
                 change: CustomEvent,
                 input: CustomEvent,
                 blur: FocusEvent,
                 focus: FocusEvent,
+                mousedown: MouseEvent,
             };
 
             const EventConstructor =

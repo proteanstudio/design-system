@@ -22,9 +22,11 @@ export declare class ProteanSelect {
   get activeOption(): HTMLProteanOptionElement | undefined;
   get activeOptionIndex(): number;
   defaultChangeHandler(event: CustomEvent): void;
+  delegateFocus(event: FocusEvent): void;
   updateOptions(): void;
   updateSingleOptions(value: string): void;
   updateMultipleOptions(selectedOptions: string[]): void;
+  focusInput: () => void;
   closeDropdown: VoidFunction;
   activateDefaultOption(): void;
   handleOptionNavigation(key: string, activeOptionIndex?: number): void;

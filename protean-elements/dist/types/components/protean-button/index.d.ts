@@ -4,5 +4,7 @@ export declare class ProteanButton {
   type: string;
   disabled: boolean;
   ariaLabel: string;
+  hostElement: HTMLProteanButtonElement;
+  delegateFocus(event: FocusEvent): void;
   render(): VNode;
 }

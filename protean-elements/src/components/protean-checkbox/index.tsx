@@ -33,6 +33,13 @@ export class ProteanCheckbox {
         }
     }
 
+    @Listen('focus')
+    delegateFocus(event: FocusEvent): void {
+        if (event.target === this.hostElement) {
+            this.hostElement.shadowRoot.querySelector('input').focus();
+        }
+    }
+
     guid = createGuid();
 
     get checkboxId(): string {

@@ -102,16 +102,25 @@ button > div {
 
 :host(:not([disabled])[variant='primary']) button:hover,
 :host(:not([disabled])[variant='primary']) button:focus {
-    background-color: var(--protean-button-primary-hover-background-color, #f83e19);
+    background-color: var(
+        --protean-button-primary-hover-background-color,
+        #f83e19
+    );
     color: var(--protean-button-primary-hover-text-color, #000000);
     border-color: var(--protean-button-primary-hover-border-color, transparent);
 }
 
 :host(:not([disabled])[variant='secondary']) button:hover,
 :host(:not([disabled])[variant='secondary']) button:focus {
-    background-color: var(--protean-button-secondary-hover-background-color, #f83e19);
+    background-color: var(
+        --protean-button-secondary-hover-background-color,
+        #f83e19
+    );
     color: var(--protean-button-secondary-hover-text-color, #000000);
-    border-color: var(--protean-button-secondary-hover-border-color, transparent);
+    border-color: var(
+        --protean-button-secondary-hover-border-color,
+        transparent
+    );
 }
 
 :host([variant='icon']) button {
@@ -123,5 +132,7 @@ button > div {
 :host(:not([disabled])[variant='icon']) button:hover,
 :host(:not([disabled])[variant='icon']) button:focus {
     background-color: var(--protean-button-icon-hover-background-color);
-    --protean-icon-hover-stroke-primary: var(--protean-button-icon-stroke-color);
+    --protean-icon-hover-stroke-primary: var(
+        --protean-button-icon-stroke-color
+    );
 }

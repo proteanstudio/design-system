@@ -1,5 +1,5 @@
 import { Options, Vue } from 'vue-class-component';
-import { Prop, Emit } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 
 interface MainNavItem {
     path: string;

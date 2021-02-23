@@ -29,7 +29,7 @@ describe('protean-optgroup', () => {
         );
         expect(optgroupContainer).toEqualAttribute('role', 'group');
         expect(optgroupContainer).toEqualAttribute(
-            'aria-labelled-by',
+            'aria-labelledby',
             rootInstance.labelId,
         );
         expect(optgroupContainer).toEqualAttribute('aria-disabled', 'false');
@@ -38,6 +38,7 @@ describe('protean-optgroup', () => {
             '.protean-optgroup-label',
         );
         expect(optgroupLabel).toEqualAttribute('id', rootInstance.labelId);
+        expect(optgroupLabel).toEqualAttribute('role', 'presentation');
         expect(optgroupLabel.textContent.trim()).toEqual('Optgroup Label');
     });
 

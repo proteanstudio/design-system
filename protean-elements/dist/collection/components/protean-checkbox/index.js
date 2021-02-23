@@ -16,6 +16,11 @@ export class ProteanCheckbox {
       this.checked = event.detail.checked;
     }
   }
+  delegateFocus(event) {
+    if (event.target === this.hostElement) {
+      this.hostElement.shadowRoot.querySelector('input').focus();
+    }
+  }
   get checkboxId() {
     return `checkbox-${this.guid}`;
   }
@@ -210,6 +215,12 @@ export class ProteanCheckbox {
   static get listeners() { return [{
       "name": "change",
       "method": "defaultChangeHandler",
+      "target": undefined,
+      "capture": false,
+      "passive": false
+    }, {
+      "name": "focus",
+      "method": "delegateFocus",
       "target": undefined,
       "capture": false,
       "passive": false

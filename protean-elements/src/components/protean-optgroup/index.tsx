@@ -56,17 +56,21 @@ export class ProteanOptgroup {
                 class="protean-optgroup-container"
                 role="group"
                 aria-labelledby={this.labelId}
-                aria-disabled={this.disabled ? "true" : null}
+                aria-disabled={`${this.disabled ?? false}`}
             >
                 {this.label && (
-                    <div class="protean-optgroup-label" id={this.labelId} role="presentation">
+                    <div
+                        class="protean-optgroup-label"
+                        id={this.labelId}
+                        role="presentation"
+                    >
                         <div class="protean-optgroup-label-text">
                             <span>{this.label}</span>
                         </div>
                     </div>
                 )}
-                <div class="protean-optgroup-option-container" role="presentation">
-                    <slot></slot>
+                <div class="protean-optgroup-option-container">
+                    <slot />
                 </div>
             </div>
         );

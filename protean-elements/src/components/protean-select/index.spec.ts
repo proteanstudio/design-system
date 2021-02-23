@@ -38,7 +38,6 @@ describe('protean-select', () => {
         );
 
         expect(rootInstance.guid).toEqual(1000);
-        expect(rootInstance.functionQueueTimeout).toEqual(200);
         expect(rootInstance.selectAriaLabel).toEqual(null);
         expect(rootInstance.optionElements).toEqual(optionElements);
         expect(rootInstance.displayValue).toEqual('Option 2');
@@ -53,7 +52,7 @@ describe('protean-select', () => {
         expect(proteanInput.optional).toEqual(undefined);
         expect(proteanInput.errors).toEqual(undefined);
         expect(proteanInput.disabled).toEqual(false);
-        expect(proteanInput.readonly).toEqual(true);
+        expect(proteanInput.type).toEqual('button');
         expect(proteanInput.suppressMessages).toEqual(true);
         expect(proteanInput.ariaLabel).toEqual(null);
         expect(proteanInput.ariaHasPopup).toEqual('listbox');
@@ -74,6 +73,11 @@ describe('protean-select', () => {
         );
         expect(selectDropdown).toEqualAttribute('role', 'listbox');
         expect(selectDropdown).toEqualAttribute('aria-label', 'Select label');
+        expect(selectDropdown).toEqualAttribute('aria-required', 'true');
+        expect(selectDropdown).toEqualAttribute(
+            'aria-multiselectable',
+            'false',
+        );
         expect(selectDropdown).toEqualAttribute('tabindex', '-1');
         expect(selectDropdown).toEqualAttribute('aria-activedescendant', null);
         expect(selectDropdown).toHaveAttribute('hidden');
@@ -122,6 +126,39 @@ describe('protean-select', () => {
         expect(proteanInput.ariaExpanded).toEqual(true);
     });
 
+    it('passes certain properties to listbox', async () => {
+        const { root, waitForChanges } = await newSpecPage({
+            components: [
+                ProteanSelect,
+                ProteanOption,
+                ProteanInput,
+                ProteanIcon,
+            ],
+            html:
+                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+        });
+
+        const selectDropdown = root.shadowRoot.querySelector<HTMLProteanIconElement>(
+            '.protean-select-dropdown',
+        );
+
+        expect(selectDropdown).toEqualAttribute('aria-label', 'Select label');
+        expect(selectDropdown).toEqualAttribute('aria-required', 'true');
+        expect(selectDropdown).toEqualAttribute(
+            'aria-multiselectable',
+            'false',
+        );
+
+        root.label = 'Updated label';
+        root.optional = true;
+        root.multiple = true;
+        await waitForChanges();
+
+        expect(selectDropdown).toEqualAttribute('aria-label', 'Updated label');
+        expect(selectDropdown).toEqualAttribute('aria-required', 'false');
+        expect(selectDropdown).toEqualAttribute('aria-multiselectable', 'true');
+    });
+
     it('shows separator when dropdown open', async () => {
         const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [
@@ -131,7 +168,7 @@ describe('protean-select', () => {
                 ProteanIcon,
             ],
             html:
-                '<protean-select value="2" label="Select label" optional><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const selectSeparator = root.shadowRoot.querySelector<HTMLDivElement>(
@@ -315,7 +352,8 @@ describe('protean-select', () => {
         expect(root.selectedOptions).toEqual(selectedOptions);
     });
 
-    it('clears function queue on focus', async () => {
+    it('can focus input', async () => {
+        (global as any).FocusEvent = Event; //eslint-disable-line
         const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [
                 ProteanSelect,
@@ -327,22 +365,17 @@ describe('protean-select', () => {
                 '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
-        rootInstance.functionQueue = [
-            () => {
-                /*  */
-            },
-            () => {
-                /*  */
-            },
-        ];
+        const focusMock = jest.fn();
+        root.shadowRoot.querySelector(
+            'protean-input',
+        ).dispatchEvent = focusMock;
 
+        rootInstance.focusInput();
         await waitForChanges();
-        root.dispatchEvent(new Event('focus'));
-
-        expect(rootInstance.functionQueue).toEqual([]);
+        expect(focusMock).toHaveBeenCalledTimes(1);
     });
 
-    it('calls close dropdown via function queue on blur', async () => {
+    it('delegates focus to input', async () => {
         const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [
                 ProteanSelect,
@@ -354,47 +387,47 @@ describe('protean-select', () => {
                 '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
-        const executeFunctionQueueMock = jest.fn().mockImplementation(() => {
-            rootInstance.functionQueue.forEach(fn => {
-                fn();
-            });
+        const focusMock = jest.fn();
+        rootInstance.focusInput = focusMock;
+
+        root.dispatchEvent(new Event('focus'));
+        await waitForChanges();
+        expect(focusMock).toHaveBeenCalledTimes(1);
+
+        rootInstance.delegateFocus(new Event('focus'));
+        await waitForChanges();
+        expect(focusMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('close dropdown on click-elsewhere', async () => {
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
+            components: [
+                ProteanSelect,
+                ProteanOption,
+                ProteanInput,
+                ProteanIcon,
+            ],
+            html:
+                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
-        rootInstance.executeFunctionQueue = executeFunctionQueueMock;
+
+        const clickElsewhere = root.shadowRoot.querySelector(
+            'protean-click-elsewhere',
+        );
+
         const closeDropdownMock = jest.fn();
         rootInstance.closeDropdown = closeDropdownMock;
         await waitForChanges();
 
-        expect(executeFunctionQueueMock).toHaveBeenCalledTimes(0);
-        expect(closeDropdownMock).toHaveBeenCalledTimes(0);
-        expect(rootInstance.functionQueue).toEqual([]);
-        root.dispatchEvent(new Event('blur'));
+        const clickElsewhereEvent = new Event('change');
+        const sIPMock = jest.fn();
+        clickElsewhereEvent.stopImmediatePropagation = sIPMock;
+
+        clickElsewhere.dispatchEvent(clickElsewhereEvent);
         await waitForChanges();
 
-        expect(rootInstance.functionQueue).toHaveLength(1);
-        expect(executeFunctionQueueMock).toHaveBeenCalledTimes(1);
         expect(closeDropdownMock).toHaveBeenCalledTimes(1);
-    });
-
-    it('executes function queue ', async () => {
-        const rootInstance = new ProteanSelect();
-
-        const mock1 = jest.fn();
-        const mock2 = jest.fn();
-        rootInstance.functionQueue = [mock1, mock2];
-
-        const timerPromise = () =>
-            new Promise(resolve => {
-                setTimeout(resolve, rootInstance.functionQueueTimeout);
-            });
-
-        rootInstance.executeFunctionQueue();
-
-        expect(mock1).toHaveBeenCalledTimes(0);
-        expect(mock2).toHaveBeenCalledTimes(0);
-
-        await timerPromise();
-        expect(mock1).toHaveBeenCalledTimes(1);
-        expect(mock2).toHaveBeenCalledTimes(1);
+        expect(sIPMock).toHaveBeenCalledTimes(1);
     });
 
     it('updates correct options depending on multiple property', async () => {
@@ -515,6 +548,9 @@ describe('protean-select', () => {
                 '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2" active>Option 2</protean-option></protean-select>',
         });
 
+        const focusMock = jest.fn();
+        rootInstance.focusInput = focusMock;
+
         rootInstance.dropdownOpen = true;
         await waitForChanges();
 
@@ -527,16 +563,19 @@ describe('protean-select', () => {
 
         expect(rootInstance.dropdownOpen).toEqual(false);
         expect(rootInstance.activeOption).toEqual(undefined);
+        expect(focusMock).toHaveBeenCalledTimes(1);
 
         rootInstance.closeDropdown();
         await waitForChanges();
         expect(rootInstance.dropdownOpen).toEqual(false);
+        expect(focusMock).toHaveBeenCalledTimes(1);
 
         rootInstance.dropdownOpen = true;
         rootInstance.closeDropdown();
         await waitForChanges();
 
         expect(rootInstance.activeOption).toEqual(undefined);
+        expect(focusMock).toHaveBeenCalledTimes(2);
     });
 
     it('defaults active option to first selected or first option overall', async () => {
@@ -1013,7 +1052,7 @@ describe('protean-select', () => {
         inputElement.dispatchEvent(keydownEvent);
         await waitForChanges();
 
-        expect(preventDefaultMock).toHaveBeenCalledTimes(4);
+        expect(preventDefaultMock).toHaveBeenCalledTimes(5);
         expect(handleOptionNavigationMock).toHaveBeenCalledTimes(4);
         expect(handleSelectionMock).toHaveBeenCalledTimes(1);
         expect(closeDropdownMock).toHaveBeenCalledTimes(0);
@@ -1023,7 +1062,7 @@ describe('protean-select', () => {
         inputElement.dispatchEvent(keydownEvent);
         await waitForChanges();
 
-        expect(preventDefaultMock).toHaveBeenCalledTimes(4);
+        expect(preventDefaultMock).toHaveBeenCalledTimes(6);
         expect(handleOptionNavigationMock).toHaveBeenCalledTimes(4);
         expect(handleSelectionMock).toHaveBeenCalledTimes(2);
         expect(closeDropdownMock).toHaveBeenCalledTimes(0);
@@ -1033,7 +1072,7 @@ describe('protean-select', () => {
         inputElement.dispatchEvent(keydownEvent);
         await waitForChanges();
 
-        expect(preventDefaultMock).toHaveBeenCalledTimes(4);
+        expect(preventDefaultMock).toHaveBeenCalledTimes(6);
         expect(handleOptionNavigationMock).toHaveBeenCalledTimes(4);
         expect(handleSelectionMock).toHaveBeenCalledTimes(2);
         expect(closeDropdownMock).toHaveBeenCalledTimes(1);
@@ -1048,7 +1087,7 @@ describe('protean-select', () => {
         inputElement.dispatchEvent(keydownEvent);
         await waitForChanges();
 
-        expect(preventDefaultMock).toHaveBeenCalledTimes(4);
+        expect(preventDefaultMock).toHaveBeenCalledTimes(6);
         expect(handleOptionNavigationMock).toHaveBeenCalledTimes(4);
         expect(handleSelectionMock).toHaveBeenCalledTimes(2);
         expect(closeDropdownMock).toHaveBeenCalledTimes(1);

@@ -1,5 +1,10 @@
-import { Component, Prop, h, } from '@stencil/core';
+import { Component, Prop, Element, Listen, h, } from '@stencil/core';
 export class ProteanButton {
+  delegateFocus(event) {
+    if (event.target === this.hostElement) {
+      this.hostElement.shadowRoot.querySelector('button').focus();
+    }
+  }
   render() {
     return (h("button", { type: this.type ?? 'button', disabled: this.disabled, "aria-label": this.ariaLabel },
       h("div", null,
@@ -83,4 +88,12 @@ export class ProteanButton {
       "reflect": false
     }
   }; }
+  static get elementRef() { return "hostElement"; }
+  static get listeners() { return [{
+      "name": "focus",
+      "method": "delegateFocus",
+      "target": undefined,
+      "capture": false,
+      "passive": false
+    }]; }
 }

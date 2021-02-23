@@ -73,7 +73,7 @@ export class ProteanInput {
       password: 'password',
       search: 'search',
       email: 'email',
-      button: 'button'
+      button: 'button',
     };
     return inputTypeMap[this.type] ?? 'text';
   }
@@ -81,6 +81,11 @@ export class ProteanInput {
     if (this.label)
       return null;
     return this.ariaLabel ?? null;
+  }
+  get inputAriaRequired() {
+    if (this.ariaHasPopup === 'listbox')
+      return null;
+    return `${!this.optional}`;
   }
   get hasErrors() {
     return Array.isArray(this.errors) && this.errors.length > 0;
@@ -109,14 +114,14 @@ export class ProteanInput {
       .getBoundingClientRect().height;
     return `${height}px`;
   }
-  get ariaRequired() {
-    if (this.ariaHasPopup === 'listbox')
-      return null;
-    return `${!this.optional}`;
-  }
   defaultChangeHandler(event) {
     if (!this.hostElement.onchange) {
       this.value = event.detail.value;
+    }
+  }
+  delegateFocus(event) {
+    if (event.target === this.hostElement) {
+      this.inputElement.focus();
     }
   }
   reformatValue() {
@@ -173,7 +178,7 @@ export class ProteanInput {
           this.hasErrors && (h("protean-icon", { type: "status-error-filled", class: "error-icon" })),
           this.label,
           this.optional && (h("span", { class: "optional-tag" }, " (optional)")))),
-        h("input", { id: this.inputId, type: this.inputType, disabled: this.disabled, readOnly: this.readonly, role: this.ariaRole, "aria-required": this.ariaRequired, "aria-label": this.inputAriaLabel, "aria-invalid": `${this.hasErrors}`, "aria-describedby": this.descriptionId, "aria-haspopup": this.ariaHasPopup, "aria-expanded": this.ariaExpanded === undefined
+        h("input", { id: this.inputId, type: this.inputType, disabled: this.disabled, readOnly: this.readonly, maxLength: this.maxlength, role: this.ariaRole, "aria-required": this.inputAriaRequired, "aria-label": this.inputAriaLabel, "aria-invalid": `${this.hasErrors}`, "aria-describedby": this.descriptionId, "aria-haspopup": this.ariaHasPopup, "aria-expanded": this.ariaExpanded === undefined
             ? null
             : `${this.ariaExpanded}`, onChange: this.onInputChange, onInput: this.onInputInput, onFocus: this.onInputFocus, onBlur: this.onInputBlur })),
       this.renderMessages()));
@@ -378,23 +383,6 @@ export class ProteanInput {
       "reflect": true,
       "defaultValue": "false"
     },
-    "ariaRole": {
-      "type": "string",
-      "mutable": false,
-      "complexType": {
-        "original": "string",
-        "resolved": "string",
-        "references": {}
-      },
-      "required": false,
-      "optional": false,
-      "docs": {
-        "tags": [],
-        "text": ""
-      },
-      "attribute": "aria-role",
-      "reflect": false
-    },
     "ariaLabel": {
       "type": "string",
       "mutable": false,
@@ -444,6 +432,23 @@ export class ProteanInput {
         "text": ""
       },
       "attribute": "aria-expanded",
+      "reflect": false
+    },
+    "ariaRole": {
+      "type": "string",
+      "mutable": false,
+      "complexType": {
+        "original": "string",
+        "resolved": "string",
+        "references": {}
+      },
+      "required": false,
+      "optional": false,
+      "docs": {
+        "tags": [],
+        "text": ""
+      },
+      "attribute": "aria-role",
       "reflect": false
     }
   }; }
@@ -508,6 +513,12 @@ export class ProteanInput {
   static get listeners() { return [{
       "name": "change",
       "method": "defaultChangeHandler",
+      "target": undefined,
+      "capture": false,
+      "passive": false
+    }, {
+      "name": "focus",
+      "method": "delegateFocus",
       "target": undefined,
       "capture": false,
       "passive": false

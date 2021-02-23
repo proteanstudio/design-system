@@ -1,14 +1,20 @@
-import { r as registerInstance, h, c as createEvent, g as getElement } from './index-e0b8d77a.js';
+import { r as registerInstance, h, g as getElement, c as createEvent } from './index-e0b8d77a.js';
 
-const stylesCss = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:inline-block}:host([disabled]) button{cursor:not-allowed;opacity:0.4}button{color:inherit;cursor:pointer;height:var(--touch-zone-size, 42px);transition:background-color 0.2s ease-in-out, color 0.2s ease-in-out,\n        border 0.2s ease-in-out}button>div{display:flex;align-items:center;justify-content:center}:host([variant='primary']) button,:host([variant='secondary']) button{padding:0 1rem;border:2px solid;border-radius:2px;font-weight:600;font-size:0.875rem}:host([variant='primary']) button{background-color:var(--protean-button-primary-background-color, #ff5f40);color:var(--protean-button-primary-text-color, #000000);border-color:var(--protean-button-primary-border-color, transparent)}:host([variant='secondary']) button{background-color:var(\n        --protean-button-secondary-background-color,\n        transparent\n    );color:var(--protean-button-secondary-text-color, inherit);border-color:var(--protean-button-secondary-border-color, #ff5f40)}:host(:not([disabled])[variant='primary']) button:hover,:host(:not([disabled])[variant='primary']) button:focus{background-color:var(--protean-button-primary-hover-background-color, #f83e19);color:var(--protean-button-primary-hover-text-color, #000000);border-color:var(--protean-button-primary-hover-border-color, transparent)}:host(:not([disabled])[variant='secondary']) button:hover,:host(:not([disabled])[variant='secondary']) button:focus{background-color:var(--protean-button-secondary-hover-background-color, #f83e19);color:var(--protean-button-secondary-hover-text-color, #000000);border-color:var(--protean-button-secondary-hover-border-color, transparent)}:host([variant='icon']) button{width:var(--touch-zone-size);background-color:var(--protean-button-icon-background-color);--protean-icon-stroke-primary:var(--protean-button-icon-stroke-color)}:host(:not([disabled])[variant='icon']) button:hover,:host(:not([disabled])[variant='icon']) button:focus{background-color:var(--protean-button-icon-hover-background-color);--protean-icon-hover-stroke-primary:var(--protean-button-icon-stroke-color)}";
+const stylesCss = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:inline-block}:host([disabled]) button{cursor:not-allowed;opacity:0.4}button{color:inherit;cursor:pointer;height:var(--touch-zone-size, 42px);transition:background-color 0.2s ease-in-out, color 0.2s ease-in-out,\n        border 0.2s ease-in-out}button>div{display:flex;align-items:center;justify-content:center}:host([variant='primary']) button,:host([variant='secondary']) button{padding:0 1rem;border:2px solid;border-radius:2px;font-weight:600;font-size:0.875rem}:host([variant='primary']) button{background-color:var(--protean-button-primary-background-color, #ff5f40);color:var(--protean-button-primary-text-color, #000000);border-color:var(--protean-button-primary-border-color, transparent)}:host([variant='secondary']) button{background-color:var(\n        --protean-button-secondary-background-color,\n        transparent\n    );color:var(--protean-button-secondary-text-color, inherit);border-color:var(--protean-button-secondary-border-color, #ff5f40)}:host(:not([disabled])[variant='primary']) button:hover,:host(:not([disabled])[variant='primary']) button:focus{background-color:var(\n        --protean-button-primary-hover-background-color,\n        #f83e19\n    );color:var(--protean-button-primary-hover-text-color, #000000);border-color:var(--protean-button-primary-hover-border-color, transparent)}:host(:not([disabled])[variant='secondary']) button:hover,:host(:not([disabled])[variant='secondary']) button:focus{background-color:var(\n        --protean-button-secondary-hover-background-color,\n        #f83e19\n    );color:var(--protean-button-secondary-hover-text-color, #000000);border-color:var(\n        --protean-button-secondary-hover-border-color,\n        transparent\n    )}:host([variant='icon']) button{width:var(--touch-zone-size);background-color:var(--protean-button-icon-background-color);--protean-icon-stroke-primary:var(--protean-button-icon-stroke-color)}:host(:not([disabled])[variant='icon']) button:hover,:host(:not([disabled])[variant='icon']) button:focus{background-color:var(--protean-button-icon-hover-background-color);--protean-icon-hover-stroke-primary:var(\n        --protean-button-icon-stroke-color\n    )}";
 
 const ProteanButton = class {
   constructor(hostRef) {
     registerInstance(this, hostRef);
   }
+  delegateFocus(event) {
+    if (event.target === this.hostElement) {
+      this.hostElement.shadowRoot.querySelector('button').focus();
+    }
+  }
   render() {
     return (h("button", { type: this.type ?? 'button', disabled: this.disabled, "aria-label": this.ariaLabel }, h("div", null, h("slot", null))));
   }
+  get hostElement() { return getElement(this); }
 };
 ProteanButton.style = stylesCss;
 
@@ -34,6 +40,11 @@ const ProteanCheckbox = class {
   defaultChangeHandler(event) {
     if (event.target === this.hostElement && !this.hostElement.onchange) {
       this.checked = event.detail.checked;
+    }
+  }
+  delegateFocus(event) {
+    if (event.target === this.hostElement) {
+      this.hostElement.shadowRoot.querySelector('input').focus();
     }
   }
   get checkboxId() {
@@ -92,7 +103,7 @@ const ProteanClickElsewhere = class {
         this.change.emit();
         return;
       }
-      this.isCurrentlyFocused = aboutToBeFocused || isCurrentlyFocused;
+      this.isCurrentlyFocused = aboutToBeFocused;
     };
   }
   connectedCallback() {
@@ -107,7 +118,7 @@ const ProteanClickElsewhere = class {
   }
   findActiveElement(element = document.activeElement) {
     return element.shadowRoot
-      ? this.findActiveElement(element.shadowRoot.activeElement || null)
+      ? this.findActiveElement(element.shadowRoot.activeElement)
       : element;
   }
   shadowEventTarget(event) {
@@ -123,8 +134,7 @@ const ProteanClickElsewhere = class {
     const slots = this.hostElement.querySelectorAll('slot');
     for (let i = 0; i < slots.length; i++) {
       const slot = slots[i];
-      const nodes = (slot && slot.assignedNodes && slot.assignedNodes()) ||
-        this.hostElement.childNodes;
+      const nodes = slot.assignedNodes();
       for (let nodeIndex = 0; nodeIndex < nodes.length; nodeIndex++) {
         if (nodes[nodeIndex].contains(node))
           return true;
@@ -460,7 +470,7 @@ const ProteanInput = class {
       password: 'password',
       search: 'search',
       email: 'email',
-      button: 'button'
+      button: 'button',
     };
     return inputTypeMap[this.type] ?? 'text';
   }
@@ -468,6 +478,11 @@ const ProteanInput = class {
     if (this.label)
       return null;
     return this.ariaLabel ?? null;
+  }
+  get inputAriaRequired() {
+    if (this.ariaHasPopup === 'listbox')
+      return null;
+    return `${!this.optional}`;
   }
   get hasErrors() {
     return Array.isArray(this.errors) && this.errors.length > 0;
@@ -496,14 +511,14 @@ const ProteanInput = class {
       .getBoundingClientRect().height;
     return `${height}px`;
   }
-  get ariaRequired() {
-    if (this.ariaHasPopup === 'listbox')
-      return null;
-    return `${!this.optional}`;
-  }
   defaultChangeHandler(event) {
     if (!this.hostElement.onchange) {
       this.value = event.detail.value;
+    }
+  }
+  delegateFocus(event) {
+    if (event.target === this.hostElement) {
+      this.inputElement.focus();
     }
   }
   reformatValue() {
@@ -554,7 +569,7 @@ const ProteanInput = class {
     }
   }
   render() {
-    return (h("div", { class: "input-wrapper" }, h("div", { class: `input-container ${this.hasErrors ? 'has-error' : ''}` }, this.label && (h("label", { htmlFor: this.inputId, onClick: this.onLabelClick }, this.hasErrors && (h("protean-icon", { type: "status-error-filled", class: "error-icon" })), this.label, this.optional && (h("span", { class: "optional-tag" }, " (optional)")))), h("input", { id: this.inputId, type: this.inputType, disabled: this.disabled, readOnly: this.readonly, role: this.ariaRole, "aria-required": this.ariaRequired, "aria-label": this.inputAriaLabel, "aria-invalid": `${this.hasErrors}`, "aria-describedby": this.descriptionId, "aria-haspopup": this.ariaHasPopup, "aria-expanded": this.ariaExpanded === undefined
+    return (h("div", { class: "input-wrapper" }, h("div", { class: `input-container ${this.hasErrors ? 'has-error' : ''}` }, this.label && (h("label", { htmlFor: this.inputId, onClick: this.onLabelClick }, this.hasErrors && (h("protean-icon", { type: "status-error-filled", class: "error-icon" })), this.label, this.optional && (h("span", { class: "optional-tag" }, " (optional)")))), h("input", { id: this.inputId, type: this.inputType, disabled: this.disabled, readOnly: this.readonly, maxLength: this.maxlength, role: this.ariaRole, "aria-required": this.inputAriaRequired, "aria-label": this.inputAriaLabel, "aria-invalid": `${this.hasErrors}`, "aria-describedby": this.descriptionId, "aria-haspopup": this.ariaHasPopup, "aria-expanded": this.ariaExpanded === undefined
         ? null
         : `${this.ariaExpanded}`, onChange: this.onInputChange, onInput: this.onInputInput, onFocus: this.onInputFocus, onBlur: this.onInputBlur })), this.renderMessages()));
   }
@@ -636,7 +651,7 @@ const ProteanOptgroup = class {
     this.mutationObserver = mutationObserver;
   }
   render() {
-    return (h("div", { class: "protean-optgroup-container", role: "group", "aria-labelledby": this.labelId, "aria-disabled": this.disabled ? "true" : null }, this.label && (h("div", { class: "protean-optgroup-label", id: this.labelId, role: "presentation" }, h("div", { class: "protean-optgroup-label-text" }, h("span", null, this.label)))), h("div", { class: "protean-optgroup-option-container", role: "presentation" }, h("slot", null))));
+    return (h("div", { class: "protean-optgroup-container", role: "group", "aria-labelledby": this.labelId, "aria-disabled": `${this.disabled ?? false}` }, this.label && (h("div", { class: "protean-optgroup-label", id: this.labelId, role: "presentation" }, h("div", { class: "protean-optgroup-label-text" }, h("span", null, this.label)))), h("div", { class: "protean-optgroup-option-container" }, h("slot", null))));
   }
   get hostElement() { return getElement(this); }
   static get watchers() { return {
@@ -671,12 +686,19 @@ const ProteanSelect = class {
   constructor(hostRef) {
     registerInstance(this, hostRef);
     this.change = createEvent(this, "change", 3);
+    this.multiple = false; //change to variant?
     this.dropdownOpen = false;
     this.guid = createGuid();
+    this.focusInput = () => {
+      this.hostElement.shadowRoot
+        .querySelector('protean-input')
+        .dispatchEvent(new FocusEvent('focus'));
+    };
     this.closeDropdown = () => {
       if (!this.dropdownOpen)
         return;
       this.dropdownOpen = false;
+      this.focusInput();
       if (this.activeOption) {
         this.activeOption.active = false;
         this.activeOptionId = '';
@@ -779,6 +801,11 @@ const ProteanSelect = class {
       return;
     }
     this.value = event.detail.value;
+  }
+  delegateFocus(event) {
+    if (event.target === this.hostElement) {
+      this.focusInput();
+    }
   }
   updateOptions() {
     if (this.multiple) {

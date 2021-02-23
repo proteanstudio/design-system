@@ -19,6 +19,7 @@ describe('protean-input', () => {
         expect(inputElement).toEqualAttribute('aria-invalid', 'false');
         expect(inputElement).toHaveAttribute('aria-describedby');
         expect(inputElement).not.toHaveAttribute('readonly');
+        expect(inputElement).not.toHaveAttribute('role');
 
         const messageContainer = await find(
             'protean-input >>> .message-container',
@@ -102,6 +103,13 @@ describe('protean-input', () => {
 
         expect(inputElement).toEqualAttribute('aria-required', 'false');
         expect(optionalSpan).not.toBeNull;
+
+        proteanInput.setProperty('ariaHasPopup', 'listbox');
+        proteanInput.setProperty('optional', false);
+        await waitForChanges();
+
+        expect(inputElement).not.toHaveAttribute('aria-required');
+        expect(optionalSpan).toBeNull;
     });
 
     it('handles readonly binding', async () => {
@@ -119,6 +127,74 @@ describe('protean-input', () => {
         await waitForChanges();
 
         expect(inputElement).toHaveAttribute('readonly');
+    });
+
+    it('handles maxlength binding', async () => {
+        const { find, waitForChanges } = await newE2EPage({
+            html: '<protean-input label="Label text"></protean-input>',
+        });
+
+        const inputElement = await find('protean-input >>> input');
+
+        expect(inputElement).not.toHaveAttribute('maxlength');
+
+        const proteanInput = await find('protean-input');
+
+        proteanInput.setProperty('maxlength', 10);
+        await waitForChanges();
+
+        expect(inputElement).toEqualAttribute('maxlength', '10');
+    });
+
+    it('handles aria-haspopup binding', async () => {
+        const { find, waitForChanges } = await newE2EPage({
+            html: '<protean-input label="Label text"></protean-input>',
+        });
+
+        const inputElement = await find('protean-input >>> input');
+
+        expect(inputElement).not.toHaveAttribute('aria-haspopup');
+
+        const proteanInput = await find('protean-input');
+
+        proteanInput.setProperty('ariaHasPopup', 'listbox');
+        await waitForChanges();
+
+        expect(inputElement).toEqualAttribute('aria-haspopup', 'listbox');
+    });
+
+    it('handles aria-expanded binding', async () => {
+        const { find, waitForChanges } = await newE2EPage({
+            html: '<protean-input label="Label text"></protean-input>',
+        });
+
+        const inputElement = await find('protean-input >>> input');
+
+        expect(inputElement).not.toHaveAttribute('aria-expanded');
+
+        const proteanInput = await find('protean-input');
+
+        proteanInput.setProperty('ariaExpanded', true);
+        await waitForChanges();
+
+        expect(inputElement).toHaveAttribute('aria-expanded');
+    });
+
+    it('handles role binding', async () => {
+        const { find, waitForChanges } = await newE2EPage({
+            html: '<protean-input label="Label text"></protean-input>',
+        });
+
+        const inputElement = await find('protean-input >>> input');
+
+        expect(inputElement).not.toHaveAttribute('role');
+
+        const proteanInput = await find('protean-input');
+
+        proteanInput.setProperty('ariaRole', 'button');
+        await waitForChanges();
+
+        expect(inputElement).toEqualAttribute('role', 'button');
     });
 
     it('emits change event and handles defaults', async () => {
@@ -158,6 +234,26 @@ describe('protean-input', () => {
             formattedValue: 'ab',
         });
         expect(await proteanInput.getProperty('value')).toEqual('a');
+    });
+
+    it('delegates focus', async () => {
+        const page = await newE2EPage({
+            html: '<protean-input label="Label text"></protean-input>',
+        });
+
+        await dispatchEvent(page, 'protean-input', 'focus');
+
+        const { input, activeElement } = await page.$eval(
+            'protean-input',
+            element => {
+                const input = element.shadowRoot.querySelector('input');
+                const activeElement = element.shadowRoot.activeElement;
+
+                return { input, activeElement };
+            },
+        );
+
+        expect(activeElement).toEqual(input);
     });
 
     it('emits input event', async () => {

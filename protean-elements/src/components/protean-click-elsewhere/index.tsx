@@ -30,10 +30,10 @@ export class ProteanClickElsewhere {
         const isCurrentlyFocused = this.shadowContains(
             this.findActiveElement(),
         );
-
         const aboutToBeFocused =
             this.shadowContains(this.shadowEventTarget(event)) ||
             this.originatesInSlots(event.target);
+
         if (
             !aboutToBeFocused &&
             (this.isCurrentlyFocused || isCurrentlyFocused)
@@ -42,14 +42,16 @@ export class ProteanClickElsewhere {
             this.change.emit();
             return;
         }
-        this.isCurrentlyFocused = aboutToBeFocused || isCurrentlyFocused;
+
+        this.isCurrentlyFocused = aboutToBeFocused;
     };
 
     findActiveElement(element = document.activeElement): Element {
         return element.shadowRoot
-            ? this.findActiveElement(element.shadowRoot.activeElement || null)
+            ? this.findActiveElement(element.shadowRoot.activeElement)
             : element;
     }
+
     shadowEventTarget(event: Event): EventTarget {
         return event.composedPath()[0] ?? event.target;
     }
@@ -64,13 +66,12 @@ export class ProteanClickElsewhere {
                 ))
         );
     }
+
     originatesInSlots(node: EventTarget): boolean {
         const slots = this.hostElement.querySelectorAll('slot');
         for (let i = 0; i < slots.length; i++) {
             const slot = slots[i];
-            const nodes =
-                (slot && slot.assignedNodes && slot.assignedNodes()) ||
-                this.hostElement.childNodes;
+            const nodes = slot.assignedNodes();
 
             for (let nodeIndex = 0; nodeIndex < nodes.length; nodeIndex++) {
                 if (nodes[nodeIndex].contains(node)) return true;

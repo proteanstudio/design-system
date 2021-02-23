@@ -40,10 +40,10 @@ export class ProteanInput {
     @Prop({ reflect: true }) errors: string[];
     @Prop({ reflect: true }) suppressMessages: boolean;
     @Prop({ reflect: true }) readonly = false;
-    @Prop() ariaRole: string;
     @Prop() ariaLabel: string;
     @Prop() ariaHasPopup: string;
     @Prop() ariaExpanded: boolean | undefined;
+    @Prop() ariaRole: string;
 
     guid = createGuid();
     inputId = `protean-input-${this.guid}`;
@@ -81,7 +81,7 @@ export class ProteanInput {
             password: 'password',
             search: 'search',
             email: 'email',
-            button: 'button'
+            button: 'button',
         };
 
         return inputTypeMap[this.type] ?? 'text';
@@ -91,6 +91,12 @@ export class ProteanInput {
         if (this.label) return null;
 
         return this.ariaLabel ?? null;
+    }
+
+    get inputAriaRequired(): string | null {
+        if (this.ariaHasPopup === 'listbox') return null;
+
+        return `${!this.optional}`;
     }
 
     get hasErrors(): boolean {
@@ -129,12 +135,6 @@ export class ProteanInput {
             .getBoundingClientRect().height;
 
         return `${height}px`;
-    }
-
-    get ariaRequired(): string | null {
-        if (this.ariaHasPopup === 'listbox') return null;
-
-        return `${!this.optional}`;
     }
 
     @Event({ eventName: 'change', bubbles: false })
@@ -197,6 +197,13 @@ export class ProteanInput {
     defaultChangeHandler(event: CustomEvent): void {
         if (!this.hostElement.onchange) {
             this.value = event.detail.value;
+        }
+    }
+
+    @Listen('focus')
+    delegateFocus(event: FocusEvent): void {
+        if (event.target === this.hostElement) {
+            this.inputElement.focus();
         }
     }
 
@@ -300,8 +307,9 @@ export class ProteanInput {
                         type={this.inputType}
                         disabled={this.disabled}
                         readOnly={this.readonly}
+                        maxLength={this.maxlength} // should be computed
                         role={this.ariaRole}
-                        aria-required={this.ariaRequired}
+                        aria-required={this.inputAriaRequired}
                         aria-label={this.inputAriaLabel}
                         aria-invalid={`${this.hasErrors}`}
                         aria-describedby={this.descriptionId}

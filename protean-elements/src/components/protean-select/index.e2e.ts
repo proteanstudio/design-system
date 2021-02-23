@@ -17,7 +17,7 @@ describe('protean-select', () => {
         expect(proteanInput).not.toHaveAttribute('optional');
         expect(await proteanInput.getProperty('errors')).toEqual(undefined);
         expect(proteanInput).not.toHaveAttribute('disabled');
-        expect(proteanInput).toHaveAttribute('readonly');
+        expect(proteanInput).toEqualAttribute('type', 'button');
         expect(proteanInput).toHaveAttribute('suppress-messages');
         expect(await proteanInput.getProperty('ariaLabel')).toEqual(null);
         expect(await proteanInput.getProperty('ariaHasPopup')).toEqual(
@@ -42,6 +42,11 @@ describe('protean-select', () => {
 
         expect(selectDropdown).toEqualAttribute('role', 'listbox');
         expect(selectDropdown).toEqualAttribute('aria-label', 'Select label');
+        expect(selectDropdown).toEqualAttribute('aria-required', 'true');
+        expect(selectDropdown).toEqualAttribute(
+            'aria-multiselectable',
+            'false',
+        );
         expect(selectDropdown).toEqualAttribute('tabindex', '-1');
         expect(selectDropdown).toEqualAttribute('aria-activedescendant', null);
         expect(selectDropdown).toHaveAttribute('hidden');
@@ -70,6 +75,35 @@ describe('protean-select', () => {
         await page.waitForChanges();
 
         expect(await proteanInput.getProperty('errors')).toEqual(['1']);
+    });
+
+    it('passes props to listbox', async () => {
+        const page = await newE2EPage({
+            html:
+                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+        });
+
+        const selectDropdown = await page.find(
+            'protean-select >>> .protean-select-dropdown',
+        );
+
+        expect(selectDropdown).toEqualAttribute('aria-label', 'Select label');
+        expect(selectDropdown).toEqualAttribute('aria-required', 'true');
+        expect(selectDropdown).toEqualAttribute(
+            'aria-multiselectable',
+            'false',
+        );
+
+        const proteanSelect = await page.find('protean-select');
+
+        proteanSelect.setProperty('label', 'Updated label');
+        proteanSelect.setProperty('optional', true);
+        proteanSelect.setProperty('multiple', true);
+        await page.waitForChanges();
+
+        expect(selectDropdown).toEqualAttribute('aria-label', 'Updated label');
+        expect(selectDropdown).toEqualAttribute('aria-required', 'false');
+        expect(selectDropdown).toEqualAttribute('aria-multiselectable', 'true');
     });
 
     it('appropriately binds aria-label', async () => {
@@ -348,7 +382,7 @@ describe('protean-select', () => {
         expect(await proteanInput.getProperty('value')).toEqual('2 selected');
     });
 
-    it('closes dropdown on blur', async () => {
+    it('closes dropdown on click-elsewhere', async () => {
         const page = await newE2EPage({
             html:
                 '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
@@ -364,20 +398,29 @@ describe('protean-select', () => {
 
         expect(await proteanInput.getProperty('ariaExpanded')).toEqual(true);
 
-        await dispatchEvent(page, 'protean-select', 'blur');
-        await page.waitFor(200);
+        await dispatchEvent(
+            page,
+            ['protean-select', 'protean-click-elsewhere'],
+            'change',
+        );
 
         expect(await proteanInput.getProperty('ariaExpanded')).toEqual(false);
+    });
 
-        await dispatchEvent(page, ['protean-select', 'protean-input'], 'click');
+    it('delegates focus', async () => {
+        const page = await newE2EPage({
+            html:
+                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+        });
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(true);
+        const proteanInput = await page.find(
+            'protean-select >>> protean-input',
+        );
+        const focusMock = await proteanInput.spyOnEvent('focus');
 
-        await dispatchEvent(page, 'protean-select', 'blur');
         await dispatchEvent(page, 'protean-select', 'focus');
-        await page.waitFor(200);
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(true);
+        expect(focusMock).toHaveReceivedEvent();
     });
 
     it('opens dropdown and activates default option on navigation key when closed', async () => {

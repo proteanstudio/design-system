@@ -146,4 +146,22 @@ describe('protean-message', () => {
         expect(checkboxSymbol).toHaveClass('toggle');
         expect(checkboxSymbol).not.toHaveClass('standard');
     });
+
+    it('delegates focus to button', async () => {
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
+            components: [ProteanCheckbox],
+            html: '<protean-checkbox label="test label"></protean-checkbox>',
+        });
+        const innerCheckbox = root.shadowRoot.querySelector('input');
+        const focusMock = jest.fn();
+        innerCheckbox.focus = focusMock;
+
+        root.dispatchEvent(new Event('focus'));
+        await waitForChanges();
+        expect(focusMock).toHaveBeenCalledTimes(1);
+
+        rootInstance.delegateFocus(new Event('focus'));
+        await waitForChanges();
+        expect(focusMock).toHaveBeenCalledTimes(1);
+    });
 });

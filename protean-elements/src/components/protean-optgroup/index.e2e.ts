@@ -13,7 +13,7 @@ describe('protean-optgroup', () => {
 
         expect(optgroupContainer).toEqualAttribute('role', 'group');
         expect(optgroupContainer).toEqualAttribute(
-            'aria-labelled-by',
+            'aria-labelledby',
             'protean-optgroup-label-1000',
         );
         expect(optgroupContainer).toEqualAttribute('aria-disabled', 'false');
@@ -26,6 +26,7 @@ describe('protean-optgroup', () => {
             'id',
             'protean-optgroup-label-1000',
         );
+        expect(optgroupLabel).toEqualAttribute('role', 'presentation');
         expect(optgroupLabel.textContent).toEqual('Optgroup Label');
 
         const slottedElement = await page.$eval(

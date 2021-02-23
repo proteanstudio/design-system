@@ -1,3 +1,4 @@
+import dispatchEvent from '@/test-helpers/dispatchEvent';
 import { newE2EPage } from '@stencil/core/testing';
 
 describe('protean-button', () => {
@@ -44,5 +45,41 @@ describe('protean-button', () => {
         await waitForChanges();
 
         expect(innerButton).toHaveAttribute('disabled');
+    });
+
+    it('binds aria-label', async () => {
+        const { find, waitForChanges } = await newE2EPage({
+            html: '<protean-button>Button Text</protean-button>',
+        });
+
+        const proteanButton = await find('protean-button');
+        const innerButton = await find('protean-button >>> button');
+
+        expect(innerButton).not.toHaveAttribute('aria-label');
+
+        proteanButton.setProperty('ariaLabel', 'button aria-label');
+        await waitForChanges();
+
+        expect(innerButton).toEqualAttribute('aria-label', 'button aria-label');
+    });
+
+    it('delegates focus', async () => {
+        const page = await newE2EPage({
+            html: '<protean-button>Button Text</protean-button>',
+        });
+
+        await dispatchEvent(page, 'protean-button', 'focus');
+
+        const { button, activeElement } = await page.$eval(
+            'protean-button',
+            element => {
+                const button = element.shadowRoot.querySelector('button');
+                const activeElement = element.shadowRoot.activeElement;
+
+                return { button, activeElement };
+            },
+        );
+
+        expect(activeElement).toEqual(button);
     });
 });

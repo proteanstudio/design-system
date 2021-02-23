@@ -11,6 +11,7 @@ export declare class ProteanCheckbox {
   indeterminate: boolean;
   hostElement: HTMLElement;
   defaultChangeHandler(event: CustomEvent): void;
+  delegateFocus(event: FocusEvent): void;
   guid: number;
   get checkboxId(): string;
   get checkboxAriaLabel(): string | null;

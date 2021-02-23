@@ -19,10 +19,10 @@ export declare class ProteanInput {
   errors: string[];
   suppressMessages: boolean;
   readonly: boolean;
-  ariaRole: string;
   ariaLabel: string;
   ariaHasPopup: string;
   ariaExpanded: boolean | undefined;
+  ariaRole: string;
   guid: number;
   inputId: string;
   descriptionId: string;
@@ -36,12 +36,12 @@ export declare class ProteanInput {
   get inputElement(): HTMLInputElement;
   get inputType(): string;
   get inputAriaLabel(): string | null;
+  get inputAriaRequired(): string | null;
   get hasErrors(): boolean;
   get messages(): string[] | undefined;
   get showMessages(): boolean;
   get messageContainer(): HTMLDivElement;
   get messageContainerHeight(): string;
-  get ariaRequired(): string | null;
   change: EventEmitter<FormattedValue>;
   input: EventEmitter<FormattedValue>;
   onInputChange: (event: Event) => void;
@@ -50,6 +50,7 @@ export declare class ProteanInput {
   onInputBlur: () => void;
   onLabelClick: (event: MouseEvent) => void;
   defaultChangeHandler(event: CustomEvent): void;
+  delegateFocus(event: FocusEvent): void;
   reformatValue(): void;
   onMessageUpdate(): void;
   setMessagesHeight(): void;

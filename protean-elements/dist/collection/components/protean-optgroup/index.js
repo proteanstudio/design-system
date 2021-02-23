@@ -27,11 +27,11 @@ export class ProteanOptgroup {
     this.mutationObserver = mutationObserver;
   }
   render() {
-    return (h("div", { class: "protean-optgroup-container", role: "group", "aria-labelledby": this.labelId, "aria-disabled": this.disabled ? "true" : null },
+    return (h("div", { class: "protean-optgroup-container", role: "group", "aria-labelledby": this.labelId, "aria-disabled": `${this.disabled ?? false}` },
       this.label && (h("div", { class: "protean-optgroup-label", id: this.labelId, role: "presentation" },
         h("div", { class: "protean-optgroup-label-text" },
           h("span", null, this.label)))),
-      h("div", { class: "protean-optgroup-option-container", role: "presentation" },
+      h("div", { class: "protean-optgroup-option-container" },
         h("slot", null))));
   }
   static get is() { return "protean-optgroup"; }

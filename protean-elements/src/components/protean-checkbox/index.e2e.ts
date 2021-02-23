@@ -130,4 +130,24 @@ describe('protean-checkbox', () => {
 
         expect(innerCheckbox).toEqualAttribute('aria-label', null);
     });
+
+    it('delegates focus', async () => {
+        const page = await newE2EPage({
+            html: '<protean-checkbox></protean-checkbox>',
+        });
+
+        await dispatchEvent(page, 'protean-checkbox', 'focus');
+
+        const { checkbox, activeElement } = await page.$eval(
+            'protean-checkbox',
+            element => {
+                const checkbox = element.shadowRoot.querySelector('input');
+                const activeElement = element.shadowRoot.activeElement;
+
+                return { checkbox, activeElement };
+            },
+        );
+
+        expect(activeElement).toEqual(checkbox);
+    });
 });

@@ -2,12 +2,19 @@ import { createGuid } from '@/utils/utils';
 import { Component, Prop, State, Event, Listen, Element, Watch, h, } from '@stencil/core';
 export class ProteanSelect {
   constructor() {
+    this.multiple = false; //change to variant?
     this.dropdownOpen = false;
     this.guid = createGuid();
+    this.focusInput = () => {
+      this.hostElement.shadowRoot
+        .querySelector('protean-input')
+        .dispatchEvent(new FocusEvent('focus'));
+    };
     this.closeDropdown = () => {
       if (!this.dropdownOpen)
         return;
       this.dropdownOpen = false;
+      this.focusInput();
       if (this.activeOption) {
         this.activeOption.active = false;
         this.activeOptionId = '';
@@ -110,6 +117,11 @@ export class ProteanSelect {
       return;
     }
     this.value = event.detail.value;
+  }
+  delegateFocus(event) {
+    if (event.target === this.hostElement) {
+      this.focusInput();
+    }
   }
   updateOptions() {
     if (this.multiple) {
@@ -293,7 +305,8 @@ export class ProteanSelect {
         "text": ""
       },
       "attribute": "multiple",
-      "reflect": true
+      "reflect": true,
+      "defaultValue": "false"
     },
     "label": {
       "type": "string",
@@ -413,6 +426,12 @@ export class ProteanSelect {
   static get listeners() { return [{
       "name": "change",
       "method": "defaultChangeHandler",
+      "target": undefined,
+      "capture": false,
+      "passive": false
+    }, {
+      "name": "focus",
+      "method": "delegateFocus",
       "target": undefined,
       "capture": false,
       "passive": false

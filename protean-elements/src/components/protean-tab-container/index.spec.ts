@@ -44,10 +44,6 @@ describe('protean-tab-container', () => {
         expect(tabControl1).toEqualAttribute('aria-selected', 'false');
         expect(tabControl1.tabIndex).toEqual(-1);
         expect(tabControl1.dataset.value).toEqual('1');
-        expect(tabControl1).toEqualAttribute(
-            'aria-controls',
-            'tab-pane-1000-0',
-        );
         expect(tabControl1.id).toEqual('tab-1000-0');
 
         expect(tabControl2).toEqualAttribute('role', 'tab');
@@ -55,10 +51,6 @@ describe('protean-tab-container', () => {
         expect(tabControl2).toEqualAttribute('aria-selected', 'true');
         expect(tabControl2.tabIndex).toEqual(0);
         expect(tabControl2.dataset.value).toEqual('2');
-        expect(tabControl2).toEqualAttribute(
-            'aria-controls',
-            'tab-pane-1000-1',
-        );
         expect(tabControl2.id).toEqual('tab-1000-1');
     });
 

@@ -23,31 +23,29 @@ import { newSpecPage } from '@stencil/core/testing';
 
 describe('protean-input', () => {
     it('builds static values', () => {
-        const proteanInput = new ProteanInput();
+        const root = new ProteanInput();
 
-        expect(proteanInput.guid).toBeGreaterThanOrEqual(1000);
-        expect(proteanInput.inputId).toContain(
-            `protean-input-${proteanInput.guid}`,
-        );
-        expect(proteanInput.descriptionId).toEqual(
-            `protean-input-description-${proteanInput.guid}`,
+        expect(root.guid).toBeGreaterThanOrEqual(1000);
+        expect(root.inputId).toContain(`protean-input-${root.guid}`);
+        expect(root.descriptionId).toEqual(
+            `protean-input-description-${root.guid}`,
         );
     });
 
     it('handles scheduledAfterRender', () => {
-        const proteanInput = new ProteanInput();
+        const root = new ProteanInput();
 
         const mock = jest.fn();
-        proteanInput.scheduledAfterRender.push(mock, mock);
+        root.scheduledAfterRender.push(mock, mock);
 
-        proteanInput.componentDidRender();
+        root.componentDidRender();
 
         expect(mock).toHaveBeenCalledTimes(2);
-        expect(proteanInput.scheduledAfterRender).toEqual([]);
+        expect(root.scheduledAfterRender).toEqual([]);
     });
 
     it('re-formats value on load and property change', async () => {
-        const { root: proteanInput, rootInstance } = await newSpecPage({
+        const { root, rootInstance } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
@@ -62,7 +60,7 @@ describe('protean-input', () => {
             value: '1',
             formattedValue: '1',
         };
-        proteanInput.value = '1';
+        root.value = '1';
         expect(rootInstance.formattedValueObject).toEqual(formattedValueObject);
         expect(rootInstance.inputElement.value).toEqual(
             formattedValueObject.formattedValue,
@@ -74,188 +72,199 @@ describe('protean-input', () => {
         rootInstance.componentDidLoad();
         expect(mock).toHaveBeenCalledTimes(1);
 
-        proteanInput.value = '2';
+        root.value = '2';
         expect(mock).toHaveBeenCalledTimes(2);
 
-        proteanInput.type = 'numeric';
+        root.type = 'numeric';
         expect(mock).toHaveBeenCalledTimes(3);
 
-        proteanInput.format = 'delimited';
+        root.format = 'delimited';
         expect(mock).toHaveBeenCalledTimes(4);
 
-        proteanInput.label = 'should not call reformat';
+        root.label = 'should not call reformat';
         expect(mock).toHaveBeenCalledTimes(4);
     });
 
     it('outputs correct input type', () => {
-        const proteanInput = new ProteanInput();
+        const root = new ProteanInput();
 
-        proteanInput.type = 'foo';
-        expect(proteanInput.inputType).toEqual('text');
+        root.type = 'foo';
+        expect(root.inputType).toEqual('text');
 
-        proteanInput.type = 'text';
-        expect(proteanInput.inputType).toEqual('text');
+        root.type = 'text';
+        expect(root.inputType).toEqual('text');
 
-        proteanInput.type = 'tel';
-        expect(proteanInput.inputType).toEqual('tel');
+        root.type = 'tel';
+        expect(root.inputType).toEqual('tel');
 
-        proteanInput.type = 'phone';
-        expect(proteanInput.inputType).toEqual('tel');
+        root.type = 'phone';
+        expect(root.inputType).toEqual('tel');
 
-        proteanInput.type = 'numeric';
-        expect(proteanInput.inputType).toEqual('tel');
+        root.type = 'numeric';
+        expect(root.inputType).toEqual('tel');
 
-        proteanInput.type = 'date';
-        expect(proteanInput.inputType).toEqual('tel');
+        root.type = 'date';
+        expect(root.inputType).toEqual('tel');
 
-        proteanInput.type = 'number';
-        expect(proteanInput.inputType).toEqual('number');
+        root.type = 'number';
+        expect(root.inputType).toEqual('number');
 
-        proteanInput.type = 'password';
-        expect(proteanInput.inputType).toEqual('password');
+        root.type = 'password';
+        expect(root.inputType).toEqual('password');
 
-        proteanInput.type = 'search';
-        expect(proteanInput.inputType).toEqual('search');
+        root.type = 'search';
+        expect(root.inputType).toEqual('search');
 
-        proteanInput.type = 'email';
-        expect(proteanInput.inputType).toEqual('email');
+        root.type = 'email';
+        expect(root.inputType).toEqual('email');
+
+        root.type = 'button';
+        expect(root.inputType).toEqual('button');
     });
 
     it('outputs correct input aria-label', () => {
-        const proteanInput = new ProteanInput();
+        const root = new ProteanInput();
 
-        expect(proteanInput.inputAriaLabel).toEqual(null);
+        expect(root.inputAriaLabel).toEqual(null);
 
         const ariaLabel = 'Input aria-label';
-        proteanInput.ariaLabel = ariaLabel;
-        expect(proteanInput.inputAriaLabel).toEqual(ariaLabel);
+        root.ariaLabel = ariaLabel;
+        expect(root.inputAriaLabel).toEqual(ariaLabel);
 
-        proteanInput.label = 'Input label';
-        expect(proteanInput.inputAriaLabel).toEqual(null);
+        root.label = 'Input label';
+        expect(root.inputAriaLabel).toEqual(null);
+    });
+
+    it('outputs correct input aria-required', () => {
+        const root = new ProteanInput();
+
+        expect(root.inputAriaRequired).toEqual('true');
+
+        root.optional = false;
+        expect(root.inputAriaRequired).toEqual('true');
+
+        root.ariaHasPopup = 'listbox';
+        expect(root.inputAriaRequired).toEqual(null);
     });
 
     it('identifies presence of errors', () => {
-        const proteanInput = new ProteanInput();
+        const root = new ProteanInput();
 
-        expect(proteanInput.hasErrors).toEqual(false);
+        expect(root.hasErrors).toEqual(false);
 
-        proteanInput.errors = ['foo'];
-        expect(proteanInput.hasErrors).toEqual(true);
+        root.errors = ['foo'];
+        expect(root.hasErrors).toEqual(true);
 
-        proteanInput.errors = [];
-        expect(proteanInput.hasErrors).toEqual(false);
+        root.errors = [];
+        expect(root.hasErrors).toEqual(false);
     });
 
     it('pulls the appropriate messages', () => {
-        const proteanInput = new ProteanInput();
+        const root = new ProteanInput();
 
-        expect(proteanInput.messages).toEqual(undefined);
+        expect(root.messages).toEqual(undefined);
 
-        proteanInput.errors = ['foo'];
-        expect(proteanInput.messages).toEqual(proteanInput.errors);
+        root.errors = ['foo'];
+        expect(root.messages).toEqual(root.errors);
 
-        proteanInput.errors = ['foo'];
-        proteanInput.hints = ['bar'];
-        expect(proteanInput.messages).toEqual(proteanInput.errors);
+        root.errors = ['foo'];
+        root.hints = ['bar'];
+        expect(root.messages).toEqual(root.errors);
 
-        proteanInput.errors = [];
-        expect(proteanInput.messages).toEqual(proteanInput.hints);
+        root.errors = [];
+        expect(root.messages).toEqual(root.hints);
     });
 
     it('applies appropriate error class', async () => {
-        const { root: proteanInput, waitForChanges } = await newSpecPage({
+        const { root, waitForChanges } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
 
-        const inputContainer = proteanInput.shadowRoot.querySelector(
+        const inputContainer = root.shadowRoot.querySelector(
             '.input-container',
         );
         expect(inputContainer).not.toHaveClass('has-error');
 
-        proteanInput.errors = ['error 1'];
+        root.errors = ['error 1'];
         await waitForChanges();
 
         expect(inputContainer).toHaveClass('has-error');
     });
 
     it('renders error icon', async () => {
-        const { root: proteanInput, waitForChanges } = await newSpecPage({
+        const { root, waitForChanges } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input label="test label"></protean-input>',
         });
 
-        let errorIcon: HTMLProteanIconElement = proteanInput.shadowRoot.querySelector(
+        let errorIcon: HTMLProteanIconElement = root.shadowRoot.querySelector(
             '.error-icon',
         );
         expect(errorIcon).toBeNull();
 
-        proteanInput.errors = ['error 1'];
+        root.errors = ['error 1'];
         await waitForChanges();
 
-        errorIcon = proteanInput.shadowRoot.querySelector('.error-icon');
+        errorIcon = root.shadowRoot.querySelector('.error-icon');
 
         expect(errorIcon).not.toBeNull();
         expect(errorIcon).toEqualAttribute('type', 'status-error-filled');
     });
 
     it('shows messages', () => {
-        const proteanInput = new ProteanInput();
+        const root = new ProteanInput();
 
-        expect(proteanInput.showMessages).toEqual(false);
+        expect(root.showMessages).toEqual(false);
 
-        proteanInput.hints = ['foo'];
-        expect(proteanInput.showMessages).toEqual(true);
+        root.hints = ['foo'];
+        expect(root.showMessages).toEqual(true);
 
-        proteanInput.suppressMessages = true;
-        expect(proteanInput.showMessages).toEqual(false);
+        root.suppressMessages = true;
+        expect(root.showMessages).toEqual(false);
     });
 
     it('renders messages', async () => {
-        const {
-            root: proteanInput,
-            rootInstance,
-            waitForChanges,
-        } = await newSpecPage({
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
 
-        let messageItems = proteanInput.shadowRoot.querySelectorAll(
+        let messageItems = root.shadowRoot.querySelectorAll(
             '.message-container li',
         );
 
         expect(rootInstance.messages).toEqual(undefined);
         expect(messageItems.length).toEqual(0);
 
-        proteanInput.hints = ['hint 1', 'hint 2'];
+        root.hints = ['hint 1', 'hint 2'];
         await waitForChanges();
 
-        messageItems = proteanInput.shadowRoot.querySelectorAll(
+        messageItems = root.shadowRoot.querySelectorAll(
             '.message-container li',
         );
-        expect(rootInstance.messages).toEqual(proteanInput.hints);
+        expect(rootInstance.messages).toEqual(root.hints);
         expect(messageItems.length).toEqual(2);
     });
 
     it('gets correct message container element', async () => {
-        const { root: proteanInput, rootInstance } = await newSpecPage({
+        const { root, rootInstance } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
 
         expect(rootInstance.messageContainer).toEqual(
-            proteanInput.shadowRoot.querySelector('.message-container'),
+            root.shadowRoot.querySelector('.message-container'),
         );
     });
 
     it('gets correct message container height', async () => {
-        const { root: proteanInput, rootInstance } = await newSpecPage({
+        const { root, rootInstance } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
 
-        const messageContainerHeight = proteanInput.shadowRoot
+        const messageContainerHeight = root.shadowRoot
             .querySelector('.message-container protean-message')
             .getBoundingClientRect().height;
         expect(rootInstance.messageContainerHeight).toEqual(
@@ -264,11 +273,7 @@ describe('protean-input', () => {
     });
 
     it('updates message container height when message set', async () => {
-        const {
-            root: proteanInput,
-            rootInstance,
-            waitForChanges,
-        } = await newSpecPage({
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
@@ -277,14 +282,18 @@ describe('protean-input', () => {
         rootInstance.setMessagesHeight = setMessagesHeightMock;
         expect(rootInstance.scheduledAfterRender).toEqual([]);
 
-        proteanInput.hints = ['hint 1'];
+        root.hints = ['hint 1'];
+        expect(rootInstance.scheduledAfterRender).toHaveLength(0);
+
+        rootInstance.isFocused = true;
+        root.hints = ['hint 1 again'];
         expect(rootInstance.scheduledAfterRender).toHaveLength(1);
         await waitForChanges();
 
         expect(setMessagesHeightMock).toHaveBeenCalledTimes(1);
         expect(rootInstance.scheduledAfterRender).toHaveLength(0);
 
-        proteanInput.errors = ['error 1'];
+        root.errors = ['error 1'];
         expect(rootInstance.scheduledAfterRender).toHaveLength(1);
         await waitForChanges();
         expect(setMessagesHeightMock).toHaveBeenCalledTimes(2);
@@ -292,12 +301,12 @@ describe('protean-input', () => {
     });
 
     it('prevents click propagation from input', async () => {
-        const { root: proteanInput } = await newSpecPage({
+        const { root } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input label="Label text"></protean-input>',
         });
 
-        const label = proteanInput.shadowRoot.querySelector('label');
+        const label = root.shadowRoot.querySelector('label');
 
         const clickEvent = new MouseEvent('click');
         const sIPMock = jest.fn();
@@ -309,7 +318,7 @@ describe('protean-input', () => {
     });
 
     it('handles change event', async () => {
-        const { root: proteanInput, rootInstance } = await newSpecPage({
+        const { root, rootInstance } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
@@ -325,7 +334,7 @@ describe('protean-input', () => {
                     event.detail.value;
             });
 
-        proteanInput.addEventListener('change', changeMock);
+        root.addEventListener('change', changeMock);
 
         rootInstance.inputElement.dispatchEvent(new Event('change'));
 
@@ -340,19 +349,19 @@ describe('protean-input', () => {
         rootInstance.inputElement.dispatchEvent(new Event('change'));
         expect(changeMock).toHaveBeenCalledTimes(1);
 
-        proteanInput.removeEventListener('change', changeMock);
+        root.removeEventListener('change', changeMock);
     });
 
     it('automatically sets value with default change handler', async () => {
-        const { root: proteanInput, waitForChanges } = await newSpecPage({
+        const { root, waitForChanges } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
 
-        proteanInput.onchange = undefined;
+        root.onchange = undefined;
         await waitForChanges();
 
-        proteanInput.dispatchEvent(
+        root.dispatchEvent(
             new CustomEvent('change', {
                 bubbles: true,
                 detail: {
@@ -362,14 +371,14 @@ describe('protean-input', () => {
             }),
         );
 
-        expect(proteanInput.value).toEqual('value');
+        expect(root.value).toEqual('value');
 
-        proteanInput.onchange = () => {
+        root.onchange = () => {
             /*  */
         };
         await waitForChanges();
 
-        proteanInput.dispatchEvent(
+        root.dispatchEvent(
             new CustomEvent('change', {
                 bubbles: true,
                 detail: {
@@ -379,11 +388,29 @@ describe('protean-input', () => {
             }),
         );
 
-        expect(proteanInput.value).toEqual('value');
+        expect(root.value).toEqual('value');
+    });
+
+    it('delegates focus to button', async () => {
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
+            components: [ProteanInput],
+            html: '<protean-input></protean-input>',
+        });
+
+        const focusMock = jest.fn();
+        rootInstance.inputElement.focus = focusMock;
+
+        root.dispatchEvent(new Event('focus'));
+        await waitForChanges();
+        expect(focusMock).toHaveBeenCalledTimes(1);
+
+        rootInstance.delegateFocus(new Event('focus'));
+        await waitForChanges();
+        expect(focusMock).toHaveBeenCalledTimes(1);
     });
 
     it('handles input event', async () => {
-        const { root: proteanInput, rootInstance } = await newSpecPage({
+        const { root, rootInstance } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
@@ -399,7 +426,7 @@ describe('protean-input', () => {
                 event.detail.value;
         });
 
-        proteanInput.addEventListener('input', inputMock);
+        root.addEventListener('input', inputMock);
 
         const formattedValueObject = {
             value,
@@ -435,11 +462,11 @@ describe('protean-input', () => {
         expect(setSelectionRangeMock).toHaveBeenCalledTimes(2);
         expect(inputMock).toHaveBeenCalledTimes(1);
 
-        proteanInput.removeEventListener('input', inputMock);
+        root.removeEventListener('input', inputMock);
     });
 
     it('handles input focus', async () => {
-        const { root: proteanInput, rootInstance } = await newSpecPage({
+        const { root, rootInstance } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
@@ -448,16 +475,18 @@ describe('protean-input', () => {
 
         rootInstance.inputElement.dispatchEvent(new Event('focus'));
         expect(rootInstance.messageContainer.style.height).toBeUndefined;
+        expect(rootInstance.isFocused).toEqual(true);
 
-        proteanInput.hints = ['1'];
+        root.hints = ['1'];
         rootInstance.inputElement.dispatchEvent(new Event('focus'));
         expect(rootInstance.messageContainer.style.height).toEqual(
             rootInstance.messageContainerHeight,
         );
+        expect(rootInstance.isFocused).toEqual(true);
     });
 
     it('handles input blur', async () => {
-        const { root: proteanInput, rootInstance } = await newSpecPage({
+        const { root, rootInstance } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
@@ -466,39 +495,37 @@ describe('protean-input', () => {
 
         rootInstance.inputElement.dispatchEvent(new Event('blur'));
         expect(rootInstance.messageContainer.style.height).toBeUndefined;
+        expect(rootInstance.isFocused).toEqual(false);
 
-        proteanInput.hints = ['1'];
+        root.hints = ['1'];
         rootInstance.inputElement.dispatchEvent(new Event('blur'));
         expect(rootInstance.messageContainer.style.height).toEqual('0px');
+        expect(rootInstance.isFocused).toEqual(false);
     });
 
     it('calls appropriate formatting function', async () => {
         //loose understanding of jest mocks, may skip/deleted this test in favor of those already in e2e and formatting fns
-        const {
-            root: proteanInput,
-            rootInstance,
-            waitForChanges,
-        } = await newSpecPage({
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
 
-        proteanInput.value = '10';
+        root.value = '10';
 
         expect(rootInstance.formattedValueObject).toEqual({
             value: '10',
             formattedValue: '10',
         });
 
-        proteanInput.type = 'date';
+        root.type = 'date';
         await waitForChanges();
         expect(rootInstance.formattedValueObject).toEqual(dateValue);
 
-        proteanInput.type = 'numeric';
+        root.type = 'numeric';
         await waitForChanges();
         expect(rootInstance.formattedValueObject).toEqual(numericValue);
 
-        proteanInput.type = 'phone';
+        root.type = 'phone';
         await waitForChanges();
         expect(rootInstance.formattedValueObject).toEqual(phoneValue);
 
@@ -506,16 +533,12 @@ describe('protean-input', () => {
     });
 
     it('calculates cursor position', async () => {
-        const {
-            root: proteanInput,
-            rootInstance,
-            waitForChanges,
-        } = await newSpecPage({
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
 
-        proteanInput.value = '10';
+        root.value = '10';
         await waitForChanges();
 
         const valueLength = 2;
@@ -536,16 +559,12 @@ describe('protean-input', () => {
     });
 
     it('sets cursor position', async () => {
-        const {
-            root: proteanInput,
-            rootInstance,
-            waitForChanges,
-        } = await newSpecPage({
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
 
-        proteanInput.value = '10';
+        root.value = '10';
         await waitForChanges();
 
         const valueLength = 2;
@@ -575,85 +594,129 @@ describe('protean-input', () => {
     });
 
     it('handles label rendering', async () => {
-        const { root: proteanInput, waitForChanges } = await newSpecPage({
+        const { root, waitForChanges } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
 
-        let labelElement = proteanInput.shadowRoot.querySelector('label');
+        let labelElement = root.shadowRoot.querySelector('label');
         expect(labelElement).toBeNull;
 
-        let optionalSpan = proteanInput.shadowRoot.querySelector(
-            '.optional-tag',
-        );
+        let optionalSpan = root.shadowRoot.querySelector('.optional-tag');
         expect(optionalSpan).toBeNull;
 
-        proteanInput.label = 'label text';
+        root.label = 'label text';
         await waitForChanges();
-        labelElement = proteanInput.shadowRoot.querySelector('label');
+        labelElement = root.shadowRoot.querySelector('label');
         expect(labelElement).not.toBeNull;
         expect(labelElement.textContent).toEqual('label text');
 
-        optionalSpan = proteanInput.shadowRoot.querySelector('.optional-tag');
+        optionalSpan = root.shadowRoot.querySelector('.optional-tag');
         expect(optionalSpan).toBeNull;
 
-        proteanInput.optional = true;
+        root.optional = true;
         await waitForChanges();
 
-        optionalSpan = proteanInput.shadowRoot.querySelector('.optional-tag');
+        optionalSpan = root.shadowRoot.querySelector('.optional-tag');
         expect(optionalSpan).not.toBeNull;
         expect(optionalSpan.textContent).toEqual(' (optional)');
     });
 
     it('handles disabled binding', async () => {
-        const { root: proteanInput, waitForChanges } = await newSpecPage({
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
 
-        const inputElement = proteanInput.shadowRoot.querySelector('input');
-        expect(proteanInput.disabled).toEqual(false);
+        const inputElement = rootInstance.inputElement;
+        expect(root.disabled).toEqual(false);
         expect(inputElement.disabled).toEqual(false);
 
-        proteanInput.disabled = true;
+        root.disabled = true;
         await waitForChanges();
 
         expect(inputElement.disabled).toEqual(true);
     });
 
     it('handles readonly binding', async () => {
-        const { root: proteanInput, waitForChanges } = await newSpecPage({
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
 
-        const inputElement = proteanInput.shadowRoot.querySelector('input');
-        expect(proteanInput.readonly).toEqual(false);
+        const inputElement = rootInstance.inputElement;
+        expect(root.readonly).toEqual(false);
         expect(inputElement.readOnly).toEqual(false);
 
-        proteanInput.readonly = true;
+        root.readonly = true;
         await waitForChanges();
 
         expect(inputElement.readOnly).toEqual(true);
     });
 
-    it('handles aria-expanded binding', async () => {
-        const { root: proteanInput, waitForChanges } = await newSpecPage({
+    it('handles maxlength binding', async () => {
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [ProteanInput],
             html: '<protean-input></protean-input>',
         });
 
-        const inputElement = proteanInput.shadowRoot.querySelector('input');
+        const inputElement = rootInstance.inputElement;
+        expect(root.maxlength).toEqual(undefined);
+        expect(inputElement.maxLength).toEqual(0); // actually -1 in practice
+
+        root.maxlength = 10;
+        await waitForChanges();
+
+        expect(inputElement.maxLength).toEqual(10);
+    });
+
+    it('handles aria-haspopup binding', async () => {
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
+            components: [ProteanInput],
+            html: '<protean-input></protean-input>',
+        });
+
+        const inputElement = rootInstance.inputElement;
+        expect(inputElement).toEqualAttribute('aria-haspopup', null);
+
+        root.ariaHasPopup = 'listbox';
+        await waitForChanges();
+
+        expect(inputElement).toEqualAttribute('aria-haspopup', 'listbox');
+    });
+
+    it('handles aria-expanded binding', async () => {
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
+            components: [ProteanInput],
+            html: '<protean-input></protean-input>',
+        });
+
+        const inputElement = rootInstance.inputElement;
         expect(inputElement).toEqualAttribute('aria-expanded', null);
 
-        proteanInput.ariaExpanded = true;
+        root.ariaExpanded = true;
         await waitForChanges();
 
         expect(inputElement).toEqualAttribute('aria-expanded', 'true');
 
-        proteanInput.ariaExpanded = false;
+        root.ariaExpanded = false;
         await waitForChanges();
 
         expect(inputElement).toEqualAttribute('aria-expanded', 'false');
+    });
+
+    it('handles role binding', async () => {
+        const { root, rootInstance, waitForChanges } = await newSpecPage({
+            components: [ProteanInput],
+            html: '<protean-input></protean-input>',
+        });
+
+        const inputElement = rootInstance.inputElement;
+        expect(inputElement).toEqualAttribute('role', null);
+
+        root.ariaRole = 'button';
+        await waitForChanges();
+
+        expect(inputElement).toEqualAttribute('role', 'button');
     });
 });

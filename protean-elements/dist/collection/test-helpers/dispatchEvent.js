@@ -8,10 +8,12 @@ export default async function dispatchEvent(page, selector, eventName, eventInit
   await page.$eval(parentSelector, (element, childSelectors, eventName, eventInit) => {
     const eventConstructorMap = {
       keyup: KeyboardEvent,
+      keydown: KeyboardEvent,
       change: CustomEvent,
       input: CustomEvent,
       blur: FocusEvent,
       focus: FocusEvent,
+      mousedown: MouseEvent,
     };
     const EventConstructor = eventConstructorMap[eventName] ?? CustomEvent;
     const elementToDispatch = childSelectors

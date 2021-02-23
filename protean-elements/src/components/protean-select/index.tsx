@@ -20,7 +20,7 @@ import { VNode } from '@stencil/core/internal';
 export class ProteanSelect {
     @Prop({ mutable: true }) value: string;
     @Prop({ mutable: true }) selectedOptions: string[];
-    @Prop({ reflect: true }) multiple: boolean; //change to variant?
+    @Prop({ reflect: true }) multiple = false; //change to variant?
     @Prop({ reflect: true }) label: string;
     @Prop() ariaLabel: string;
     @Prop({ reflect: true }) optional: boolean;
@@ -108,6 +108,13 @@ export class ProteanSelect {
         this.value = event.detail.value;
     }
 
+    @Listen('focus')
+    delegateFocus(event: FocusEvent): void {
+        if (event.target === this.hostElement) {
+            this.focusInput();
+        }
+    }
+
     @Watch('multiple')
     updateOptions(): void {
         if (this.multiple) {
@@ -165,10 +172,17 @@ export class ProteanSelect {
             .map(option => option.value);
     }
 
+    focusInput = (): void => {
+        this.hostElement.shadowRoot
+            .querySelector('protean-input')
+            .dispatchEvent(new FocusEvent('focus'));
+    };
+
     closeDropdown: VoidFunction = () => {
         if (!this.dropdownOpen) return;
 
         this.dropdownOpen = false;
+        this.focusInput();
 
         if (this.activeOption) {
             this.activeOption.active = false;
@@ -373,7 +387,7 @@ export class ProteanSelect {
                 hidden={!this.dropdownOpen}
                 onClick={this.onOptionClick}
             >
-                <slot></slot>
+                <slot />
             </div>
         );
     }
