@@ -6,8 +6,6 @@ export default function debounce(
 
     return function (): void {
         clearTimeout(timeout);
-        timeout = setTimeout(() => {
-            fn();
-        }, threshold);
+        timeout = setTimeout(fn, threshold);
     };
 }

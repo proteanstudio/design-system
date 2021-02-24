@@ -56,7 +56,7 @@ h3 {
 
 a:not(.unstyled) {
     text-decoration: none;
-    color: inherit;
+    color: var(--link-color);
     display: inline-block;
     position: relative;
 
@@ -73,7 +73,7 @@ a:not(.unstyled) {
 
     &:focus,
     &:hover {
-        color: #ffffff;
+        color: var(--link-hover-color);
 
         &::after {
             width: 100%;
@@ -105,5 +105,6 @@ nav li {
 
 code {
     font-size: var(--body-font-size);
-    background-color: var(--code-background-color);overflow-wrap: anywhere;
+    background-color: var(--code-background-color);
+    overflow-wrap: anywhere;
 }

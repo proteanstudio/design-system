@@ -11,6 +11,8 @@
   --action-contrast-color: #000000;
   --action-hover-color: #f83e19;
   --action-hover-contrast-color: var(--action-contrast-color);
+  --link-color: inherit;
+  --link-hover-color: var(--link-color);
   --touch-zone-size: 42px;
   --code-background-color: #393939;
   --protean-status-info: #0965b7;
@@ -50,16 +52,15 @@
   --protean-dropdown-text-color: inherit;
   --protean-dropdown-border-color: currentColor;
   --protean-dropdown-border-width: 0 1px 1px;
-  --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(255, 255, 255, 0.5);
+  --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(255, 255, 255, 0.7);
   --protean-dropdown-hover-background-color: #353535;
   --protean-select-separator-color: #535353;
   --protean-optgroup-separator-color: var(--protean-select-separator-color);
   --protean-checkbox-toggle-path-color: #535353;
 }
-
-.light {
+:root.light {
   --body-color: #333333;
-  --body-background-color: #fff;
+  --body-background-color: #fdfdfd;
   --action-color: var(--purple);
   --action-contrast-color: #ffffff;
   --action-hover-color: #5a0d8d;
@@ -67,7 +68,7 @@
   --protean-dropdown-background-color: #fff;
   --protean-message-background-color: #f7f7f7;
   --protean-message-text-color: #000000;
-  --protean-message-border-color: #e2e2e2;
+  --protean-message-border-color: #dadada;
   --protean-tab-container-border-color: #cdcdcd;
   --protean-button-icon-hover-background-color: rgba(114, 9, 183, 0.2);
   --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.5);
@@ -189,7 +190,7 @@ h3 + p {
 
 a:not(.unstyled) {
   text-decoration: none;
-  color: inherit;
+  color: var(--link-color);
   display: inline-block;
   position: relative;
 }
@@ -204,7 +205,7 @@ a:not(.unstyled)::after {
   transition: width 0.2s ease-in-out, font-weight 0.2s ease-in-out;
 }
 a:not(.unstyled):focus, a:not(.unstyled):hover {
-  color: #ffffff;
+  color: var(--link-hover-color);
 }
 a:not(.unstyled):focus::after, a:not(.unstyled):hover::after {
   width: 100%;

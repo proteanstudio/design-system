@@ -13,6 +13,9 @@
     --action-hover-color: #f83e19;
     --action-hover-contrast-color: var(--action-contrast-color);
 
+    --link-color: inherit;
+    --link-hover-color: var(--link-color);
+
     --touch-zone-size: 42px;
 
     --code-background-color: #393939;
@@ -45,7 +48,6 @@
     --protean-button-icon-hover-background-color: rgba(255, 95, 64, 0.2);
     --protean-button-icon-stroke-color: currentColor;
 
-
     --protean-message-background-color: #2a2a2a;
     --protean-message-text-color: #fcfcfc;
     --protean-message-border-color: #353535;
@@ -57,36 +59,36 @@
     --protean-dropdown-text-color: inherit;
     --protean-dropdown-border-color: currentColor;
     --protean-dropdown-border-width: 0 1px 1px;
-    --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(255, 255, 255, 0.5);
+    --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(255, 255, 255, 0.7);
     --protean-dropdown-hover-background-color: #353535;
 
     --protean-select-separator-color: #535353;
     --protean-optgroup-separator-color: var(--protean-select-separator-color);
 
     --protean-checkbox-toggle-path-color: #535353;
-}
 
-.light {
-    --body-color: #333333;
-    --body-background-color: #fff;
-    --action-color: var(--purple);
-    --action-contrast-color: #ffffff;
-    --action-hover-color: #5a0d8d;
+    &.light {
+        --body-color: #333333;
+        --body-background-color: #fdfdfd;
+        --action-color: var(--purple);
+        --action-contrast-color: #ffffff;
+        --action-hover-color: #5a0d8d;
 
-    --code-background-color: #f2f2f2;
+        --code-background-color: #f2f2f2;
 
-    --protean-dropdown-background-color: #fff;
-    --protean-message-background-color: #f7f7f7;
-    --protean-message-text-color: #000000;
-    --protean-message-border-color: #e2e2e2;
-    --protean-tab-container-border-color: #cdcdcd;
+        --protean-dropdown-background-color: #fff;
+        --protean-message-background-color: #f7f7f7;
+        --protean-message-text-color: #000000;
+        --protean-message-border-color: #dadada;
+        --protean-tab-container-border-color: #cdcdcd;
 
-    --protean-button-icon-hover-background-color: rgba(114, 9, 183, 0.2);
+        --protean-button-icon-hover-background-color: rgba(114, 9, 183, 0.2);
 
-    --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.5);
-    --protean-dropdown-hover-background-color: #efefef;
-    --protean-select-separator-color: #dadada;
-    --protean-optgroup-separator-color: var(--protean-select-separator-color);
+        --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.5);
+        --protean-dropdown-hover-background-color: #efefef;
+        --protean-select-separator-color: #dadada;
+        --protean-optgroup-separator-color: var(--protean-select-separator-color);
 
-    --protean-checkbox-toggle-path-color: #979797;
+        --protean-checkbox-toggle-path-color: #979797;
+    }
 }

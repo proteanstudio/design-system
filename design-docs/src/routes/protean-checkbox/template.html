@@ -10,7 +10,7 @@
             class="overview-demo-element"
             label="Checkbox label"
             :variant="demoVariant"
-            :checked="demoChecked"
+            v-prop:checked="demoChecked"
             :disabled="demoDisabled"
             :alignment="demoAlignment"
             :indeterminate="demoIndeterminate"
@@ -22,25 +22,25 @@
         <protean-checkbox
             label="Show as toggle"
             variant="toggle"
-            :checked="demoIsToggle"
+            v-prop:checked="demoIsToggle"
             @change="demoIsToggle = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Show as disabled"
             variant="toggle"
-            :checked="demoDisabled"
+            v-prop:checked="demoDisabled"
             @change="demoDisabled = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Align to the right"
             variant="toggle"
-            :checked="demoIsRightAligned"
+            v-prop:checked="demoIsRightAligned"
             @change="demoIsRightAligned = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Show as indeterminate"
             variant="toggle"
-            :checked="demoIndeterminate"
+            v-prop:checked="demoIndeterminate"
             :disabled="demoIsToggle"
             @change="demoIndeterminate = $event.detail.checked"
         ></protean-checkbox>
@@ -49,7 +49,8 @@
         <code-snippet
             :substitutions='[demoVariant ? `\n variant="${demoVariant}"`: "", demoChecked ? "\n checked" : "", demoDisabled ? "\n disabled" : "",  demoIndeterminate && !demoIsToggle ? "\n indeterminate" : "", demoAlignment]'
         >
-            {{`<protean-checkbox {0}{1}{2}{3}
+            {{`<protean-checkbox 
+                label="Checkbox label"{0}{1}{2}{3}
                 alignment="{4}"
                 ></protean-checkbox>
             `}}

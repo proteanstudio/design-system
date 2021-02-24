@@ -11,13 +11,14 @@
             class="overview-demo-element"
             label="Field label"
             :type="demoType"
-            :hints="demoHints"
-            :errors="demoErrors"
+            v-prop:hints="demoHints"
+            v-prop:errors="demoErrors"
             :suppressMessages="demoSuppressMessages"
             :optional="demoOptional"
             :disabled="demoDisabled"
             :readonly="demoReadonly"
             :format="demoFormat"
+            :maxlength="demoMaxlength"
             @input="spamErrors"
         ></protean-input>
     </div>
@@ -25,39 +26,39 @@
         <protean-checkbox
             label="Populate validation errors"
             variant="toggle"
-            :checked="demoShowErrors"
+            v-prop:checked="demoShowErrors"
             @change="demoShowErrors = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Hide hints and errors"
             variant="toggle"
-            :checked="demoSuppressMessages"
+            v-prop:checked="demoSuppressMessages"
             @change="demoSuppressMessages = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Show as optional"
             variant="toggle"
-            :checked="demoOptional"
+            v-prop:checked="demoOptional"
             @change="demoOptional = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Show as disabled"
             variant="toggle"
-            :checked="demoDisabled"
+            v-prop:checked="demoDisabled"
             @change="demoDisabled = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Show as readonly"
             variant="toggle"
-            :checked="demoReadonly"
+            v-prop:checked="demoReadonly"
             @change="demoReadonly = $event.detail.checked"
         ></protean-checkbox>
-        <!-- <protean-input
+        <protean-input
             label="Input maxlength"
             type="tel"
             :value="demoMaxlength"
             @change="demoMaxlength = $event.detail.value"
-        ></protean-input> -->
+        ></protean-input>
         <protean-select
             @change="demoType = $event.detail.value"
             :value="demoType"
@@ -91,12 +92,12 @@
     </div>
     <div class="overview-demo-snippet">
         <code-snippet
-            :substitutions='[demoType, demoFormat ? `\n format="${demoFormat}"` : "",   demoSuppressMessages ? "\n suppress-messages" : "",demoOptional ? "\n optional" : "", demoDisabled ? "\n disabled" : "", demoReadonly ? "\n readonly" : ""]'
+            :substitutions='[demoType, demoFormat ? `\n format="${demoFormat}"` : "", demoMaxlength ? `\n maxlength="${demoMaxlength}"` : "",   demoSuppressMessages ? "\n suppress-messages" : "",demoOptional ? "\n optional" : "", demoDisabled ? "\n disabled" : "", demoReadonly ? "\n readonly" : ""]'
         >
             {{`<protean-input
                 label="Field label"
                 type="{0}"
-                {1}{2}{3}{4}{5}
+                {1}{2}{3}{4}{5}{6}
             ></protean-input>
             `}}
         </code-snippet>
@@ -347,6 +348,25 @@
         <div class="prop-example">
             <code-snippet language="javascript">
                 element.readonly = true;
+            </code-snippet>
+        </div>
+    </li>
+    <li class="prop-item">
+        <div class="prop-info">
+            <h4 class="prop-name">maxlength</h4>
+            <div class="prop-type">
+                <code>number</code>
+            </div>
+            <div class="prop-attribute">
+                Attribute name: <code>maxlength</code>
+            </div>
+            <div class="prop-desc">
+                Maximum allowed length of the input value.  Valid for <code>password</code>, <code>search</code>, <code>tel</code>, and <code>text</code> fields.
+            </div>
+        </div>
+        <div class="prop-example">
+            <code-snippet language="javascript">
+                element.maxlength = 20;
             </code-snippet>
         </div>
     </li>

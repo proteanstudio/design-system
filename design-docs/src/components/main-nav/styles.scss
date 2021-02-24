@@ -11,16 +11,17 @@
 }
 
 .main-nav {
-    flex: 0 0 200px;
+    --main-nav-width: 200px;
+    flex: 0 0 var(--main-nav-width);
     background-color: var(--body-background-color);
     border-right: 1px solid #353535;
     position: relative;
 
     @include breakpoint(m) {
         position: fixed;
-        width: 200px;
+        width: var(--main-nav-width);
         top: 60px;
-        left: -200px;
+        left: calc(-1 * var(--main-nav-width));
         z-index: 1;
         height: 100vh;
         overflow-y: auto;
@@ -52,6 +53,11 @@
         position: sticky;
         top: 0;
         padding: 1.5rem;
+
+        @include breakpoint(m, min) {
+            height: 100vh;
+            overflow-y: auto;
+        }
     }
 
     .nav-group {
@@ -72,8 +78,9 @@
         }
     }
 
-    /* .light-mode-toggle {
+    .light-mode-toggle {
         position: sticky;
-        top: calc(100vh - 60px);
-    } */
+        top: calc(100% - var(--touch-zone-size));
+        margin: 0;
+    }
 }

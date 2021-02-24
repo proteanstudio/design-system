@@ -2,20 +2,25 @@
     <protean-button
         variant="icon"
         class="off-canvas-toggle"
-        ariaLabel="Toggle Menu"
+        v-prop:ariaLabel="'Toggle Menu'"
         @click="showOffCanvas = !showOffCanvas"
     >
         <protean-icon type="menu"></protean-icon>
     </protean-button>
     <router-link to="/" class="home-link unstyled">
         <img
-            src="@/assets/images/logo-white-text.svg"
+            :src="logoURL"
             class="protean-logo"
             alt="Protean Studio Design System"
         />
     </router-link>
 </header>
-<main-nav :showOffCanvas="showOffCanvas" @hideOffCanvas="showOffCanvas = false" />
+<main-nav
+    :showOffCanvas="showOffCanvas"
+    :lightModeEnabled="lightModeEnabled"
+    @hideOffCanvas="showOffCanvas = false"
+    @toggleLightMode="toggleLightMode"
+/>
 <main class="content" tabindex="-1">
     <div>
         <router-view />

@@ -34,13 +34,13 @@
         <protean-checkbox
             label="Show as status message"
             variant="toggle"
-            :checked="demoIsStatus"
+            v-prop:checked="demoIsStatus"
             @change="demoIsStatus = $event.detail.checked"
         ></protean-checkbox>
         <!-- <protean-checkbox
             label="Show as inline message"
             variant="toggle"
-            :checked="demoIsInline"
+            v-prop:checked="demoIsInline"
             @change="demoIsInline = $event.detail.checked"
         ></protean-checkbox> -->
     </div>

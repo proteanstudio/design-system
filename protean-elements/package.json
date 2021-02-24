@@ -2,11 +2,10 @@
   "name": "protean-elements",
   "version": "0.0.1",
   "description": "Protean Studio Elements",
-  "main": "./dist/index.cjs.js",
-  "module": "./dist/index.js",
+  "main": "./dist/protean-elements/protean-elements.esm.js",
+  "module": "./dist/protean-elements/protean-elements.esm.js",
   "es2015": "./dist/protean-elements/protean-elements.esm.js",
   "es2017": "./dist/protean-elements/protean-elements.esm.js",
-  "collection": "./dist/collection/collection-manifest.json",
   "types": "./dist/types/components.d.ts",
   "license": "MIT",
   "files": [

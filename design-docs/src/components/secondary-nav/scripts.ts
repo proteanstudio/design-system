@@ -9,7 +9,9 @@ interface SecondaryNavItem {
 
 export default class SecondaryNav extends Vue {
     mounted(): void {
-        window.addEventListener('scroll', this.scrollListener);
+        window.addEventListener('scroll', this.scrollListener, {
+            passive: true,
+        });
     }
 
     unmounted(): void {

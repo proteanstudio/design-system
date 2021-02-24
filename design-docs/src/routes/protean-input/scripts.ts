@@ -57,7 +57,7 @@ export default class ProteanInput extends Vue {
     demoOptional = false;
     demoDisabled = false;
     demoReadonly = false;
-    // demoMaxlength = 20; // currrently unbound
+    demoMaxlength = 20;
     demoFormat = '';
     demoNumericFormats = ['delimited', '3dec'];
     dateFormats = [

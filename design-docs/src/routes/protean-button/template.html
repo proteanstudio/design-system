@@ -10,7 +10,7 @@
             class="overview-demo-element"
             :variant="demoVariant"
             :disabled="demoDisabled"
-            :ariaLabel="demoAriaLabel"
+            v-prop:ariaLabel="demoAriaLabel"
         >
         <protean-icon v-if="demoVariant === 'icon'" type="chevron-down"></protean-icon>
         <span v-else>Button text</span>
@@ -20,7 +20,7 @@
         <protean-checkbox
             label="Show as disabled"
             variant="toggle"
-            :checked="demoDisabled"
+            v-prop:checked="demoDisabled"
             @change="demoDisabled = $event.detail.checked"
         ></protean-checkbox>
         <protean-select

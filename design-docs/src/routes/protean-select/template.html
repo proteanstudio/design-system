@@ -54,31 +54,31 @@
         <protean-checkbox
             label="Show with optgroups"
             variant="toggle"
-            :checked="demoWithOptGroups"
+            v-prop:checked="demoWithOptGroups"
             @change="demoWithOptGroups = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Show as multiselect"
             variant="toggle"
-            :checked="demoMultiple"
+            v-prop:checked="demoMultiple"
             @change="demoMultiple = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Show with validation errors"
             variant="toggle"
-            :checked="demoShowErrors"
+            v-prop:checked="demoShowErrors"
             @change="demoShowErrors = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Show as optional"
             variant="toggle"
-            :checked="demoOptional"
+            v-prop:checked="demoOptional"
             @change="demoOptional = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
             label="Show as disabled"
             variant="toggle"
-            :checked="demoDisabled"
+            v-prop:checked="demoDisabled"
             @change="demoDisabled = $event.detail.checked"
         ></protean-checkbox>
     </div>

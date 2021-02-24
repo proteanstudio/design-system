@@ -4,6 +4,7 @@
     display: flex;
     position: relative;
 
+    --cs-border: #686868;
     --cs-1: #f2e1ff;
     --cs-2: #ebd7f9;
     --cs-3: #fd9bc7;
@@ -17,6 +18,15 @@
     --cs-addition: rgba(163, 190, 140, 0.5);
     --cs-deletion: rgba(191, 97, 106, 0.5);
 
+    html.light & {
+        --cs-border: #cdcdcd;
+        --cs-1: #2f5dca;
+        --cs-2: #816395;
+        --cs-3: #d50765;
+        --cs-4: var(--purple);
+        --cs-string: #d02e0e;
+    }
+
     .hljs {
         display: block;
         min-height: var(--touch-zone-size);
@@ -24,7 +34,7 @@
         overflow-x: auto;
         padding: 1rem var(--touch-zone-size) 1rem 1rem;
         background: var(--code-background-color);
-        border: 1px solid #686868;
+        border: 1px solid var(--cs-border);
     }
     .hljs,
     .hljs-subst {

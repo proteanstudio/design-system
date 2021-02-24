@@ -7,8 +7,8 @@
         "dist/*.css"
     ],
     "scripts": {
-        "scss": "sass styles/app.scss dist/css/app.css",
-        "scss:w": "sass --watch styles/app.scss dist/css/app.css",
+        "build": "sass styles/app.scss dist/css/app.css",
+        "start": "sass --watch styles/app.scss dist/css/app.css",
         "format": "prettier --check  'styles/'",
         "format:fix": "prettier --write 'styles/'"
     },

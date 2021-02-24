@@ -6,10 +6,8 @@ export const config: Config = {
         {
           type: 'dist',
           esmLoaderPath: '../loader',
+          polyfills: false
         },
-        // {
-        //   type: 'dist-custom-elements-bundle',
-        // },
         {
             type: 'www',
             serviceWorker: null, // disable service workers

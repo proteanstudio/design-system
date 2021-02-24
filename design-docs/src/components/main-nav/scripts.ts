@@ -12,10 +12,13 @@ interface MainNavGroup {
 }
 
 @Options({
-    emits: ['hide-off-canvas'],
+    emits: ['hide-off-canvas', 'toggle-light-mode'],
 })
 export default class MainNav extends Vue {
     @Prop() showOffCanvas = false;
+    @Prop() lightModeEnabled = false;
+
+    hasMounted = false;
 
     get sortedRoutes(): MainNavGroup[] {
         const groupedStructure: MainNavGroup[] = [
@@ -48,13 +51,4 @@ export default class MainNav extends Vue {
 
         return routes;
     }
-
-    /* 
-    lightModeEnabled = document.body.classList.contains('light');
-
-    toggleLightMode(event: CustomEvent): void {
-        this.lightModeEnabled = event.detail.checked;
-
-        document.body.classList.toggle('light');
-    } */
 }
