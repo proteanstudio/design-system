@@ -6,12 +6,8 @@
     }
 }
 
-[role="group"] {
-    pointer-events: none;
-}
-
 .main-nav {
-    --main-nav-width: 200px;
+    --main-nav-width: 225px;
     flex: 0 0 var(--main-nav-width);
     background-color: var(--body-background-color);
     border-right: 1px solid #353535;

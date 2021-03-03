@@ -1,10 +1,11 @@
 <h1>Message</h1>
 <p>
-    Use messages to...
+    Messages present important information about an action, task, or system
+    status.
 </p>
 
-<h2 data-in-page-anchor="overview">Overview</h2>
-<div class="overview-content">
+<section class="overview-content">
+    <h2 data-in-page-anchor="overview">Overview</h2>
     <div class="overview-demo">
         <protean-message
             class="overview-demo-element"
@@ -29,7 +30,8 @@
                 v-for="type in demoTypes"
                 :label="type"
                 :value="type"
-            >{{type}}</protean-option>
+                >{{type}}</protean-option
+            >
         </protean-select>
         <protean-checkbox
             label="Show as status message"
@@ -45,9 +47,7 @@
         ></protean-checkbox> -->
     </div>
     <div class="overview-demo-snippet">
-        <code-snippet
-            :substitutions='[demoType, demoLevel]'
-        >
+        <code-snippet :substitutions="[demoType, demoLevel]">
             {{`
             <protean-message
                 class="overview-demo-element"
@@ -64,64 +64,104 @@
             `}}
         </code-snippet>
     </div>
-</div>
-<h2 data-in-page-anchor="best-practices">Best practices</h2>
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum minima
-    beatae dolores qui assumenda distinctio est, repellat architecto tempore
-    illo iste pariatur debitis repellendus accusantium explicabo eum ex dolorem
-    ullam? Provident officiis voluptatem in sit expedita consequatur ad
-    voluptatibus nisi repellat tempore? Ex et ducimus ea distinctio deserunt.
-    Aliquam a doloribus eligendi ratione porro vel consequuntur eaque sunt
-    corrupti molestiae accusamus harum reprehenderit, fugit repudiandae? Quaerat
-    fugit laudantium sunt libero consectetur reprehenderit temporibus id
-    cupiditate dolorem recusandae, ut voluptates sequi. Officia, maiores ad
-    asperiores iure commodi dolore aut aspernatur ut consectetur amet distinctio
-    eius nesciunt ullam sapiente architecto fugit adipisci!
-</p>
-<h2 data-in-page-anchor="api">API</h2>
-<h3>Properties</h3>
-<div>
-    In the following examples, <code>element</code> refers to an instance of
-    <code>protean-message</code> (i.e.
-    <code>element = document.querySelector('protean-message#myMessage')</code>).
-</div>
-<ul class="prop-list">
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">type</h4>
-            <div class="prop-type">
-                <code>"info"</code> (default) | 
-                <code>"success"</code> | 
-                <code>"warning"</code> | 
-                <code>"error"</code>
+</section>
+<section class="best-practices-content">
+    <h2 data-in-page-anchor="best-practices">Best practices</h2>
+    <section>
+        <h3>
+            Tell the user what happened, <strong>and</strong> what to do next.
+        </h3>
+        <ul>
+            <li>
+                If the user needs to take action in response to a message, give
+                clear, specific instructions about what to do.
+            </li>
+        </ul>
+    </section>
+    <section>
+        <h3>Use the right level of urgency.</h3>
+        <ul>
+            <li>
+                Messages are interruptive; the level of interruption should
+                match the urgency of the information.
+            </li>
+            <li>
+                Informational and success messages rarely require immediate attention, so <code>level="status"</code> is appropriate.
+            </li>
+            <li>
+                Warning and error messages often demand timely action, so use <code>level="alert"</code> to give it the necessary priority.
+            </li>
+        </ul>
+    </section>
+    <section>
+        <h3>Use clear, polite language.</h3>
+        <ul>
+            <li>Be specific, be concise, and don't blame the user.</li>
+        </ul>
+    </section>
+    <section>
+        <h3>Use messages thoughtfully</h3>
+        <ul>
+            <li>
+                Messages aren't effective when they are ignored; don't annoy or
+                overwhelm the user with too many interruptions.
+            </li>
+        </ul>
+    </section>
+</section>
+
+<section>
+    <h2 data-in-page-anchor="api">API</h2>
+    <h3>Properties</h3>
+    <div>
+        In the following examples, <code>element</code> refers to an instance of
+        <code>protean-message</code> (i.e.
+        <code
+            >element = document.querySelector('protean-message#myMessage')</code
+        >).
+    </div>
+    <ul class="prop-list">
+        <li class="prop-item">
+            <div class="prop-info">
+                <h4 class="prop-name">type</h4>
+                <div class="prop-type">
+                    <code>"info"</code> (default) | <code>"success"</code> |
+                    <code>"warning"</code> |
+                    <code>"error"</code>
+                </div>
+                <div class="prop-attribute">
+                    Attribute name: <code>type</code>
+                </div>
+                <div class="prop-desc">
+                    The visual style of the message. Controls the icon and color
+                    used to communicate the intent of the message.
+                </div>
             </div>
-            <div class="prop-attribute">
-                Attribute name: <code>type</code>
+            <div class="prop-example">
+                <code-snippet language="javascript">
+                    element.type = 'success';
+                </code-snippet>
             </div>
-            <div class="prop-desc">
-                The visual style of the message. Controls the icon and color used to communicate the intent of the message.
+        </li>
+        <li class="prop-item">
+            <div class="prop-info">
+                <h4 class="prop-name">level</h4>
+                <div class="prop-type">
+                    <code>"alert"</code> (default) | <code>"status"</code>
+                </div>
+                <div class="prop-attribute">
+                    Attribute name: <code>level</code>
+                </div>
+                <div class="prop-desc">
+                    Controls the <code>role</code> assigned to the message list,
+                    dictating the verbosity of assistive technologies.
+                </div>
             </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.type = 'success';
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">level</h4>
-            <div class="prop-type"><code>"alert"</code> (default) | <code>"status"</code></div>
-            <div class="prop-attribute">
-                Attribute name: <code>level</code>
+            <div class="prop-example">
+                <code-snippet language="javascript">
+                    element.level = 'status';
+                </code-snippet>
             </div>
-            <div class="prop-desc">Controls the <code>role</code> assigned to the message list, dictating the verbosity of assistive technologies.</div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.level = 'status';
-            </code-snippet>
-        </div>
-    </li>
-</ul>
+        </li>
+    </ul>
+</section>

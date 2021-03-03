@@ -1,4 +1,4 @@
-<nav class="main-nav" :class="{'show-off-canvas': showOffCanvas} ">
+<nav class="main-nav" :class="{'show-off-canvas': showOffCanvas} " aria-label="Main navigation">
     <protean-click-elsewhere @change.self="$emit('hide-off-canvas')" class="nav-content">
         <router-link to="/" class="home-link unstyled">
             <img

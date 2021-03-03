@@ -1,10 +1,9 @@
 <h1>Button</h1>
 <p>
-    Use buttons to indicate an action on the current view. Don’t use these to navigate to a new view.
+    Buttons allow the user to perform actions in a given page or context, typically in forms, dialogs, or contextual menus.
 </p>
-
-<h2 data-in-page-anchor="overview">Overview</h2>
-<div class="overview-content">
+<section class="overview-content">
+    <h2 data-in-page-anchor="overview">Overview</h2>
     <div class="overview-demo">
         <protean-button
             class="overview-demo-element"
@@ -12,9 +11,12 @@
             :disabled="demoDisabled"
             v-prop:ariaLabel="demoAriaLabel"
         >
-        <protean-icon v-if="demoVariant === 'icon'" type="chevron-down"></protean-icon>
-        <span v-else>Button text</span>
-    </protean-button>
+            <protean-icon
+                v-if="demoVariant === 'icon'"
+                type="chevron-down"
+            ></protean-icon>
+            <span v-else>Button text</span>
+        </protean-button>
     </div>
     <div class="overview-demo-controls">
         <protean-checkbox
@@ -28,98 +30,220 @@
             :value="demoVariant"
             label="Button variant"
         >
-            <protean-option
-                value="primary"
-                label="primary"
-            >
+            <protean-option value="primary" label="primary">
                 primary
             </protean-option>
-            <protean-option
-                value="secondary"
-                label="secondary"
-            >
+            <protean-option value="secondary" label="secondary">
                 secondary
             </protean-option>
-            <protean-option
-                value="icon"
-                label="icon"
-            >
-                icon
-            </protean-option>
+            <protean-option value="icon" label="icon"> icon </protean-option>
         </protean-select>
     </div>
     <div class="overview-demo-snippet">
         <code-snippet
             :substitutions='[demoVariant, demoDisabled ? " disabled" : "", demoContent]'
         >
-            {{`<protean-button variant="{0}"{1}>
-            {2}
-        </protean-button>
+            {{`<protean-button variant="{0}" {1}> {2} </protean-button>
             `}}
         </code-snippet>
     </div>
-</div>
-<h2 data-in-page-anchor="best-practices">Best practices</h2>
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum minima
-    beatae dolores qui assumenda distinctio est, repellat architecto tempore
-    illo iste pariatur debitis repellendus accusantium explicabo eum ex dolorem
-    ullam? Provident officiis voluptatem in sit expedita consequatur ad
-    voluptatibus nisi repellat tempore? Ex et ducimus ea distinctio deserunt.
-    Aliquam a doloribus eligendi ratione porro vel consequuntur eaque sunt
-    corrupti molestiae accusamus harum reprehenderit, fugit repudiandae? Quaerat
-    fugit laudantium sunt libero consectetur reprehenderit temporibus id
-    cupiditate dolorem recusandae, ut voluptates sequi. Officia, maiores ad
-    asperiores iure commodi dolore aut aspernatur ut consectetur amet distinctio
-    eius nesciunt ullam sapiente architecto fugit adipisci!
-</p>
-<h2 data-in-page-anchor="api">API</h2>
-<h3>Properties</h3>
-<div>
-    In the following examples, <code>element</code> refers to an instance of
-    <code>protean-button</code> (i.e.
-    <code>element = document.querySelector('protean-button#myButton')</code>).
-</div>
-<ul class="prop-list">
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">variant</h4>
-            <div class="prop-type"><code>"primary"</code> | <code>"secondary</code> | <code>"icon"</code></div>
-            <div class="prop-attribute">Attribute name: <code>variant</code></div>
-            <div class="prop-desc">The visual style of the button. <code>icon</code> buttons should only be used in conjuction with <code>protean-icon</code> and should be used with an ariaLabel.</div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.variant = 'primary';
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">disabled</h4>
-            <div class="prop-type"><code>boolean</code></div>
-            <div class="prop-attribute">Attribute name: <code>disabled</code></div>
-            <div class="prop-desc">Disables button interaction.</div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.disabled = true;
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">ariaLabel</h4>
-            <div class="prop-type"><code>string</code></div>
-            <div class="prop-desc">
-                The label read by assistive technologies for the input. Note:
-                This should not be set when the button has text rendered in it.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.ariaLabel = 'Field aria-label';
-            </code-snippet>
-        </div>
-    </li>
-</ul>
+</section>
+<section class="best-practices-content">
+    <h2 data-in-page-anchor="best-practices">Best practices</h2>
+    <section>
+        <h3 >Use clear, concise button labels.</h3>
+        <ul>
+            <li>
+                Button labels should indicate what will happen when the button is
+                clicked.
+            </li>
+            <li>
+                Start with a verb (e.g. "Create", "Save", "Remove"), and supplement
+                with a noun when you need additional clarity (e.g. "Create folder",
+                "Save address", "Remove user").
+            </li>
+        </ul>
+    </section>
+    <section>
+        <h3 >
+            Use only one primary button in a given page or view.
+        </h3>
+        <ul>
+            <li>
+                The primary button has the greatest visual prominence, so reserve it
+                for the most important action on the page.
+            </li>
+            <li>
+                If there are several equally-important actions on a page, use the
+                secondary style for all buttons on that page.
+            </li>
+        </ul>
+    </section>
+    <section>
+        <h3 >Use consistent button alignment.</h3>
+        <ul>
+            <li>
+                Consistent button alignment reduces cognitive load and interaction
+                cost.
+            </li>
+            <li>
+                Once you have the button alignment convention that's best for your
+                design, stick to it.
+            </li>
+            <li>
+                Our alignment convention, for example, is to right-align buttons to
+                their respective content, with priority actions to the right.
+            </li>
+        </ul>
+    </section>
+    <section>
+        <h3>
+            Use buttons for actions, and use links for navigation.
+        </h3>
+        <ul>
+            <li>
+                Buttons and links communicate distinct meaning both to users and to
+                assistive technology.
+            </li>
+            <li>
+                Use a button to allow the user to interact with the
+                <em>current page or view</em>.
+            </li>
+            <li>
+                Use a link to allow the user to go to a
+                <em>different page or view.</em>
+            </li>
+        </ul>
+    </section>
+    <section>
+        <h3>Take extra care with icon buttons</h3>
+        <ul>
+            <li>Icon buttons don't have visible labels, so users must rely on context and experience to understand the button's purpose.</li>
+            <li>Always include a descriptive <code>ariaLabel</code> for icon buttons to ensure they can be understood by users who rely on assistive technology.</li>
+        </ul>
+    </section>
+</section>
+
+<section>
+    <h2 data-in-page-anchor="api">API</h2>
+    <section>
+        <h3>Properties</h3>
+        <p>
+            In the following examples, <code>element</code> refers to an instance of
+            <code>protean-button</code> (i.e.
+            <code>element = document.querySelector('protean-button#myButton')</code>).
+        </p>
+        <ul class="prop-list">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">variant</h4>
+                    <div class="prop-type">
+                        <code>"primary"</code> | <code>"secondary</code> |
+                        <code>"icon"</code>
+                    </div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>variant</code>
+                    </div>
+                    <div class="prop-desc">
+                        The visual style of the button. <code>icon</code> buttons should
+                        only be used in conjunction with <code>protean-icon</code> and
+                        should be used with an ariaLabel.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.variant = 'primary';
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">disabled</h4>
+                    <div class="prop-type"><code>boolean</code></div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>disabled</code>
+                    </div>
+                    <div class="prop-desc">Disables button interaction.</div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.disabled = true;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">ariaLabel</h4>
+                    <div class="prop-type"><code>string</code></div>
+                    <div class="prop-desc">
+                        The label read by assistive technologies for the input. Note:
+                        This should not be set when the button has text rendered in it.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.ariaLabel = 'Field aria-label';
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>CSS Variables</h3>
+        <ul class="prop-list stacked">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-primary-background-color</h4>
+                    <div class="prop-desc">
+                        The background color of the primary button.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-primary-background-color: var(--action-color);
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-primary-text-color</h4>
+                    <div class="prop-desc">
+                        The text color of the primary button.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-primary-text-color: var(--action-contrast-color);
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-primary-text-color</h4>
+                    <div class="prop-desc">
+                        The text color of the primary button.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-primary-text-color: var(--action-contrast-color);
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-primary-text-color</h4>
+                    <div class="prop-desc">
+                        The text color of the primary button.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-primary-text-color: var(--action-contrast-color);
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+    </section>
+</section>

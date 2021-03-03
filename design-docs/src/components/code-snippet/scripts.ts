@@ -4,10 +4,12 @@ import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 import typescript from 'highlight.js/lib/languages/typescript';
 import html from 'highlight.js/lib/languages/xml';
+import css from 'highlight.js/lib/languages/css';
 
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('typescript', typescript);
 hljs.registerLanguage('html', html);
+hljs.registerLanguage('css', css);
 
 export default class CodeSnippet extends Vue {
     @Prop() language = 'html';
