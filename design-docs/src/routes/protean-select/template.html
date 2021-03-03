@@ -1,8 +1,8 @@
 <h1>Select</h1>
-<p>Use selects to...</p>
-
-<h2 data-in-page-anchor="overview">Overview</h2>
-<div class="overview-content">
+<p>Selects present a collapsible list of options from which the user can make a single selection (the default), or multiple selections (when using the multi-select variant).</p>
+    
+<section class="overview-content">
+    <h2 data-in-page-anchor="overview">Overview</h2>
     <div class="overview-demo">
         <protean-select
             v-if="demoWithOptGroups"
@@ -90,300 +90,326 @@
             `}}
         </code-snippet>
     </div>
-</div>
-<h2 data-in-page-anchor="best-practices">Best practices</h2>
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum minima
-    beatae dolores qui assumenda distinctio est, repellat architecto tempore
-    illo iste pariatur debitis repellendus accusantium explicabo eum ex dolorem
-    ullam? Provident officiis voluptatem in sit expedita consequatur ad
-    voluptatibus nisi repellat tempore? Ex et ducimus ea distinctio deserunt.
-    Aliquam a doloribus eligendi ratione porro vel consequuntur eaque sunt
-    corrupti molestiae accusamus harum reprehenderit, fugit repudiandae? Quaerat
-    fugit laudantium sunt libero consectetur reprehenderit temporibus id
-    cupiditate dolorem recusandae, ut voluptates sequi. Officia, maiores ad
-    asperiores iure commodi dolore aut aspernatur ut consectetur amet distinctio
-    eius nesciunt ullam sapiente architecto fugit adipisci!
-</p>
-<h2 data-in-page-anchor="api">API</h2>
-<h3>Select Properties</h3>
-<div>
-    In the following examples, <code>element</code> refers to an instance of
-    <code>protean-select</code> (i.e.
-    <code>element = document.querySelector('protean-select#mySelect')</code>).
-</div>
-<ul class="prop-list">
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">value</h4>
-            <div class="prop-type"><code>string</code></div>
-            <div class="prop-desc">The value of the select when not using a <code>multiple</code> select. Should match the <code>value</code> of one of the nested options.</div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.value = 'option1';
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">selectedOptions</h4>
-            <div class="prop-type"><code>string[]</code></div>
-            <div class="prop-desc">The list of selected options when using a <code>multiple</code> select. Individual items should match the <code>value</code>s of one of the nested options.</div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.selectedOptions = ['option1', 'option2'];
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">multiple</h4>
-            <div class="prop-type"><code>boolean</code></div>
-            <div class="prop-attribute">Attribute name: <code>multiple</code></div>
-            <div class="prop-desc">Allows selection of multiple options</div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.multiple = true;
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">label</h4>
-            <div class="prop-type"><code>string</code></div>
-            <div class="prop-attribute">Attribute name: <code>label</code></div>
-            <div class="prop-desc">The visible label for the select.</div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.label = 'Field label';
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">ariaLabel</h4>
-            <div class="prop-type"><code>string</code></div>
-            <div class="prop-desc">
-                The label read by assistive technologies for the select. Note:
-                when <code>label</code> is set, this value will not be bound to
-                the field.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.ariaLabel = 'Field aria-label';
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">optional</h4>
-            <div class="prop-type">
-                <code>boolean</code>
-            </div>
-            <div class="prop-attribute">
-                Attribute name: <code>optional</code>
-            </div>
-            <div class="prop-desc">
-                Marks the field as optional to the user by appending
-                "(optional)" to the visible <code>label</code> and to assistive
-                technologies by setting <code>aria-required="false"</code>.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.optional = true;
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">errors</h4>
-            <div class="prop-type">
-                <code>string[]</code>
-            </div>
-            <div class="prop-desc">
-                A list of errors used to show the field in an error state. The contents of the errors are not visible to the user.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.errors = [ 'Error #1', ' Error #2' ];
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">disabled</h4>
-            <div class="prop-type">
-                <code>boolean</code>
-            </div>
-            <div class="prop-attribute">
-                Attribute name: <code>disabled</code>
-            </div>
-            <div class="prop-desc">
-                Disables the field and prevents user interaction.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.disabled = true;
-            </code-snippet>
-        </div>
-    </li>
-</ul>
+</section>
 
-<h3>Optgroup Properties</h3>
-<ul class="prop-list">
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">label</h4>
-            <div class="prop-type"><code>string</code></div>
-            <div class="prop-attribute">Attribute name: <code>label</code></div>
-            <div class="prop-desc">The visible label for the group.</div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.label = 'Group label';
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">disabled</h4>
-            <div class="prop-type">
-                <code>boolean</code>
-            </div>
-            <div class="prop-attribute">
-                Attribute name: <code>disabled</code>
-            </div>
-            <div class="prop-desc">
-                Disables the group and prevents any options with it from being selected.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.disabled = true;
-            </code-snippet>
-        </div>
-    </li>
-</ul>
+<section class="best-practices-content">
+    <h2 data-in-page-anchor="best-practices">Best practices</h2>
+    <p>Selects, radio buttons, and checkboxes all provide the same fundamental function: choosing from a list of options. Consider these questions before using a select in your design:</p>
+    <section>
+        <h3>How many options are in the list?</h3>
+        <ul>
+            <li>If there are five or fewer options, radio buttons (for a single selection) or checkboxes (for multiple selections) are less demanding on the user’s memory and outperform selects in usability tests.</li>
+        </ul>
+    </section>
+    <section>
+        <h3>Are users likely to know what option they want before seeing the list?</h3>
+        <ul>
+            <li>
+                If users are familiar with the list of options and how they are ordered, a select may be appropriate. For highly familiar option sets, like US states, it may be easier simply to type the answer.
+            </li>
+            <li>
+                If users likely need to browse the options before choosing, radio buttons or checkboxes support browsing better than selects.
+            </li>
+        </ul>
+    </section>
+    <section>
+        <h3>Is screen space constrained?</h3>
+        <ul>
+            <li>When screen space is limited, a select can be an efficient way to allow the user to choose from a list of options. </li>
+        </ul>
+    </section>
 
-<h3>Option Properties</h3>
-<ul class="prop-list">
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">value</h4>
-            <div class="prop-type"><code>string</code></div>
-            <div class="prop-attribute">Attribute name: <code>value</code></div>
-            <div class="prop-desc">The value of the option. This value is emitted when the option is selected.</div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.value = 'option1';
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">label</h4>
-            <div class="prop-type"><code>string</code></div>
-            <div class="prop-attribute">Attribute name: <code>label</code></div>
-            <div class="prop-desc">The text shown in the select when this option is selected. If not populated, the select will fall back to the option's inner text and further to its value.</div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.label = 'Group label';
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">disabled</h4>
-            <div class="prop-type">
-                <code>boolean</code>
-            </div>
-            <div class="prop-attribute">
-                Attribute name: <code>disabled</code>
-            </div>
-            <div class="prop-desc">
-                Disables the options and prevents it from being selected.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.disabled = true;
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">selected</h4>
-            <div class="prop-type">
-                <code>boolean</code>
-            </div>
-            <div class="prop-attribute">
-                Attribute name: <code>selected</code>
-            </div>
-            <div class="prop-desc">
-                Indicates whether an option is selected. Can be used to pre-select options on render but once <code>value</code> or <code>selectedOptions</code> is set on the select, the properties of the select override any user-defined properties on the option.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="html">
-                {{`<protean-option
-                        selected
-                        value="1" 
-                        label="Option 1">
-                        Option 1
-                    </protean-option>`}}
-            </code-snippet>
-        </div>
-    </li>
-</ul>
+</section>
 
-<h3>Event</h3>
-
-<ul class="prop-list">
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">change</h4>
-            <div class="prop-desc">
-                Fires when an option is selected.
-
-                <h5>Event detail</h5>
-                <code-snippet language="typescript">
-                    {{`event: {
-                        detail: {
-                            value?: string,
-                            selectedOptions?: string[],
-                    }
-                } `}}
-                </code-snippet>
-            </div>
+<section>
+    <h2 data-in-page-anchor="api">API</h2>
+    <section>
+        <h3>Select Properties</h3>
+        <div>
+            In the following examples, <code>element</code> refers to an instance of
+            <code>protean-select</code> (i.e.
+            <code>element = document.querySelector('protean-select#mySelect')</code>).
         </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                {{`function onChange(event) {
-                    if (this.multiple) {
-                        this.selectedOptions = event.detail.selectedOptions;
-                    } else {
-                        this.value = event.detail.value;
-                    }
-                }`}}
-            </code-snippet>
-            <code-snippet language="html">
-                {{`
-                <protean-select
-                    label="My select field label"
-                    onchange="onChange(event)"
-                ></protean-select>
-                `}}
-            </code-snippet>
-        </div>
-    </li>
-</ul>
+        <ul class="prop-list">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">value</h4>
+                    <div class="prop-type"><code>string</code></div>
+                    <div class="prop-desc">The value of the select when not using a <code>multiple</code> select. Should match the <code>value</code> of one of the nested options.</div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.value = 'option1';
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">selectedOptions</h4>
+                    <div class="prop-type"><code>string[]</code></div>
+                    <div class="prop-desc">The list of selected options when using a <code>multiple</code> select. Individual items should match the <code>value</code>s of one of the nested options.</div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.selectedOptions = ['option1', 'option2'];
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">multiple</h4>
+                    <div class="prop-type"><code>boolean</code></div>
+                    <div class="prop-attribute">Attribute name: <code>multiple</code></div>
+                    <div class="prop-desc">Allows selection of multiple options</div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.multiple = true;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">label</h4>
+                    <div class="prop-type"><code>string</code></div>
+                    <div class="prop-attribute">Attribute name: <code>label</code></div>
+                    <div class="prop-desc">The visible label for the select.</div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.label = 'Field label';
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">ariaLabel</h4>
+                    <div class="prop-type"><code>string</code></div>
+                    <div class="prop-desc">
+                        The label read by assistive technologies for the select. Note:
+                        when <code>label</code> is set, this value will not be bound to
+                        the field.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.ariaLabel = 'Field aria-label';
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">optional</h4>
+                    <div class="prop-type">
+                        <code>boolean</code>
+                    </div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>optional</code>
+                    </div>
+                    <div class="prop-desc">
+                        Marks the field as optional to the user by appending
+                        "(optional)" to the visible <code>label</code> and to assistive
+                        technologies by setting <code>aria-required="false"</code>.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.optional = true;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">errors</h4>
+                    <div class="prop-type">
+                        <code>string[]</code>
+                    </div>
+                    <div class="prop-desc">
+                        A list of errors used to show the field in an error state. The contents of the errors are not visible to the user.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.errors = [ 'Error #1', ' Error #2' ];
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">disabled</h4>
+                    <div class="prop-type">
+                        <code>boolean</code>
+                    </div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>disabled</code>
+                    </div>
+                    <div class="prop-desc">
+                        Disables the field and prevents user interaction.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.disabled = true;
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Optgroup Properties</h3>
+        <ul class="prop-list">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">label</h4>
+                    <div class="prop-type"><code>string</code></div>
+                    <div class="prop-attribute">Attribute name: <code>label</code></div>
+                    <div class="prop-desc">The visible label for the group.</div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.label = 'Group label';
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">disabled</h4>
+                    <div class="prop-type">
+                        <code>boolean</code>
+                    </div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>disabled</code>
+                    </div>
+                    <div class="prop-desc">
+                        Disables the group and prevents any options with it from being selected.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.disabled = true;
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Option Properties</h3>
+        <ul class="prop-list">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">value</h4>
+                    <div class="prop-type"><code>string</code></div>
+                    <div class="prop-attribute">Attribute name: <code>value</code></div>
+                    <div class="prop-desc">The value of the option. This value is emitted when the option is selected.</div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.value = 'option1';
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">label</h4>
+                    <div class="prop-type"><code>string</code></div>
+                    <div class="prop-attribute">Attribute name: <code>label</code></div>
+                    <div class="prop-desc">The text shown in the select when this option is selected. If not populated, the select will fall back to the option's inner text and further to its value.</div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.label = 'Group label';
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">disabled</h4>
+                    <div class="prop-type">
+                        <code>boolean</code>
+                    </div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>disabled</code>
+                    </div>
+                    <div class="prop-desc">
+                        Disables the options and prevents it from being selected.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.disabled = true;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">selected</h4>
+                    <div class="prop-type">
+                        <code>boolean</code>
+                    </div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>selected</code>
+                    </div>
+                    <div class="prop-desc">
+                        Indicates whether an option is selected. Can be used to pre-select options on render but once <code>value</code> or <code>selectedOptions</code> is set on the select, the properties of the select override any user-defined properties on the option.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="html">
+                        {{`<protean-option
+                                selected
+                                value="1"
+                                label="Option 1">
+                                Option 1
+                            </protean-option>`}}
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Event</h3>
+    
+        <ul class="prop-list">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">change</h4>
+                    <div class="prop-desc">
+                        Fires when an option is selected.
+    
+                        <h5>Event detail</h5>
+                        <code-snippet language="typescript">
+                            {{`event: {
+                                detail: {
+                                    value?: string,
+                                    selectedOptions?: string[],
+                            }
+                        } `}}
+                        </code-snippet>
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        {{`function onChange(event) {
+                            if (this.multiple) {
+                                this.selectedOptions = event.detail.selectedOptions;
+                            } else {
+                                this.value = event.detail.value;
+                            }
+                        }`}}
+                    </code-snippet>
+                    <code-snippet language="html">
+                        {{`
+                        <protean-select
+                            label="My select field label"
+                            onchange="onChange(event)"
+                        ></protean-select>
+                        `}}
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+    </section>
+</section>

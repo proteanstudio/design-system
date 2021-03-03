@@ -119,7 +119,7 @@ describe('protean-click-elsewhere', () => {
         const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [ProteanClickElsewhere],
             html:
-                '<protean-click-elsewhere><protean-select><button>External focus point</button><p> Unrelated target</p></protean-click-elsewhere>',
+                '<protean-click-elsewhere><button>External focus point</button><p> Unrelated target</p></protean-click-elsewhere>',
         });
 
         const button = root.querySelector('button');
@@ -143,7 +143,7 @@ describe('protean-click-elsewhere', () => {
         const { root, rootInstance } = await newSpecPage({
             components: [ProteanClickElsewhere, ProteanButton],
             html:
-                '<protean-click-elsewhere><protean-select><protean-button>External focus point</protean-button><p> Unrelated target</p></protean-click-elsewhere>',
+                '<protean-click-elsewhere><protean-button>External focus point</protean-button><p> Unrelated target</p></protean-click-elsewhere>',
         });
 
         const proteanButton = root.querySelector('protean-button');

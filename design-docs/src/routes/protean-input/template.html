@@ -1,11 +1,11 @@
-<h1>Input</h1>
+<h1>Input field</h1>
 <p>
-    Text input fields allow users to enter information. This element supports
+    Input fields allow users to enter information. This element supports
     several input formatting options.
 </p>
 
-<h2 data-in-page-anchor="overview">Overview</h2>
-<div class="overview-content">
+<section class="overview-content">
+    <h2 data-in-page-anchor="overview">Overview</h2>
     <div class="overview-demo">
         <protean-input
             class="overview-demo-element"
@@ -102,349 +102,385 @@
             `}}
         </code-snippet>
     </div>
-</div>
-<h2 data-in-page-anchor="best-practices">Best practices</h2>
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum minima
-    beatae dolores qui assumenda distinctio est, repellat architecto tempore
-    illo iste pariatur debitis repellendus accusantium explicabo eum ex dolorem
-    ullam? Provident officiis voluptatem in sit expedita consequatur ad
-    voluptatibus nisi repellat tempore? Ex et ducimus ea distinctio deserunt.
-    Aliquam a doloribus eligendi ratione porro vel consequuntur eaque sunt
-    corrupti molestiae accusamus harum reprehenderit, fugit repudiandae? Quaerat
-    fugit laudantium sunt libero consectetur reprehenderit temporibus id
-    cupiditate dolorem recusandae, ut voluptates sequi. Officia, maiores ad
-    asperiores iure commodi dolore aut aspernatur ut consectetur amet distinctio
-    eius nesciunt ullam sapiente architecto fugit adipisci!
-</p>
-<h2 data-in-page-anchor="api">API</h2>
-<h3>Properties</h3>
-<div>
-    In the following examples, <code>element</code> refers to an instance of
-    <code>protean-input</code> (i.e.
-    <code>element = document.querySelector('protean-input#myInput')</code>).
-</div>
-<ul class="prop-list">
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">value</h4>
-            <div class="prop-type"><code>string</code></div>
-            <div class="prop-desc">The value of the input.</div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.value = '02/09/2021';
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">label</h4>
-            <div class="prop-type"><code>string</code></div>
-            <div class="prop-attribute">Attribute name: <code>label</code></div>
-            <div class="prop-desc">The visible label for the input.</div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.label = 'Field label';
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">ariaLabel</h4>
-            <div class="prop-type"><code>string</code></div>
-            <div class="prop-desc">
-                The label read by assistive technologies for the input. Note:
-                when <code>label</code> is set, this value will not be bound to
-                the field.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.ariaLabel = 'Field aria-label';
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">type</h4>
-            <div class="prop-type">
-                <code>"text"</code> (default) | <code>"tel"</code> |
-                <code>"number"</code> | <code>"password"</code> |
-                <code>"search"</code> | <code>"phone"</code> |
-                <code>"numeric"</code> |
-                <code>"date"</code>
-            </div>
-            <div class="prop-attribute">Attribute name: <code>type</code></div>
-            <div class="prop-desc">
-                The type of input used. <code>phone</code>, <code>date</code>,
-                and <code>numeric</code> types provide text formatting and have
-                some settable <code>format</code>s.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.type = 'tel';
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">format</h4>
-            <div class="prop-type">
-                <code>string</code>
-            </div>
-            <div class="prop-attribute">
-                Attribute name: <code>format</code>
-            </div>
-            <div class="prop-desc">
-                The format of the visible text in the input field. Allowed
-                values are dependent on type selection. Note that the visible
-                value may differ from what is set onto the
-                <code>value</code> property; when <code>value</code> is set
-                programmatically, it will automatically be formatted.
-            </div>
-        </div>
-        <div class="prop-example">
-            <div class="prop-extras">
-                <h5><code>numeric</code> formats:</h5>
-                <ul>
-                    <li><code>delimited</code></li>
-                    <li>
-                        <code>Ndec</code> where <code>N</code> is a count of
-                        numbers after the decimal.
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <h5><code>date</code> formats:</h5>
-                <ul>
-                    <li v-for="format in dateFormats">
-                        <code>{{format}}</code>
-                    </li>
-                </ul>
-            </div>
-            <!-- <protean-select label="Formats for" :value="apiFormat" @change="apiFormat = $event.detail.value">
-                <protean-option value="date" label="date">date</protean-option>
-                <protean-option value="numeric" label="numeric">numeric</protean-option>
-            </protean-select> -->
-            <code-snippet language="javascript">
-                element.type = 'date'; element.format = 'M/D/YY';
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">optional</h4>
-            <div class="prop-type">
-                <code>boolean</code>
-            </div>
-            <div class="prop-attribute">
-                Attribute name: <code>optional</code>
-            </div>
-            <div class="prop-desc">
-                Marks the field as optional to the user by appending
-                "(optional)" to the visible <code>label</code> and to assistive
-                technologies by setting <code>aria-required="false"</code>.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.optional = true;
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">hints</h4>
-            <div class="prop-type">
-                <code>string[]</code>
-            </div>
-            <div class="prop-desc">
-                An array of hints made visible to the user when the field is
-                focused - hints are also read by assistive technologies.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.hints = [ 'Hint #1', ' Hint #2' ];
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">errors</h4>
-            <div class="prop-type">
-                <code>string[]</code>
-            </div>
-            <div class="prop-desc">
-                An array of errors made visible to the user when the field is
-                focused. When populated, the field border is changed, an error
-                icon is added, and assistive technologies are alerted to the
-                invalid state of the field. Errors take precedence over hints.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.errors = [ 'Error #1', ' Error #2' ];
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">suppressMessages</h4>
-            <div class="prop-type">
-                <code>boolean</code>
-            </div>
-            <div class="prop-attribute">
-                Attribute name: <code>suppress-messages</code>
-            </div>
-            <div class="prop-desc">
-                Dictates the visibility of <code>hint</code> or
-                <code>error</code> messages when the field is focused. Other
-                error state indicators are not affected by this property.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.suppressMessages = true;
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">disabled</h4>
-            <div class="prop-type">
-                <code>boolean</code>
-            </div>
-            <div class="prop-attribute">
-                Attribute name: <code>disabled</code>
-            </div>
-            <div class="prop-desc">
-                Disables the field and prevents user interaction.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.disabled = true;
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">readonly</h4>
-            <div class="prop-type">
-                <code>boolean</code>
-            </div>
-            <div class="prop-attribute">
-                Attribute name: <code>readonly</code>
-            </div>
-            <div class="prop-desc">
-                Prevents editing but, unlike <code>disabled</code>, allows the
-                field to be focused.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.readonly = true;
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">maxlength</h4>
-            <div class="prop-type">
-                <code>number</code>
-            </div>
-            <div class="prop-attribute">
-                Attribute name: <code>maxlength</code>
-            </div>
-            <div class="prop-desc">
-                Maximum allowed length of the input value.  Valid for <code>password</code>, <code>search</code>, <code>tel</code>, and <code>text</code> fields.
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                element.maxlength = 20;
-            </code-snippet>
-        </div>
-    </li>
-</ul>
+</section>
 
-<h3>Events</h3>
+<section class="best-practices-content">
+    <h2 data-in-page-anchor="best-practices">Best practices</h2>
+    <section>
+        <h3>Use short, clear field labels.</h3>
+        <ul>
+            <li>The label should make it obvious what information is being requested.</li>
+        </ul>
+    </section>
+    <section>
+        <h3>No placeholder text</h3>
+        <p>The <code>protean-input</code> element does not support placeholder text for the following reasons:</p>
+        <ul>
+            <li>Placeholder text often fails to meet minimum contrast requirements</li>
+            <li>Fields with placeholder text appear completed, and users may mistakenly overlook them</li>
+        </ul>
+    </section>
+    <section>
+        <h3>Only ask for input you actually need</h3>
+        <ul>
+            <li>Users are more likely to complete forms with fewer fields, and to make fewer errors when doing so.</li>
+            <li>If you must include optional fields in your form, use the <code>optional</code> attribute to clearly distinguish them from required fields.</li>
+        </ul>
+    </section>
+    <section>
+        <h3>Assist the user with inline hints and error messages</h3>
+        <ul>
+            <li>Communicate unique or complex input requirements with the <code>hints</code> array. These hints are displayed when the input field is focused.</li>
+            <li>Provide inline validation feedback with the <code>errors</code> array. Like hints, these error messages are displayed while the input is focused.</li>
+            <li>Input fields with at least one item in the <code>errors</code> array also receive styles to make them easy to find when scanning the form.</li>
+        </ul>
+    </section>
+    <section>
+        <h3>Use the appropriate input field type for the kind of data you expect.</h3>
+        <ul>
+            <li>Choosing the right input field type is particularly useful for users on mobile devices and those using assistive technology: mobile devices display keyboards optimized for each input type, and many screen readers have input modes specific to a given input type.</li>
+        </ul>
+    </section>
+    
+</section>
 
-<ul class="prop-list">
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">change</h4>
-            <div class="prop-desc">
-                Fires when the field loses focus after having its value updated.
+<section>
+    <h2 data-in-page-anchor="api">API</h2>
+    <section>
+        <h3>Properties</h3>
+        <div>
+            In the following examples, <code>element</code> refers to an
+            instance of <code>protean-input</code> (i.e.
+            <code
+                >element = document.querySelector('protean-input#myInput')</code
+            >).
+        </div>
+        <ul class="prop-list">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">value</h4>
+                    <div class="prop-type"><code>string</code></div>
+                    <div class="prop-desc">The value of the input.</div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.value = '02/09/2021';
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">label</h4>
+                    <div class="prop-type"><code>string</code></div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>label</code>
+                    </div>
+                    <div class="prop-desc">
+                        The visible label for the input.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.label = 'Field label';
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">ariaLabel</h4>
+                    <div class="prop-type"><code>string</code></div>
+                    <div class="prop-desc">
+                        The label read by assistive technologies for the input.
+                        Note: when <code>label</code> is set, this value will
+                        not be bound to the field.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.ariaLabel = 'Field aria-label';
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">type</h4>
+                    <div class="prop-type">
+                        <code>"text"</code> (default) | <code>"tel"</code> |
+                        <code>"number"</code> | <code>"password"</code> |
+                        <code>"search"</code> | <code>"phone"</code> |
+                        <code>"numeric"</code> |
+                        <code>"date"</code>
+                    </div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>type</code>
+                    </div>
+                    <div class="prop-desc">
+                        The type of input used. <code>phone</code>,
+                        <code>date</code>, and <code>numeric</code> types
+                        provide text formatting and have some settable
+                        <code>format</code>s.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.type = 'tel';
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">format</h4>
+                    <div class="prop-type">
+                        <code>string</code>
+                    </div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>format</code>
+                    </div>
+                    <div class="prop-desc">
+                        The format of the visible text in the input field.
+                        Allowed values are dependent on type selection. Note
+                        that the visible value may differ from what is set onto
+                        the
+                        <code>value</code> property; when <code>value</code> is
+                        set programmatically, it will automatically be
+                        formatted.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <div class="prop-extras">
+                        <h5><code>numeric</code> formats:</h5>
+                        <ul>
+                            <li><code>delimited</code></li>
+                            <li>
+                                <code>Ndec</code> where <code>N</code> is a
+                                count of numbers after the decimal.
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5><code>date</code> formats:</h5>
+                        <ul>
+                            <li v-for="format in dateFormats">
+                                <code>{{format}}</code>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- <protean-select label="Formats for" :value="apiFormat" @change="apiFormat = $event.detail.value">
+                        <protean-option value="date" label="date">date</protean-option>
+                        <protean-option value="numeric" label="numeric">numeric</protean-option>
+                    </protean-select> -->
+                    <code-snippet language="javascript">
+                        element.type = 'date'; element.format = 'M/D/YY';
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">optional</h4>
+                    <div class="prop-type">
+                        <code>boolean</code>
+                    </div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>optional</code>
+                    </div>
+                    <div class="prop-desc">
+                        Marks the field as optional to the user by appending
+                        "(optional)" to the visible <code>label</code> and to
+                        assistive technologies by setting
+                        <code>aria-required="false"</code>.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.optional = true;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">hints</h4>
+                    <div class="prop-type">
+                        <code>string[]</code>
+                    </div>
+                    <div class="prop-desc">
+                        An array of hints made visible to the user when the
+                        field is focused - hints are also read by assistive
+                        technologies.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.hints = [ 'Hint #1', ' Hint #2' ];
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">errors</h4>
+                    <div class="prop-type">
+                        <code>string[]</code>
+                    </div>
+                    <div class="prop-desc">
+                        An array of errors made visible to the user when the
+                        field is focused. When populated, the field border is
+                        changed, an error icon is added, and assistive
+                        technologies are alerted to the invalid state of the
+                        field. Errors take precedence over hints.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.errors = [ 'Error #1', ' Error #2' ];
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">suppressMessages</h4>
+                    <div class="prop-type">
+                        <code>boolean</code>
+                    </div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>suppress-messages</code>
+                    </div>
+                    <div class="prop-desc">
+                        Dictates the visibility of <code>hint</code> or
+                        <code>error</code> messages when the field is focused.
+                        Other error state indicators are not affected by this
+                        property.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.suppressMessages = true;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">disabled</h4>
+                    <div class="prop-type">
+                        <code>boolean</code>
+                    </div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>disabled</code>
+                    </div>
+                    <div class="prop-desc">
+                        Disables the field and prevents user interaction.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.disabled = true;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">readonly</h4>
+                    <div class="prop-type">
+                        <code>boolean</code>
+                    </div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>readonly</code>
+                    </div>
+                    <div class="prop-desc">
+                        Prevents editing but, unlike <code>disabled</code>,
+                        allows the field to be focused.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.readonly = true;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">maxlength</h4>
+                    <div class="prop-type">
+                        <code>number</code>
+                    </div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>maxlength</code>
+                    </div>
+                    <div class="prop-desc">
+                        Maximum allowed length of the input value. Valid for
+                        <code>password</code>, <code>search</code>,
+                        <code>tel</code>, and <code>text</code> fields.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.maxlength = 20;
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+    </section>
 
-                <h5>Event detail</h5>
-                <code-snippet language="typescript">
-                    {{`event: {
-                        detail: {
-                            value: string,
-                            formattedValue: string,
-                            }
-                        }
-                    `}}
-                </code-snippet>
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                {{`
-                    function onChange(event) {
-                        this.value = event.detail.value;
-                }
-                `}}
-            </code-snippet>
-            <code-snippet language="html">
-                {{`
-                    <protean-input
-                        label="My input field label"
-                        onchange="onChange(event)"
-                    ></protean-input>
-                `}}
-            </code-snippet>
-        </div>
-    </li>
-    <li class="prop-item">
-        <div class="prop-info">
-            <h4 class="prop-name">input</h4>
-            <div class="prop-desc">
-                Fires when the user modifies the field value. Useful for inline field validation.
+    <section>
+        <h3>Events</h3>
 
-                <h5>Event detail</h5>
-                <code-snippet language="typescript">
-                    {{`event: {
-                        detail: {
-                            value: string,
-                            formattedValue: string,
-                            }
-                        }
-                    `}}
-                </code-snippet>
-            </div>
-        </div>
-        <div class="prop-example">
-            <code-snippet language="javascript">
-                {{`
-                    function onInput(event) {
-                        this.value = event.detail.value;
-                }
-                `}}
-            </code-snippet>
-            <code-snippet language="html">
-                {{`
-                    <protean-input
-                        label="My input field label"
-                        oninput="onInput(event)"
-                    ></protean-input>
-                `}}
-            </code-snippet>
-        </div>
-    </li>
-</ul>
+        <ul class="prop-list">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">change</h4>
+                    <div class="prop-desc">
+                        Fires when the field loses focus after having its value
+                        updated.
+
+                        <h5>Event detail</h5>
+                        <code-snippet language="typescript">
+                            {{`event: { detail: { value: string, formattedValue:
+                            string, } } `}}
+                        </code-snippet>
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        {{` function onChange(event) { this.value =
+                        event.detail.value; } `}}
+                    </code-snippet>
+                    <code-snippet language="html">
+                        {{`
+                        <protean-input
+                            label="My input field label"
+                            onchange="onChange(event)"
+                        ></protean-input>
+                        `}}
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">input</h4>
+                    <div class="prop-desc">
+                        Fires when the user modifies the field value. Useful for
+                        inline field validation.
+
+                        <h5>Event detail</h5>
+                        <code-snippet language="typescript">
+                            {{`event: { detail: { value: string, formattedValue:
+                            string, } } `}}
+                        </code-snippet>
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        {{` function onInput(event) { this.value =
+                        event.detail.value; } `}}
+                    </code-snippet>
+                    <code-snippet language="html">
+                        {{`
+                        <protean-input
+                            label="My input field label"
+                            oninput="onInput(event)"
+                        ></protean-input>
+                        `}}
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+    </section>
+</section>

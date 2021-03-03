@@ -21,12 +21,12 @@ const routes: Array<RouteRecordRaw> = [
     },
     {
         path: '/elements/protean-checkbox',
-        name: 'Checkbox',
+        name: 'Checkboxes & toggles',
         component: ProteanCheckbox,
     },
     {
         path: '/elements/protean-input',
-        name: 'Input',
+        name: 'Input field',
         component: ProteanInput,
     },
     {
