@@ -15,7 +15,8 @@
 :host([active]) .protean-option-container,
 .protean-option-container:hover,
 .protean-option-container:focus {
-    background-color: var(--protean-dropdown-hover-background-color);
+    background-color: var(--protean-dropdown-hover-background-color, #353535);
+    color: var(--protean-dropdown-hover-text-color, inherit);
 }
 
 [aria-disabled='true'] {

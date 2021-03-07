@@ -2,7 +2,7 @@
 
 :host {
     display: block;
-    margin: 1rem;
+    margin: var(--protean-input-margin, 1rem);
 }
 
 .input-wrapper {
@@ -10,13 +10,13 @@
 }
 
 .input-container {
-    border: 1px solid currentColor;
-    border-radius: 2px;
+    border: 1px solid var(--protean-input-border-color, currentColor);
+    border-radius: var(--protean-input-border-radius, 2px);
     flex-grow: 1;
 }
 
 :host([disabled]) .input-container {
-    opacity: 0.4;
+    opacity: var(--protean-input-disabled-opacity, 0.4);
 }
 
 :host([disabled]) .input-container,
@@ -30,7 +30,7 @@
 }
 
 .input-container.has-error {
-    border-color: var(--protean-status-error);
+    border-color: var(--protean-status-error, #ab0000);
 }
 
 .error-icon {
@@ -44,11 +44,11 @@ label {
     align-items: center;
     font-weight: 400;
     padding: 0.375rem 0.5rem 0.25rem;
-    font-size: 0.6875rem;
+    font-size: var(--protean-input-label-font-size, 0.6875rem);
 }
 
 .optional-tag {
-    font-size: 0.625rem;
+    font-size: var(--protean-input-label-optional-font-size, 0.625rem);
     margin-left: 0.25rem;
 }
 
@@ -58,7 +58,7 @@ input {
     padding: 0 0.5rem;
     border: none;
     background-color: transparent;
-    font-size: 1rem;
+    font-size: var(--protean-input-font-size, 1rem);
     color: inherit;
     box-shadow: none;
     text-align: left;

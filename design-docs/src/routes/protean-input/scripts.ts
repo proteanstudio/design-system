@@ -4,7 +4,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
 @Options({
     components: { CodeSnippet },
 })
-export default class ProteanInput extends Vue {
+export default class ProteanInputRoute extends Vue {
     demoTypes = [
         {
             label: 'Native',

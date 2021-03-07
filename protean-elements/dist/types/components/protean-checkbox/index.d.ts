@@ -5,7 +5,7 @@ export declare class ProteanCheckbox {
   checked: boolean;
   variant: string;
   label: string;
-  ariaLabel: string;
+  a11yLabel: string;
   alignment: 'left' | 'right';
   disabled: boolean;
   indeterminate: boolean;

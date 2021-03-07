@@ -23,6 +23,11 @@
     @include breakpoint(m, min) {
         display: none;
     }
+
+
+    @media print {
+        display: none;
+    }
 }
 
 .home-link {
@@ -38,6 +43,7 @@ main {
     flex: 1 1 auto;
     display: flex;
     min-height: 100vh;
+    padding-bottom: 3rem;
 
     &:focus {
         outline: none;

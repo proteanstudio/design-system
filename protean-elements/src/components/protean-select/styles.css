@@ -2,7 +2,7 @@
 
 :host {
     display: block;
-    margin: 1rem;
+    margin: var(--protean-select-margin, 1rem);
 }
 
 .select-container {
@@ -31,13 +31,16 @@ protean-input {
     z-index: 2;
     top: calc(100% - 3px);
     width: 100%;
-    background-color: var(--protean-dropdown-background-color);
-    color: var(--protean-dropdown-text-color);
-    border-width: var(--protean-dropdown-border-width);
+    background-color: var(--protean-dropdown-background-color, #1a1a1a);
+    color: var(--protean-dropdown-text-color, #fafafa);
+    border-width: var(--protean-dropdown-border-width, 0 1px 1px);
     border-style: solid;
     border-color: var(--protean-dropdown-border-color, currentColor);
     border-radius: 0 0 2px 2px;
-    box-shadow: var(--protean-dropdown-box-shadow);
+    box-shadow: var(
+        --protean-dropdown-box-shadow,
+        0 3px 5px -2px rgba(255, 255, 255, 0.7)
+    );
     max-height: 250px;
     overflow-y: scroll;
 }
@@ -49,5 +52,5 @@ protean-input {
     position: relative;
     top: -2px;
     z-index: 3;
-    background-color: var(--protean-select-separator-color);
+    background-color: var(--protean-select-separator-color, #535353);
 }

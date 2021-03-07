@@ -59,27 +59,28 @@ export default class CodeSnippet extends Vue {
 
     parseSnippet(snippet: string): string {
         let indentCount = 0;
-        return snippet.split('\n').reduce((acc, line) => {
-            const trimmedLine = line.trim();
+        return snippet
+            .trim()
+            .split('\n')
+            .reduce((acc, line) => {
+                const trimmedLine = line.trim();
 
-            if (!trimmedLine) return acc;
+                const hasClosingTag = !!trimmedLine.match(this.closingRegex);
+                const hasOpeningTag = !!trimmedLine.match(this.openingRegex);
+                const hasElse = !!trimmedLine.match('else');
 
-            const hasClosingTag = !!trimmedLine.match(this.closingRegex);
-            const hasOpeningTag = !!trimmedLine.match(this.openingRegex);
-            const hasElse = !!trimmedLine.match('else');
+                if ((hasClosingTag && !hasOpeningTag) || hasElse) {
+                    indentCount--;
+                }
 
-            if ((hasClosingTag && !hasOpeningTag) || hasElse) {
-                indentCount--;
-            }
+                const indent = this.createIndentationString(indentCount + 1);
 
-            const indent = this.createIndentationString(indentCount + 1);
+                if ((hasOpeningTag && !hasClosingTag) || hasElse) {
+                    indentCount++;
+                }
 
-            if ((hasOpeningTag && !hasClosingTag) || hasElse) {
-                indentCount++;
-            }
-
-            return acc + indent + trimmedLine + '\n';
-        }, '');
+                return acc + indent + trimmedLine + '\n';
+            }, '');
     }
 
     copySnippet(): void {

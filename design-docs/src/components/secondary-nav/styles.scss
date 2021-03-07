@@ -1,7 +1,7 @@
 @import '~protean-styles/styles/mixins';
 
 .secondary-nav {
-    flex: 0 0 150px;
+    flex: 0 0 125px;
     padding: 1rem;
 
     @include breakpoint(s) {
@@ -31,7 +31,7 @@
         }
 
         &.active {
-            font-weight: 600;
+            font-weight: 700;
         }
 
         &:hover,
@@ -44,5 +44,9 @@
         &:not(.active):not(:hover)::after {
             display: none;
         }
+    }
+
+    @media print {
+        display: none;
     }
 }

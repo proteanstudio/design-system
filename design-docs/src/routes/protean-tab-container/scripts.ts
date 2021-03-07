@@ -4,7 +4,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
 @Options({
     components: { CodeSnippet },
 })
-export default class ProteanTabs extends Vue {
+export default class ProteanTabsRoute extends Vue {
     demoValue = 'tab1';
     demoName = 'demo-name';
     demoChildName = 'demo-child-name';

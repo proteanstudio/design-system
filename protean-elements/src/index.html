@@ -15,14 +15,14 @@
             @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
             :root {
-                --body-color: #fafafa;
+                --body-text-color: #fafafa;
                 --body-background-color: #1a1a1a;
 
-                --pink: #f72585;
-                --purple: #7209b7;
-                --orange: #ff5f40;
+                --brand-color-1: #f72585;
+                --brand-color-2: #7209b7;
+                --brand-color-3: #ff5f40;
 
-                --action-color: var(--orange);
+                --action-color: var(--brand-color-3);
                 --action-contrast-color: #000000;
                 --protean-status-info: #0965b7; /* 5.9 #fff, 5.75 #fc, 2.94 #1a, 3.55 #00 */
                 --protean-status-info-contrast: #ffffff;
@@ -38,7 +38,7 @@
                 --protean-message-border-color: #353535;
                 --protean-icon-fill-primary: currentColor;
 
-                --protean-tab-container-border-color: #535353;
+                --protean-tab-container-separator-color: #535353;
 
                 --protean-dropdown-background-color: var(
                     --body-background-color
@@ -58,15 +58,15 @@
             }
 
             .light {
-                --body-color: #333333;
+                --body-text-color: #333333;
                 --body-background-color: #fff;
-                --action-color: var(--purple);
+                --action-color: var(--brand-color-2);
                 --action-contrast-color: #ffffff;
                 --protean-dropdown-background-color: #fff;
                 --protean-message-background-color: #f7f7f7;
                 --protean-message-text-color: #000000;
                 --protean-message-border-color: #e2e2e2;
-                --protean-tab-container-border-color: #cdcdcd;
+                --protean-tab-container-separator-color: #cdcdcd;
 
                 --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.5);
                 --protean-dropdown-hover-background-color: #efefef;
@@ -84,7 +84,7 @@
 
             body {
                 font-family: 'Quicksand', 'Heiti SC', sans-serif;
-                color: var(--body-color);
+                color: var(--body-text-color);
                 background-color: var(--body-background-color);
             }
 

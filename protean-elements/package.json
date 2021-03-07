@@ -7,6 +7,7 @@
   "es2015": "./dist/protean-elements/protean-elements.esm.js",
   "es2017": "./dist/protean-elements/protean-elements.esm.js",
   "types": "./dist/types/components.d.ts",
+  "unpkg": "./dist/protean-elements/protean-elements.esm.js",
   "license": "MIT",
   "files": [
     "dist/",

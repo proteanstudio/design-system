@@ -96,8 +96,7 @@
         >
             {{`<protean-input
                 label="Field label"
-                type="{0}"
-                {1}{2}{3}{4}{5}{6}
+                type="{0}" {1}{2}{3}{4}{5}{6}
             ></protean-input>
             `}}
         </code-snippet>
@@ -187,17 +186,20 @@
             </li>
             <li class="prop-item">
                 <div class="prop-info">
-                    <h4 class="prop-name">ariaLabel</h4>
+                    <h4 class="prop-name">a11yLabel</h4>
                     <div class="prop-type"><code>string</code></div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>a11y-label</code>
+                    </div>
                     <div class="prop-desc">
-                        The label read by assistive technologies for the input.
+                        The label read by assistive technologies for the input; <code>a11yLabel</code> is used here instead of <code>ariaLabel</code> to prevent double readings of the text by those technologies.
                         Note: when <code>label</code> is set, this value will
                         not be bound to the field.
                     </div>
                 </div>
                 <div class="prop-example">
                     <code-snippet language="javascript">
-                        element.ariaLabel = 'Field aria-label';
+                        element.a11yLabel = 'Field aria-label';
                     </code-snippet>
                 </div>
             </li>
@@ -250,6 +252,7 @@
                     <div class="prop-extras">
                         <h5><code>numeric</code> formats:</h5>
                         <ul>
+                            <li><code>integer</code></li>
                             <li><code>delimited</code></li>
                             <li>
                                 <code>Ndec</code> where <code>N</code> is a
@@ -270,7 +273,8 @@
                         <protean-option value="numeric" label="numeric">numeric</protean-option>
                     </protean-select> -->
                     <code-snippet language="javascript">
-                        element.type = 'date'; element.format = 'M/D/YY';
+                        {{`element.type = 'date';
+                        element.format = 'M/D/YY';`}}
                     </code-snippet>
                 </div>
             </li>
@@ -405,9 +409,7 @@
                         Attribute name: <code>maxlength</code>
                     </div>
                     <div class="prop-desc">
-                        Maximum allowed length of the input value. Valid for
-                        <code>password</code>, <code>search</code>,
-                        <code>tel</code>, and <code>text</code> fields.
+                        Maximum allowed length of the input value.  This value will be ignored for most formatted input types in favor of the length of the selected format. For <code>numeric</code> formats, this value is adjusted internally to account for any delimiting characters.
                     </div>
                 </div>
                 <div class="prop-example">
@@ -432,15 +434,21 @@
 
                         <h5>Event detail</h5>
                         <code-snippet language="typescript">
-                            {{`event: { detail: { value: string, formattedValue:
-                            string, } } `}}
+                            {{`event: {
+                                    detail: {
+                                        value: string,
+                                        formattedValue: string,
+                                    } 
+                                }`
+                            }}
                         </code-snippet>
                     </div>
                 </div>
                 <div class="prop-example">
                     <code-snippet language="javascript">
-                        {{` function onChange(event) { this.value =
-                        event.detail.value; } `}}
+                        {{` function onChange(event) {
+                            this.value = event.detail.value; 
+                        } `}}
                     </code-snippet>
                     <code-snippet language="html">
                         {{`
@@ -461,15 +469,25 @@
 
                         <h5>Event detail</h5>
                         <code-snippet language="typescript">
-                            {{`event: { detail: { value: string, formattedValue:
-                            string, } } `}}
+                            {{`event: {
+                                    detail: {
+                                        value: string,
+                                        formattedValue: string,
+                                    } 
+                                }`
+                            }}
                         </code-snippet>
                     </div>
                 </div>
                 <div class="prop-example">
                     <code-snippet language="javascript">
-                        {{` function onInput(event) { this.value =
-                        event.detail.value; } `}}
+                        {{`function onInput(event) {
+                            const value = event.detail.value;
+                            this.value = value;
+
+                            this.errors = value === '' ? ['My input field label should have a least one character.'] : [];
+                        } `
+                    }}
                     </code-snippet>
                     <code-snippet language="html">
                         {{`
@@ -478,6 +496,104 @@
                             oninput="onInput(event)"
                         ></protean-input>
                         `}}
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>CSS variables</h3>
+        <p>Listed below are the CSS variables that can be adjusted to alter the <code>protean-input</code> element's appearance along with the default values set in the <code>protean-styles</code> package:</p>
+        <ul class="prop-list stacked">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-input-margin</h4>
+                    <div class="prop-desc">
+                        The margin around the <code>protean-input</code> element.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-input-margin: 1rem;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-input-border-color</h4>
+                    <div class="prop-desc">
+                        The color of the border that wraps the input field and its and label.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-input-border-color: currentColor;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-input-border-radius</h4>
+                    <div class="prop-desc">
+                        The radius of the border that wraps the input field and its and label.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-input-border-radius: 2px;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-input-label-font-size</h4>
+                    <div class="prop-desc">
+                        The size of the label text.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-input-label-font-size: 0.6875rem;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-input-label-optional-font-size</h4>
+                    <div class="prop-desc">
+                        The size of the <code>(optional)</code> text within the label. 
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-input-label-optional-font-size: 0.625rem;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-input-font-size</h4>
+                    <div class="prop-desc">
+                        The size of the text within the input field. 
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-input-font-size: 1rem;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-input-disabled-opacity</h4>
+                    <div class="prop-desc">
+                        The opacity of the field while it is disabled. 
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-input-disabled-opacity: var(--disabled-opacity);
                     </code-snippet>
                 </div>
             </li>

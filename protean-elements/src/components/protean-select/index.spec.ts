@@ -54,7 +54,7 @@ describe('protean-select', () => {
         expect(proteanInput.disabled).toEqual(false);
         expect(proteanInput.type).toEqual('button');
         expect(proteanInput.suppressMessages).toEqual(true);
-        expect(proteanInput.ariaLabel).toEqual(null);
+        expect(proteanInput.a11yLabel).toEqual(null);
         expect(proteanInput.ariaHasPopup).toEqual('listbox');
         expect(proteanInput.ariaExpanded).toEqual(false);
 
@@ -108,10 +108,10 @@ describe('protean-select', () => {
         expect(proteanInput.value).toEqual(rootInstance.displayValue);
         expect(rootInstance.dropdownOpen).toEqual(false);
         expect(proteanInput.ariaExpanded).toEqual(false);
-        expect(proteanInput.ariaLabel).toEqual(null);
+        expect(proteanInput.a11yLabel).toEqual(null);
 
         root.label = null;
-        root.ariaLabel = 'Select aria-label';
+        root.a11yLabel = 'Select aria-label';
         root.optional = false;
         root.errors = ['error 1'];
         root.disabled = true;
@@ -119,7 +119,7 @@ describe('protean-select', () => {
         await waitForChanges();
 
         expect(proteanInput.label).toEqual(null);
-        expect(proteanInput.ariaLabel).toEqual('Select aria-label');
+        expect(proteanInput.a11yLabel).toEqual('Select aria-label');
         expect(proteanInput.optional).toEqual(false);
         expect(proteanInput.errors).toEqual(['error 1']);
         expect(proteanInput.disabled).toEqual(true);
@@ -202,7 +202,7 @@ describe('protean-select', () => {
 
         expect(rootInstance.selectAriaLabel).toEqual(null);
 
-        rootInstance.ariaLabel = 'Test aria-label';
+        rootInstance.a11yLabel = 'Test aria-label';
         expect(rootInstance.selectAriaLabel).toEqual('Test aria-label');
 
         rootInstance.label = 'Test label';

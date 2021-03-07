@@ -56,17 +56,20 @@ h4,
 
 h1,
 h2,
-h3 {
+h3,
+h4,
+h5 {
     + p {
         margin-top: 0;
     }
 }
 
-a:not(.unstyled) {
+a {
     text-decoration: none;
     color: var(--link-color);
     display: inline-block;
     position: relative;
+    font-weight: 500;
 
     &::after {
         content: '';
@@ -74,9 +77,18 @@ a:not(.unstyled) {
         width: 50%;
         position: absolute;
         left: 0;
-        bottom: -4px;
-        background-color: var(--pink);
+        bottom: -2px;
+        background-color: var(--brand-color-1);
         transition: width 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+    }
+
+    &.unstyled {
+        font-weight: normal;
+        color: inherit;
+
+        &::after {
+            display: none;
+        }
     }
 
     &:focus,
@@ -89,24 +101,28 @@ a:not(.unstyled) {
     }
 
     &:nth-of-type(3n + 2)::after {
-        background-color: var(--purple);
+        background-color: var(--brand-color-2);
     }
 
     &:nth-of-type(3n)::after {
-        background-color: var(--orange);
+        background-color: var(--brand-color-3);
     }
 }
 
 nav li {
+    a::after {
+        bottom: -4px;
+    }
+
     &:nth-of-type(3n + 2) a {
         &::after {
-            background-color: var(--purple);
+            background-color: var(--brand-color-2);
         }
     }
 
     &:nth-of-type(3n) a {
         &::after {
-            background-color: var(--orange);
+            background-color: var(--brand-color-3);
         }
     }
 }

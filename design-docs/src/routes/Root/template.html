@@ -2,7 +2,7 @@
     <protean-button
         variant="icon"
         class="off-canvas-toggle"
-        v-prop:ariaLabel="'Toggle Menu'"
+        v-prop:a11yLabel="'Toggle Menu'"
         @click="showOffCanvas = !showOffCanvas"
     >
         <protean-icon type="menu"></protean-icon>
@@ -21,7 +21,7 @@
     @hideOffCanvas="showOffCanvas = false"
     @toggleLightMode="toggleLightMode"
 />
-<main class="content" tabindex="-1">
+<main class="content" :class="routeClassBinding" tabindex="-1">
     <div>
         <router-view />
     </div>

@@ -1,0 +1,65 @@
+.prop-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 3rem;
+
+    &.stacked {
+        .prop-item {
+            flex-wrap: wrap;
+        }
+        .prop-info,
+        .prop-example {
+            flex-basis: 100%;
+        }
+        .prop-example {
+            .code-snippet {
+                margin: 1rem 0 0;
+            }
+        }
+    }
+
+    .prop-item {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        border-bottom: 1px solid #353535;
+        padding: 1rem 0;
+
+        @include breakpoint(l) {
+            flex-wrap: wrap;
+        }
+    }
+
+    .prop-name {
+        margin: 0;
+    }
+
+    .prop-info,
+    .prop-example {
+        flex: 1 1 50%;
+
+        @include breakpoint(l) {
+            flex-basis: 100%;
+        }
+    }
+
+    .prop-desc {
+        margin-top: 0.5rem;
+
+        h5 {
+            margin-bottom: 0.5rem;
+        }
+
+        .code-snippet {
+            margin: 0;
+        }
+    }
+
+    .prop-example {
+        .code-snippet {
+            @include breakpoint(l) {
+                margin: 1rem 0 0;
+            }
+        }
+    }
+}

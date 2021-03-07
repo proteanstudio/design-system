@@ -13,6 +13,16 @@ export default class Root extends Vue {
     showOffCanvas = false;
     lightModeEnabled = false;
 
+    mounted(): void {
+        const lightModeEnabled =
+            localStorage.getItem('lightModeEnabled') === 'true';
+
+        if (lightModeEnabled) {
+            this.lightModeEnabled = lightModeEnabled;
+            document.documentElement.classList.add('light');
+        }
+    }
+
     @Watch('$route')
     closeOffCanvas(): void {
         this.showOffCanvas = false;
@@ -24,8 +34,13 @@ export default class Root extends Vue {
         }-text.svg`);
     }
 
+    get routeClassBinding(): string {
+        return this.$route.fullPath.split('/').join(' ');
+    }
     toggleLightMode(event: CustomEvent): void {
-        this.lightModeEnabled = event.detail.checked;
+        const lightModeEnabled = event.detail.checked;
+        this.lightModeEnabled = lightModeEnabled;
+        localStorage.setItem('lightModeEnabled', lightModeEnabled);
 
         document.documentElement.classList.toggle('light');
     }

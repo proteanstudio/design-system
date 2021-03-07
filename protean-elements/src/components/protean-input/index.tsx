@@ -6,6 +6,7 @@ import {
     Element,
     EventEmitter,
     Watch,
+    State,
     h, //eslint-disable-line
 } from '@stencil/core';
 import { VNode } from '@stencil/core/internal';
@@ -40,7 +41,7 @@ export class ProteanInput {
     @Prop({ reflect: true }) errors: string[];
     @Prop({ reflect: true }) suppressMessages: boolean;
     @Prop({ reflect: true }) readonly = false;
-    @Prop() ariaLabel: string;
+    @Prop({ reflect: true, attribute: 'a11y-label' }) a11yLabel: string;
     @Prop() ariaHasPopup: string;
     @Prop() ariaExpanded: boolean | undefined;
     @Prop() ariaRole: string;
@@ -48,15 +49,19 @@ export class ProteanInput {
     guid = createGuid();
     inputId = `protean-input-${this.guid}`;
     descriptionId = `protean-input-description-${this.guid}`;
-    formattedValueObject: FormattedValue;
     cursorData: CursorData;
     scheduledAfterRender: VoidFunction[] = [];
     isFocused = false;
 
+    @State() formattedValueObject: FormattedValue;
     @Element() hostElement: HTMLProteanInputElement;
 
+    componentWillLoad(): void {
+        this.formattedValueObject = this.getFormattedValueObj(this.value, true);
+    }
+
     componentDidLoad(): void {
-        this.reformatValue();
+        this.inputElement.value = this.formattedValueObject.formattedValue;
     }
 
     componentDidRender(): void {
@@ -77,10 +82,8 @@ export class ProteanInput {
             phone: 'tel',
             numeric: 'tel',
             date: 'tel',
-            number: 'number',
             password: 'password',
             search: 'search',
-            email: 'email',
             button: 'button',
         };
 
@@ -90,13 +93,28 @@ export class ProteanInput {
     get inputAriaLabel(): string | null {
         if (this.label) return null;
 
-        return this.ariaLabel ?? null;
+        return this.a11yLabel ?? null;
     }
 
     get inputAriaRequired(): string | null {
         if (this.ariaHasPopup === 'listbox') return null;
 
         return `${!this.optional}`;
+    }
+
+    get inputMaxlength(): number | undefined {
+        const {
+            maxlength,
+            formattingCharacterCount,
+        } = this.formattedValueObject;
+
+        if (maxlength) {
+            return maxlength;
+        }
+
+        if (this.maxlength) {
+            return this.maxlength + (formattingCharacterCount ?? 0);
+        }
     }
 
     get hasErrors(): boolean {
@@ -307,7 +325,7 @@ export class ProteanInput {
                         type={this.inputType}
                         disabled={this.disabled}
                         readOnly={this.readonly}
-                        maxLength={this.maxlength} // should be computed
+                        maxLength={this.inputMaxlength}
                         role={this.ariaRole}
                         aria-required={this.inputAriaRequired}
                         aria-label={this.inputAriaLabel}

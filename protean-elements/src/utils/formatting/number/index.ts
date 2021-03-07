@@ -2,18 +2,18 @@ import { FormattedValue } from '@/utils/formatting/types';
 
 export interface NumberFormatOptions {
     decimals: number;
+    delimited: boolean;
 }
 
 export default function formatNumber(
     value = '',
     options: NumberFormatOptions = {
         decimals: 0,
+        delimited: true,
     },
     explicit = false,
 ): FormattedValue {
     const decimals = options?.decimals ?? 0;
-    const thousandsSeparator = ',';
-    const decimalSeparator = '.';
 
     let filteredValue = value;
     if (explicit) {
@@ -29,25 +29,33 @@ export default function formatNumber(
         decimals,
     );
 
+    const thousandsSeparator = options?.delimited ? ',' : '';
+    const decimalSeparator = decimals > 0 ? '.' : '';
     const formattedIntegerString = integerString.replace(
         /\B(?=(\d{3})+(?!\d))/g,
         thousandsSeparator,
     );
-    const formattedDecimalString =
-        decimals > 0 ? `${decimalSeparator}${decimalString}` : '';
+    const formattedDecimalString = `${decimalSeparator}${decimalString}`;
 
     const valueString = `${integerString}${formattedDecimalString}`;
     const formattedValueString = `${formattedIntegerString}${formattedDecimalString}`;
 
-    return { value: valueString, formattedValue: formattedValueString };
+    return {
+        value: valueString,
+        formattedValue: formattedValueString,
+        formattingCharacterCount:
+            formattedValueString.length -
+            valueString.length +
+            decimalSeparator.length,
+    };
 }
 
-interface SpllitValue {
+interface SplitValue {
     integerString: string;
     decimalString: string;
 }
 
-export function splitValue(value: string, decimals: number): SpllitValue {
+export function splitValue(value: string, decimals: number): SplitValue {
     const integerLength = value.length - decimals;
     let integerString = value
         .substring(0, integerLength)

@@ -112,56 +112,223 @@
 
 <section>
     <h2 data-in-page-anchor="api">API</h2>
-    <h3>Properties</h3>
-    <div>
-        In the following examples, <code>element</code> refers to an instance of
-        <code>protean-message</code> (i.e.
-        <code
-            >element = document.querySelector('protean-message#myMessage')</code
-        >).
-    </div>
-    <ul class="prop-list">
-        <li class="prop-item">
-            <div class="prop-info">
-                <h4 class="prop-name">type</h4>
-                <div class="prop-type">
-                    <code>"info"</code> (default) | <code>"success"</code> |
-                    <code>"warning"</code> |
-                    <code>"error"</code>
+    <section>
+        <h3>Properties</h3>
+        <div>
+            In the following examples, <code>element</code> refers to an instance of
+            <code>protean-message</code> (i.e.
+            <code
+                >element = document.querySelector('protean-message#myMessage')</code
+            >).
+        </div>
+        <ul class="prop-list">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">type</h4>
+                    <div class="prop-type">
+                        <code>"info"</code> (default) | <code>"success"</code> |
+                        <code>"warning"</code> |
+                        <code>"error"</code>
+                    </div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>type</code>
+                    </div>
+                    <div class="prop-desc">
+                        The visual style of the message. Controls the icon and color
+                        used to communicate the intent of the message.
+                    </div>
                 </div>
-                <div class="prop-attribute">
-                    Attribute name: <code>type</code>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.type = 'success';
+                    </code-snippet>
                 </div>
-                <div class="prop-desc">
-                    The visual style of the message. Controls the icon and color
-                    used to communicate the intent of the message.
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">level</h4>
+                    <div class="prop-type">
+                        <code>"alert"</code> (default) | <code>"status"</code>
+                    </div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>level</code>
+                    </div>
+                    <div class="prop-desc">
+                        Controls the <code>role</code> assigned to the message list,
+                        dictating the verbosity of assistive technologies.
+                    </div>
                 </div>
-            </div>
-            <div class="prop-example">
-                <code-snippet language="javascript">
-                    element.type = 'success';
-                </code-snippet>
-            </div>
-        </li>
-        <li class="prop-item">
-            <div class="prop-info">
-                <h4 class="prop-name">level</h4>
-                <div class="prop-type">
-                    <code>"alert"</code> (default) | <code>"status"</code>
+                <div class="prop-example">
+                    <code-snippet language="javascript">
+                        element.level = 'status';
+                    </code-snippet>
                 </div>
-                <div class="prop-attribute">
-                    Attribute name: <code>level</code>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>CSS variables</h3>
+        <p>Listed below are the CSS variables that can be adjusted to alter the appearance of <code>protean-message</code>. <code>protean-message</code> also inherits global status colors. The default values set in the <code>protean-styles</code> package are shown in the code snippets.</p>
+        <ul class="prop-list stacked">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-message-margin</h4>
+                    <div class="prop-desc">
+                        The margin around the <code>protean-message</code> element.
+                    </div>
                 </div>
-                <div class="prop-desc">
-                    Controls the <code>role</code> assigned to the message list,
-                    dictating the verbosity of assistive technologies.
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-message-margin: 1rem 0;
+                    </code-snippet>
                 </div>
-            </div>
-            <div class="prop-example">
-                <code-snippet language="javascript">
-                    element.level = 'status';
-                </code-snippet>
-            </div>
-        </li>
-    </ul>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-message-background-color</h4>
+                    <div class="prop-desc">
+                        The background color of the message container.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-message-background-color: #2a2a2a;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-message-text-color</h4>
+                    <div class="prop-desc">
+                        The text color of the message container.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-message-text-color: #fcfcfc;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-message-border-color</h4>
+                    <div class="prop-desc">
+                        The border color of the message container.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-message-border-color: #353535;
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+        <ul class="prop-list stacked">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-status-info</h4>
+                    <div class="prop-desc">
+                        The color used for informational statuses.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-status-info: #0965b7;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-status-info-contrast</h4>
+                    <div class="prop-desc">
+                        The color used as a contrasting foreground or background for informational statuses.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-status-info-contrast: #ffffff;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-status-success</h4>
+                    <div class="prop-desc">
+                        The color used for success statuses.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-status-success: #1d820f;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-status-success-contrast</h4>
+                    <div class="prop-desc">
+                        The color used as a contrasting foreground or background for success statuses.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-status-success-contrast: #ffffff;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-status-warning</h4>
+                    <div class="prop-desc">
+                        The color used for warning statuses.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-status-warning: #e6c400;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-status-warning-contrast</h4>
+                    <div class="prop-desc">
+                        The color used as a contrasting foreground or background for warning statuses.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-status-warning-contrast: #1a1a1a;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-status-error</h4>
+                    <div class="prop-desc">
+                        The color used for error statuses.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-status-error: #ab0000;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-status-error-contrast</h4>
+                    <div class="prop-desc">
+                        The color used as a contrasting foreground or background for error statuses.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-status-error-contrast: #ffffff;
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+    </section>
 </section>

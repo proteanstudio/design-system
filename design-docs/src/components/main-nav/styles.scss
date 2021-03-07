@@ -70,7 +70,7 @@
         margin: 0.5rem 0;
 
         &:not(.router-link-active):not(:hover)::after {
-            display: none;
+            width: 0;
         }
     }
 
@@ -78,5 +78,9 @@
         position: sticky;
         top: calc(100% - var(--touch-zone-size));
         margin: 0;
+    }
+
+    @media print {
+        display: none;
     }
 }

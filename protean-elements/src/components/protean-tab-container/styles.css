@@ -10,7 +10,7 @@
     overflow-x: auto;
     margin: 0;
     padding: 0;
-    border-top: 1px solid var(--protean-tab-container-border-color);
+    border-top: 1px solid var(--protean-tab-container-separator-color, #535353);
     list-style: none;
 }
 
@@ -19,9 +19,19 @@
     padding: 1rem;
     text-decoration: none;
     color: inherit;
-    transition: box-shadow 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out;
+}
+
+.tab-list button:hover {
+    background-color: var(
+        --protean-tab-container-hover-background-color,
+        #353535
+    );
+    color: var(--protean-tab-container-hover-text-color, inherit);
 }
 
 .tab-list button[aria-selected='true'] {
-    box-shadow: inset var(--action-color) 0 5px;
+    box-shadow: inset var(--protean-tab-container-active-border-color, #ff5f40)
+        0 5px;
 }

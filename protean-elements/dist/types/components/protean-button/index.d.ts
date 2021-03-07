@@ -3,7 +3,7 @@ export declare class ProteanButton {
   variant: string;
   type: string;
   disabled: boolean;
-  ariaLabel: string;
+  a11yLabel: string;
   hostElement: HTMLProteanButtonElement;
   delegateFocus(event: FocusEvent): void;
   render(): VNode;

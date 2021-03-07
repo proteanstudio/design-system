@@ -120,7 +120,7 @@ describe('protean-checkbox', () => {
         const innerCheckbox = await find('protean-checkbox >>> input');
         expect(innerCheckbox).toEqualAttribute('aria-label', null);
 
-        proteanCheckbox.setProperty('ariaLabel', 'test aria-label');
+        proteanCheckbox.setProperty('a11yLabel', 'test aria-label');
         await page.waitForChanges();
 
         expect(innerCheckbox).toEqualAttribute('aria-label', 'test aria-label');

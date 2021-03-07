@@ -6,7 +6,8 @@ export const config: Config = {
         {
           type: 'dist',
           esmLoaderPath: '../loader',
-          polyfills: false
+          polyfills: false,
+          collectionDir: null
         },
         {
             type: 'www',

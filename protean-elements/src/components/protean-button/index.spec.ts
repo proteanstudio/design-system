@@ -24,7 +24,7 @@ describe('protean-button', () => {
         expect(button.type).toEqual('submit');
         expect(button).toHaveAttribute('disabled');
 
-        root.ariaLabel = 'button aria-label';
+        root.a11yLabel = 'button aria-label';
         await waitForChanges();
 
         expect(button).toEqualAttribute('aria-label', 'button aria-label');

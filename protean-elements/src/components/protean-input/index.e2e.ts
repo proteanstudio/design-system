@@ -74,12 +74,12 @@ describe('protean-input', () => {
 
         const proteanInput = await find('protean-input');
 
-        proteanInput.setProperty('ariaLabel', 'aria-label text');
+        proteanInput.setProperty('a11yLabel', 'aria-label text');
         await waitForChanges();
 
         expect(inputElement).toEqualAttribute('aria-label', 'aria-label text');
 
-        proteanInput.setProperty('label', 'ariaLabel text');
+        proteanInput.setProperty('label', 'a11yLabel text');
         await waitForChanges();
 
         expect(inputElement).not.toHaveAttribute('aria-label');
@@ -144,6 +144,16 @@ describe('protean-input', () => {
         await waitForChanges();
 
         expect(inputElement).toEqualAttribute('maxlength', '10');
+
+        proteanInput.setProperty('type', 'phone');
+        await waitForChanges();
+
+        expect(inputElement).toEqualAttribute('maxlength', '14');
+
+        proteanInput.setProperty('type', 'numeric');
+        await waitForChanges();
+
+        expect(inputElement).toEqualAttribute('maxlength', '11');
     });
 
     it('handles aria-haspopup binding', async () => {

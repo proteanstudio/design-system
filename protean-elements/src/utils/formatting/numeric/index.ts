@@ -5,9 +5,15 @@ import { FormattedValue } from '@/utils/formatting/types';
 const formats: Dict<NumberFormatOptions> = {
     delimited: {
         decimals: 2,
+        delimited: true,
     },
     dec: {
         decimals: 0,
+        delimited: true,
+    },
+    integer: {
+        decimals: 0,
+        delimited: false,
     },
 };
 export default function formatNumeric(

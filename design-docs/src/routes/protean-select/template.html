@@ -183,17 +183,20 @@
             </li>
             <li class="prop-item">
                 <div class="prop-info">
-                    <h4 class="prop-name">ariaLabel</h4>
+                    <h4 class="prop-name">a11yLabel</h4>
                     <div class="prop-type"><code>string</code></div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>a11y-label</code>
+                    </div>
                     <div class="prop-desc">
-                        The label read by assistive technologies for the select. Note:
+                        The label read by assistive technologies for the select; <code>a11yLabel</code> is used here instead of <code>ariaLabel</code> to prevent double readings of the text by those technologies. Note:
                         when <code>label</code> is set, this value will not be bound to
                         the field.
                     </div>
                 </div>
                 <div class="prop-example">
                     <code-snippet language="javascript">
-                        element.ariaLabel = 'Field aria-label';
+                        element.a11yLabel = 'Field aria-label';
                     </code-snippet>
                 </div>
             </li>
@@ -407,6 +410,152 @@
                             onchange="onChange(event)"
                         ></protean-select>
                         `}}
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+
+    <section>
+        <h3>CSS variables</h3>
+
+        <p>Listed below are the CSS variables that can be adjusted to alter the appearance of <code>protean-select</code>, <code>protean-optgroup</code>, and <code>protean-option</code>. <code>protean-select</code> inherits styles from <code>protean-input</code> and dropdown styles that will also be used in future components. The default values set in the <code>protean-styles</code> package are shown in the code snippets.</p>
+
+        <ul class="prop-list stacked">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-select-margin</h4>
+                    <div class="prop-desc">
+                        The margin around the <code>protean-select</code> element.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-select-margin: 1rem;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-select-separator-color</h4>
+                    <div class="prop-desc">
+                        The color of the line between the select field and its dropdown.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-select-separator-color: #535353;
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="prop-list stacked">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-optgroup-separator-color</h4>
+                    <div class="prop-desc">
+                        The color of the line used to distinguish the optgroup.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-optgroup-separator-color: var(--protean-select-separator-color);
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="prop-list stacked">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-dropdown-background-color</h4>
+                    <div class="prop-desc">
+                        The background color of the select dropdown.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-dropdown-background-color: var(--body-background-color);
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-dropdown-text-color</h4>
+                    <div class="prop-desc">
+                        The text color of content within the select dropdown.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-dropdown-text-color: var(--body-text-color);
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-dropdown-border-color</h4>
+                    <div class="prop-desc">
+                        The border color of the select dropdown.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-dropdown-border-color: currentColor;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-dropdown-border-width</h4>
+                    <div class="prop-desc">
+                        The border width of the select dropdown.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-dropdown-border-width: 0 1px 1px;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-dropdown-box-shadow</h4>
+                    <div class="prop-desc">
+                        The box shadow style of the select dropdown.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(255, 255, 255, 0.7);
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-dropdown-hover-background-color</h4>
+                    <div class="prop-desc">
+                        The background color of an option when hovered or active.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-dropdown-hover-background-color: #353535;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-dropdown-hover-text-color</h4>
+                    <div class="prop-desc">
+                        The text color of an option when hovered or active.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-dropdown-hover-text-color: #353535;
                     </code-snippet>
                 </div>
             </li>

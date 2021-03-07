@@ -57,7 +57,7 @@ describe('protean-button', () => {
 
         expect(innerButton).not.toHaveAttribute('aria-label');
 
-        proteanButton.setProperty('ariaLabel', 'button aria-label');
+        proteanButton.setProperty('a11yLabel', 'button aria-label');
         await waitForChanges();
 
         expect(innerButton).toEqualAttribute('aria-label', 'button aria-label');
