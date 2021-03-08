@@ -4,7 +4,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
 @Options({
     components: { CodeSnippet },
 })
-export default class ProteanCheckbox extends Vue {
+export default class ProteanCheckboxRoute extends Vue {
     demoChecked = false;
     demoIsToggle = false;
     demoIsRightAligned = false;

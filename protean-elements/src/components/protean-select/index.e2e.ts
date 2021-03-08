@@ -19,7 +19,7 @@ describe('protean-select', () => {
         expect(proteanInput).not.toHaveAttribute('disabled');
         expect(proteanInput).toEqualAttribute('type', 'button');
         expect(proteanInput).toHaveAttribute('suppress-messages');
-        expect(await proteanInput.getProperty('ariaLabel')).toEqual(null);
+        expect(await proteanInput.getProperty('a11yLabel')).toEqual(null);
         expect(await proteanInput.getProperty('ariaHasPopup')).toEqual(
             'listbox',
         );
@@ -114,26 +114,26 @@ describe('protean-select', () => {
 
         const proteanSelect = await page.find('protean-select');
 
-        proteanSelect.setProperty('ariaLabel', 'Select aria-label');
+        proteanSelect.setProperty('a11yLabel', 'Select aria-label');
         await page.waitForChanges();
 
         const proteanInput = await page.find(
             'protean-select >>> protean-input',
         );
 
-        expect(await proteanInput.getProperty('ariaLabel')).toEqual(null);
+        expect(await proteanInput.getProperty('a11yLabel')).toEqual(null);
 
         proteanSelect.setProperty('label', '');
         await page.waitForChanges();
 
-        expect(await proteanInput.getProperty('ariaLabel')).toEqual(
+        expect(await proteanInput.getProperty('a11yLabel')).toEqual(
             'Select aria-label',
         );
 
-        proteanSelect.setProperty('ariaLabel', undefined);
+        proteanSelect.setProperty('a11yLabel', undefined);
         await page.waitForChanges();
 
-        expect(await proteanInput.getProperty('ariaLabel')).toEqual(null);
+        expect(await proteanInput.getProperty('a11yLabel')).toEqual(null);
     });
 
     it('toggles dropdown on input click and binds associated props for each state', async () => {

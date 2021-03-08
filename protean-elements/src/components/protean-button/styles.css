@@ -6,13 +6,13 @@
 
 :host([disabled]) button {
     cursor: not-allowed;
-    opacity: 0.4;
+    opacity: var(--protean-button-disabled-opacity, 0.4);
 }
 
 button {
     color: inherit;
     cursor: pointer;
-    height: var(--touch-zone-size, 42px);
+    height: var(--protean-button-height, 42px);
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
         border 0.2s ease-in-out;
 }
@@ -71,7 +71,7 @@ button > div {
 }
 
 :host([variant='icon']) button {
-    width: var(--touch-zone-size);
+    width: var(--protean-button-icon-size, 42px);
     background-color: var(--protean-button-icon-background-color);
     --protean-icon-stroke-primary: var(--protean-button-icon-stroke-color);
 }
@@ -80,6 +80,6 @@ button > div {
 :host(:not([disabled])[variant='icon']) button:focus {
     background-color: var(--protean-button-icon-hover-background-color);
     --protean-icon-hover-stroke-primary: var(
-        --protean-button-icon-stroke-color
+        --protean-button-icon-hover-stroke-color
     );
 }

@@ -1,6 +1,9 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 
 const Home = () => import('@/routes/home/index.vue');
+const GettingStarted = () => import('@/routes/getting-started/index.vue');
+const Accessibility = () => import('@/routes/accessibility/index.vue');
+const CSSVariables = () => import('@/routes/css-variables/index.vue');
 const ProteanInput = () => import('@/routes/protean-input/index.vue');
 const ProteanButton = () => import('@/routes/protean-button/index.vue');
 const ProteanCheckbox = () => import('@/routes/protean-checkbox/index.vue');
@@ -13,6 +16,21 @@ const routes: Array<RouteRecordRaw> = [
         path: '/',
         name: 'Home',
         component: Home,
+    },
+    {
+        path: '/getting-started',
+        name: 'Getting started',
+        component: GettingStarted,
+    },
+    {
+        path: '/guidelines/accessibility',
+        name: 'Accessibility',
+        component: Accessibility,
+    },
+    {
+        path: '/guidelines/css-variables',
+        name: 'CSS variables',
+        component: CSSVariables,
     },
     {
         path: '/elements/protean-button',

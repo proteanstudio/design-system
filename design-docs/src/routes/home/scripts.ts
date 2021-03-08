@@ -1,3 +1,3 @@
 import { Vue } from 'vue-class-component';
 
-export default class Home extends Vue {}
+export default class HomeRoute extends Vue {}

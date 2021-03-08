@@ -5,7 +5,7 @@ export declare class ProteanSelect {
   selectedOptions: string[];
   multiple: boolean;
   label: string;
-  ariaLabel: string;
+  a11yLabel: string;
   optional: boolean;
   disabled: boolean;
   errors: string[];

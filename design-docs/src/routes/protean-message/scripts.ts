@@ -4,7 +4,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
 @Options({
     components: { CodeSnippet },
 })
-export default class ProteanMessage extends Vue {
+export default class ProteanMessageRoute extends Vue {
     demoType = 'info';
     demoTypes = ['info', 'success', 'warning', 'error'];
     demoIsInline = false;

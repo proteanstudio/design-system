@@ -4,7 +4,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
 @Options({
     components: { CodeSnippet },
 })
-export default class ProteanSelect extends Vue {
+export default class ProteanSelectRoute extends Vue {
     demoOptgroupOptions = [
         {
             label: 'Group 1',
@@ -106,22 +106,26 @@ export default class ProteanSelect extends Vue {
 
     get snippetOptions(): string {
         if (this.demoWithOptGroups) {
-            return this.demoOptgroupOptions.reduce((acc, group) => {
+            return this.demoOptgroupOptions.reduce((acc, group, index) => {
                 const children = this.buildOptionString(group.children);
 
-                return `${acc}\n<protean-optgroup label="${group.label}">\n ${children}</protean-optgroup>`;
+                const leadingLineBreak = index === 0 ? '' : '\n';
+
+                return `${acc}${leadingLineBreak}<protean-optgroup label="${group.label}">
+                ${children}
+                </protean-optgroup>`;
             }, '');
         }
-
         return this.buildOptionString(this.demoFlatOptions);
     }
 
     buildOptionString(options: { label: string; value: string }[]): string {
-        return options.reduce((innerAcc, { label, value }) => {
-            const childStr = `
-                <protean-option value="${value}" label="${label}">${label}</protean-option>`;
+        return options.reduce((innerAcc, { label, value }, index) => {
+            const childStr = `<protean-option value="${value}" label="${label}">${label}</protean-option>`;
 
-            return innerAcc + childStr + '\n';
+            const trailingLineBreak = index === options.length - 1 ? '' : '\n';
+
+            return innerAcc + childStr + trailingLineBreak;
         }, '');
     }
 

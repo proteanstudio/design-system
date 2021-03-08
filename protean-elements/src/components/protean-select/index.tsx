@@ -22,7 +22,7 @@ export class ProteanSelect {
     @Prop({ mutable: true }) selectedOptions: string[];
     @Prop({ reflect: true }) multiple = false; //change to variant?
     @Prop({ reflect: true }) label: string;
-    @Prop() ariaLabel: string;
+    @Prop({ reflect: true, attribute: 'a11y-label' }) a11yLabel: string;
     @Prop({ reflect: true }) optional: boolean;
     @Prop({ reflect: true }) disabled: boolean;
     @Prop() errors: string[];
@@ -50,7 +50,7 @@ export class ProteanSelect {
     get selectAriaLabel(): string | null {
         if (this.label) return null;
 
-        return this.ariaLabel ?? null;
+        return this.a11yLabel ?? null;
     }
 
     get optionElements(): HTMLProteanOptionElement[] {
@@ -355,7 +355,7 @@ export class ProteanSelect {
                     disabled={this.disabled}
                     suppress-messages
                     type="button"
-                    ariaLabel={this.selectAriaLabel}
+                    a11yLabel={this.selectAriaLabel}
                     ariaHasPopup="listbox"
                     ariaExpanded={this.dropdownOpen}
                     onClick={this.onInputClick}

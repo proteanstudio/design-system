@@ -8,14 +8,14 @@ import { HTMLStencilElement, JSXBase } from "./stencil-public-runtime";
 import { FormattedValue } from "@/utils/formatting/types";
 export namespace Components {
     interface ProteanButton {
-        "ariaLabel": string;
+        "a11yLabel": string;
         "disabled": boolean;
         "type": string;
         "variant": string;
     }
     interface ProteanCheckbox {
+        "a11yLabel": string;
         "alignment": 'left' | 'right';
-        "ariaLabel": string;
         "checked": boolean;
         "disabled": boolean;
         "indeterminate": boolean;
@@ -29,9 +29,9 @@ export namespace Components {
         "use": string;
     }
     interface ProteanInput {
+        "a11yLabel": string;
         "ariaExpanded": boolean | undefined;
         "ariaHasPopup": string;
-        "ariaLabel": string;
         "ariaRole": string;
         "disabled": boolean;
         "errors": string[];
@@ -63,7 +63,7 @@ export namespace Components {
         "value": string;
     }
     interface ProteanSelect {
-        "ariaLabel": string;
+        "a11yLabel": string;
         "disabled": boolean;
         "errors": string[];
         "label": string;
@@ -168,14 +168,14 @@ declare global {
 }
 declare namespace LocalJSX {
     interface ProteanButton {
-        "ariaLabel"?: string;
+        "a11yLabel"?: string;
         "disabled"?: boolean;
         "type"?: string;
         "variant"?: string;
     }
     interface ProteanCheckbox {
+        "a11yLabel"?: string;
         "alignment"?: 'left' | 'right';
-        "ariaLabel"?: string;
         "checked"?: boolean;
         "disabled"?: boolean;
         "indeterminate"?: boolean;
@@ -191,9 +191,9 @@ declare namespace LocalJSX {
         "use"?: string;
     }
     interface ProteanInput {
+        "a11yLabel"?: string;
         "ariaExpanded"?: boolean | undefined;
         "ariaHasPopup"?: string;
-        "ariaLabel"?: string;
         "ariaRole"?: string;
         "disabled"?: boolean;
         "errors"?: string[];
@@ -227,7 +227,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface ProteanSelect {
-        "ariaLabel"?: string;
+        "a11yLabel"?: string;
         "disabled"?: boolean;
         "errors"?: string[];
         "label"?: string;

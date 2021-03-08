@@ -6,14 +6,14 @@
 
     --cs-border: #686868;
     --cs-1: #f2e1ff;
-    --cs-2: #ebd7f9;
+    --cs-2: #e3c0fc;
     --cs-3: #fd9bc7;
     --cs-4: #d18aff;
     --cs-string: #ff9b88;
-    --cs-number: #b48ead;
+    --cs-number: var(--cs-2);
     --cs-regexp: #ebcb8b;
     --cs-keyword: #5e81ac;
-    --cs-css-keyword: #d08770;
+    --cs-css-keyword: var(--cs-3);
     --cs-comment: #b8c4db;
     --cs-addition: rgba(163, 190, 140, 0.5);
     --cs-deletion: rgba(191, 97, 106, 0.5);
@@ -23,8 +23,9 @@
         --cs-1: #2f5dca;
         --cs-2: #816395;
         --cs-3: #d50765;
-        --cs-4: var(--purple);
+        --cs-4: var(--brand-color-2);
         --cs-string: #d02e0e;
+        --cs-comment: #3b6bc4;
     }
 
     .hljs {
@@ -38,7 +39,7 @@
     }
     .hljs,
     .hljs-subst {
-        color: var(--cs-3);
+        color: var(--cs-4);
     }
     .hljs-selector-tag {
         color: var(--cs-4);
@@ -51,7 +52,7 @@
         color: var(--cs-2);
     }
     .hljs-selector-attr {
-        color: var(--cs-2);
+        color: var(--cs-1);
     }
     .hljs-selector-pseudo {
         color: var(--cs-1);
@@ -78,7 +79,7 @@
     .hljs-keyword,
     .hljs-literal,
     .hljs-symbol {
-        color: var(--cs-4);
+        color: var(--cs-3);
     }
     .hljs-number {
         color: var(--cs-number);
@@ -131,7 +132,7 @@
         color: var(--cs-2);
     }
     .hljs-attribute {
-        color: var(--cs-3);
+        color: var(--cs-4);
     }
     .hljs-builtin-name {
         color: var(--cs-4);

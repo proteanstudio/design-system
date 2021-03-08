@@ -8,12 +8,14 @@ jest.mock('../../utils/formatting/date', () => () => dateValue);
 const numericValue = {
     value: '0.00',
     formattedValue: '0.00',
+    formattingCharacterCount: 1,
 };
 jest.mock('../../utils/formatting/numeric', () => () => numericValue);
 
 const phoneValue = {
     value: '0000000000',
     formattedValue: '(000) 000-0000',
+    maxlength: 14,
 };
 jest.mock('../../utils/formatting/phone', () => () => phoneValue);
 
@@ -70,19 +72,22 @@ describe('protean-input', () => {
         rootInstance.reformatValue = mock;
 
         rootInstance.componentDidLoad();
-        expect(mock).toHaveBeenCalledTimes(1);
+        expect(mock).toHaveBeenCalledTimes(0);
+        expect(rootInstance.inputElement.value).toEqual(
+            rootInstance.formattedValueObject.formattedValue,
+        );
 
         root.value = '2';
-        expect(mock).toHaveBeenCalledTimes(2);
+        expect(mock).toHaveBeenCalledTimes(1);
 
         root.type = 'numeric';
-        expect(mock).toHaveBeenCalledTimes(3);
+        expect(mock).toHaveBeenCalledTimes(2);
 
         root.format = 'delimited';
-        expect(mock).toHaveBeenCalledTimes(4);
+        expect(mock).toHaveBeenCalledTimes(3);
 
         root.label = 'should not call reformat';
-        expect(mock).toHaveBeenCalledTimes(4);
+        expect(mock).toHaveBeenCalledTimes(3);
     });
 
     it('outputs correct input type', () => {
@@ -106,17 +111,11 @@ describe('protean-input', () => {
         root.type = 'date';
         expect(root.inputType).toEqual('tel');
 
-        root.type = 'number';
-        expect(root.inputType).toEqual('number');
-
         root.type = 'password';
         expect(root.inputType).toEqual('password');
 
         root.type = 'search';
         expect(root.inputType).toEqual('search');
-
-        root.type = 'email';
-        expect(root.inputType).toEqual('email');
 
         root.type = 'button';
         expect(root.inputType).toEqual('button');
@@ -127,9 +126,9 @@ describe('protean-input', () => {
 
         expect(root.inputAriaLabel).toEqual(null);
 
-        const ariaLabel = 'Input aria-label';
-        root.ariaLabel = ariaLabel;
-        expect(root.inputAriaLabel).toEqual(ariaLabel);
+        const a11yLabel = 'Input aria-label';
+        root.a11yLabel = a11yLabel;
+        expect(root.inputAriaLabel).toEqual(a11yLabel);
 
         root.label = 'Input label';
         expect(root.inputAriaLabel).toEqual(null);
@@ -663,11 +662,23 @@ describe('protean-input', () => {
         const inputElement = rootInstance.inputElement;
         expect(root.maxlength).toEqual(undefined);
         expect(inputElement.maxLength).toEqual(0); // actually -1 in practice
+        expect(rootInstance.inputMaxlength).toEqual(undefined);
 
         root.maxlength = 10;
         await waitForChanges();
 
         expect(inputElement.maxLength).toEqual(10);
+        expect(rootInstance.inputMaxlength).toEqual(10);
+
+        root.type = 'phone';
+        await waitForChanges();
+        expect(inputElement.maxLength).toEqual(14);
+        expect(rootInstance.inputMaxlength).toEqual(14);
+
+        root.type = 'numeric';
+        await waitForChanges();
+        expect(inputElement.maxLength).toEqual(11);
+        expect(rootInstance.inputMaxlength).toEqual(11);
     });
 
     it('handles aria-haspopup binding', async () => {

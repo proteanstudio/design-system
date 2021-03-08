@@ -42,7 +42,7 @@ describe('protean-message', () => {
 
         expect(rootInstance.checkboxAriaLabel).toEqual(null);
 
-        rootInstance.ariaLabel = 'test aria-label';
+        rootInstance.a11yLabel = 'test aria-label';
         expect(rootInstance.checkboxAriaLabel).toEqual('test aria-label');
 
         rootInstance.label = 'test label';

@@ -4,7 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 const index = require('./index-d66cd85c.js');
 
-const stylesCss = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:inline-block}:host([disabled]) button{cursor:not-allowed;opacity:0.4}button{color:inherit;cursor:pointer;height:var(--touch-zone-size, 42px);transition:background-color 0.2s ease-in-out, color 0.2s ease-in-out,\n        border 0.2s ease-in-out}button>div{display:flex;align-items:center;justify-content:center}:host([variant='primary']) button,:host([variant='secondary']) button{padding:0 1rem;border:2px solid;border-radius:2px;font-weight:600;font-size:0.875rem}:host([variant='primary']) button{background-color:var(--protean-button-primary-background-color, #ff5f40);color:var(--protean-button-primary-text-color, #000000);border-color:var(--protean-button-primary-border-color, transparent)}:host([variant='secondary']) button{background-color:var(\n        --protean-button-secondary-background-color,\n        transparent\n    );color:var(--protean-button-secondary-text-color, inherit);border-color:var(--protean-button-secondary-border-color, #ff5f40)}:host(:not([disabled])[variant='primary']) button:hover,:host(:not([disabled])[variant='primary']) button:focus{background-color:var(\n        --protean-button-primary-hover-background-color,\n        #f83e19\n    );color:var(--protean-button-primary-hover-text-color, #000000);border-color:var(--protean-button-primary-hover-border-color, transparent)}:host(:not([disabled])[variant='secondary']) button:hover,:host(:not([disabled])[variant='secondary']) button:focus{background-color:var(\n        --protean-button-secondary-hover-background-color,\n        #f83e19\n    );color:var(--protean-button-secondary-hover-text-color, #000000);border-color:var(\n        --protean-button-secondary-hover-border-color,\n        transparent\n    )}:host([variant='icon']) button{width:var(--touch-zone-size);background-color:var(--protean-button-icon-background-color);--protean-icon-stroke-primary:var(--protean-button-icon-stroke-color)}:host(:not([disabled])[variant='icon']) button:hover,:host(:not([disabled])[variant='icon']) button:focus{background-color:var(--protean-button-icon-hover-background-color);--protean-icon-hover-stroke-primary:var(\n        --protean-button-icon-stroke-color\n    )}";
+const stylesCss = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:inline-block}:host([disabled]) button{cursor:not-allowed;opacity:var(--protean-button-disabled-opacity, 0.4)}button{color:inherit;cursor:pointer;height:var(--protean-button-height, 42px);transition:background-color 0.2s ease-in-out, color 0.2s ease-in-out,\n        border 0.2s ease-in-out}button>div{display:flex;align-items:center;justify-content:center}:host([variant='primary']) button,:host([variant='secondary']) button{padding:0 1rem;border:2px solid;border-radius:2px;font-weight:600;font-size:0.875rem}:host([variant='primary']) button{background-color:var(--protean-button-primary-background-color, #ff5f40);color:var(--protean-button-primary-text-color, #000000);border-color:var(--protean-button-primary-border-color, transparent)}:host([variant='secondary']) button{background-color:var(\n        --protean-button-secondary-background-color,\n        transparent\n    );color:var(--protean-button-secondary-text-color, inherit);border-color:var(--protean-button-secondary-border-color, #ff5f40)}:host(:not([disabled])[variant='primary']) button:hover,:host(:not([disabled])[variant='primary']) button:focus{background-color:var(\n        --protean-button-primary-hover-background-color,\n        #f83e19\n    );color:var(--protean-button-primary-hover-text-color, #000000);border-color:var(--protean-button-primary-hover-border-color, transparent)}:host(:not([disabled])[variant='secondary']) button:hover,:host(:not([disabled])[variant='secondary']) button:focus{background-color:var(\n        --protean-button-secondary-hover-background-color,\n        #f83e19\n    );color:var(--protean-button-secondary-hover-text-color, #000000);border-color:var(\n        --protean-button-secondary-hover-border-color,\n        transparent\n    )}:host([variant='icon']) button{width:var(--protean-button-icon-size, 42px);background-color:var(--protean-button-icon-background-color);--protean-icon-stroke-primary:var(--protean-button-icon-stroke-color)}:host(:not([disabled])[variant='icon']) button:hover,:host(:not([disabled])[variant='icon']) button:focus{background-color:var(--protean-button-icon-hover-background-color);--protean-icon-hover-stroke-primary:var(\n        --protean-button-icon-hover-stroke-color\n    )}";
 
 const ProteanButton = class {
   constructor(hostRef) {
@@ -16,7 +16,7 @@ const ProteanButton = class {
     }
   }
   render() {
-    return (index.h("button", { type: this.type ?? 'button', disabled: this.disabled, "aria-label": this.ariaLabel }, index.h("div", null, index.h("slot", null))));
+    return (index.h("button", { type: this.type ?? 'button', disabled: this.disabled, "aria-label": this.a11yLabel }, index.h("div", null, index.h("slot", null))));
   }
   get hostElement() { return index.getElement(this); }
 };
@@ -27,7 +27,7 @@ function createGuid() {
   return guid++;
 }
 
-const stylesCss$1 = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:block;margin:1rem}:host([disabled]) label{cursor:not-allowed;opacity:0.5}label{display:flex;align-items:center;cursor:pointer;min-height:24px}:host([alignment='right']) label{flex-direction:row-reverse;justify-content:flex-end}.checkbox-symbol{flex:0 0 24px;margin-right:0.625rem;stroke-linecap:round;stroke-linejoin:round}:host([alignment='right']) .checkbox-symbol{margin-left:0.625rem;margin-right:0}input:focus+label .checkbox-symbol{outline:auto}.checkbox-outline{fill:transparent;stroke:var(--action-color);stroke-width:2;transition:fill 0.2s ease-in-out}:host([checked]) .checkbox-outline,:host([indeterminate]) .checkbox-outline{fill:var(--action-color)}.checkbox-fill{stroke:var(--action-contrast-color);fill:none;stroke-width:3}:host([variant='toggle']) .checkbox-symbol{flex-basis:45px;border-radius:10px}.toggle-path{stroke:var(--protean-checkbox-toggle-path-color);stroke-width:20;fill:none;transition:stroke 0.2s ease-in-out}:host([checked]) .toggle-path{stroke:var(--action-color)}.toggle-fill{fill:var(--action-contrast-color);stroke:none;transition:transform 0.2s ease-in-out}:host([checked]) .toggle-fill{transform:translateX(25px)}.label-text{flex:1 0}";
+const stylesCss$1 = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:block;margin:var(--protean-checkbox-margin, 1rem)}:host([disabled]) label{cursor:not-allowed;opacity:var(--protean-checkbox-disabled-opacity, 0.4)}label{display:flex;align-items:center;cursor:pointer;min-height:24px}:host([alignment='right']) label{flex-direction:row-reverse;justify-content:flex-end}.checkbox-symbol{flex:0 0 24px;margin-right:0.625rem;stroke-linecap:round;stroke-linejoin:round}:host([alignment='right']) .checkbox-symbol{margin-left:0.625rem;margin-right:0}input:focus+label .checkbox-symbol{outline:auto}.checkbox-outline{fill:transparent;stroke:var(--protean-checkbox-outline-color, #ff5f40);stroke-width:2;transition:fill 0.2s ease-in-out}:host([checked]) .checkbox-outline,:host([indeterminate]) .checkbox-outline{fill:var(--protean-checkbox-checked-outer-color, #ff5f40)}.checkbox-fill{stroke:var(--protean-checkbox-checked-inner-color, #000000);fill:none;stroke-width:3}:host([variant='toggle']) .checkbox-symbol{flex-basis:45px;border-radius:10px}.toggle-path{stroke:var(--protean-checkbox-toggle-path-color, #535353);stroke-width:20;fill:none;transition:stroke 0.2s ease-in-out}:host([checked]) .toggle-path{stroke:var(--protean-checkbox-checked-outer-color, #ff5f40)}.toggle-fill{fill:var(--protean-checkbox-toggle-circle-fill, #000000);stroke:none;transition:transform 0.2s ease-in-out}:host([checked]) .toggle-fill{transform:translateX(25px);fill:var(--protean-checkbox-checked-inner-color, #000000)}.label-text{flex:1 0}";
 
 const ProteanCheckbox = class {
   constructor(hostRef) {
@@ -57,7 +57,7 @@ const ProteanCheckbox = class {
   get checkboxAriaLabel() {
     if (this.label)
       return null;
-    return this.ariaLabel ?? null;
+    return this.a11yLabel ?? null;
   }
   get checkboxAlignment() {
     return ['left', 'right'].includes(this.alignment)
@@ -244,10 +244,12 @@ const ProteanIcon = class {
 ProteanIcon.style = stylesCss$2;
 
 function formatGeneric(value = '', format = '') {
+  const maxlength = format.length > 0 ? format.length : undefined;
   if (!value || !format) {
     return {
       value,
       formattedValue: value,
+      maxlength,
     };
   }
   const optionalValidatingCharacters = new Set(['@', '#']);
@@ -287,6 +289,7 @@ function formatGeneric(value = '', format = '') {
   return {
     value: formattedValueObj.value,
     formattedValue: formattedValueObj.formattedValue,
+    maxlength,
   };
   function checkCharacter(validatingCharacter) {
     if (valueIndex >= value.length)
@@ -332,10 +335,9 @@ function formatDate(value, format = 'MM/DD/YYYY') {
 
 function formatNumber(value = '', options = {
   decimals: 0,
+  delimited: true,
 }, explicit = false) {
   const decimals = options?.decimals ?? 0;
-  const thousandsSeparator = ',';
-  const decimalSeparator = '.';
   let filteredValue = value;
   if (explicit) {
     filteredValue = value.replace(/[^\d.]/g, '');
@@ -345,11 +347,19 @@ function formatNumber(value = '', options = {
   }
   filteredValue = filteredValue.replace(/[^\d]/g, '');
   const { integerString, decimalString } = splitValue(filteredValue, decimals);
+  const thousandsSeparator = options?.delimited ? ',' : '';
+  const decimalSeparator = decimals > 0 ? '.' : '';
   const formattedIntegerString = integerString.replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSeparator);
-  const formattedDecimalString = decimals > 0 ? `${decimalSeparator}${decimalString}` : '';
+  const formattedDecimalString = `${decimalSeparator}${decimalString}`;
   const valueString = `${integerString}${formattedDecimalString}`;
   const formattedValueString = `${formattedIntegerString}${formattedDecimalString}`;
-  return { value: valueString, formattedValue: formattedValueString };
+  return {
+    value: valueString,
+    formattedValue: formattedValueString,
+    formattingCharacterCount: formattedValueString.length -
+      valueString.length +
+      decimalSeparator.length,
+  };
 }
 function splitValue(value, decimals) {
   const integerLength = value.length - decimals;
@@ -371,9 +381,15 @@ function splitValue(value, decimals) {
 const formats$1 = {
   delimited: {
     decimals: 2,
+    delimited: true,
   },
   dec: {
     decimals: 0,
+    delimited: true,
+  },
+  integer: {
+    decimals: 0,
+    delimited: false,
   },
 };
 function formatNumeric(value, format = 'delimited', explicit = false) {
@@ -399,7 +415,7 @@ function formatPhoneNumber(value, format = 'US') {
   return formatGeneric(value, formatObj.format);
 }
 
-const stylesCss$3 = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:block;margin:1rem}.input-wrapper{position:relative}.input-container{border:1px solid currentColor;border-radius:2px;flex-grow:1}:host([disabled]) .input-container{opacity:0.4}:host([disabled]) .input-container,:host([disabled]) label,:host([disabled]) input{cursor:not-allowed}.input-container:focus-within{outline:auto 1px}.input-container.has-error{border-color:var(--protean-status-error)}.error-icon{margin-right:0.25rem;height:1.25em;width:1.25em}label{display:flex;align-items:center;font-weight:400;padding:0.375rem 0.5rem 0.25rem;font-size:0.6875rem}.optional-tag{font-size:0.625rem;margin-left:0.25rem}input{height:30px;width:100%;padding:0 0.5rem;border:none;background-color:transparent;font-size:1rem;color:inherit;box-shadow:none;text-align:left}:host(:not([label])) input{height:56px}input:focus{outline:none}.message-container{position:absolute;top:calc(100% - 1px);width:100%;height:0;transition:height 0.2s ease-in-out;overflow:hidden;z-index:2;box-shadow:0 2px 4px rgba(0, 0, 0, 0.5)}.message-container protean-message{margin:0}.message-container ul{margin:0;padding:0 1rem}";
+const stylesCss$3 = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:block;margin:var(--protean-input-margin, 1rem)}.input-wrapper{position:relative}.input-container{border:1px solid var(--protean-input-border-color, currentColor);border-radius:var(--protean-input-border-radius, 2px);flex-grow:1}:host([disabled]) .input-container{opacity:var(--protean-input-disabled-opacity, 0.4)}:host([disabled]) .input-container,:host([disabled]) label,:host([disabled]) input{cursor:not-allowed}.input-container:focus-within{outline:auto 1px}.input-container.has-error{border-color:var(--protean-status-error, #ab0000)}.error-icon{margin-right:0.25rem;height:1.25em;width:1.25em}label{display:flex;align-items:center;font-weight:400;padding:0.375rem 0.5rem 0.25rem;font-size:var(--protean-input-label-font-size, 0.6875rem)}.optional-tag{font-size:var(--protean-input-label-optional-font-size, 0.625rem);margin-left:0.25rem}input{height:30px;width:100%;padding:0 0.5rem;border:none;background-color:transparent;font-size:var(--protean-input-font-size, 1rem);color:inherit;box-shadow:none;text-align:left}:host(:not([label])) input{height:56px}input:focus{outline:none}.message-container{position:absolute;top:calc(100% - 1px);width:100%;height:0;transition:height 0.2s ease-in-out;overflow:hidden;z-index:2;box-shadow:0 2px 4px rgba(0, 0, 0, 0.5)}.message-container protean-message{margin:0}.message-container ul{margin:0;padding:0 1rem}";
 
 const ProteanInput = class {
   constructor(hostRef) {
@@ -451,8 +467,11 @@ const ProteanInput = class {
       event.stopImmediatePropagation();
     };
   }
+  componentWillLoad() {
+    this.formattedValueObject = this.getFormattedValueObj(this.value, true);
+  }
   componentDidLoad() {
-    this.reformatValue();
+    this.inputElement.value = this.formattedValueObject.formattedValue;
   }
   componentDidRender() {
     this.scheduledAfterRender.forEach(fn => {
@@ -470,10 +489,8 @@ const ProteanInput = class {
       phone: 'tel',
       numeric: 'tel',
       date: 'tel',
-      number: 'number',
       password: 'password',
       search: 'search',
-      email: 'email',
       button: 'button',
     };
     return inputTypeMap[this.type] ?? 'text';
@@ -481,12 +498,21 @@ const ProteanInput = class {
   get inputAriaLabel() {
     if (this.label)
       return null;
-    return this.ariaLabel ?? null;
+    return this.a11yLabel ?? null;
   }
   get inputAriaRequired() {
     if (this.ariaHasPopup === 'listbox')
       return null;
     return `${!this.optional}`;
+  }
+  get inputMaxlength() {
+    const { maxlength, formattingCharacterCount, } = this.formattedValueObject;
+    if (maxlength) {
+      return maxlength;
+    }
+    if (this.maxlength) {
+      return this.maxlength + (formattingCharacterCount ?? 0);
+    }
   }
   get hasErrors() {
     return Array.isArray(this.errors) && this.errors.length > 0;
@@ -573,7 +599,7 @@ const ProteanInput = class {
     }
   }
   render() {
-    return (index.h("div", { class: "input-wrapper" }, index.h("div", { class: `input-container ${this.hasErrors ? 'has-error' : ''}` }, this.label && (index.h("label", { htmlFor: this.inputId, onClick: this.onLabelClick }, this.hasErrors && (index.h("protean-icon", { type: "status-error-filled", class: "error-icon" })), this.label, this.optional && (index.h("span", { class: "optional-tag" }, " (optional)")))), index.h("input", { id: this.inputId, type: this.inputType, disabled: this.disabled, readOnly: this.readonly, maxLength: this.maxlength, role: this.ariaRole, "aria-required": this.inputAriaRequired, "aria-label": this.inputAriaLabel, "aria-invalid": `${this.hasErrors}`, "aria-describedby": this.descriptionId, "aria-haspopup": this.ariaHasPopup, "aria-expanded": this.ariaExpanded === undefined
+    return (index.h("div", { class: "input-wrapper" }, index.h("div", { class: `input-container ${this.hasErrors ? 'has-error' : ''}` }, this.label && (index.h("label", { htmlFor: this.inputId, onClick: this.onLabelClick }, this.hasErrors && (index.h("protean-icon", { type: "status-error-filled", class: "error-icon" })), this.label, this.optional && (index.h("span", { class: "optional-tag" }, " (optional)")))), index.h("input", { id: this.inputId, type: this.inputType, disabled: this.disabled, readOnly: this.readonly, maxLength: this.inputMaxlength, role: this.ariaRole, "aria-required": this.inputAriaRequired, "aria-label": this.inputAriaLabel, "aria-invalid": `${this.hasErrors}`, "aria-describedby": this.descriptionId, "aria-haspopup": this.ariaHasPopup, "aria-expanded": this.ariaExpanded === undefined
         ? null
         : `${this.ariaExpanded}`, onChange: this.onInputChange, onInput: this.onInputInput, onFocus: this.onInputFocus, onBlur: this.onInputBlur })), this.renderMessages()));
   }
@@ -592,7 +618,7 @@ const ProteanInput = class {
 };
 ProteanInput.style = stylesCss$3;
 
-const stylesCss$4 = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:block;margin:1rem 0}.message-container{--symbol-size:16px;--symbol-offset:-3px;--icon-offset:-12px;--status-color:#ffffff;--status-color:var(--info-color);background-color:var(--protean-message-background-color);color:var(--protean-message-text-color);border:1px solid var(--protean-message-border-color);border-radius:2px;position:relative;margin:calc(-1 * var(--icon-offset)) calc(-1 * var(--icon-offset))\n        calc(-1 * var(--symbol-offset));padding:var(--symbol-size) calc(-1 * var(--icon-offset))}:host([variant='inline']) .message-container{margin:0;border-color:var(--status-color)}.message-container.info{--status-color:var(--protean-status-info)}.message-container.success{--status-color:var(--protean-status-success)}.message-container.warning{--status-color:var(--protean-status-warning)}.message-container.error{--status-color:var(--protean-status-error)}.decorator{width:32px;height:32px;position:absolute;fill:var(--status-color)}.decorator.top{top:var(--symbol-offset);right:var(--symbol-offset);transform:rotate(270deg)}:host([variant='inline']) .decorator.top{top:0;right:0}.decorator.bottom{bottom:var(--symbol-offset);left:var(--symbol-offset);transform:rotate(90deg)}:host([variant='inline']) .decorator.bottom{bottom:0;left:0}protean-icon{position:absolute;top:var(--icon-offset);left:var(--icon-offset);font-weight:600;line-height:1}::slotted(ul){margin:0;padding:0.5rem 0 0.5rem 2rem}";
+const stylesCss$4 = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:block;margin:var(--protean-message-margin, 1rem 0)}.message-container{--symbol-size:16px;--symbol-offset:-3px;--icon-offset:-12px;--status-color:#ffffff;--status-color:var(--protean-status-info, #0965b7);background-color:var(--protean-message-background-color, #2a2a2a);color:var(--protean-message-text-color, #fcfcfc);border:1px solid var(--protean-message-border-color, #353535);border-radius:2px;position:relative;margin:calc(-1 * var(--icon-offset)) calc(-1 * var(--icon-offset))\n        calc(-1 * var(--symbol-offset));padding:var(--symbol-size) calc(-1 * var(--icon-offset))}:host([variant='inline']) .message-container{margin:0;border-color:var(--status-color)}.message-container.info{--status-color:var(--protean-status-info, #0965b7)}.message-container.success{--status-color:var(--protean-status-success, #1d820f)}.message-container.warning{--status-color:var(--protean-status-warning, #e6c400)}.message-container.error{--status-color:var(--protean-status-error, #ab0000)}.decorator{width:32px;height:32px;position:absolute;fill:var(--status-color)}.decorator.top{top:var(--symbol-offset);right:var(--symbol-offset);transform:rotate(270deg)}:host([variant='inline']) .decorator.top{top:0;right:0}.decorator.bottom{bottom:var(--symbol-offset);left:var(--symbol-offset);transform:rotate(90deg)}:host([variant='inline']) .decorator.bottom{bottom:0;left:0}protean-icon{position:absolute;top:var(--icon-offset);left:var(--icon-offset);font-weight:600;line-height:1}::slotted(ul){margin:0;padding:0.5rem 0 0.5rem 2rem}";
 
 const ProteanMessage = class {
   constructor(hostRef) {
@@ -625,7 +651,7 @@ const ProteanMessage = class {
 };
 ProteanMessage.style = stylesCss$4;
 
-const stylesCss$5 = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:block}.protean-optgroup-label{position:relative;z-index:1;top:0;display:flex;align-items:center;min-height:2.5rem;font-weight:500;background-color:var(--protean-dropdown-background-color)}.protean-optgroup-label::before{content:'';width:calc(100% - 30px);height:1px;position:absolute;top:50%;left:15px;background-color:var(--protean-optgroup-separator-color)}.protean-optgroup-label-text{display:inline-block;margin-left:1.5rem;padding:0 0.5rem;background-color:var(--protean-dropdown-background-color);position:relative;font-style:italic}:host([disabled]) .protean-optgroup-label-text span{opacity:0.4}";
+const stylesCss$5 = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:block}.protean-optgroup-label{position:relative;z-index:1;top:0;display:flex;align-items:center;min-height:2.5rem;font-weight:500;background-color:var(--protean-dropdown-background-color, #1a1a1a)}.protean-optgroup-label::before{content:'';width:calc(100% - 30px);height:1px;position:absolute;top:50%;left:15px;background-color:var(--protean-optgroup-separator-color, #535353)}.protean-optgroup-label-text{display:inline-block;margin-left:1.5rem;padding:0 0.5rem;background-color:var(--protean-dropdown-background-color, #1a1a1a);position:relative;font-style:italic}:host([disabled]) .protean-optgroup-label-text span{opacity:0.4}";
 
 const ProteanOptgroup = class {
   constructor(hostRef) {
@@ -664,7 +690,7 @@ const ProteanOptgroup = class {
 };
 ProteanOptgroup.style = stylesCss$5;
 
-const stylesCss$6 = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:block}.protean-option-container{display:flex;min-height:42px;align-items:center;cursor:pointer;font-size:14px}:host([active]) .protean-option-container,.protean-option-container:hover,.protean-option-container:focus{background-color:var(--protean-dropdown-hover-background-color)}[aria-disabled='true']{opacity:0.4;cursor:not-allowed}.protean-option-selected{padding:0 5px;flex:0 0 34px}.protean-option-content{flex:0 1 auto}";
+const stylesCss$6 = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:block}.protean-option-container{display:flex;min-height:42px;align-items:center;cursor:pointer;font-size:14px}:host([active]) .protean-option-container,.protean-option-container:hover,.protean-option-container:focus{background-color:var(--protean-dropdown-hover-background-color, #353535);color:var(--protean-dropdown-hover-text-color, inherit)}[aria-disabled='true']{opacity:0.4;cursor:not-allowed}.protean-option-selected{padding:0 5px;flex:0 0 34px}.protean-option-content{flex:0 1 auto}";
 
 const ProteanOption = class {
   constructor(hostRef) {
@@ -684,7 +710,7 @@ const ProteanOption = class {
 };
 ProteanOption.style = stylesCss$6;
 
-const stylesCss$7 = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:block;margin:1rem}.select-container{display:block;position:relative}protean-input{margin:0;cursor:pointer}.protean-select-icon{position:absolute;right:0.75rem;bottom:0.25rem}:host([disabled]) .protean-select-icon{opacity:0.4;cursor:not-allowed}.protean-dropdown{position:absolute;z-index:2;top:calc(100% - 3px);width:100%;background-color:var(--protean-dropdown-background-color);color:var(--protean-dropdown-text-color);border-width:var(--protean-dropdown-border-width);border-style:solid;border-color:var(--protean-dropdown-border-color, currentColor);border-radius:0 0 2px 2px;box-shadow:var(--protean-dropdown-box-shadow);max-height:250px;overflow-y:scroll}.protean-select-separator{height:1px;width:calc(100% - 20px);margin:0 auto;position:relative;top:-2px;z-index:3;background-color:var(--protean-select-separator-color)}";
+const stylesCss$7 = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:block;margin:var(--protean-select-margin, 1rem)}.select-container{display:block;position:relative}protean-input{margin:0;cursor:pointer}.protean-select-icon{position:absolute;right:0.75rem;bottom:0.25rem}:host([disabled]) .protean-select-icon{opacity:0.4;cursor:not-allowed}.protean-dropdown{position:absolute;z-index:2;top:calc(100% - 3px);width:100%;background-color:var(--protean-dropdown-background-color, #1a1a1a);color:var(--protean-dropdown-text-color, #fafafa);border-width:var(--protean-dropdown-border-width, 0 1px 1px);border-style:solid;border-color:var(--protean-dropdown-border-color, currentColor);border-radius:0 0 2px 2px;box-shadow:var(\n        --protean-dropdown-box-shadow,\n        0 3px 5px -2px rgba(255, 255, 255, 0.7)\n    );max-height:250px;overflow-y:scroll}.protean-select-separator{height:1px;width:calc(100% - 20px);margin:0 auto;position:relative;top:-2px;z-index:3;background-color:var(--protean-select-separator-color, #535353)}";
 
 const ProteanSelect = class {
   constructor(hostRef) {
@@ -767,7 +793,7 @@ const ProteanSelect = class {
   get selectAriaLabel() {
     if (this.label)
       return null;
-    return this.ariaLabel ?? null;
+    return this.a11yLabel ?? null;
   }
   get optionElements() {
     return Array.from(this.hostElement.querySelectorAll('protean-option'));
@@ -927,7 +953,7 @@ const ProteanSelect = class {
     this.change.emit({ selectedOptions });
   }
   render() {
-    return (index.h("protean-click-elsewhere", { onChange: this.onClickElsewhere, class: "select-container" }, index.h("protean-input", { value: this.displayValue, label: this.label, optional: this.optional, errors: this.errors, disabled: this.disabled, "suppress-messages": true, type: "button", ariaLabel: this.selectAriaLabel, ariaHasPopup: "listbox", ariaExpanded: this.dropdownOpen, onClick: this.onInputClick, onKeyDown: this.onInputKeyDown }), index.h("protean-icon", { class: "protean-select-icon", type: "chevron-down" }), index.h("div", { class: "protean-select-separator", hidden: !this.dropdownOpen }), this.renderDropdown()));
+    return (index.h("protean-click-elsewhere", { onChange: this.onClickElsewhere, class: "select-container" }, index.h("protean-input", { value: this.displayValue, label: this.label, optional: this.optional, errors: this.errors, disabled: this.disabled, "suppress-messages": true, type: "button", a11yLabel: this.selectAriaLabel, ariaHasPopup: "listbox", ariaExpanded: this.dropdownOpen, onClick: this.onInputClick, onKeyDown: this.onInputKeyDown }), index.h("protean-icon", { class: "protean-select-icon", type: "chevron-down" }), index.h("div", { class: "protean-select-separator", hidden: !this.dropdownOpen }), this.renderDropdown()));
   }
   renderDropdown() {
     return (index.h("div", { class: "protean-select-dropdown protean-dropdown", role: "listbox", "aria-label": this.label, tabIndex: -1, "aria-required": `${!this.optional}`, "aria-multiselectable": `${this.multiple}`, "aria-activedescendant": this.activeOptionId, hidden: !this.dropdownOpen, onClick: this.onOptionClick }, index.h("slot", null)));
@@ -941,7 +967,7 @@ const ProteanSelect = class {
 };
 ProteanSelect.style = stylesCss$7;
 
-const stylesCss$8 = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:block}.tab-list{display:flex;align-items:center;overflow-x:auto;margin:0;padding:0;border-top:1px solid var(--protean-tab-container-border-color);list-style:none}.tab-list button{font-size:1.125rem;padding:1rem;text-decoration:none;color:inherit;transition:box-shadow 0.2s ease-in-out}.tab-list button[aria-selected='true']{box-shadow:inset var(--action-color) 0 5px}";
+const stylesCss$8 = "*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:block}.tab-list{display:flex;align-items:center;overflow-x:auto;margin:0;padding:0;border-top:1px solid var(--protean-tab-container-separator-color, #535353);list-style:none}.tab-list button{font-size:1.125rem;padding:1rem;text-decoration:none;color:inherit;transition:color 0.2s ease-in-out, background-color 0.2s ease-in-out,\n        box-shadow 0.2s ease-in-out}.tab-list button:hover{background-color:var(\n        --protean-tab-container-hover-background-color,\n        #353535\n    );color:var(--protean-tab-container-hover-text-color, inherit)}.tab-list button[aria-selected='true']{box-shadow:inset var(--protean-tab-container-active-border-color, #ff5f40)\n        0 5px}";
 
 const ProteanTabContainer = class {
   constructor(hostRef) {

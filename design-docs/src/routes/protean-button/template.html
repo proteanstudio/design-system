@@ -9,7 +9,7 @@
             class="overview-demo-element"
             :variant="demoVariant"
             :disabled="demoDisabled"
-            v-prop:ariaLabel="demoAriaLabel"
+            v-prop:a11yLabel="demoAriaLabel"
         >
             <protean-icon
                 v-if="demoVariant === 'icon'"
@@ -41,9 +41,13 @@
     </div>
     <div class="overview-demo-snippet">
         <code-snippet
-            :substitutions='[demoVariant, demoDisabled ? " disabled" : "", demoContent]'
+            :substitutions='[demoVariant, demoDisabled ? "\n disabled" : "", demoAriaLabel ? `\na11y-label="${demoAriaLabel}"` : "", demoContent]'
         >
-            {{`<protean-button variant="{0}" {1}> {2} </protean-button>
+            {{`<protean-button
+                    variant="{0}"{1}{2}
+                >
+                    {3}
+                </protean-button>
             `}}
         </code-snippet>
     </div>
@@ -119,7 +123,7 @@
         <h3>Take extra care with icon buttons</h3>
         <ul>
             <li>Icon buttons don't have visible labels, so users must rely on context and experience to understand the button's purpose.</li>
-            <li>Always include a descriptive <code>ariaLabel</code> for icon buttons to ensure they can be understood by users who rely on assistive technology.</li>
+            <li>Always include a descriptive <code>a11yLabel</code> for icon buttons to ensure they can be understood by users who rely on assistive technology.</li>
         </ul>
     </section>
 </section>
@@ -147,7 +151,7 @@
                     <div class="prop-desc">
                         The visual style of the button. <code>icon</code> buttons should
                         only be used in conjunction with <code>protean-icon</code> and
-                        should be used with an ariaLabel.
+                        should be used with an <code>a11yLabel</code>.
                     </div>
                 </div>
                 <div class="prop-example">
@@ -173,16 +177,19 @@
             </li>
             <li class="prop-item">
                 <div class="prop-info">
-                    <h4 class="prop-name">ariaLabel</h4>
+                    <h4 class="prop-name">a11yLabel</h4>
                     <div class="prop-type"><code>string</code></div>
+                    <div class="prop-attribute">
+                        Attribute name: <code>a11y-label</code>
+                    </div>
                     <div class="prop-desc">
-                        The label read by assistive technologies for the input. Note:
+                        The label read by assistive technologies for the input; <code>a11yLabel</code> is used here instead of <code>ariaLabel</code> to prevent double readings of the text by those technologies. Note:
                         This should not be set when the button has text rendered in it.
                     </div>
                 </div>
                 <div class="prop-example">
                     <code-snippet language="javascript">
-                        element.ariaLabel = 'Field aria-label';
+                        element.a11yLabel = 'Field aria-label';
                     </code-snippet>
                 </div>
             </li>
@@ -190,7 +197,37 @@
     </section>
 
     <section>
-        <h3>CSS Variables</h3>
+        <h3>CSS variables</h3>
+        <p>Listed below are the several CSS variables that can be adjusted to alter the <code>protean-button</code> element's appearance along with the default values set in the <code>protean-styles</code> package:</p>
+        <ul class="prop-list stacked">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-height</h4>
+                    <div class="prop-desc">
+                        The height of all buttons; typically bound to minimum touch zone size (42px).
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-height: var(--touch-zone-size);
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-disabled-opacity</h4>
+                    <div class="prop-desc">
+                        The opacity of the button while it is disabled. 
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-disabled-opacity: var(--disabled-opacity);
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+
         <ul class="prop-list stacked">
             <li class="prop-item">
                 <div class="prop-info">
@@ -220,27 +257,202 @@
             </li>
             <li class="prop-item">
                 <div class="prop-info">
-                    <h4 class="prop-name">--protean-button-primary-text-color</h4>
+                    <h4 class="prop-name">--protean-button-primary-border-color</h4>
                     <div class="prop-desc">
-                        The text color of the primary button.
+                        The border color of the primary button.
                     </div>
                 </div>
                 <div class="prop-example">
                     <code-snippet language="css">
-                        --protean-button-primary-text-color: var(--action-contrast-color);
+                        --protean-button-primary-border-color: transparent;
                     </code-snippet>
                 </div>
             </li>
             <li class="prop-item">
                 <div class="prop-info">
-                    <h4 class="prop-name">--protean-button-primary-text-color</h4>
+                    <h4 class="prop-name">--protean-button-primary-hover-background-color</h4>
                     <div class="prop-desc">
-                        The text color of the primary button.
+                        The background color of the primary button while it is hovered or focused.
                     </div>
                 </div>
                 <div class="prop-example">
                     <code-snippet language="css">
-                        --protean-button-primary-text-color: var(--action-contrast-color);
+                        --protean-button-primary-hover-background-color: var(--action-hover-color);
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-primary-hover-text-color</h4>
+                    <div class="prop-desc">
+                        The text color of the primary button while it is hovered or focused.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-primary-hover-text-color: var(--action-hover-contrast-color);
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-primary-hover-border-color</h4>
+                    <div class="prop-desc">
+                        The border color of the primary button while it is hovered or focused.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-primary-hover-border-color: transparent;
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="prop-list stacked">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-secondary-background-color</h4>
+                    <div class="prop-desc">
+                        The background color of the secondary button.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-secondary-background-color: transparent;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-secondary-text-color</h4>
+                    <div class="prop-desc">
+                        The text color of the secondary button.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-secondary-text-color: inherit;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-secondary-border-color</h4>
+                    <div class="prop-desc">
+                        The border color of the secondary button.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-secondary-border-color: var(--action-color);
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-secondary-hover-background-color</h4>
+                    <div class="prop-desc">
+                        The background color of the secondary button while it is hovered or focused.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-secondary-hover-background-color: var(--protean-button-primary-hover-background-color);
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-secondary-hover-text-color</h4>
+                    <div class="prop-desc">
+                        The text color of the secondary button while it is hovered or focused.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-secondary-hover-text-color: var(--protean-button-primary-hover-text-color);
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-secondary-hover-border-color</h4>
+                    <div class="prop-desc">
+                        The border color of the secondary button while it is hovered or focused.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-secondary-hover-border-color: var(--protean-button-primary-hover-border-color);
+                    </code-snippet>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="prop-list stacked">
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-icon-size</h4>
+                    <div class="prop-desc">
+                        The width of icon buttons; typically matches the minimum touch zone size.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-icon-size: var(--touch-zone-size);
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-icon-background-color</h4>
+                    <div class="prop-desc">
+                        The background color of the icon button.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-icon-background-color: transparent;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-icon-stroke-color</h4>
+                    <div class="prop-desc">
+                        The stroke color of the icon with the icon button.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-icon-stroke-color: currentColor;
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-icon-hover-background-color</h4>
+                    <div class="prop-desc">
+                        The background color of the icon button while hovered or focused.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-icon-hover-background-color: rgba(255, 95, 64, 0.2);
+                    </code-snippet>
+                </div>
+            </li>
+            <li class="prop-item">
+                <div class="prop-info">
+                    <h4 class="prop-name">--protean-button-icon-hover-stroke-color</h4>
+                    <div class="prop-desc">
+                        The stroke color of the icon with the icon button while hovered or focused.
+                    </div>
+                </div>
+                <div class="prop-example">
+                    <code-snippet language="css">
+                        --protean-button-icon-hover-stroke-color: currentColor;
                     </code-snippet>
                 </div>
             </li>

@@ -16,7 +16,7 @@ export class ProteanButton {
     @Prop({ reflect: true }) variant: string;
     @Prop({ reflect: true }) type: string;
     @Prop({ reflect: true }) disabled: boolean;
-    @Prop() ariaLabel: string;
+    @Prop({ reflect: true, attribute: 'a11y-label' }) a11yLabel: string;
 
     @Element() hostElement: HTMLProteanButtonElement;
 
@@ -32,7 +32,7 @@ export class ProteanButton {
             <button
                 type={this.type ?? 'button'}
                 disabled={this.disabled}
-                aria-label={this.ariaLabel}
+                aria-label={this.a11yLabel}
             >
                 <div>
                     <slot />

@@ -1,10 +1,13 @@
 import { FormattedValue } from '@/utils/formatting/types';
 
 export default function formatGeneric(value = '', format = ''): FormattedValue {
+    const maxlength = format.length > 0 ? format.length : undefined;
+
     if (!value || !format) {
         return {
             value,
             formattedValue: value,
+            maxlength,
         };
     }
 
@@ -59,6 +62,7 @@ export default function formatGeneric(value = '', format = ''): FormattedValue {
     return {
         value: formattedValueObj.value,
         formattedValue: formattedValueObj.formattedValue,
+        maxlength,
     };
 
     function checkCharacter(validatingCharacter: string): string {

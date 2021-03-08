@@ -19,7 +19,7 @@ export class ProteanCheckbox {
     @Prop({ reflect: true, mutable: true }) checked = false;
     @Prop({ reflect: true }) variant: string;
     @Prop({ reflect: true }) label: string;
-    @Prop() ariaLabel: string;
+    @Prop({ reflect: true, attribute: 'a11y-label' }) a11yLabel: string;
     @Prop({ reflect: true }) alignment: 'left' | 'right';
     @Prop({ reflect: true }) disabled: boolean;
     @Prop({ reflect: true }) indeterminate: boolean;
@@ -48,7 +48,7 @@ export class ProteanCheckbox {
     get checkboxAriaLabel(): string | null {
         if (this.label) return null;
 
-        return this.ariaLabel ?? null;
+        return this.a11yLabel ?? null;
     }
 
     get checkboxAlignment(): string {

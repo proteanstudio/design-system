@@ -4,7 +4,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
 @Options({
     components: { CodeSnippet },
 })
-export default class ProteanButton extends Vue {
+export default class ProteanButtonRoute extends Vue {
     demoVariant = 'primary';
     demoDisabled = false;
     get demoContent(): string {

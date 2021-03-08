@@ -2,7 +2,7 @@
 
 :host {
     display: block;
-    margin: 1rem 0;
+    margin: var(--protean-message-margin, 1rem 0);
 }
 
 .message-container {
@@ -11,11 +11,11 @@
     --icon-offset: -12px;
 
     --status-color: #ffffff;
-    --status-color: var(--info-color);
+    --status-color: var(--protean-status-info, #0965b7);
 
-    background-color: var(--protean-message-background-color);
-    color: var(--protean-message-text-color);
-    border: 1px solid var(--protean-message-border-color);
+    background-color: var(--protean-message-background-color, #2a2a2a);
+    color: var(--protean-message-text-color, #fcfcfc);
+    border: 1px solid var(--protean-message-border-color, #353535);
     border-radius: 2px;
     position: relative;
     margin: calc(-1 * var(--icon-offset)) calc(-1 * var(--icon-offset))
@@ -29,19 +29,19 @@
 }
 
 .message-container.info {
-    --status-color: var(--protean-status-info);
+    --status-color: var(--protean-status-info, #0965b7);
 }
 
 .message-container.success {
-    --status-color: var(--protean-status-success);
+    --status-color: var(--protean-status-success, #1d820f);
 }
 
 .message-container.warning {
-    --status-color: var(--protean-status-warning);
+    --status-color: var(--protean-status-warning, #e6c400);
 }
 
 .message-container.error {
-    --status-color: var(--protean-status-error);
+    --status-color: var(--protean-status-error, #ab0000);
 }
 
 .decorator {

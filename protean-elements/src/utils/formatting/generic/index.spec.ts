@@ -5,6 +5,7 @@ describe('formatGeneric', () => {
         expect(formatGeneric()).toEqual({
             value: '',
             formattedValue: '',
+            maxlength: undefined,
         });
     });
 
@@ -13,12 +14,14 @@ describe('formatGeneric', () => {
         expect(formatGeneric(value, 'foo')).toEqual({
             value,
             formattedValue: value,
+            maxlength: 3,
         });
 
         value = 'foo';
         expect(formatGeneric(value, '')).toEqual({
             value,
             formattedValue: value,
+            maxlength: undefined,
         });
     });
 
@@ -27,6 +30,7 @@ describe('formatGeneric', () => {
         expect(formatGeneric(value, 'aaaaaaa')).toEqual({
             value: 'TesTing',
             formattedValue: 'TesTing',
+            maxlength: 7,
         });
     });
 
@@ -35,6 +39,7 @@ describe('formatGeneric', () => {
         expect(formatGeneric(value, 'AAAA')).toEqual({
             value: 'TT',
             formattedValue: 'TT',
+            maxlength: 4,
         });
     });
 
@@ -43,11 +48,13 @@ describe('formatGeneric', () => {
         expect(formatGeneric(value, '@@@@@@@')).toEqual({
             value: '123TesT',
             formattedValue: '123TesT',
+            maxlength: 7,
         });
 
         expect(formatGeneric(value, '@@@@@@)(@')).toEqual({
             value: '123TesT',
             formattedValue: '123Tes)(T',
+            maxlength: 9,
         });
     });
 
@@ -56,6 +63,7 @@ describe('formatGeneric', () => {
         expect(formatGeneric(value, '0000')).toEqual({
             value: '1234',
             formattedValue: '1234',
+            maxlength: 4,
         });
     });
 
@@ -64,11 +72,13 @@ describe('formatGeneric', () => {
         expect(formatGeneric(value, '####')).toEqual({
             value: '1234',
             formattedValue: '1234',
+            maxlength: 4,
         });
 
         expect(formatGeneric(value, '#-##:#')).toEqual({
             value: '1234',
             formattedValue: '1-23:4',
+            maxlength: 6,
         });
     });
 });
