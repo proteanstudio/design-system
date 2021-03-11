@@ -1,0 +1,11 @@
+<pre class="code-snippet">
+    <code class="parsed-snippet" :class="language">
+        <slot />
+    </code>
+    <div class="copy-container" v-if="canCopy">
+        <code v-show="showCopyConfirmation" class="copy-confirmation">Copied to clipboard</code>
+        <protean-button a11yLabel="Copy code snippet" variant="icon" @click="copySnippet">
+            <protean-icon type="clipboard" />
+        </protean-button>
+    </div>
+</pre>
