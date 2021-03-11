@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
+        />
+        <title>Stencil Component Starter</title>
+
+        <script type="module" src="/build/protean-elements.esm.js"></script>
+        <script nomodule src="/build/protean-elements.js"></script>
+
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+            :root {
+                --body-text-color: #fafafa;
+                --body-background-color: #1a1a1a;
+
+                --brand-color-1: #f72585;
+                --brand-color-2: #7209b7;
+                --brand-color-3: #ff5f40;
+
+                --action-color: var(--brand-color-3);
+                --action-contrast-color: #000000;
+                --protean-status-info: #0965b7; /* 5.9 #fff, 5.75 #fc, 2.94 #1a, 3.55 #00 */
+                --protean-status-info-contrast: #ffffff;
+                --protean-status-success: #1d820f; /*  4.93 #fff, 4.81 #fc, 3.52 #1a,4.25 #00 */
+                --protean-status-success-contrast: #ffffff;
+                --protean-status-warning: #e6c400; /* 1.71, fff, 1.66 #fc, 10.16 #1a, 12.26 #000 */
+                --protean-status-warning-contrast: #1a1a1a;
+                --protean-status-error: #ab0000; /* 7.68 #fff, 7.49 #fc, 2.26 #1a, 2.73 #000  */
+                --protean-status-error-contrast: #ffffff;
+
+                --protean-message-background-color: #2a2a2a;
+                --protean-message-text-color: #fcfcfc;
+                --protean-message-border-color: #353535;
+                --protean-icon-fill-primary: currentColor;
+
+                /* --protean-input-border-radius: 28px; */
+                --protean-button-border-radius: 21px;
+                --protean-tab-container-separator-color: #535353;
+
+                --protean-dropdown-background-color: var(
+                    --body-background-color
+                );
+                --protean-dropdown-text-color: inherit;
+                --protean-dropdown-border-color: currentColor;
+                --protean-dropdown-border-width: 0 1px 1px;
+                --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(255, 255, 255, 0.5);
+                --protean-dropdown-hover-background-color: #353535;
+
+                --protean-select-separator-color: #535353;
+                --protean-optgroup-separator-color: var(
+                    --protean-select-separator-color
+                );
+
+                --protean-checkbox-toggle-path-color: #535353;
+            }
+
+            .light {
+                --body-text-color: #333333;
+                --body-background-color: #fff;
+                --action-color: var(--brand-color-2);
+                --action-contrast-color: #ffffff;
+                --protean-dropdown-background-color: #fff;
+                --protean-message-background-color: #f7f7f7;
+                --protean-message-text-color: #000000;
+                --protean-message-border-color: #e2e2e2;
+                --protean-tab-container-separator-color: #cdcdcd;
+
+                --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.5);
+                --protean-dropdown-hover-background-color: #efefef;
+                --protean-select-separator-color: #dadada;
+                --protean-optgroup-separator-color: var(
+                    --protean-select-separator-color
+                );
+
+                --protean-checkbox-toggle-path-color: #979797;
+            }
+
+            [role='group'] {
+                pointer-events: none;
+            }
+
+            body {
+                font-family: 'Quicksand', 'Heiti SC', sans-serif;
+                color: var(--body-text-color);
+                background-color: var(--body-background-color);
+            }
+
+            .flex {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .flex > * {
+                flex: 1 1 45%;
+            }
+        </style>
+    </head>
+    <body class="">
+        <protean-button variant="primary">Content</protean-button>
+        <protean-button variant="secondary">Content</protean-button>
+        <div class="flex">
+            <protean-input
+                label="Label text"
+                oninput="spamErrors(event)"
+            ></protean-input>
+            <protean-input label="Label text" type="phone"></protean-input>
+            <protean-input
+                label="Label text"
+                type="date"
+                format="M/D/YYYY"
+            ></protean-input>
+            <protean-input
+                label="Label text"
+                type="numeric"
+                value="1"
+            ></protean-input>
+            <protean-input
+                label="Label text"
+                type="numeric"
+                format="5dec"
+            ></protean-input>
+            <protean-input label="Label text"></protean-input>
+        </div>
+
+        <protean-select label="Select label" optional>
+            <!-- <protean-optgroup label="Group 1"> -->
+            <protean-option label="Option 0" value="0" disabled
+                >Option 0</protean-option
+            >
+            <protean-option value="1" selected>Option 1</protean-option>
+            <protean-option label="Option 2" value="2" disabled
+                >Option 2</protean-option
+            >
+            <protean-option label="Option 3" value="3">Option 3</protean-option>
+            <!-- </protean-optgroup> -->
+            <!-- <protean-optgroup label="Group 2" disabled> -->
+            <protean-option label="Option 4" value="4">Option 4</protean-option>
+            <protean-option label="Option 5" value="5">Option 5</protean-option>
+            <protean-option label="Option 6" value="6">Option 6</protean-option>
+            <protean-option label="Option 7" value="7">Option 7</protean-option>
+            <!-- </protean-optgroup> -->
+            <!-- <protean-optgroup label="Group 3"> -->
+            <protean-option label="Option 8" value="8">Option 8</protean-option>
+            <protean-option label="Option 9" value="9">Option 9</protean-option>
+            <protean-option label="Option 10" value="10" disabled
+                >Option 10</protean-option
+            >
+            <!-- </protean-optgroup> -->
+        </protean-select>
+
+        <protean-select label="Select label" multiple>
+            <protean-optgroup disabled label="Group 1">
+                <protean-option label="Option 1" value="1" selected>
+                    <span>Option 1</span>
+                </protean-option>
+                <protean-option label="Option 2" value="2">
+                    <span>Option 2</span>
+                </protean-option>
+                <protean-option label="Option 3" value="3" selected>
+                    <span>Option 3</span>
+                </protean-option>
+            </protean-optgroup>
+            <protean-optgroup label="Group 2">
+                <protean-option label="Option 4" value="4">
+                    <span>Option 4</span>
+                </protean-option>
+                <protean-option label="Option 5" value="5">
+                    <span>Option 5</span>
+                </protean-option>
+                <protean-option label="Option 6" value="6">
+                    <span>Option 6</span>
+                </protean-option>
+                <protean-option label="Option 7" value="7">
+                    <span>Option 7</span>
+                </protean-option>
+            </protean-optgroup>
+        </protean-select>
+
+        <protean-tab-container name="test" value="2">
+            <protean-tab-pane name="test" label="pane 1" value="1"
+                >pane 1 content</protean-tab-pane
+            >
+            <protean-tab-pane name="test" label="pane 2" value="2"
+                >pane 2 content</protean-tab-pane
+            >
+            <protean-tab-pane name="test" label="pane 3" value="3"
+                >pane 3 content</protean-tab-pane
+            >
+        </protean-tab-container>
+
+        <protean-message type="error">Big error</protean-message>
+        <protean-message type="error" level="status"
+            >Little error</protean-message
+        >
+        <protean-message type="success">Yay</protean-message>
+        <protean-message type="warning">Uhh...</protean-message>
+        <protean-message type="info">Data</protean-message>
+
+        <protean-checkbox
+            label="Checkbox label"
+            indeterminate
+        ></protean-checkbox>
+        <protean-checkbox label="Checkbox label" checked></protean-checkbox>
+        <protean-checkbox label="Checkbox label"></protean-checkbox>
+        <protean-checkbox
+            variant="toggle"
+            label="Toggle light mode"
+            onchange="toggleLightMode(event)"
+        ></protean-checkbox>
+        <protean-icon type="status-info"></protean-icon>
+        <protean-icon type="status-info-filled"></protean-icon>
+        <protean-icon type="status-success"></protean-icon>
+        <protean-icon type="status-success-filled"></protean-icon>
+        <protean-icon type="status-warning"></protean-icon>
+        <protean-icon type="status-warning-filled"></protean-icon>
+        <protean-icon type="status-error"></protean-icon>
+        <protean-icon type="status-error-filled"></protean-icon>
+        <!-- <protean-icon type="custom" use="icons.svg#icon-design"></protean-icon> -->
+
+        <protean-click-elsewhere onchange="onClickElsewhere(event)">
+            <!-- <protean-input label="Click elsewhere focal"></protean-input> -->
+            <protean-button variant="primary"
+                >Click elsewhere focal</protean-button
+            >
+        </protean-click-elsewhere>
+
+        <script type="text/javascript">
+            function spamErrors(event) {
+                const arrayLength = Math.round(Math.random() * 9 + 1);
+
+                const errorList = new Array(arrayLength)
+                    .fill('')
+                    .map((i, index) => `error ${index}`);
+
+                event.target.errors = errorList;
+            }
+
+            function toggleLightMode(event) {
+                event.target.checked = event.detail.checked;
+                document.body.classList.toggle('light');
+            }
+
+            function onClickElsewhere(event) {
+                console.log('click-elsewhere', event);
+            }
+        </script>
+    </body>
+</html>
