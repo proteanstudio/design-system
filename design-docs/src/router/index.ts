@@ -10,6 +10,7 @@ const ProteanCheckbox = () => import('@/routes/protean-checkbox/index.vue');
 const ProteanMessage = () => import('@/routes/protean-message/index.vue');
 const ProteanSelect = () => import('@/routes/protean-select/index.vue');
 const ProteanTabs = () => import('@/routes/protean-tab-container/index.vue');
+const Typography = () => import('@/routes/typography/index.vue');
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -31,6 +32,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/guidelines/css-variables',
         name: 'CSS variables',
         component: CSSVariables,
+    },
+    {
+        path: '/guidelines/typography',
+        name: 'Typography',
+        component: Typography,
     },
     {
         path: '/elements/protean-button',
