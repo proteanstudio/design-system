@@ -1,6 +1,6 @@
 {
   "name": "protean-elements",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Protean Studio Elements",
   "main": "./dist/protean-elements/protean-elements.esm.js",
   "module": "./dist/protean-elements/protean-elements.esm.js",
