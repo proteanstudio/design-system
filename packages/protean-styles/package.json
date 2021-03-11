@@ -4,7 +4,8 @@
     "main": "index.js",
     "license": "MIT",
     "files": [
-        "dist/"
+        "dist/",
+        "styles/"
     ],
     "scripts": {
         "build": "sass styles/app.scss dist/css/app.css",
