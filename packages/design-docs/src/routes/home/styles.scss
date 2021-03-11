@@ -1,0 +1,18 @@
+@import '~protean-styles/styles/mixins';
+
+.home {
+    > div {
+        margin: 5rem auto;
+        max-width: 35rem;
+        @include breakpoint(m) {
+            margin: 0 auto;
+        }
+    }
+    section {
+        margin: 0 auto 4rem;
+    }
+    
+    h1 {
+        line-height: 1;
+    }
+}

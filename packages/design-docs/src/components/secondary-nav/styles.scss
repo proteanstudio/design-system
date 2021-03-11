@@ -1,0 +1,52 @@
+@import '~protean-styles/styles/mixins';
+
+.secondary-nav {
+    flex: 0 0 125px;
+    padding: 1rem;
+
+    @include breakpoint(s) {
+        display: none;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        position: sticky;
+        top: 1rem;
+
+        @include breakpoint(m) {
+            top: 60px;
+        }
+    }
+
+    .secondary-nav-item {
+        margin: 0.5rem 0;
+        padding-left: 1rem;
+
+        &::after {
+            height: 100%;
+            width: 4px;
+            bottom: 0;
+        }
+
+        &.active {
+            font-weight: 700;
+        }
+
+        &:hover,
+        &:focus {
+            &::after {
+                width: 4px;
+            }
+        }
+
+        &:not(.active):not(:hover)::after {
+            display: none;
+        }
+    }
+
+    @media print {
+        display: none;
+    }
+}

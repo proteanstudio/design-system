@@ -1,0 +1,26 @@
+<nav class="main-nav" :class="{'show-off-canvas': showOffCanvas} " aria-label="Main navigation">
+    <protean-click-elsewhere @change.self="$emit('hide-off-canvas')" class="nav-content">
+        <router-link to="/" class="home-link unstyled">
+            <img
+                src="@/assets/images/logo-symbol.svg"
+                alt="Protean Studio Design System"
+            />
+        </router-link>
+        <div v-for="(group, index) in sortedRoutes" class="nav-group">
+            <h2 class="heading-3" :id="`nav-group-${index}-heading`">{{group.title}}</h2>
+            <ul :aria-labelledby="`nav-group-${index}-heading`">
+                <li v-for="item in group.children">
+                    <router-link :to="item.path">{{item.name}}</router-link>
+                </li>
+            </ul>
+        </div>
+        <protean-checkbox
+            class="light-mode-toggle"
+            label="Light mode"
+            variant="toggle"
+            alignment="right"
+            v-prop:checked="lightModeEnabled"
+            @change="$emit('toggle-light-mode', $event)"
+        ></protean-checkbox>
+    </protean-click-elsewhere>
+</nav>

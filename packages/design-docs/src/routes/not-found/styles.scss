@@ -1,0 +1,43 @@
+@import '~protean-styles/styles/mixins/';
+
+.not-found {
+    > div {
+        margin: 0 auto;
+        max-width: 35rem;
+    }
+
+    h1 {
+        font-size: 17rem;
+        font-style: italic;
+        text-align: center;
+        text-shadow: 5px 5px var(--link-underline-color);
+
+        @include breakpoint(m) {
+            font-size: 15rem;
+        }
+
+        @include breakpoint(s) {
+            font-size: 10rem;
+            text-shadow: 3px 3px var(--link-underline-color);
+        }
+
+        @include breakpoint(320px) {
+            font-size: 7.5rem;
+        }
+
+        html.light & {
+            color: var(--body-background-color);
+            text-shadow: 5px 5px var(--link-underline-color),
+            -1px -1px var(--link-underline-color),
+            -1px 1px var(--link-underline-color),
+            1px -1px var(--link-underline-color);
+
+            @include breakpoint(s) {
+                text-shadow: 3px 3px var(--link-underline-color),
+                -1px -1px var(--link-underline-color),
+                -1px 1px var(--link-underline-color),
+                1px -1px var(--link-underline-color);
+            }
+        }
+    }
+}
