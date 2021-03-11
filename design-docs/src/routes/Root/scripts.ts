@@ -35,8 +35,10 @@ export default class Root extends Vue {
     }
 
     get routeClassBinding(): string {
-        return this.$route.fullPath.split('/').join(' ');
+        const path = this.$route.fullPath;
+        return path === '/' ? 'home' : path.split('/').join(' ');
     }
+
     toggleLightMode(event: CustomEvent): void {
         const lightModeEnabled = event.detail.checked;
         this.lightModeEnabled = lightModeEnabled;

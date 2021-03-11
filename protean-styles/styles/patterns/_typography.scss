@@ -131,4 +131,10 @@ code {
     font-size: var(--body-font-size);
     background-color: var(--code-background-color);
     overflow-wrap: anywhere;
+    padding: 3px;
+}
+
+p,
+li {
+    line-height: 1.4;
 }
