@@ -11,9 +11,20 @@
 </p>
 
 <section>
+    <h2 data-in-page-anchor="static">Use static assets</h2>
+    <p>
+        Static versions of the elements and styles are available for download from <code>unpkg</code> using <code>link</code> and <code>style</code> tags.
+    </p>
+
+    <code-snippet language="html">
+        {{`<script type="module" src="https://unpkg.com/protean-elements@0.1.2/dist/protean-elements/protean-elements.esm.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/protean-styles@0.1.2/dist/css/app.css" />`}}
+    </code-snippet>
+</section>
+
+<section>
     <h2 data-in-page-anchor="npm-install">Install via NPM</h2>
-    <protean-message level="status">We are currently working through some issues with this path.  Once resolved, we will add the accompanying documentation. Please use the static imports until then.</protean-message>
-    <!-- <p>
+    <p>
         To get started, install the <code>protean-elements</code> and
         <code>protean-styles</code> packages with npm or yarn.
     </p>
@@ -62,34 +73,22 @@
         <section>
             <h4>SCSS</h4>
             <p>
-                Access the styles before they are bundled; using the styles this way also allows use of our mixins, such as the <code>breakpoint</code> mixin.
+                If using <code>sass-loader</code>, the styles can be imported before they are bundled; using the styles this way also allows use of our mixins, such as the <code>breakpoint</code> mixin.
             </p>
             <code-snippet language="css">
-                {{`@import '~protean-styles/styles/app';`}}
+                {{`@import 'protean-styles/styles/app';`}}
             </code-snippet>
         </section>
         <section>
             <h4>CSS</h4>
             <p>
-                Access fully built styles.
+                Access fully built styles. There is no need to <code>npm install protean-styles</code> for this implementation.
             </p>
-            <code-snippet language="css">
-                {{`@import '~protean-styles/dist/css/app';`}}
+            <code-snippet language="html">
+                {{`<link rel="stylesheet" href="https://unpkg.com/protean-styles@0.1.2/dist/css/app.css" />`}}
             </code-snippet>
         </section>
-    </section> -->
-</section>
-
-<section>
-    <h2 data-in-page-anchor="static">Use on a static site</h2>
-    <p>
-        Static versions of the elements and styles are available for download from <code>unpkg</code> using <code>link</code> and <code>style</code> tags.
-    </p>
-
-    <code-snippet language="html">
-        {{`<script type="module" src="https://unpkg.com/protean-elements@0.1.2/dist/protean-elements/protean-elements.esm.js"></script>
-        <link rel="stylesheet" href="https://unpkg.com/protean-styles@0.1.2/dist/css/app.css" />`}}
-    </code-snippet>
+    </section>
 </section>
 
 <section>
