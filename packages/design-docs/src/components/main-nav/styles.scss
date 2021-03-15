@@ -19,7 +19,7 @@
         top: 60px;
         left: calc(-1 * var(--main-nav-width));
         z-index: 1;
-        height: 100vh;
+        height: calc(100vh - 60px);
         overflow-y: auto;
         transition: left 0.2s ease-in-out;
     }
@@ -49,6 +49,7 @@
         position: sticky;
         top: 0;
         padding: 1.5rem;
+        height: 100%;
 
         @include breakpoint(m, min) {
             height: 100vh;

@@ -1,5 +1,4 @@
 .typography {
-
     .type-gallery {
         display: flex;
         flex-flow: row wrap;
@@ -11,7 +10,8 @@
             )
             1 100%;
         border-image-width: 0 0 0 4px;
-        padding-left: 1rem;
+        border-left-style: solid;
+        padding-left: 0.75rem;
     }
 
     .weight-example-container {
