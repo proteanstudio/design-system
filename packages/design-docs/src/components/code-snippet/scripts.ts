@@ -18,6 +18,8 @@ export default class CodeSnippet extends Vue {
     mounted(): void {
         this.snippet = this.$el.querySelector('code').innerText.trim();
         this.resetInnerContent();
+
+        this.canCopy = typeof navigator.clipboard?.writeText === 'function';
     }
 
     snippet = '';
@@ -25,9 +27,7 @@ export default class CodeSnippet extends Vue {
     closingRegex = /(<|&lt;)\/|}|]/g;
     showCopyConfirmation = false;
 
-    get canCopy(): boolean {
-        return !!navigator.clipboard;
-    }
+    canCopy = false;
 
     get parsedSnippet(): string {
         let snippet = this.snippet;
