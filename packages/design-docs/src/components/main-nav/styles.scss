@@ -49,7 +49,6 @@
         position: sticky;
         top: 0;
         padding: 1.5rem;
-        height: 100%;
 
         @include breakpoint(m, min) {
             height: 100vh;
