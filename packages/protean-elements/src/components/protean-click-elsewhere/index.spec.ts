@@ -10,8 +10,7 @@ describe('protean-click-elsewhere', () => {
     it('renders with set values', async () => {
         const { root, rootInstance } = await newSpecPage({
             components: [ProteanClickElsewhere],
-            html:
-                '<protean-click-elsewhere>Slotted Content</protean-click-elsewhere>',
+            html: '<protean-click-elsewhere>Slotted Content</protean-click-elsewhere>',
         });
 
         expect(rootInstance.hostElement).toEqual(root);
@@ -91,8 +90,7 @@ describe('protean-click-elsewhere', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-click-elsewhere><protean-select></protean-select><button>External focus point</button></protean-click-elsewhere>',
+            html: '<protean-click-elsewhere><protean-select></protean-select><button>External focus point</button></protean-click-elsewhere>',
         });
 
         const select = root.querySelector('protean-select');
@@ -118,8 +116,7 @@ describe('protean-click-elsewhere', () => {
     it('finds correct event target', async () => {
         const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [ProteanClickElsewhere],
-            html:
-                '<protean-click-elsewhere><button>External focus point</button><p> Unrelated target</p></protean-click-elsewhere>',
+            html: '<protean-click-elsewhere><button>External focus point</button><p> Unrelated target</p></protean-click-elsewhere>',
         });
 
         const button = root.querySelector('button');
@@ -142,8 +139,7 @@ describe('protean-click-elsewhere', () => {
     it('recursively searches to find if shadow contains target', async () => {
         const { root, rootInstance } = await newSpecPage({
             components: [ProteanClickElsewhere, ProteanButton],
-            html:
-                '<protean-click-elsewhere><protean-button>External focus point</protean-button><p> Unrelated target</p></protean-click-elsewhere>',
+            html: '<protean-click-elsewhere><protean-button>External focus point</protean-button><p> Unrelated target</p></protean-click-elsewhere>',
         });
 
         const proteanButton = root.querySelector('protean-button');
@@ -159,8 +155,7 @@ describe('protean-click-elsewhere', () => {
     it('identifies whether an event originates in slots', async () => {
         const { root, rootInstance } = await newSpecPage({
             components: [ProteanClickElsewhere],
-            html:
-                '<protean-click-elsewhere><slot /><span>Span text</span><button>Button text</button></protean-click-elsewhere>',
+            html: '<protean-click-elsewhere><slot /><span>Span text</span><button>Button text</button></protean-click-elsewhere>',
         });
 
         const span = root.querySelector('span');
@@ -179,8 +174,7 @@ describe('protean-click-elsewhere', () => {
     it('correctly emits changes event on handler select', async () => {
         const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [ProteanClickElsewhere],
-            html:
-                '<protean-click-elsewhere><span>Span text</span><button>Button text</button></protean-click-elsewhere>',
+            html: '<protean-click-elsewhere><span>Span text</span><button>Button text</button></protean-click-elsewhere>',
         });
 
         const button = root.querySelector('button');

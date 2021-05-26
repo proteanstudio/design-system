@@ -3,8 +3,7 @@ import { newE2EPage } from '@stencil/core/testing';
 describe('protean-option', () => {
     it('renders', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-option value="1" label="Label 1">Label 1</protean-option>',
+            html: '<protean-option value="1" label="Label 1">Label 1</protean-option>',
         });
 
         const optionContainer = await page.find(
@@ -29,8 +28,7 @@ describe('protean-option', () => {
 
     it('handles disabled state', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-option value="1" label="Label 1">Label 1</protean-option>',
+            html: '<protean-option value="1" label="Label 1">Label 1</protean-option>',
         });
 
         const optionContainer = await page.find(
@@ -60,8 +58,7 @@ describe('protean-option', () => {
 
     it('handles selected state', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-option value="1" label="Label 1">Label 1</protean-option>',
+            html: '<protean-option value="1" label="Label 1">Label 1</protean-option>',
         });
 
         const optionContainer = await page.find(

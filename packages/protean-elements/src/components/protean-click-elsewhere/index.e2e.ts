@@ -4,8 +4,7 @@ import { newE2EPage } from '@stencil/core/testing';
 describe('protean-click-elsewhere', () => {
     it('emits change event when child focused and external mousedown occurs', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-click-elsewhere><button>Click elsewhere focal</button></protean-click-elsewhere>',
+            html: '<protean-click-elsewhere><button>Click elsewhere focal</button></protean-click-elsewhere>',
         });
         const { find, waitForChanges } = page;
 
@@ -27,8 +26,7 @@ describe('protean-click-elsewhere', () => {
 
     it('does not emit change event when child focused and internal mousedown occurs', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-click-elsewhere><button>Click elsewhere focal</button><span>More nested content</span></protean-click-elsewhere>',
+            html: '<protean-click-elsewhere><button>Click elsewhere focal</button><span>More nested content</span></protean-click-elsewhere>',
         });
 
         const clickElsewhere = await page.find('protean-click-elsewhere');
@@ -46,8 +44,7 @@ describe('protean-click-elsewhere', () => {
 
     it('does not emit change event when child not focused', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-click-elsewhere><button>Click elsewhere focal</button></protean-click-elsewhere>',
+            html: '<protean-click-elsewhere><button>Click elsewhere focal</button></protean-click-elsewhere>',
         });
 
         const clickElsewhere = await page.find('protean-click-elsewhere');

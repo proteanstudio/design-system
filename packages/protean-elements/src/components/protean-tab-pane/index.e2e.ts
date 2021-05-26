@@ -3,8 +3,7 @@ import { newE2EPage } from '@stencil/core/testing';
 describe('protean-tab-pane', () => {
     it('renders base state', async () => {
         const { waitForChanges, find } = await newE2EPage({
-            html:
-                '<protean-tab-pane label="Pane 1" value="test-value" name="test-name"> Pane Content </protean-tab-pane>',
+            html: '<protean-tab-pane label="Pane 1" value="test-value" name="test-name"> Pane Content </protean-tab-pane>',
         });
 
         const paneElement = await find('protean-tab-pane');
@@ -24,8 +23,7 @@ describe('protean-tab-pane', () => {
 
     it('shows selected', async () => {
         const { waitForChanges, find } = await newE2EPage({
-            html:
-                '<protean-tab-pane label="Pane 1" value="test-value" name="test-name"> Pane Content </protean-tab-pane>',
+            html: '<protean-tab-pane label="Pane 1" value="test-value" name="test-name"> Pane Content </protean-tab-pane>',
         });
 
         const paneElement = await find('protean-tab-pane');
