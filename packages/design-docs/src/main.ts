@@ -5,20 +5,18 @@ import { defineCustomElements } from 'protean-elements/loader';
 
 defineCustomElements();
 
-const app = createApp(Root);
-app.config.isCustomElement = tag => tag.startsWith('protean-');
-
-app.directive('prop', {
-    mounted(element, binding) {
-        if (binding.arg) {
-            element[binding.arg] = binding.value;
-        }
-    },
-    updated(element, binding) {
-        if (binding.arg) {
-            element[binding.arg] = binding.value;
-        }
-    },
-})
+createApp(Root)
+    .directive('prop', {
+        mounted(element, binding) {
+            if (binding.arg) {
+                element[binding.arg] = binding.value;
+            }
+        },
+        updated(element, binding) {
+            if (binding.arg) {
+                element[binding.arg] = binding.value;
+            }
+        },
+    })
     .use(router)
     .mount('#app');

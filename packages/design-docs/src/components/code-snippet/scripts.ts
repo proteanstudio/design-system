@@ -50,7 +50,7 @@ export default class CodeSnippet extends Vue {
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;');
 
-        hljs.highlightBlock(element);
+        hljs.highlightElement(element);
     }
 
     createIndentationString(count: number): string {

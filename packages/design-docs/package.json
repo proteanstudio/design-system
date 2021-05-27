@@ -5,10 +5,11 @@
     "scripts": {
         "start": "vue-cli-service serve",
         "build": "vue-cli-service build --modern && rm -rf ../../docs && mkdir ../../docs && cp -R dist/ ../../docs && cp ../../CNAME ../../docs",
-        "test:unit": "vue-cli-service test:unit",
+        "test": "vue-cli-service test:unit",
+        "test:dev": "vue-cli-service test:unit --watch",
         "lint": "vue-cli-service lint",
-        "format": "prettier -c 'src/**'",
-        "format:fix": "prettier --write 'src/**'"
+        "format": "prettier -c 'src/**/*.{ts,vue,scss,spec.ts}'",
+        "format:fix": "prettier --write 'src/**/*.{ts,vue,scss,spec.ts}'"
     },
     "devDependencies": {
         "@types/highlight.js": "^10.1.0",
@@ -21,11 +22,11 @@
         "@vue/cli-plugin-typescript": "~4.5.13",
         "@vue/cli-plugin-unit-jest": "~4.5.13",
         "@vue/cli-service": "~4.5.13",
-        "@vue/compiler-sfc": "^3.0.5",
+        "@vue/compiler-sfc": "^3.0.11",
         "@vue/eslint-config-prettier": "^6.0.0",
         "@vue/eslint-config-typescript": "^7.0.0",
         "@vue/test-utils": "^2.0.0-0",
-        "core-js": "^3.13",
+        "core-js": "^3.13.0",
         "eslint": "^7.27.0",
         "eslint-plugin-prettier": "^3.4.0",
         "eslint-plugin-vue": "^7.9.0",

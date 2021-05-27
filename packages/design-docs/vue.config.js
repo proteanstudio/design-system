@@ -11,26 +11,15 @@ module.exports = {
             args[0].title = 'Protean Design System';
             return args;
         });
+        config.module
+            .rule('vue')
+            .use('vue-loader')
+            .tap(options => {
+                options.compilerOptions = {
+                    ...options.compilerOptions,
+                    isCustomElement: tag => tag.startsWith('protean-'),
+                };
+                return options;
+            });
     },
-    //   module: {
-    //     rules: [
-    //         {
-    //             test: /\.tsx?$/,
-    //             loader: 'ts-loader',
-    //             options: {
-    //               appendTsSuffixTo: [/\.vue$/],
-    //             },
-    //             exclude: /node_modules/,
-    //           },
-    //           {
-    //             test: /\.vue$/,
-    //             loader: 'vue-loader',
-    //             options: {
-    //                 compilerOptions: {
-    //                   isCustomElement: tag => tag.indexOf('protean-') > -1
-    //                 }
-    //               }
-    //           }
-    //       ]
-    //   }
 };
