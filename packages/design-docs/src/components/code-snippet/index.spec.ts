@@ -1,14 +1,19 @@
-/* import { expect } from "chai";
-import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+import { shallowMount } from '@vue/test-utils';
+import CodeSnippet from './index.vue';
 
-describe('Root.vue', () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      props: { msg }
+describe('code-snippet', () => {
+    it.skip('renders base properties and structure', () => {
+        const wrapper = shallowMount(CodeSnippet);
+
+        expect(wrapper.vm.language).toEqual('html');
+        expect(wrapper.vm.substitutions).toEqual([]);
     });
-    expect(wrapper.text()).to.include(msg);
-  });
+
+    it.skip('renders props.msg when passed', () => {
+        const msg = 'new message';
+        const wrapper = shallowMount(CodeSnippet, {
+            props: { msg },
+        });
+        expect(wrapper.text()).toContain('');
+    });
 });
- */

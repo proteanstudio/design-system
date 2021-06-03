@@ -19,8 +19,6 @@ export default class MainNav extends Vue {
     @Prop() showOffCanvas = false;
     @Prop() lightModeEnabled = false;
 
-    hasMounted = false;
-
     get sortedRoutes(): MainNavGroup[] {
         const groupedStructure: MainNavGroup[] = [
             {
