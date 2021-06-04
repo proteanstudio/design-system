@@ -4,7 +4,7 @@
     </code>
     <div class="copy-container" v-if="canCopy">
         <code v-show="showCopyConfirmation" class="copy-confirmation">Copied to clipboard</code>
-        <protean-button a11yLabel="Copy code snippet" variant="icon" @click="copySnippet">
+        <protean-button class="copy-snippet" a11y-label="Copy code snippet" variant="icon" @click="copySnippet">
             <protean-icon type="clipboard" />
         </protean-button>
     </div>
