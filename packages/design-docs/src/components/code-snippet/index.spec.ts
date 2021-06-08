@@ -31,8 +31,8 @@ describe('code-snippet', () => {
         expect(wrapper.vm.canCopy).toEqual(false);
         expect(wrapper.vm.parsedSnippet.trim()).toEqual('');
 
-        expect(wrapper.vm.$el.className).toEqual('code-snippet');
-        expect(wrapper.vm.$el.localName).toEqual('pre');
+        expect(wrapper.element.className).toEqual('code-snippet');
+        expect(wrapper.element.localName).toEqual('pre');
 
         expect(wrapper.find('.parsed-snippet').classes('html')).toBe(true);
         expect(wrapper.find('.copy-container').exists()).toBe(false);

@@ -32,10 +32,10 @@ describe('main-nav', () => {
 
         expect(wrapper.vm.showOffCanvas).toEqual(false);
         expect(wrapper.vm.lightModeEnabled).toEqual(false);
-        expect(wrapper.vm.$el.localName).toEqual('nav');
-        expect(wrapper.vm.$el.classList).toContain('main-nav');
-        expect(wrapper.vm.$el.classList).not.toContain('show-off-canvas');
-        expect(wrapper.vm.$el.getAttribute('aria-label')).toEqual(
+        expect(wrapper.element.localName).toEqual('nav');
+        expect(wrapper.element.classList).toContain('main-nav');
+        expect(wrapper.element.classList).not.toContain('show-off-canvas');
+        expect(wrapper.element.getAttribute('aria-label')).toEqual(
             'Main navigation',
         );
 

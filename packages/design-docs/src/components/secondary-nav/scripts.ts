@@ -21,8 +21,6 @@ export default class SecondaryNav extends Vue {
     navItems: SecondaryNavItem[] = [];
     activeTarget = '';
 
-    scrolling = false;
-
     @Watch('$route')
     onRouteChanged(): void {
         this.navItems = [];
