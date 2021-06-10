@@ -1,14 +1,11 @@
-/* import { expect } from "chai";
-import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+import { shallowMount } from '@vue/test-utils';
+import TypographyRoute from './index.vue';
 
-describe('Root.vue', () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      props: { msg }
+describe('Typography Route', () => {
+    it('renders', () => {
+        const wrapper = shallowMount(TypographyRoute);
+
+        expect(wrapper.find('h1').text()).toEqual('Typography');
+        expect(wrapper.findComponent({ name: 'CodeSnippet' })).not.toBeNull();
     });
-    expect(wrapper.text()).to.include(msg);
-  });
 });
- */
