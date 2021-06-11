@@ -101,7 +101,7 @@ describe('protean-click-elsewhere', () => {
         (document.activeElement as any) = select;
         (select.shadowRoot.activeElement as any) = proteanInput;
         (proteanInput.shadowRoot.activeElement as any) = input;
-        /* eslint enable */
+        /* eslint-enable */
         await waitForChanges();
 
         expect(rootInstance.findActiveElement()).toEqual(input);
@@ -187,7 +187,7 @@ describe('protean-click-elsewhere', () => {
         /* eslint-disable */
         (document.activeElement as any) = button;
         event.composedPath = () => [span];
-        /* eslint enable */
+        /* eslint-enable */
 
         expect(rootInstance.isCurrentlyFocused).toEqual(false);
         rootInstance.handler(event);
@@ -212,7 +212,7 @@ describe('protean-click-elsewhere', () => {
         /* eslint-disable */
         (document.activeElement as any) = document.body;
         event.composedPath = () => [button];
-        /* eslint enable */
+        /* eslint-enable */
 
         rootInstance.handler(event);
         await waitForChanges();

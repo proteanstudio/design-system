@@ -3,7 +3,7 @@ import { shallowMount } from '@vue/test-utils';
 import SecondaryNav from './index.vue';
 
 jest.mock('@/utils/debounce', () =>
-    jest.fn().mockImplementation((fn: VoidFunction, threshold?: number) => {
+    jest.fn().mockImplementation((fn: VoidFunction) => {
         return fn;
     }),
 );

@@ -39,7 +39,7 @@ export default class Root extends Vue {
 
         if (name === 'not-found') return 'not-found';
 
-        return path === '/' ? 'home' : path.split('/').join(' ');
+        return path === '/' ? 'home' : path.split('/').join(' ').trim();
     }
 
     toggleLightMode(event: CustomEvent): void {
