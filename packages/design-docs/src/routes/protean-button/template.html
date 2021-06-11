@@ -12,6 +12,7 @@
             v-prop:a11yLabel="demoAriaLabel"
         >
             <protean-icon
+                class="demo-button-icon"
                 v-if="demoVariant === 'icon'"
                 type="chevron-down"
             ></protean-icon>
@@ -20,12 +21,14 @@
     </div>
     <div class="overview-demo-controls">
         <protean-checkbox
+            class="demo-toggle-disabled"
             label="Show as disabled"
             variant="toggle"
             v-prop:checked="demoDisabled"
             @change="demoDisabled = $event.detail.checked"
         ></protean-checkbox>
         <protean-select
+            class="demo-select-variant"
             @change="demoVariant = $event.detail.value"
             :value="demoVariant"
             label="Button variant"
