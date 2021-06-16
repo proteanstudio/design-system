@@ -1,14 +1,104 @@
-/* import { expect } from "chai";
-import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+import vProp from '@/directives/v-prop';
+import { nextTick } from '@vue/runtime-dom';
+import { shallowMount } from '@vue/test-utils';
+import ProteanMessageRoute from './index.vue';
 
-describe('Root.vue', () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      props: { msg }
+const mountOptions = {
+    global: {
+        stubs: [
+            'code-snippet',
+            'protean-message',
+            'protean-checkbox',
+            'protean-select',
+            'protean-option',
+        ],
+        directives: {
+            prop: vProp,
+        },
+    },
+};
+
+describe('Protean Message Route', () => {
+    it('renders', () => {
+        const wrapper = shallowMount(ProteanMessageRoute, mountOptions);
+
+        expect(wrapper.find('h1').text()).toEqual('Message');
+        expect(wrapper.vm.demoType).toEqual('info');
+        expect(wrapper.vm.demoTypes).toEqual([
+            'info',
+            'success',
+            'warning',
+            'error',
+        ]);
+        expect(wrapper.vm.demoIsStatus).toEqual(false);
+        expect(wrapper.vm.demoLevel).toEqual('alert');
     });
-    expect(wrapper.text()).to.include(msg);
-  });
+
+    it('gets correct level', () => {
+        const wrapper = shallowMount(ProteanMessageRoute, mountOptions);
+
+        expect(wrapper.vm.demoIsStatus).toEqual(false);
+        expect(wrapper.vm.demoLevel).toEqual('alert');
+
+        wrapper.vm.demoIsStatus = true;
+
+        expect(wrapper.vm.demoLevel).toEqual('status');
+    });
+
+    it('updates demoType on select change', async () => {
+        const wrapper = shallowMount(ProteanMessageRoute, mountOptions);
+
+        const typeSelectWrapper = wrapper.find('.demo-select-type');
+
+        expect(wrapper.vm.demoType).toEqual('info');
+
+        await typeSelectWrapper.trigger('change', {
+            detail: {
+                value: 'success',
+            },
+        });
+
+        expect(wrapper.vm.demoType).toEqual('success');
+    });
+
+    it('updates demoIsStatus on toggle change', async () => {
+        const wrapper = shallowMount(ProteanMessageRoute, mountOptions);
+
+        const levelToggleWrapper = wrapper.find('.demo-toggle-level');
+
+        expect(wrapper.vm.demoIsStatus).toEqual(false);
+
+        await levelToggleWrapper.trigger('change', {
+            detail: {
+                checked: true,
+            },
+        });
+
+        expect(wrapper.vm.demoIsStatus).toEqual(true);
+    });
+
+    it('correctly binds code snippet substitutions', async () => {
+        const wrapper = shallowMount(ProteanMessageRoute, mountOptions);
+
+        /* eslint-disable */
+        let substitutions: string[] = (
+            wrapper.findComponent({ name: 'CodeSnippet' }).vm as any
+        ).substitutions;
+        /* eslint-enable */
+
+        expect(substitutions).toEqual(['info', 'alert']);
+
+        wrapper.vm.demoType = 'error';
+        wrapper.vm.demoIsStatus = true;
+
+        await nextTick();
+
+        /* eslint-disable */
+        substitutions = (
+            wrapper.findComponent({ name: 'CodeSnippet' }).vm as any
+        ).substitutions;
+        /* eslint-enable */
+
+        expect(substitutions).toEqual(['error', 'status']);
+    });
 });
- */
