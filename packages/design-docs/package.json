@@ -7,7 +7,6 @@
         "build": "vue-cli-service build --modern && rm -rf ../../docs && mkdir ../../docs && cp -R dist/ ../../docs && cp ../../CNAME ../../docs",
         "test": "vue-cli-service test:unit",
         "test:dev": "vue-cli-service test:unit --watch",
-        "test:clearCache": "yarn test --clearCache",
         "lint": "vue-cli-service lint",
         "format": "prettier -c 'src/**/*.{ts,vue,scss,spec.ts}'",
         "format:fix": "prettier --write 'src/**/*.{ts,vue,scss,spec.ts}'"
