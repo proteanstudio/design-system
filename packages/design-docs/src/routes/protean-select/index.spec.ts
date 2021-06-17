@@ -58,17 +58,6 @@ describe('Protean Select Route', () => {
         expect(wrapper.vm.demoErrors).toEqual(wrapper.vm.demoErrorsList);
     });
 
-    it('gets demoErrors', () => {
-        const wrapper = shallowMount(ProteanSelectRoute, mountOptions);
-
-        expect(wrapper.vm.demoErrorsList).toEqual(['Error #1']);
-        expect(wrapper.vm.demoShowErrors).toEqual(false);
-        expect(wrapper.vm.demoErrors).toEqual([]);
-
-        wrapper.vm.demoShowErrors = true;
-        expect(wrapper.vm.demoErrors).toEqual(wrapper.vm.demoErrorsList);
-    });
-
     it('gets snippetOptions', () => {
         const wrapper = shallowMount(ProteanSelectRoute, mountOptions);
 
