@@ -1,14 +1,11 @@
-/* import { expect } from "chai";
-import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+import { shallowMount } from '@vue/test-utils';
+import CSSVariablesRoute from './index.vue';
 
-describe('Root.vue', () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      props: { msg }
+describe('CSS Variables Route', () => {
+    it('renders', () => {
+        const wrapper = shallowMount(CSSVariablesRoute);
+
+        expect(wrapper.find('h1').text()).toEqual('CSS variables');
+        expect(wrapper.findComponent({ name: 'CodeSnippet' })).not.toBeNull();
     });
-    expect(wrapper.text()).to.include(msg);
-  });
 });
- */

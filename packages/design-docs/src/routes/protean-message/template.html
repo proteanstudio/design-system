@@ -10,7 +10,7 @@
         <protean-message
             class="overview-demo-element"
             :type="demoType"
-            :variant="demoVariant"
+            :level="demoLevel"
         >
             Message info:
             <ul>
@@ -22,6 +22,7 @@
     </div>
     <div class="overview-demo-controls">
         <protean-select
+            class="demo-select-type"
             label="Message type"
             :value="demoType"
             @change="demoType = $event.detail.value"
@@ -34,17 +35,12 @@
             >
         </protean-select>
         <protean-checkbox
+            class="demo-toggle-level"
             label="Show as status message"
             variant="toggle"
             v-prop:checked="demoIsStatus"
             @change="demoIsStatus = $event.detail.checked"
         ></protean-checkbox>
-        <!-- <protean-checkbox
-            label="Show as inline message"
-            variant="toggle"
-            v-prop:checked="demoIsInline"
-            @change="demoIsInline = $event.detail.checked"
-        ></protean-checkbox> -->
     </div>
     <div class="overview-demo-snippet">
         <code-snippet :substitutions="[demoType, demoLevel]">

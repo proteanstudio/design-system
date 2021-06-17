@@ -7,14 +7,9 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
 export default class ProteanMessageRoute extends Vue {
     demoType = 'info';
     demoTypes = ['info', 'success', 'warning', 'error'];
-    demoIsInline = false;
     demoIsStatus = false;
 
     get demoLevel(): string {
         return this.demoIsStatus ? 'status' : 'alert';
-    }
-
-    get demoVariant(): string {
-        return this.demoIsInline ? 'inline' : 'default';
     }
 }

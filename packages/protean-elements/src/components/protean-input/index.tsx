@@ -103,10 +103,8 @@ export class ProteanInput {
     }
 
     get inputMaxlength(): number | undefined {
-        const {
-            maxlength,
-            formattingCharacterCount,
-        } = this.formattedValueObject;
+        const { maxlength, formattingCharacterCount } =
+            this.formattedValueObject;
 
         if (maxlength) {
             return maxlength;
@@ -268,8 +266,8 @@ export class ProteanInput {
 
     calculateCursorPositionOnInput(): CursorData {
         const inputElement = this.inputElement;
-        const formattedValueLength = this.formattedValueObject.formattedValue
-            .length;
+        const formattedValueLength =
+            this.formattedValueObject.formattedValue.length;
 
         return {
             startingPosition:
@@ -283,11 +281,8 @@ export class ProteanInput {
     setCursorPosition(): void {
         if (!this.cursorData.hasSelection) {
             const inputElement = this.inputElement;
-            const {
-                valueLength,
-                previousValueLength,
-                startingPosition,
-            } = this.cursorData;
+            const { valueLength, previousValueLength, startingPosition } =
+                this.cursorData;
             const cursorPosition =
                 startingPosition + (valueLength - previousValueLength);
             inputElement.setSelectionRange(cursorPosition, cursorPosition);

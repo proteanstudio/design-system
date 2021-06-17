@@ -16,8 +16,7 @@ describe('protean-optgroup', () => {
     it('renders', async () => {
         const { root, rootInstance } = await newSpecPage({
             components: [ProteanOptgroup],
-            html:
-                '<protean-optgroup label="Optgroup Label"></protean-optgroup>',
+            html: '<protean-optgroup label="Optgroup Label"></protean-optgroup>',
         });
 
         expect(rootInstance.guid).toEqual(1000);
@@ -45,8 +44,7 @@ describe('protean-optgroup', () => {
     it('passes disabled state to children', async () => {
         const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [ProteanOptgroup, ProteanOption],
-            html:
-                '<protean-optgroup label="Optgroup Label"><protean-option value="1">1</protean-option><protean-option value="2">2</protean-option></protean-optgroup>',
+            html: '<protean-optgroup label="Optgroup Label"><protean-option value="1">1</protean-option><protean-option value="2">2</protean-option></protean-optgroup>',
         });
 
         const optionElements = Array.from(

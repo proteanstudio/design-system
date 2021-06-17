@@ -24,36 +24,42 @@
     </div>
     <div class="overview-demo-controls">
         <protean-checkbox
+            class="demo-toggle-errors"
             label="Populate validation errors"
             variant="toggle"
             v-prop:checked="demoShowErrors"
             @change="demoShowErrors = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
+            class="demo-toggle-messages"
             label="Hide hints and errors"
             variant="toggle"
             v-prop:checked="demoSuppressMessages"
             @change="demoSuppressMessages = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
+            class="demo-toggle-optional"
             label="Show as optional"
             variant="toggle"
             v-prop:checked="demoOptional"
             @change="demoOptional = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
+            class="demo-toggle-disabled"
             label="Show as disabled"
             variant="toggle"
             v-prop:checked="demoDisabled"
             @change="demoDisabled = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
+            class="demo-toggle-readonly"
             label="Show as readonly"
             variant="toggle"
             v-prop:checked="demoReadonly"
             @change="demoReadonly = $event.detail.checked"
         ></protean-checkbox>
         <protean-input
+            class="demo-input-maxlength"
             label="Input maxlength"
             type="numeric"
             format="integer"
@@ -62,6 +68,7 @@
             @change="demoMaxlength = $event.detail.value"
         ></protean-input>
         <protean-select
+            class="demo-select-type"
             @change="demoType = $event.detail.value"
             :value="demoType"
             label="Input type"
@@ -79,6 +86,7 @@
             </protean-optgroup>
         </protean-select>
         <protean-select
+            class="demo-select-format"
             :value="demoFormat"
             label="Input format"
             v-if="demoFormats"
@@ -94,7 +102,7 @@
     </div>
     <div class="overview-demo-snippet">
         <code-snippet
-            :substitutions='[demoType, demoFormat ? `\n format="${demoFormat}"` : "", demoMaxlength ? `\n maxlength="${demoMaxlength}"` : "",   demoSuppressMessages ? "\n suppress-messages" : "",demoOptional ? "\n optional" : "", demoDisabled ? "\n disabled" : "", demoReadonly ? "\n readonly" : ""]'
+            :substitutions='[demoType, demoFormat ? `\n format="${demoFormat}"` : "", `\n maxlength="${demoMaxlength}"`,   demoSuppressMessages ? "\n suppress-messages" : "",demoOptional ? "\n optional" : "", demoDisabled ? "\n disabled" : "", demoReadonly ? "\n readonly" : ""]'
         >
             {{`<protean-input
                 label="Field label"
@@ -270,10 +278,6 @@
                             </li>
                         </ul>
                     </div>
-                    <!-- <protean-select label="Formats for" :value="apiFormat" @change="apiFormat = $event.detail.value">
-                        <protean-option value="date" label="date">date</protean-option>
-                        <protean-option value="numeric" label="numeric">numeric</protean-option>
-                    </protean-select> -->
                     <code-snippet language="javascript">
                         {{`element.type = 'date';
                         element.format = 'M/D/YY';`}}

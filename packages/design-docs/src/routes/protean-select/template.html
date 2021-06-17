@@ -6,7 +6,7 @@
     <div class="overview-demo">
         <protean-select
             v-if="demoWithOptGroups"
-            class="overview-demo-element"
+            class="overview-demo-element optgroup-demo"
             label="Select label"
             :multiple="demoMultiple"
             :value="demoValue"
@@ -14,7 +14,6 @@
             :errors="demoErrors"
             :optional="demoOptional"
             :disabled="demoDisabled"
-            :format="demoFormat"
             @change="changeHandler"
         >
             <protean-optgroup
@@ -31,7 +30,7 @@
         </protean-select>
         <protean-select
             v-else
-            class="overview-demo-element"
+            class="overview-demo-element flat-demo"
             label="Select label"
             :multiple="demoMultiple"
             :value="demoValue"
@@ -39,7 +38,6 @@
             :errors="demoErrors"
             :optional="demoOptional"
             :disabled="demoDisabled"
-            :format="demoFormat"
             @change="changeHandler"
         >
             <protean-option
@@ -52,30 +50,35 @@
     </div>
     <div class="overview-demo-controls">
         <protean-checkbox
+            class="demo-toggle-optgroups"
             label="Show with optgroups"
             variant="toggle"
             v-prop:checked="demoWithOptGroups"
             @change="demoWithOptGroups = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
+            class="demo-toggle-multiselect"
             label="Show as multiselect"
             variant="toggle"
             v-prop:checked="demoMultiple"
             @change="demoMultiple = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
+            class="demo-toggle-errors"
             label="Show with validation errors"
             variant="toggle"
             v-prop:checked="demoShowErrors"
             @change="demoShowErrors = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
+            class="demo-toggle-optional"
             label="Show as optional"
             variant="toggle"
             v-prop:checked="demoOptional"
             @change="demoOptional = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
+            class="demo-toggle-disabled"
             label="Show as disabled"
             variant="toggle"
             v-prop:checked="demoDisabled"

@@ -92,7 +92,6 @@ export default class ProteanSelectRoute extends Vue {
     demoValue = '';
     demoSelectedOptions: string[] = [];
     demoMultiple = false;
-    demoType = 'text';
     demoErrorsList = ['Error #1'];
     demoShowErrors = false;
     demoOptional = false;
@@ -127,16 +126,6 @@ export default class ProteanSelectRoute extends Vue {
 
             return innerAcc + childStr + trailingLineBreak;
         }, '');
-    }
-
-    spamErrors(): void {
-        const arrayLength = Math.round(Math.random() * 9 + 1);
-
-        const errorList = new Array(arrayLength)
-            .fill('')
-            .map((i, index) => `Error #${index}`);
-
-        this.demoErrorsList = errorList;
     }
 
     changeHandler(event: CustomEvent): void {

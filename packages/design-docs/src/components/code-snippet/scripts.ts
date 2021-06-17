@@ -16,7 +16,7 @@ export default class CodeSnippet extends Vue {
     @Prop() substitutions: string[] = [];
 
     mounted(): void {
-        this.snippet = this.$el.querySelector('code').innerText.trim();
+        this.snippet = this.$el.querySelector('code').textContent.trim();
         this.resetInnerContent();
 
         this.canCopy = typeof navigator.clipboard?.writeText === 'function';
@@ -33,10 +33,10 @@ export default class CodeSnippet extends Vue {
         let snippet = this.snippet;
         if (Array.isArray(this.substitutions)) {
             snippet = snippet.replace(/({[0-9]})/g, sub => {
-                return this.substitutions[parseInt(sub[1])];
+                return this.substitutions[parseInt(sub[1])] ?? '';
             });
         }
-        return this.parseSnippet(snippet);
+        return this.parseSnippet(snippet).trim();
     }
 
     @Watch('substitutions')
@@ -50,11 +50,7 @@ export default class CodeSnippet extends Vue {
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;');
 
-        hljs.highlightBlock(element);
-    }
-
-    createIndentationString(count: number): string {
-        return count > -1 ? Array(count).join('  ') : '';
+        hljs.highlightElement(element);
     }
 
     parseSnippet(snippet: string): string {
@@ -72,8 +68,7 @@ export default class CodeSnippet extends Vue {
                 if ((hasClosingTag && !hasOpeningTag) || hasElse) {
                     indentCount--;
                 }
-
-                const indent = this.createIndentationString(indentCount + 1);
+                const indent = ''.padStart(2 * indentCount);
 
                 if ((hasOpeningTag && !hasClosingTag) || hasElse) {
                     indentCount++;
@@ -83,13 +78,13 @@ export default class CodeSnippet extends Vue {
             }, '');
     }
 
-    copySnippet(): void {
-        navigator.clipboard.writeText(this.parsedSnippet).then(() => {
-            this.showCopyConfirmation = true;
+    async copySnippet(): Promise<void> {
+        await navigator.clipboard.writeText(this.parsedSnippet);
 
-            setTimeout(() => {
-                this.showCopyConfirmation = false;
-            }, 1500);
-        });
+        this.showCopyConfirmation = true;
+
+        setTimeout(() => {
+            this.showCopyConfirmation = false;
+        }, 1500);
     }
 }

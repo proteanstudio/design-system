@@ -25,9 +25,8 @@ describe('protean-message', () => {
         expect(innerLabel.className).toEqual('alignment-left');
         expect(innerLabel).toEqualAttribute('htmlFor', rootInstance.checkboxId); //JSDOM quirk
 
-        const checkboxSymbol = root.shadowRoot.querySelector(
-            '.checkbox-symbol',
-        );
+        const checkboxSymbol =
+            root.shadowRoot.querySelector('.checkbox-symbol');
         expect(checkboxSymbol).toHaveClass('standard');
 
         const checkboxFill = root.shadowRoot.querySelector('.checkbox-fill');
@@ -112,8 +111,7 @@ describe('protean-message', () => {
     it('handles checkbox fill', async () => {
         const { root, waitForChanges } = await newSpecPage({
             components: [ProteanCheckbox],
-            html:
-                '<protean-checkbox label="test label" indeterminate checked></protean-checkbox>',
+            html: '<protean-checkbox label="test label" indeterminate checked></protean-checkbox>',
         });
 
         let checkboxFill = root.shadowRoot.querySelector('.checkbox-fill');
@@ -131,8 +129,7 @@ describe('protean-message', () => {
     it('handles toggle render', async () => {
         const { root, waitForChanges } = await newSpecPage({
             components: [ProteanCheckbox],
-            html:
-                '<protean-checkbox label="test label" indeterminate checked></protean-checkbox>',
+            html: '<protean-checkbox label="test label" indeterminate checked></protean-checkbox>',
         });
 
         let checkboxSymbol = root.shadowRoot.querySelector('.checkbox-symbol');

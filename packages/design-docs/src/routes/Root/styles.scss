@@ -3,7 +3,7 @@
 #app {
     display: flex;
 
-    @include breakpoint (m) {
+    @include breakpoint(m) {
         flex-wrap: wrap;
     }
 }
@@ -24,7 +24,6 @@
         display: none;
     }
 
-
     @media print {
         display: none;
     }
@@ -37,7 +36,6 @@
     padding-right: 42px;
     margin: 0 auto;
 }
-
 
 main {
     flex: 0 1 min(100%, 900px);

@@ -1,14 +1,9 @@
-/* import { expect } from "chai";
-import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+import { shallowMount } from '@vue/test-utils';
+import AccessibilityRoute from './index.vue';
 
-describe('Root.vue', () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      props: { msg }
+describe('Accessibility Route', () => {
+    it('renders', () => {
+        const wrapper = shallowMount(AccessibilityRoute);
+        expect(wrapper.find('h1').text()).toEqual('Accessibility');
     });
-    expect(wrapper.text()).to.include(msg);
-  });
 });
- */
