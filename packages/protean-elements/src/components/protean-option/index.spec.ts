@@ -5,8 +5,7 @@ describe('protean-option', () => {
     it('renders base content', async () => {
         const { root } = await newSpecPage({
             components: [ProteanOption],
-            html:
-                '<protean-option value="1" label="Label 1">Label 1</protean-option>',
+            html: '<protean-option value="1" label="Label 1">Label 1</protean-option>',
         });
 
         const optionContainer = root.shadowRoot.querySelector(
@@ -26,8 +25,7 @@ describe('protean-option', () => {
     it('handles disabled states', async () => {
         const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [ProteanOption],
-            html:
-                '<protean-option value="1" label="Label 1">Label 1</protean-option>',
+            html: '<protean-option value="1" label="Label 1">Label 1</protean-option>',
         });
 
         const optionContainer = root.shadowRoot.querySelector(
@@ -65,8 +63,7 @@ describe('protean-option', () => {
     it('prevents click event bubbling when disabled', async () => {
         const { root, rootInstance, waitForChanges } = await newSpecPage({
             components: [ProteanOption],
-            html:
-                '<protean-option value="1" label="Label 1">Label 1</protean-option>',
+            html: '<protean-option value="1" label="Label 1">Label 1</protean-option>',
         });
 
         const clickEvent = new MouseEvent('click');
@@ -90,8 +87,7 @@ describe('protean-option', () => {
     it('handles selected state', async () => {
         const { root, waitForChanges } = await newSpecPage({
             components: [ProteanOption],
-            html:
-                '<protean-option value="1" label="Label 1"> Label 1</protean-option>',
+            html: '<protean-option value="1" label="Label 1"> Label 1</protean-option>',
         });
 
         const optionContainer = root.shadowRoot.querySelector(

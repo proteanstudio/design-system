@@ -16,6 +16,7 @@ export default class ProteanCheckboxRoute extends Vue {
 
         return;
     }
+
     get demoAlignment(): string {
         return this.demoIsRightAligned ? 'right' : 'left';
     }

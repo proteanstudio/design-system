@@ -5,8 +5,7 @@ describe('protean-tab-pane', () => {
     it('renders', async () => {
         const { root, waitForChanges } = await newSpecPage({
             components: [ProteanTabPane],
-            html:
-                '<protean-tab-pane label="Pane 1" value="test-value" name="test-name"> Pane Content </protean-tab-pane>',
+            html: '<protean-tab-pane label="Pane 1" value="test-value" name="test-name"> Pane Content </protean-tab-pane>',
         });
 
         root.guid = 1000;
@@ -29,8 +28,7 @@ describe('protean-tab-pane', () => {
     it('defaults name property', async () => {
         const { root } = await newSpecPage({
             components: [ProteanTabPane],
-            html:
-                '<protean-tab-pane label="Pane 1" value="test-value"> Pane Content </protean-tab-pane>',
+            html: '<protean-tab-pane label="Pane 1" value="test-value"> Pane Content </protean-tab-pane>',
         });
 
         expect(root.name).toEqual('');

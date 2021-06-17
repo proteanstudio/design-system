@@ -3,12 +3,12 @@
         <router-link to="/" class="home-link unstyled">
             <img
                 src="@/assets/images/logo-symbol.svg"
-                alt="Protean Studio Design System"
+                alt="Protean Design System"
             />
         </router-link>
         <div v-for="(group, index) in sortedRoutes" class="nav-group">
-            <h2 class="heading-3" :id="`nav-group-${index}-heading`">{{group.title}}</h2>
-            <ul :aria-labelledby="`nav-group-${index}-heading`">
+            <h2 v-if="group.title" class="heading-3" :id="`nav-group-${index}-heading`">{{group.title}}</h2>
+            <ul :aria-labelledby="group.title ?`nav-group-${index}-heading` : null">
                 <li v-for="item in group.children">
                     <router-link :to="item.path">{{item.name}}</router-link>
                 </li>

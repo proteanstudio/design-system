@@ -21,6 +21,7 @@
     </div>
     <div class="overview-demo-controls">
         <protean-checkbox
+            class="demo-toggle-toggle"
             label="Show as toggle"
             variant="toggle"
             v-prop:checked="demoIsToggle"
@@ -28,18 +29,21 @@
             @change="demoIsToggle = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
+            class="demo-toggle-disabled"
             label="Show as disabled"
             variant="toggle"
             v-prop:checked="demoDisabled"
             @change="demoDisabled = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
+            class="demo-toggle-alignment"
             label="Align to the right"
             variant="toggle"
             v-prop:checked="demoIsRightAligned"
             @change="demoIsRightAligned = $event.detail.checked"
         ></protean-checkbox>
         <protean-checkbox
+            class="demo-toggle-indeterminate"
             label="Show as indeterminate"
             variant="toggle"
             v-prop:checked="demoIndeterminate"

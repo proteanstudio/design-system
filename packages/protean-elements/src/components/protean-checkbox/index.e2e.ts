@@ -34,8 +34,7 @@ describe('protean-checkbox', () => {
 
     it('renders correct fill state', async () => {
         const { find, waitForChanges } = await newE2EPage({
-            html:
-                '<protean-checkbox label="test label" indeterminate checked></protean-checkbox>',
+            html: '<protean-checkbox label="test label" indeterminate checked></protean-checkbox>',
         });
 
         let checkboxFill = await find('protean-checkbox >>> .checkbox-fill');

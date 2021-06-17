@@ -32,9 +32,10 @@ describe('protean-tab-container', () => {
         const tabList = root.shadowRoot.querySelector('.tab-list');
         expect(tabList).toEqualAttribute('role', 'tablist');
 
-        const tabControls = root.shadowRoot.querySelectorAll<HTMLButtonElement>(
-            '.tab-list button',
-        );
+        const tabControls =
+            root.shadowRoot.querySelectorAll<HTMLButtonElement>(
+                '.tab-list button',
+            );
         expect(tabControls).toHaveLength(2);
 
         const [tabControl1, tabControl2] = Array.from(tabControls);
@@ -306,9 +307,8 @@ describe('protean-tab-container', () => {
                 <protean-tab-container name="test-name" value="2"></protean-tab-container>`,
         });
 
-        const tabControls = root.shadowRoot.querySelectorAll(
-            '.tab-list button',
-        );
+        const tabControls =
+            root.shadowRoot.querySelectorAll('.tab-list button');
 
         expect(tabControls).toHaveLength(0);
     });
@@ -324,9 +324,8 @@ describe('protean-tab-container', () => {
                 </protean-tab-container>`,
         });
 
-        const tabControls = root.shadowRoot.querySelectorAll(
-            '.tab-list button',
-        );
+        const tabControls =
+            root.shadowRoot.querySelectorAll('.tab-list button');
 
         expect(tabControls).toHaveLength(0);
     });

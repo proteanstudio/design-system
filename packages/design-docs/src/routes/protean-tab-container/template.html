@@ -11,30 +11,6 @@
         >
             <protean-tab-pane :name="demoName" label="Tab 1" value="tab1">
                 <p>Tab 1 Content</p>
-    
-                <protean-tab-container
-                    v-if="demoShowChildTab"
-                    :name="demoChildName"
-                >
-                    <protean-tab-pane
-                        :name="demoChildName"
-                        label="Child 1"
-                        value="childtab1"
-                        >Child Tab 1 Content</protean-tab-pane
-                    >
-                    <protean-tab-pane
-                        :name="demoChildName"
-                        label="Child 2"
-                        value="childtab2"
-                        >Child Tab 2 Content</protean-tab-pane
-                    >
-                    <protean-tab-pane
-                        :name="demoChildName"
-                        label="Child 3"
-                        value="childtab3"
-                        >Child Tab 3 Content</protean-tab-pane
-                    >
-                </protean-tab-container>
             </protean-tab-pane>
             <protean-tab-pane :name="demoName" label="Tab 2" value="tab2"
                 ><p>Tab 2 Content</p></protean-tab-pane
@@ -44,17 +20,9 @@
             >
         </protean-tab-container>
     </div>
-    <!-- <div class="overview-demo-controls">
-        <protean-checkbox
-            label="Show with nested tabs"
-            variant="toggle"
-            v-prop:checked="demoShowChildTab"
-            @change="toggleNestedTabs"
-        ></protean-checkbox>
-    </div> -->
     <div class="overview-demo-snippet">
         <code-snippet
-            :substitutions='[demoName, demoValue, nestedTabSnippet]'
+            :substitutions='[demoName, demoValue]'
         >
             {{`<protean-tab-container
                     name="{0}"

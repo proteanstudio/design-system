@@ -180,9 +180,8 @@ describe('protean-input', () => {
             html: '<protean-input></protean-input>',
         });
 
-        const inputContainer = root.shadowRoot.querySelector(
-            '.input-container',
-        );
+        const inputContainer =
+            root.shadowRoot.querySelector('.input-container');
         expect(inputContainer).not.toHaveClass('has-error');
 
         root.errors = ['error 1'];
@@ -197,9 +196,8 @@ describe('protean-input', () => {
             html: '<protean-input label="test label"></protean-input>',
         });
 
-        let errorIcon: HTMLProteanIconElement = root.shadowRoot.querySelector(
-            '.error-icon',
-        );
+        let errorIcon: HTMLProteanIconElement =
+            root.shadowRoot.querySelector('.error-icon');
         expect(errorIcon).toBeNull();
 
         root.errors = ['error 1'];
@@ -548,7 +546,8 @@ describe('protean-input', () => {
             hasSelection: false,
         };
 
-        let calculatedCursorData = rootInstance.calculateCursorPositionOnInput();
+        let calculatedCursorData =
+            rootInstance.calculateCursorPositionOnInput();
 
         expect(calculatedCursorData).toEqual(expectedCursorData);
 

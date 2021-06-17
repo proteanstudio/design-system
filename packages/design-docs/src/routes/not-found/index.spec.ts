@@ -1,14 +1,15 @@
-/* import { expect } from "chai";
-import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+import { shallowMount } from '@vue/test-utils';
+import NotFoundRoute from './index.vue';
 
-describe('Root.vue', () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      props: { msg }
+describe('Not Found Route', () => {
+    it('renders', () => {
+        const wrapper = shallowMount(NotFoundRoute, {
+            global: {
+                stubs: ['router-link'],
+            },
+        });
+
+        expect(wrapper.find('h1').text()).toEqual('404');
+        expect(wrapper.findComponent({ name: 'RouterLink' })).not.toBeNull();
     });
-    expect(wrapper.text()).to.include(msg);
-  });
 });
- */

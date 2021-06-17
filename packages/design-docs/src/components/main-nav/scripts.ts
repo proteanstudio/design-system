@@ -19,8 +19,6 @@ export default class MainNav extends Vue {
     @Prop() showOffCanvas = false;
     @Prop() lightModeEnabled = false;
 
-    hasMounted = false;
-
     get sortedRoutes(): MainNavGroup[] {
         const groupedStructure: MainNavGroup[] = [
             {
@@ -38,14 +36,12 @@ export default class MainNav extends Vue {
 
         const routes = this.$router
             .getRoutes()
-            .map(
-                ({ path, name }): MainNavItem => {
-                    return {
-                        path,
-                        name: name as string,
-                    };
-                },
-            )
+            .map(({ path, name }): MainNavItem => {
+                return {
+                    path,
+                    name: name as string,
+                };
+            })
             .reduce((acc, item) => {
                 const omittedRoutes = ['Home', 'not-found'];
                 if (omittedRoutes.includes(item.name)) return acc;

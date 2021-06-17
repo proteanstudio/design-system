@@ -1,14 +1,50 @@
-/* import { expect } from "chai";
-import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+import vProp from '@/directives/v-prop';
+import { shallowMount } from '@vue/test-utils';
+import ProteanTabsRoute from './index.vue';
 
-describe('Root.vue', () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      props: { msg }
+const mountOptions = {
+    global: {
+        stubs: [
+            'code-snippet',
+            'protean-checkbox',
+            'protean-tab-container',
+            'protean-tab-pane',
+        ],
+        directives: {
+            prop: vProp,
+        },
+    },
+};
+
+describe('Protean Tabs Route', () => {
+    it('renders', () => {
+        const wrapper = shallowMount(ProteanTabsRoute, mountOptions);
+        expect(wrapper.find('h1').text()).toEqual('Tabs');
+        const demoTabs = wrapper.findComponent({ name: 'ProteanTabContainer' });
+
+        expect(wrapper.vm.demoName).toEqual('demo-name');
+        expect(demoTabs.attributes('name')).toEqual('demo-name');
+        expect(wrapper.vm.demoValue).toEqual('tab1');
+        expect(demoTabs.attributes('value')).toEqual('tab1');
     });
-    expect(wrapper.text()).to.include(msg);
-  });
+
+    it('updates demoValue on tab change', async () => {
+        const wrapper = shallowMount(ProteanTabsRoute, mountOptions);
+
+        let demoTabs = wrapper.findComponent({ name: 'ProteanTabContainer' });
+
+        expect(wrapper.vm.demoValue).toEqual('tab1');
+        expect(demoTabs.attributes('value')).toEqual('tab1');
+
+        await demoTabs.trigger('change', {
+            detail: {
+                value: 'tab3',
+            },
+        });
+
+        demoTabs = wrapper.findComponent({ name: 'ProteanTabContainer' });
+
+        expect(wrapper.vm.demoValue).toEqual('tab3');
+        expect(demoTabs.attributes('value')).toEqual('tab3');
+    });
 });
- */

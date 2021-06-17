@@ -335,9 +335,10 @@ describe('protean-input', () => {
 
         const heights = await page.$eval('protean-input', element => {
             return {
-                messageContainerHeight: element.shadowRoot.querySelector<HTMLDivElement>(
-                    '.message-container',
-                ).style.height,
+                messageContainerHeight:
+                    element.shadowRoot.querySelector<HTMLDivElement>(
+                        '.message-container',
+                    ).style.height,
                 proteanMessageHeight: `${
                     element.shadowRoot
                         .querySelector('.message-container protean-message')
@@ -388,8 +389,7 @@ describe('protean-input', () => {
 
     it('handles phone input', async () => {
         const { find, waitForChanges } = await newE2EPage({
-            html:
-                '<protean-input label="Label text" type="phone"></protean-input>',
+            html: '<protean-input label="Label text" type="phone"></protean-input>',
         });
 
         const inputElement = await find('protean-input >>> input');
@@ -420,8 +420,7 @@ describe('protean-input', () => {
 
     it('handles numeric input', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-input label="Label text" type="numeric"></protean-input>',
+            html: '<protean-input label="Label text" type="numeric"></protean-input>',
         });
         const { find, waitForChanges } = page;
 
@@ -460,8 +459,7 @@ describe('protean-input', () => {
 
     it('handles date input', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-input label="Label text" type="date"></protean-input>',
+            html: '<protean-input label="Label text" type="date"></protean-input>',
         });
         const { find, waitForChanges } = page;
 

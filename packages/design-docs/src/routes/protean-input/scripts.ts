@@ -57,7 +57,7 @@ export default class ProteanInputRoute extends Vue {
     demoOptional = false;
     demoDisabled = false;
     demoReadonly = false;
-    demoMaxlength = 20;
+    demoMaxlength = '20';
     demoFormat = '';
     demoNumericFormats = ['integer', 'delimited', '3dec'];
     dateFormats = [
@@ -85,11 +85,13 @@ export default class ProteanInputRoute extends Vue {
     }
 
     spamErrors(): void {
+        if (!this.demoShowErrors || this.demoSuppressMessages) return;
+
         const arrayLength = Math.round(Math.random() * 9 + 1);
 
         const errorList = new Array(arrayLength)
             .fill('')
-            .map((i, index) => `Error #${index}`);
+            .map((i, index) => `Error #${index + 1}`);
 
         this.demoErrorsList = errorList;
     }

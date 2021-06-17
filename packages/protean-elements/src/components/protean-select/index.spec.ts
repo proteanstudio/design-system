@@ -27,8 +27,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         expect(rootInstance.hostElement).toEqual(root);
@@ -58,9 +57,10 @@ describe('protean-select', () => {
         expect(proteanInput.ariaHasPopup).toEqual('listbox');
         expect(proteanInput.ariaExpanded).toEqual(false);
 
-        const chevronIcon = root.shadowRoot.querySelector<HTMLProteanIconElement>(
-            '.protean-select-icon',
-        );
+        const chevronIcon =
+            root.shadowRoot.querySelector<HTMLProteanIconElement>(
+                '.protean-select-icon',
+            );
         expect(chevronIcon.type).toEqual('chevron-down');
 
         const selectSeparator = root.shadowRoot.querySelector<HTMLDivElement>(
@@ -68,9 +68,10 @@ describe('protean-select', () => {
         );
         expect(selectSeparator.hidden).toEqual(true);
 
-        const selectDropdown = root.shadowRoot.querySelector<HTMLProteanIconElement>(
-            '.protean-select-dropdown',
-        );
+        const selectDropdown =
+            root.shadowRoot.querySelector<HTMLProteanIconElement>(
+                '.protean-select-dropdown',
+            );
         expect(selectDropdown).toEqualAttribute('role', 'listbox');
         expect(selectDropdown).toEqualAttribute('aria-label', 'Select label');
         expect(selectDropdown).toEqualAttribute('aria-required', 'true');
@@ -91,8 +92,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label" optional><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label" optional><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanInput = root.shadowRoot.querySelector('protean-input');
@@ -134,13 +134,13 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
-        const selectDropdown = root.shadowRoot.querySelector<HTMLProteanIconElement>(
-            '.protean-select-dropdown',
-        );
+        const selectDropdown =
+            root.shadowRoot.querySelector<HTMLProteanIconElement>(
+                '.protean-select-dropdown',
+            );
 
         expect(selectDropdown).toEqualAttribute('aria-label', 'Select label');
         expect(selectDropdown).toEqualAttribute('aria-required', 'true');
@@ -167,8 +167,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const selectSeparator = root.shadowRoot.querySelector<HTMLDivElement>(
@@ -217,8 +216,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const optionElements = Array.from(
@@ -235,8 +233,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select label="Select label" multiple><protean-option value="1">Option 1 no label</protean-option><protean-option value="2" label="Option 2">Option 2 Text</protean-option><protean-option value="3"></protean-option></protean-select>',
+            html: '<protean-select label="Select label" multiple><protean-option value="1">Option 1 no label</protean-option><protean-option value="2" label="Option 2">Option 2 Text</protean-option><protean-option value="3"></protean-option></protean-select>',
         });
 
         expect(root.multiple).toEqual(true);
@@ -299,8 +296,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2" active>Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2" active>Option 2</protean-option></protean-select>',
         });
 
         expect(rootInstance.activeOption).toEqual(
@@ -317,8 +313,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         expect(root.value).toEqual(undefined);
@@ -361,14 +356,12 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const focusMock = jest.fn();
-        root.shadowRoot.querySelector(
-            'protean-input',
-        ).dispatchEvent = focusMock;
+        root.shadowRoot.querySelector('protean-input').dispatchEvent =
+            focusMock;
 
         rootInstance.focusInput();
         await waitForChanges();
@@ -383,8 +376,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const focusMock = jest.fn();
@@ -407,8 +399,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const clickElsewhere = root.shadowRoot.querySelector(
@@ -438,8 +429,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select label="Select label" multiple><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select label="Select label" multiple><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         rootInstance.selectedOptions = [];
@@ -472,8 +462,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select label="Select label" multiple><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select label="Select label" multiple><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const consoleErrorMock = jest.fn();
@@ -508,8 +497,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const consoleErrorMock = jest.fn();
@@ -544,8 +532,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2" active>Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2" active>Option 2</protean-option></protean-select>',
         });
 
         const focusMock = jest.fn();
@@ -586,8 +573,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label" multiple><protean-option value="1" >1</protean-option><protean-option value="2" label="Option 2" selected>Option 2</protean-option><protean-option value="3" label="Option 3" selected>Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label" multiple><protean-option value="1" >1</protean-option><protean-option value="2" label="Option 2" selected>Option 2</protean-option><protean-option value="3" label="Option 3" selected>Option 2</protean-option></protean-select>',
         });
 
         expect(rootInstance.activeOption).toEqual(undefined);
@@ -615,8 +601,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="1" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="1" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         expect(rootInstance.activeOption).toEqual(undefined);
@@ -639,8 +624,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         rootInstance.dropdownOpen = true;
@@ -664,8 +648,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="1" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="1" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const scrollIntoViewMock = jest.fn();
@@ -779,8 +762,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="1" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2" disabled>Option 2</protean-option><protean-option value="3" label="Option 3">Option 3</protean-option><protean-option value="4" label="Option 4" disabled-group>Option 4</protean-option><protean-option value="5" label="Option 5">Option 5</protean-option><protean-option value="6" label="Option 6" disabled>Option 6</protean-option></protean-select>',
+            html: '<protean-select value="1" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2" disabled>Option 2</protean-option><protean-option value="3" label="Option 3">Option 3</protean-option><protean-option value="4" label="Option 4" disabled-group>Option 4</protean-option><protean-option value="5" label="Option 5">Option 5</protean-option><protean-option value="6" label="Option 6" disabled>Option 6</protean-option></protean-select>',
         });
 
         const scrollIntoViewMock = jest.fn();
@@ -851,8 +833,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const changeSpy = jest.fn();
@@ -883,8 +864,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select multiple label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2" selected>Option 2</protean-option></protean-select>',
+            html: '<protean-select multiple label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2" selected>Option 2</protean-option></protean-select>',
         });
 
         const changeSpy = jest.fn();
@@ -911,8 +891,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         expect(rootInstance.dropdownOpen).toEqual(false);
@@ -937,8 +916,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const preventDefaultMock = jest.fn();
@@ -968,8 +946,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const preventDefaultMock = jest.fn();
@@ -1101,8 +1078,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label"><div class="dummy-element"></div><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><div class="dummy-element"></div><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const handleSelectionMock = jest.fn();
@@ -1142,8 +1118,7 @@ describe('protean-select', () => {
                 ProteanInput,
                 ProteanIcon,
             ],
-            html:
-                '<protean-select value="2" label="Select label"><div class="dummy-element"></div><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><div class="dummy-element"></div><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const handleSelectionMock = jest.fn();

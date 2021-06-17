@@ -28,15 +28,15 @@
         html.light & {
             color: var(--body-background-color);
             text-shadow: 5px 5px var(--link-underline-color),
-            -1px -1px var(--link-underline-color),
-            -1px 1px var(--link-underline-color),
-            1px -1px var(--link-underline-color);
-
-            @include breakpoint(s) {
-                text-shadow: 3px 3px var(--link-underline-color),
                 -1px -1px var(--link-underline-color),
                 -1px 1px var(--link-underline-color),
                 1px -1px var(--link-underline-color);
+
+            @include breakpoint(s) {
+                text-shadow: 3px 3px var(--link-underline-color),
+                    -1px -1px var(--link-underline-color),
+                    -1px 1px var(--link-underline-color),
+                    1px -1px var(--link-underline-color);
             }
         }
     }

@@ -4,8 +4,7 @@ import { newE2EPage } from '@stencil/core/testing';
 describe('protean-select', () => {
     it('renders with default bindings', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanInput = await page.find(
@@ -54,8 +53,7 @@ describe('protean-select', () => {
 
     it('passes props to inner input', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="2" label="Select label" optional disabled><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label" optional disabled><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanInput = await page.find(
@@ -79,8 +77,7 @@ describe('protean-select', () => {
 
     it('passes props to listbox', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const selectDropdown = await page.find(
@@ -108,8 +105,7 @@ describe('protean-select', () => {
 
     it('appropriately binds aria-label', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanSelect = await page.find('protean-select');
@@ -138,8 +134,7 @@ describe('protean-select', () => {
 
     it('toggles dropdown on input click and binds associated props for each state', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanInput = await page.find(
@@ -165,8 +160,7 @@ describe('protean-select', () => {
 
     it('handle change event by default', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanSelect = await page.find('protean-select');
@@ -192,8 +186,7 @@ describe('protean-select', () => {
 
     it('emits change event on option click in single select', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanSelect = await page.find('protean-select');
@@ -222,8 +215,7 @@ describe('protean-select', () => {
 
     it('emits change event on option click in multi select', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select label="Select label" multiple><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select label="Select label" multiple><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanSelect = await page.find('protean-select');
@@ -269,8 +261,7 @@ describe('protean-select', () => {
 
     it('initiallizes value from first selected option', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2" selected>Option 2</protean-option></protean-select>',
+            html: '<protean-select label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2" selected>Option 2</protean-option></protean-select>',
         });
 
         const proteanSelect = await page.find('protean-select');
@@ -280,8 +271,7 @@ describe('protean-select', () => {
 
     it('initiallizes selectedOptions from selected option elements', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select label="Select label" multiple><protean-option value="1" selected>1</protean-option><protean-option value="2" label="Option 2" selected>Option 2</protean-option></protean-select>',
+            html: '<protean-select label="Select label" multiple><protean-option value="1" selected>1</protean-option><protean-option value="2" label="Option 2" selected>Option 2</protean-option></protean-select>',
         });
 
         const proteanSelect = await page.find('protean-select');
@@ -294,8 +284,7 @@ describe('protean-select', () => {
 
     it('mutates options to show selected', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanOptions = await page.findAll(
@@ -317,8 +306,7 @@ describe('protean-select', () => {
 
     it('sets display value for single select', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="1" label="Select label"><protean-option value="1">Option 1 no label</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option><protean-option value="3"></protean-option></protean-select>',
+            html: '<protean-select value="1" label="Select label"><protean-option value="1">Option 1 no label</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option><protean-option value="3"></protean-option></protean-select>',
         });
 
         const proteanSelect = await page.find('protean-select');
@@ -348,8 +336,7 @@ describe('protean-select', () => {
 
     it('sets display value for multi select', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select multiple label="Select label"><protean-option value="1" selected>Option 1 no label</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option><protean-option value="3"></protean-option></protean-select>',
+            html: '<protean-select multiple label="Select label"><protean-option value="1" selected>Option 1 no label</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option><protean-option value="3"></protean-option></protean-select>',
         });
 
         const proteanSelect = await page.find('protean-select');
@@ -384,8 +371,7 @@ describe('protean-select', () => {
 
     it('closes dropdown on click-elsewhere', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanInput = await page.find(
@@ -409,8 +395,7 @@ describe('protean-select', () => {
 
     it('delegates focus', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanInput = await page.find(
@@ -425,8 +410,7 @@ describe('protean-select', () => {
 
     it('opens dropdown and activates default option on navigation key when closed', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="1" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="1" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanInput = await page.find(
@@ -451,8 +435,7 @@ describe('protean-select', () => {
 
     it('activates default option on navigation key when dropdown open but no options are active', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanInput = await page.find(
@@ -482,8 +465,7 @@ describe('protean-select', () => {
 
     it('activates next option on ArrowDown', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="1" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="1" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanInput = await page.find(
@@ -548,8 +530,7 @@ describe('protean-select', () => {
 
     it('activates previous option on ArrowUp', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanInput = await page.find(
@@ -598,8 +579,7 @@ describe('protean-select', () => {
 
     it('activates first option on Home press', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="2" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanInput = await page.find(
@@ -648,8 +628,7 @@ describe('protean-select', () => {
 
     it('activates last option on End press', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="1" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select value="1" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanInput = await page.find(
@@ -698,8 +677,7 @@ describe('protean-select', () => {
 
     it('skips disabled options with keyboard navigation', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="1" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2" disabled>Option 2</protean-option><protean-option value="3" label="Option 3">Option 3</protean-option><protean-option value="4" label="Option 4" disabled-group>Option 4</protean-option><protean-option value="5" label="Option 5">Option 5</protean-option><protean-option value="6" label="Option 6" disabled>Option 6</protean-option></protean-select>',
+            html: '<protean-select value="1" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2" disabled>Option 2</protean-option><protean-option value="3" label="Option 3">Option 3</protean-option><protean-option value="4" label="Option 4" disabled-group>Option 4</protean-option><protean-option value="5" label="Option 5">Option 5</protean-option><protean-option value="6" label="Option 6" disabled>Option 6</protean-option></protean-select>',
         });
 
         const proteanInput = await page.find(
@@ -758,8 +736,7 @@ describe('protean-select', () => {
 
     it('selects active option with space and enter', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanSelect = await page.find('protean-select');
@@ -823,8 +800,7 @@ describe('protean-select', () => {
 
     it('closes dropdown on Escape press', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
+            html: '<protean-select label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option></protean-select>',
         });
 
         const proteanInput = await page.find(
@@ -849,8 +825,7 @@ describe('protean-select', () => {
 
     it('binds option id on and updates options on mutation observed', async () => {
         const page = await newE2EPage({
-            html:
-                '<protean-select value="3" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option><protean-option value="3" label="Option 3">Option 3</protean-option></protean-select>',
+            html: '<protean-select value="3" label="Select label"><protean-option value="1">1</protean-option><protean-option value="2" label="Option 2">Option 2</protean-option><protean-option value="3" label="Option 3">Option 3</protean-option></protean-select>',
         });
 
         let proteanOptions = await page.findAll(

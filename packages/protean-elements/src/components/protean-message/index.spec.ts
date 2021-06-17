@@ -5,13 +5,11 @@ describe('protean-message', () => {
     it('renders', async () => {
         const { root } = await newSpecPage({
             components: [ProteanMessage],
-            html:
-                '<protean-message type="error">Success Message</protean-message>',
+            html: '<protean-message type="error">Success Message</protean-message>',
         });
 
-        const messageContainer = root.shadowRoot.querySelector(
-            '.message-container',
-        );
+        const messageContainer =
+            root.shadowRoot.querySelector('.message-container');
 
         expect(messageContainer).toHaveClass('error');
         expect(messageContainer).toEqualAttribute('role', 'alert');
