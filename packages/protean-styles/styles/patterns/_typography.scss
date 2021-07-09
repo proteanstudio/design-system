@@ -4,9 +4,6 @@ body {
     font-family: var(--font-family);
     letter-spacing: 0.2px;
     font-size: var(--body-font-size);
-    @include breakpoint(s) {
-        --body-font-size: 0.875rem;
-    }
 }
 
 h1,
