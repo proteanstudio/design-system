@@ -32,6 +32,6 @@
 }
 
 .tab-list button[aria-selected='true'] {
-    box-shadow: inset var(--protean-tab-container-active-border-color, #ff5f40)
+    box-shadow: inset var(--protean-tab-container-active-border-color, #c7b5fb)
         0 5px;
 }

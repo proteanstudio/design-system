@@ -29,14 +29,13 @@ button > div {
 
 :host([variant='primary']) button,
 :host([variant='secondary']) button {
-    padding: 0 1rem;
+    padding: 0 1.25rem;
     border: 2px solid;
     font-weight: 600;
-    font-size: 0.875rem;
 }
 
 :host([variant='primary']) button {
-    background-color: var(--protean-button-primary-background-color, #ff5f40);
+    background-color: var(--protean-button-primary-background-color, #c7b5fb);
     color: var(--protean-button-primary-text-color, #000000);
     border-color: var(--protean-button-primary-border-color, transparent);
 }
@@ -47,14 +46,14 @@ button > div {
         transparent
     );
     color: var(--protean-button-secondary-text-color, inherit);
-    border-color: var(--protean-button-secondary-border-color, #ff5f40);
+    border-color: var(--protean-button-secondary-border-color, #c7b5fb);
 }
 
 :host(:not([disabled])[variant='primary']) button:hover,
 :host(:not([disabled])[variant='primary']) button:focus {
     background-color: var(
         --protean-button-primary-hover-background-color,
-        #f83e19
+        #7b57e4
     );
     color: var(--protean-button-primary-hover-text-color, #000000);
     border-color: var(--protean-button-primary-hover-border-color, transparent);
@@ -64,7 +63,7 @@ button > div {
 :host(:not([disabled])[variant='secondary']) button:focus {
     background-color: var(
         --protean-button-secondary-hover-background-color,
-        #f83e19
+        #7b57e4
     );
     color: var(--protean-button-secondary-hover-text-color, #000000);
     border-color: var(
