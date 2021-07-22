@@ -496,4 +496,78 @@ describe('protean-input', () => {
 
         expect(await inputElement.getProperty('value')).toEqual('12/4');
     });
+
+    it('handles color input', async () => {
+        const page = await newE2EPage({
+            html: '<protean-input label="Label text" type="color"></protean-input>',
+        });
+        const { find, waitForChanges } = page;
+
+        const inputElement = await find('protean-input >>> input');
+
+        expect(inputElement).toEqualAttribute('type', 'tel');
+
+        const proteanInput = await find('protean-input');
+
+        proteanInput.setProperty('value', '1');
+        await waitForChanges();
+
+        expect(await inputElement.getProperty('value')).toEqual('#1');
+
+        await inputElement.type('a');
+        await inputElement.type('!');
+        await inputElement.type('_');
+
+        expect(await inputElement.getProperty('value')).toEqual('#1a');
+
+        await inputElement.type('2');
+
+        expect(await inputElement.getProperty('value')).toEqual('#1a2');
+
+        await inputElement.type('4');
+
+        expect(await inputElement.getProperty('value')).toEqual('#1a24');
+
+        await dispatchEvent(page, ['protean-input', 'input'], 'change');
+
+        proteanInput.setProperty('format', 'rgb');
+        await waitForChanges();
+
+        expect(await inputElement.getProperty('value')).toEqual('rgb(124');
+    });
+
+    it('handles generically formatted input', async () => {
+        const page = await newE2EPage({
+            html: '<protean-input label="Label text" type="formatted-tel" format="(099, 099, 099)"></protean-input>',
+        });
+        const { find, waitForChanges } = page;
+
+        const inputElement = await find('protean-input >>> input');
+
+        expect(inputElement).toEqualAttribute('type', 'tel');
+
+        const proteanInput = await find('protean-input');
+
+        proteanInput.setProperty('value', '1');
+        await waitForChanges();
+
+        expect(await inputElement.getProperty('value')).toEqual('(1');
+
+        await inputElement.type('a');
+        await inputElement.type('!');
+        await inputElement.type('_');
+
+        expect(await inputElement.getProperty('value')).toEqual('(1');
+
+        await inputElement.type('2');
+        await inputElement.type(',');
+
+        expect(await inputElement.getProperty('value')).toEqual('(12,');
+
+        await inputElement.type('4');
+
+        expect(await inputElement.getProperty('value')).toEqual('(12, 4');
+
+        await dispatchEvent(page, ['protean-input', 'input'], 'change');
+    });
 });

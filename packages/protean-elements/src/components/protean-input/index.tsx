@@ -11,9 +11,11 @@ import {
 } from '@stencil/core';
 import { VNode } from '@stencil/core/internal';
 import { Dict } from '@/types';
+import formatGeneric from '@/utils/formatting/generic';
 import formatDate from '@/utils/formatting/date';
 import formatNumeric from '@/utils/formatting/numeric';
 import formatPhoneNumber from '@/utils/formatting/phone';
+import formatColor from '@/utils/formatting/color';
 import { FormattedValue, FormattingFn } from '@/utils/formatting/types';
 import { createGuid } from '@/utils/utils';
 
@@ -75,7 +77,16 @@ export class ProteanInput {
         return this.hostElement.shadowRoot.querySelector('input');
     }
 
+    get computedType(): string {
+        return this.type?.includes('formatted-') ? 'custom' : this.type;
+    }
+
     get inputType(): string {
+        const typeToMap =
+            this.computedType === 'custom'
+                ? this.type.split('formatted-')[1]
+                : this.computedType;
+
         const inputTypeMap = {
             text: 'text',
             tel: 'tel',
@@ -85,9 +96,10 @@ export class ProteanInput {
             password: 'password',
             search: 'search',
             button: 'button',
+            color: 'tel',
         };
 
-        return inputTypeMap[this.type] ?? 'text';
+        return inputTypeMap[typeToMap] ?? 'text';
     }
 
     get inputAriaLabel(): string | null {
@@ -252,9 +264,11 @@ export class ProteanInput {
             phone: formatPhoneNumber,
             date: formatDate,
             numeric: formatNumeric,
+            color: formatColor,
+            custom: formatGeneric,
         };
 
-        const formattingFn: FormattingFn = formattingFnMap[this.type];
+        const formattingFn: FormattingFn = formattingFnMap[this.computedType];
 
         return (
             formattingFn?.(value, this.format, explicit) ?? {

@@ -67,15 +67,15 @@ describe('formatGeneric', () => {
         });
     });
 
-    it('filters for optional numeric characters with "#" format', () => {
+    it('filters for optional numeric characters with "9" format', () => {
         const value = '1-23!@#$%":>?Tes4_)(*Ting43dfs';
-        expect(formatGeneric(value, '####')).toEqual({
+        expect(formatGeneric(value, '9999')).toEqual({
             value: '1234',
             formattedValue: '1234',
             maxlength: 4,
         });
 
-        expect(formatGeneric(value, '#-##:#')).toEqual({
+        expect(formatGeneric(value, '9-99:9')).toEqual({
             value: '1234',
             formattedValue: '1-23:4',
             maxlength: 6,

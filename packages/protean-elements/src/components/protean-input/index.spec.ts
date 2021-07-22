@@ -19,6 +19,21 @@ const phoneValue = {
 };
 jest.mock('../../utils/formatting/phone', () => () => phoneValue);
 
+const colorValue = {
+    value: '123456',
+    formattedValue: '123456',
+    maxlength: 7,
+};
+
+jest.mock('../../utils/formatting/color', () => () => colorValue);
+
+const genericValue = {
+    value: 'foo',
+    formattedValue: 'foo',
+};
+
+jest.mock('../../utils/formatting/generic', () => () => genericValue);
+
 import { ProteanInput, CursorData } from '.';
 import { FormattedValue } from '../../utils/formatting/types';
 import { newSpecPage } from '@stencil/core/testing';
@@ -90,6 +105,21 @@ describe('protean-input', () => {
         expect(mock).toHaveBeenCalledTimes(3);
     });
 
+    it('parses "formatted-" type', () => {
+        const root = new ProteanInput();
+
+        expect(root.computedType).toEqual(undefined);
+
+        root.type = 'text';
+        expect(root.computedType).toEqual('text');
+
+        root.type = 'formatted-text';
+        expect(root.computedType).toEqual('custom');
+
+        root.type = 'formatted-tel';
+        expect(root.computedType).toEqual('custom');
+    });
+
     it('outputs correct input type', () => {
         const root = new ProteanInput();
 
@@ -119,6 +149,15 @@ describe('protean-input', () => {
 
         root.type = 'button';
         expect(root.inputType).toEqual('button');
+
+        root.type = 'color';
+        expect(root.inputType).toEqual('tel');
+
+        root.type = 'formatted-tel';
+        expect(root.inputType).toEqual('tel');
+
+        root.type = 'formatted-foo';
+        expect(root.inputType).toEqual('text');
     });
 
     it('outputs correct input aria-label', () => {
@@ -525,6 +564,14 @@ describe('protean-input', () => {
         root.type = 'phone';
         await waitForChanges();
         expect(rootInstance.formattedValueObject).toEqual(phoneValue);
+
+        root.type = 'color';
+        await waitForChanges();
+        expect(rootInstance.formattedValueObject).toEqual(colorValue);
+
+        root.type = 'formatted-tel';
+        await waitForChanges();
+        expect(rootInstance.formattedValueObject).toEqual(genericValue);
 
         jest.restoreAllMocks();
     });
