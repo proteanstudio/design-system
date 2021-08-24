@@ -96,7 +96,8 @@ export class ProteanInput {
             password: 'password',
             search: 'search',
             button: 'button',
-            color: 'tel',
+            color: 'color',
+            'color-code': 'text',
         };
 
         return inputTypeMap[typeToMap] ?? 'text';
@@ -197,6 +198,7 @@ export class ProteanInput {
         this.inputElement.value = this.formattedValueObject.formattedValue;
 
         this.setCursorPosition();
+
         if (this.value !== this.formattedValueObject.value) {
             this.input.emit({
                 value: this.formattedValueObject.value,
@@ -256,6 +258,8 @@ export class ProteanInput {
     setMessagesHeight(): void {
         if (this.showMessages) {
             this.messageContainer.style.height = this.messageContainerHeight;
+        } else {
+            this.messageContainer.style.height = '0px';
         }
     }
 
@@ -264,7 +268,7 @@ export class ProteanInput {
             phone: formatPhoneNumber,
             date: formatDate,
             numeric: formatNumeric,
-            color: formatColor,
+            'color-code': formatColor,
             custom: formatGeneric,
         };
 
@@ -293,6 +297,8 @@ export class ProteanInput {
     }
 
     setCursorPosition(): void {
+        if (this.type === 'color') return;
+
         if (!this.cursorData.hasSelection) {
             const inputElement = this.inputElement;
             const { valueLength, previousValueLength, startingPosition } =

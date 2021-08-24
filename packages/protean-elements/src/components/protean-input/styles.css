@@ -13,10 +13,15 @@
 }
 
 .input-container {
-    border: 1px solid var(--protean-input-border-color, currentColor);
+    border: 1px solid var(--protean-input-border-color);
     border-radius: var(--protean-input-border-radius, 2px);
     flex-grow: 1;
+    overflow: hidden;
 }
+
+/* :host([type='color']) {
+    --protean-input-border-color: transparent;
+} */
 
 :host([disabled]) .input-container {
     opacity: var(--protean-input-disabled-opacity, 0.4);
@@ -68,8 +73,27 @@ input {
     text-align: left;
 }
 
+input[type='color'] {
+    display: block;
+    padding: 0;
+    min-width: 55px;
+    cursor: pointer;
+}
+
+::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+::-webkit-color-swatch {
+    border: none;
+}
+
+::-moz-color-swatch {
+    border: none;
+}
+
 :host(:not([label])) input {
-    height: 56px;
+    height: 55px;
 }
 
 input:focus {

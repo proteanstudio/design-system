@@ -50,12 +50,12 @@
     --protean-button-icon-size: var(--touch-zone-size);
     --protean-button-icon-background-color: transparent;
     --protean-button-icon-stroke-color: currentColor;
-    --protean-button-icon-hover-background-color: rgba(255, 95, 64, 0.2);
+    --protean-button-icon-hover-background-color: rgba(198, 181, 251, 0.4);
     --protean-button-icon-hover-stroke-color: currentColor;
     --protean-button-disabled-opacity: var(--disabled-opacity);
 
     --protean-input-margin: 1rem;
-    --protean-input-border-color: currentColor;
+    --protean-input-border-color: var(--body-text-color);
     --protean-input-border-radius: 2px;
     --protean-input-label-font-size: 0.75rem;
     --protean-input-label-font-weight: 600;
@@ -96,7 +96,7 @@
     --protean-checkbox-toggle-circle-fill: var(--action-contrast-color);
 
     &.light {
-        --body-text-color: #333333;
+        --body-text-color: #1a1a1a;
         --body-background-color: #fdfdfd;
 
         --action-color: var(--brand-color-2);

@@ -1,5 +1,6 @@
 import { Options, Vue } from 'vue-class-component';
 import CodeSnippet from '@/components/code-snippet/index.vue';
+import { Dict } from '@/types';
 
 @Options({
     components: { CodeSnippet },
@@ -29,6 +30,10 @@ export default class ProteanInputRoute extends Vue {
                     value: 'search',
                     label: 'search',
                 },
+                {
+                    value: 'color',
+                    label: 'color',
+                },
             ],
         },
         {
@@ -45,6 +50,10 @@ export default class ProteanInputRoute extends Vue {
                 {
                     value: 'date',
                     label: 'date',
+                },
+                {
+                    value: 'color-code',
+                    label: 'color-code',
                 },
             ],
         },
@@ -68,14 +77,17 @@ export default class ProteanInputRoute extends Vue {
         'MM/YY',
         'M/YY',
     ];
+    colorCodeFormats = ['hex', 'hexa', 'rgb'];
     apiFormat = 'date';
 
     get demoFormats(): string[] | undefined {
-        if (this.demoType === 'numeric') return this.demoNumericFormats;
+        const formatMap: Dict<string[]> = {
+            numeric: this.demoNumericFormats,
+            date: this.dateFormats,
+            'color-code': this.colorCodeFormats,
+        };
 
-        if (this.demoType === 'date') return this.dateFormats;
-
-        return;
+        return formatMap[this.demoType];
     }
 
     get demoErrors(): string[] {

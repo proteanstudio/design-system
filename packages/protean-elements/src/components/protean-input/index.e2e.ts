@@ -499,13 +499,13 @@ describe('protean-input', () => {
 
     it('handles color input', async () => {
         const page = await newE2EPage({
-            html: '<protean-input label="Label text" type="color"></protean-input>',
+            html: '<protean-input label="Label text" type="color-code"></protean-input>',
         });
         const { find, waitForChanges } = page;
 
         const inputElement = await find('protean-input >>> input');
 
-        expect(inputElement).toEqualAttribute('type', 'tel');
+        expect(inputElement).toEqualAttribute('type', 'text');
 
         const proteanInput = await find('protean-input');
 

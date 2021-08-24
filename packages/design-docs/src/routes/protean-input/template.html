@@ -9,7 +9,7 @@
     <div class="overview-demo">
         <protean-input
             class="overview-demo-element"
-            label="Field label"
+            :label="demoType === 'color' ? undefined : 'Field label'"
             :type="demoType"
             v-prop:hints="demoHints"
             v-prop:errors="demoErrors"
@@ -102,11 +102,10 @@
     </div>
     <div class="overview-demo-snippet">
         <code-snippet
-            :substitutions='[demoType, demoFormat ? `\n format="${demoFormat}"` : "", `\n maxlength="${demoMaxlength}"`,   demoSuppressMessages ? "\n suppress-messages" : "",demoOptional ? "\n optional" : "", demoDisabled ? "\n disabled" : "", demoReadonly ? "\n readonly" : ""]'
+            :substitutions='[demoType === "color" ? "" : "label=\"Field label\" \n", demoType, demoFormat ? `\n format="${demoFormat}"` : "", `\n maxlength="${demoMaxlength}"`,   demoSuppressMessages ? "\n suppress-messages" : "",demoOptional ? "\n optional" : "", demoDisabled ? "\n disabled" : "", demoReadonly ? "\n readonly" : ""]'
         >
             {{`<protean-input
-                label="Field label"
-                type="{0}" {1}{2}{3}{4}{5}{6}
+                {0}type="{1}" {2}{3}{4}{5}{6}{7}
             ></protean-input>
             `}}
         </code-snippet>
