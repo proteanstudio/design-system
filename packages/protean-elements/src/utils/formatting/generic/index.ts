@@ -11,7 +11,7 @@ export default function formatGeneric(value = '', format = ''): FormattedValue {
         };
     }
 
-    const optionalValidatingCharacters = new Set(['@', '#']);
+    const optionalValidatingCharacters = new Set(['@', '9']);
     const knownValidatingCharacters = new Set([
         'a',
         'A',
@@ -82,7 +82,7 @@ export default function formatGeneric(value = '', format = ''): FormattedValue {
             case '@':
                 character = character.replace(/[^\da-zA-Z]+/g, '');
                 break;
-            case '#':
+            case '9':
                 character = character.replace(/[^\d]/g, '');
                 break;
         }

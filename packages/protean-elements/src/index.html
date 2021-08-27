@@ -15,8 +15,10 @@
             @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
             :root {
+                --font-family: 'Quicksand', 'Heiti SC', sans-serif;
                 --body-text-color: #fafafa;
                 --body-background-color: #1a1a1a;
+                --body-font-size: 1rem;
 
                 --brand-color-1: #f72585;
                 --brand-color-2: #7209b7;
@@ -24,6 +26,18 @@
 
                 --action-color: #c7b5fb;
                 --action-contrast-color: #000000;
+                --action-hover-color: #7b57e4;
+                --action-hover-contrast-color: #fff;
+
+                --link-color: inherit;
+                --link-hover-color: var(--link-color);
+                --link-underline-color: var(--brand-color-1);
+
+                --touch-zone-size: 42px;
+                --disabled-opacity: 0.4;
+
+                --code-background-color: #393939;
+
                 --protean-status-info: #0965b7; /* 5.9 #fff, 5.75 #fc, 2.94 #1a, 3.55 #00 */
                 --protean-status-info-contrast: #ffffff;
                 --protean-status-success: #1d820f; /*  4.93 #fff, 4.81 #fc, 3.52 #1a,4.25 #00 */
@@ -33,51 +47,128 @@
                 --protean-status-error: #ab0000; /* 7.68 #fff, 7.49 #fc, 2.26 #1a, 2.73 #000  */
                 --protean-status-error-contrast: #ffffff;
 
+                --protean-button-height: var(--touch-zone-size);
+                --protean-button-border-radius: 21px;
+                --protean-button-primary-background-color: var(--action-color);
+                --protean-button-primary-text-color: var(
+                    --action-contrast-color
+                );
+                --protean-button-primary-border-color: transparent;
+                --protean-button-primary-hover-background-color: var(
+                    --action-hover-color
+                );
+                --protean-button-primary-hover-text-color: var(
+                    --action-hover-contrast-color
+                );
+                --protean-button-primary-hover-border-color: transparent;
+
+                --protean-button-secondary-background-color: transparent;
+                --protean-button-secondary-text-color: inherit;
+                --protean-button-secondary-border-color: var(--action-color);
+                --protean-button-secondary-hover-background-color: var(
+                    --protean-button-primary-hover-background-color
+                );
+                --protean-button-secondary-hover-text-color: var(
+                    --protean-button-primary-hover-text-color
+                );
+                --protean-button-secondary-hover-border-color: var(
+                    --protean-button-primary-hover-border-color
+                );
+
+                --protean-button-icon-size: var(--touch-zone-size);
+                --protean-button-icon-background-color: transparent;
+                --protean-button-icon-stroke-color: currentColor;
+                --protean-button-icon-hover-background-color: rgba(
+                    198,
+                    181,
+                    251,
+                    0.4
+                );
+                --protean-button-icon-hover-stroke-color: currentColor;
+                --protean-button-disabled-opacity: var(--disabled-opacity);
+
+                --protean-input-margin: 1rem;
+                --protean-input-border-color: currentColor;
+                --protean-input-border-radius: 2px;
+                --protean-input-label-font-size: 0.75rem;
+                --protean-input-label-font-weight: 600;
+                --protean-input-label-optional-font-size: 0.75rem;
+                --protean-input-label-optional-font-weight: 500;
+                --protean-input-font-size: 1rem;
+                --protean-input-disabled-opacity: var(--disabled-opacity);
+
+                --protean-message-margin: 1rem 0;
                 --protean-message-background-color: #2a2a2a;
                 --protean-message-text-color: #fcfcfc;
                 --protean-message-border-color: #353535;
                 --protean-icon-fill-primary: currentColor;
 
-                /* --protean-input-border-radius: 28px; */
-                --protean-button-border-radius: 21px;
                 --protean-tab-container-separator-color: #535353;
+                --protean-tab-container-active-border-color: var(
+                    --action-color
+                );
+                --protean-tab-container-hover-background-color: #353535;
+                --protean-tab-container-hover-text-color: inherit;
 
                 --protean-dropdown-background-color: var(
                     --body-background-color
                 );
-                --protean-dropdown-text-color: inherit;
+                --protean-dropdown-text-color: var(--body-text-color);
                 --protean-dropdown-border-color: currentColor;
                 --protean-dropdown-border-width: 0 1px 1px;
-                --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(255, 255, 255, 0.5);
+                --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(255, 255, 255, 0.7);
                 --protean-dropdown-hover-background-color: #353535;
+                --protean-dropdown-hover-text-color: inherit;
 
+                --protean-select-margin: 1rem;
                 --protean-select-separator-color: #535353;
                 --protean-optgroup-separator-color: var(
                     --protean-select-separator-color
                 );
 
+                --protean-checkbox-margin: 1rem;
+                --protean-checkbox-disabled-opacity: var(--disabled-opacity);
+                --protean-checkbox-outline-color: var(--action-color);
+                --protean-checkbox-checked-outer-color: var(--action-color);
+                --protean-checkbox-checked-inner-color: var(
+                    --action-contrast-color
+                );
                 --protean-checkbox-toggle-path-color: #535353;
+                --protean-checkbox-toggle-circle-fill: var(
+                    --action-contrast-color
+                );
             }
 
-            .light {
-                --body-text-color: #333333;
-                --body-background-color: #fff;
+            :root.light {
+                --body-text-color: #1a1a1a;
+                --body-background-color: #fdfdfd;
+
                 --action-color: var(--brand-color-2);
                 --action-contrast-color: #ffffff;
-                --protean-dropdown-background-color: #fff;
+                --action-hover-color: #5a0d8d;
+
+                --link-underline-color: var(--brand-color-2);
+
                 --protean-message-background-color: #f7f7f7;
                 --protean-message-text-color: #000000;
-                --protean-message-border-color: #e2e2e2;
-                --protean-tab-container-separator-color: #cdcdcd;
+                --protean-message-border-color: #dadada;
+
+                --protean-button-icon-hover-background-color: rgba(
+                    114,
+                    9,
+                    183,
+                    0.2
+                );
 
                 --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.5);
                 --protean-dropdown-hover-background-color: #efefef;
+
                 --protean-select-separator-color: #dadada;
-                --protean-optgroup-separator-color: var(
-                    --protean-select-separator-color
-                );
 
                 --protean-checkbox-toggle-path-color: #979797;
+
+                --protean-tab-container-separator-color: #cdcdcd;
+                --protean-tab-container-hover-background-color: #efefef;
             }
 
             [role='group'] {
@@ -103,6 +194,9 @@
     <body class="">
         <protean-button variant="primary">Content</protean-button>
         <protean-button variant="secondary">Content</protean-button>
+        <protean-button variant="icon">
+            <protean-icon type="swap"></protean-icon>
+        </protean-button>
         <div class="flex">
             <protean-input
                 label="Label text"
@@ -125,6 +219,16 @@
                 format="5dec"
             ></protean-input>
             <protean-input label="Label text"></protean-input>
+            <protean-input label="hex" type="color-code"></protean-input>
+            <protean-input
+                label="rgb"
+                type="color-code"
+                format="rgb"
+            ></protean-input>
+            <protean-input
+                a11yLabel="Pick a color"
+                type="color"
+            ></protean-input>
         </div>
 
         <protean-select label="Select label" optional>
@@ -242,7 +346,7 @@
 
             function toggleLightMode(event) {
                 event.target.checked = event.detail.checked;
-                document.body.classList.toggle('light');
+                document.documentElement.classList.toggle('light');
             }
 
             function onClickElsewhere(event) {

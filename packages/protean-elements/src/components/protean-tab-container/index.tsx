@@ -7,6 +7,7 @@ import {
     Event,
     EventEmitter,
     Listen,
+    Watch,
 } from '@stencil/core';
 import { VNode } from '@stencil/core/internal';
 import { createGuid } from '@/utils/utils';
@@ -51,8 +52,12 @@ export class ProteanTabContainer {
     defaultChangeHandler(event: CustomEvent): void {
         if (event.target === this.hostElement && !this.hostElement.onchange) {
             this.value = event.detail.value;
-            this.focusActiveTab();
         }
+    }
+
+    @Watch('value')
+    onValueChange(): void {
+        this.focusActiveTab();
     }
 
     connectedCallback(): void {

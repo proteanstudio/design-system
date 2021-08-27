@@ -64,10 +64,13 @@ h5 {
 a {
     text-decoration: none;
     color: var(--link-color);
-    display: inline-block;
     position: relative;
     font-weight: 500;
     transition: color 0.2s ease-in-out;
+
+    @include breakpoint(s) {
+        display: inline-block;
+    }
 
     &::after {
         content: '';
@@ -75,7 +78,7 @@ a {
         width: 50%;
         position: absolute;
         left: 0;
-        bottom: -2px;
+        bottom: -3px;
         background-color: var(--link-underline-color);
         transition: width 0.2s ease-in-out, font-weight 0.2s ease-in-out;
     }
@@ -102,8 +105,12 @@ a {
 nav li {
     --link-underline-color: var(--brand-color-1);
 
-    a::after {
-        bottom: -4px;
+    a {
+        display: inline-block;
+
+        &::after {
+            bottom: -5px;
+        }
     }
 
     &:nth-of-type(3n + 2) {
