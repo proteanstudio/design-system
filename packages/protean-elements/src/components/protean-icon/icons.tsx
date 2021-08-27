@@ -148,5 +148,13 @@ const icons: Dict<Icon> = {
     'status-warning-filled': {
         markup: () => reusableIcons['warning']('fill-primary'),
     },
+    swap: {
+        markup: () => (
+            <path
+                class="stroke-primary"
+                d="M5 14h16l-4.513 4M19 10H3l4.513-4"
+            />
+        ),
+    },
 };
 export default icons;

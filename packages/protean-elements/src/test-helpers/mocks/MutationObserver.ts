@@ -7,7 +7,7 @@ export default function fakeMutationObserver(): VoidFunction {
     /* eslint-disable */
     (global as any).MutationObserver = class {
         /* eslint-enable */
-        constructor  (observer: VoidFunction) {
+        constructor(observer: VoidFunction) {
             this.observer = observer;
         }
 
