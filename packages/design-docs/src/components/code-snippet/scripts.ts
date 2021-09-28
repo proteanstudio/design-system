@@ -12,8 +12,8 @@ hljs.registerLanguage('html', html);
 hljs.registerLanguage('css', css);
 
 export default class CodeSnippet extends Vue {
-    @Prop() language = 'html';
-    @Prop() substitutions: string[] = [];
+    @Prop({ default: 'html' }) language!: string;
+    @Prop({ default: [] }) substitutions!: string[];
 
     mounted(): void {
         this.snippet = this.$el.querySelector('code').textContent.trim();
@@ -33,7 +33,7 @@ export default class CodeSnippet extends Vue {
         let snippet = this.snippet;
         if (Array.isArray(this.substitutions)) {
             snippet = snippet.replace(/({[0-9]})/g, sub => {
-                return this.substitutions[parseInt(sub[1])] ?? '';
+                return this.substitutions?.[parseInt(sub[1])] ?? '';
             });
         }
         return this.parseSnippet(snippet).trim();
