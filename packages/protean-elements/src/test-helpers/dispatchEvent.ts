@@ -1,10 +1,11 @@
+import { Dict } from '@/types';
 import { E2EPage } from '@stencil/core/testing';
 
 export default async function dispatchEvent(
     page: E2EPage,
     selector: string | string[],
     eventName: string,
-    eventInit?: EventInit | CustomEventInit | KeyboardEventInit,
+    eventInit?: (EventInit | CustomEventInit | KeyboardEventInit) & Dict<string>,
 ): Promise<void> {
     let parentSelector = selector;
     let childSelectors;
