@@ -4,6 +4,10 @@
     display: inline-block;
 }
 
+:host([full-width]) {
+    display: flex;
+}
+
 :host([disabled]) button {
     cursor: not-allowed;
     opacity: var(--protean-button-disabled-opacity, 0.4);
@@ -12,6 +16,7 @@
 button {
     color: inherit;
     cursor: pointer;
+    width: 100%;
     height: var(--protean-button-height, 42px);
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
         border 0.2s ease-in-out;

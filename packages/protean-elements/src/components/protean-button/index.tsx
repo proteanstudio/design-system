@@ -16,6 +16,7 @@ export class ProteanButton {
     @Prop({ reflect: true }) variant: string;
     @Prop({ reflect: true }) type: string;
     @Prop({ reflect: true }) disabled: boolean;
+    @Prop({ reflect: true }) fullWidth: boolean;
     @Prop({ reflect: true, attribute: 'a11y-label' }) a11yLabel: string;
 
     @Element() hostElement: HTMLProteanButtonElement;

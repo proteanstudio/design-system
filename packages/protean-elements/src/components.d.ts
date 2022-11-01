@@ -10,6 +10,7 @@ export namespace Components {
     interface ProteanButton {
         "a11yLabel": string;
         "disabled": boolean;
+        "fullWidth": boolean;
         "type": string;
         "variant": string;
     }
@@ -170,6 +171,7 @@ declare namespace LocalJSX {
     interface ProteanButton {
         "a11yLabel"?: string;
         "disabled"?: boolean;
+        "fullWidth"?: boolean;
         "type"?: string;
         "variant"?: string;
     }
