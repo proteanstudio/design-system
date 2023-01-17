@@ -184,7 +184,7 @@ describe('protean-input', () => {
 
         const proteanInput = await find('protean-input');
 
-        proteanInput.setProperty('ariaExpanded', true);
+        proteanInput.setProperty('a11yExpanded', true);
         await waitForChanges();
 
         expect(inputElement).toHaveAttribute('aria-expanded');

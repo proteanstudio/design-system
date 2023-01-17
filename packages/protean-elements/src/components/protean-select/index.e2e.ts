@@ -22,7 +22,7 @@ describe('protean-select', () => {
         expect(await proteanInput.getProperty('ariaHasPopup')).toEqual(
             'listbox',
         );
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(false);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(false);
 
         const proteanIcon = await page.find('protean-select >>> protean-icon');
 
@@ -147,13 +147,13 @@ describe('protean-select', () => {
             'protean-select >>> .protean-select-separator',
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(false);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(false);
         expect(selectDropdown).toHaveAttribute('hidden');
         expect(selectSeparator).toHaveAttribute('hidden');
 
         await dispatchEvent(page, ['protean-select', 'protean-input'], 'click');
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(true);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(true);
         expect(selectDropdown).not.toHaveAttribute('hidden');
         expect(selectSeparator).not.toHaveAttribute('hidden');
     });
@@ -378,11 +378,11 @@ describe('protean-select', () => {
             'protean-select >>> protean-input',
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(false);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(false);
 
         await dispatchEvent(page, ['protean-select', 'protean-input'], 'click');
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(true);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(true);
 
         await dispatchEvent(
             page,
@@ -390,7 +390,7 @@ describe('protean-select', () => {
             'change',
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(false);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(false);
     });
 
     it('delegates focus', async () => {
@@ -419,7 +419,7 @@ describe('protean-select', () => {
 
         const firstOption = await page.find('protean-select protean-option');
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(false);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(false);
         expect(firstOption).not.toHaveAttribute('active');
 
         await dispatchEvent(
@@ -429,7 +429,7 @@ describe('protean-select', () => {
             { key: 'ArrowDown' },
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(true);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(true);
         expect(firstOption).toHaveAttribute('active');
     });
 
@@ -446,11 +446,11 @@ describe('protean-select', () => {
             'protean-select protean-option:nth-child(2)',
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(false);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(false);
 
         await dispatchEvent(page, ['protean-select', 'protean-input'], 'click');
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(true);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(true);
         expect(secondOption).not.toHaveAttribute('active');
 
         await dispatchEvent(
@@ -479,7 +479,7 @@ describe('protean-select', () => {
             'protean-select protean-option',
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(false);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(false);
         expect(firstOption).not.toHaveAttribute('active');
         expect(secondOption).not.toHaveAttribute('active');
         expect(selectDropdown).toEqualAttribute('aria-activedescendant', null);
@@ -491,7 +491,7 @@ describe('protean-select', () => {
             { key: 'ArrowDown' },
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(true);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(true);
         expect(firstOption).toHaveAttribute('active');
         expect(secondOption).not.toHaveAttribute('active');
         expect(selectDropdown).toEqualAttribute(
@@ -541,7 +541,7 @@ describe('protean-select', () => {
             'protean-select protean-option',
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(false);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(false);
         expect(firstOption).not.toHaveAttribute('active');
         expect(secondOption).not.toHaveAttribute('active');
 
@@ -552,7 +552,7 @@ describe('protean-select', () => {
             { key: 'ArrowUp' },
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(true);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(true);
         expect(firstOption).not.toHaveAttribute('active');
         expect(secondOption).toHaveAttribute('active');
 
@@ -590,7 +590,7 @@ describe('protean-select', () => {
             'protean-select protean-option',
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(false);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(false);
         expect(firstOption).not.toHaveAttribute('active');
         expect(secondOption).not.toHaveAttribute('active');
 
@@ -601,7 +601,7 @@ describe('protean-select', () => {
             { key: 'Home' },
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(true);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(true);
         expect(firstOption).not.toHaveAttribute('active');
         expect(secondOption).toHaveAttribute('active');
 
@@ -639,7 +639,7 @@ describe('protean-select', () => {
             'protean-select protean-option',
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(false);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(false);
         expect(firstOption).not.toHaveAttribute('active');
         expect(secondOption).not.toHaveAttribute('active');
 
@@ -650,7 +650,7 @@ describe('protean-select', () => {
             { key: 'Home' },
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(true);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(true);
         expect(firstOption).toHaveAttribute('active');
         expect(secondOption).not.toHaveAttribute('active');
 
@@ -688,7 +688,7 @@ describe('protean-select', () => {
             'protean-select protean-option',
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(false);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(false);
         expect(proteanOptions[0]).not.toHaveAttribute('active');
         expect(proteanOptions[1]).not.toHaveAttribute('active');
         expect(proteanOptions[2]).not.toHaveAttribute('active');
@@ -703,7 +703,7 @@ describe('protean-select', () => {
             { key: 'ArrowDown' },
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(true);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(true);
         expect(proteanOptions[0]).toHaveAttribute('active');
 
         await dispatchEvent(
@@ -750,7 +750,7 @@ describe('protean-select', () => {
             'protean-select protean-option',
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(false);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(false);
 
         await dispatchEvent(
             page,
@@ -759,7 +759,7 @@ describe('protean-select', () => {
             { key: 'ArrowDown' },
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(true);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(true);
         expect(firstOption).toHaveAttribute('active');
 
         await dispatchEvent(
@@ -771,7 +771,7 @@ describe('protean-select', () => {
 
         expect(changeSpy).toHaveReceivedEventTimes(1);
         expect(changeSpy).toHaveReceivedEventDetail({ value: '1' });
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(false);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(false);
 
         await dispatchEvent(
             page,
@@ -807,11 +807,11 @@ describe('protean-select', () => {
             'protean-select >>> protean-input',
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(false);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(false);
 
         await dispatchEvent(page, ['protean-select', 'protean-input'], 'click');
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(true);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(true);
 
         await dispatchEvent(
             page,
@@ -820,7 +820,7 @@ describe('protean-select', () => {
             { key: 'Escape' },
         );
 
-        expect(await proteanInput.getProperty('ariaExpanded')).toEqual(false);
+        expect(await proteanInput.getProperty('a11yExpanded')).toEqual(false);
     });
 
     it('binds option id on and updates options on mutation observed', async () => {

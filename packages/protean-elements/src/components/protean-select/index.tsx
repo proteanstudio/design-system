@@ -357,7 +357,7 @@ export class ProteanSelect {
                     type="button"
                     a11yLabel={this.selectAriaLabel}
                     ariaHasPopup="listbox"
-                    ariaExpanded={this.dropdownOpen}
+                    a11yExpanded={this.dropdownOpen}
                     onClick={this.onInputClick}
                     onKeyDown={this.onInputKeyDown}
                 ></protean-input>
