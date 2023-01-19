@@ -4840,7 +4840,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.4.1, prettier@npm:^2.8.3":
+"prettier@npm:^2.8.3":
   version: 2.8.3
   resolution: "prettier@npm:2.8.3"
   bin:
@@ -4916,8 +4916,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "protean-styles@workspace:packages/protean-styles"
   dependencies:
-    prettier: ^2.4.1
-    sass: ^1.42.1
+    prettier: ^2.8.3
+    sass: ^1.57.1
   languageName: unknown
   linkType: soft
 
@@ -5152,7 +5152,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.42.1, sass@npm:^1.57.1":
+"sass@npm:^1.57.1":
   version: 1.57.1
   resolution: "sass@npm:1.57.1"
   dependencies:
