@@ -4,10 +4,8 @@
         "module": "esnext",
         "strict": true,
         "jsx": "react",
-        "importHelpers": true,
         "moduleResolution": "node",
         "experimentalDecorators": true,
-        "skipLibCheck": true,
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "sourceMap": true,
@@ -25,5 +23,5 @@
         "tests/**/*.ts",
         "tests/**/*.tsx"
     ],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules", "dist"]
 }

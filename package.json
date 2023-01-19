@@ -7,9 +7,11 @@
     "license": "MIT",
     "private": true,
     "devDependencies": {
+        "typescript": "^4.9.4",
         "yarn": "^1.22.10"
     },
     "workspaces": [
         "packages/*"
-    ]
+    ],
+    "packageManager": "yarn@3.3.1"
 }

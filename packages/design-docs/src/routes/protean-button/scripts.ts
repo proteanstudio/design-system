@@ -7,6 +7,8 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
 export default class ProteanButtonRoute extends Vue {
     demoVariant = 'primary';
     demoDisabled = false;
+    demoFullWidth = false;
+
     get demoContent(): string {
         if (this.demoVariant === 'icon') {
             return '<protean-icon type="chevron-down"></protean-icon>';

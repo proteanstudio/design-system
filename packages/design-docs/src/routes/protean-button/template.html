@@ -9,7 +9,8 @@
             class="overview-demo-element"
             :variant="demoVariant"
             :disabled="demoDisabled"
-            v-prop:a11yLabel="demoAriaLabel"
+            v-prop:fullWidth="demoFullWidth"
+            :a11y-label="demoAriaLabel"
         >
             <protean-icon
                 class="demo-button-icon"
@@ -26,6 +27,13 @@
             variant="toggle"
             v-prop:checked="demoDisabled"
             @change="demoDisabled = $event.detail.checked"
+        ></protean-checkbox>
+        <protean-checkbox
+            class="demo-toggle-width"
+            label="Show as full width"
+            variant="toggle"
+            v-prop:checked="demoFullWidth"
+            @change="demoFullWidth = $event.detail.checked"
         ></protean-checkbox>
         <protean-select
             class="demo-select-variant"
@@ -44,12 +52,12 @@
     </div>
     <div class="overview-demo-snippet">
         <code-snippet
-            :substitutions='[demoVariant, demoDisabled ? "\n disabled" : "", demoAriaLabel ? `\na11y-label="${demoAriaLabel}"` : "", demoContent]'
+            :substitutions='[demoVariant, demoDisabled ? "\n disabled" : "", demoFullWidth ? "\n full-width" : "",  demoAriaLabel ? `\na11y-label="${demoAriaLabel}"` : "", demoContent]'
         >
             {{`<protean-button
-                    variant="{0}"{1}{2}
+                    variant="{0}"{1}{2}{3}
                 >
-                    {3}
+                    {4}
                 </protean-button>
             `}}
         </code-snippet>
