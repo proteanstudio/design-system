@@ -269,7 +269,7 @@ describe('Protean Input Route', () => {
         /* eslint-enable */
 
         expect(wrapper.vm.demoType).toEqual('text');
-        expect(substitutions[0]).toEqual('label=\"Field label\" \n');
+        expect(substitutions[0]).toEqual('label="Field label" \n');
         expect(substitutions[1]).toEqual('text');
 
         expect(wrapper.vm.demoFormat).toEqual('');
@@ -305,7 +305,7 @@ describe('Protean Input Route', () => {
         ).substitutions;
         /* eslint-enable */
 
-        expect(substitutions[0]).toEqual('label=\"Field label\" \n');
+        expect(substitutions[0]).toEqual('label="Field label" \n');
         expect(substitutions[1]).toEqual('numeric');
         expect(substitutions[2]).toEqual('\n format="integer"');
         expect(substitutions[3]).toEqual('\n maxlength="10"');

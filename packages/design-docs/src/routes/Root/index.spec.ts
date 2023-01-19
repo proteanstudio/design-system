@@ -74,7 +74,7 @@ describe('Root Route', () => {
 
     it('sets lightModeEnabled from localStorage', async () => {
         localStorage.setItem('lightModeEnabled', 'true');
-        await nextTick()
+        await nextTick();
         const wrapper = shallowMount(RootRoute, mountOptions);
 
         expect(wrapper.vm.lightModeEnabled).toEqual(true);

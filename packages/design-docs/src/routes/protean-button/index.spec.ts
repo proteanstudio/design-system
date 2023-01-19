@@ -103,7 +103,9 @@ describe('Protean Button Route', () => {
         );
         /* eslint-enable */
         expect(wrapper.vm.demoAriaLabel).toEqual('Button aria-label');
-        expect(demoButton.getAttribute('a11y-label')).toEqual('Button aria-label');
+        expect(demoButton.getAttribute('a11y-label')).toEqual(
+            'Button aria-label',
+        );
 
         await selectWrapper.trigger('change', {
             detail: {

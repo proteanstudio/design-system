@@ -8,7 +8,8 @@
         "build": "vite build && rm -rf ../../docs && mkdir ../../docs && cp -R dist/ ../../docs && cp ../../CNAME ../../docs",
         "test": "vitest run",
         "test:dev": "vitest watch",
-        "lint": "vue-cli-service lint",
+        "lint": "eslint",
+        "lint:fix": "eslint --fix src/",
         "format": "prettier -c 'src/**/*.{ts,vue,scss,spec.ts}'",
         "format:fix": "prettier --write 'src/**/*.{ts,vue,scss,spec.ts}'"
     },

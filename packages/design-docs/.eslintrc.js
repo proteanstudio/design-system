@@ -1,7 +1,7 @@
 module.exports = {
     root: true,
     env: {
-        es2022: true
+        es2022: true,
     },
     extends: [
         'plugin:vue/vue3-essential',
@@ -13,17 +13,19 @@ module.exports = {
     parserOptions: {
         ecmaVersion: 2022,
     },
-    ignorePatterns: ['/protean-elements/', '/node_modules/', '/highlight.js/'],
+    ignorePatterns: [
+        '/protean-elements/',
+        '/node_modules/',
+        '/highlight.js/',
+        '.eslintrc.js',
+    ],
     rules: {
-        'no-console': import.meta.env.NODE_ENV === 'production' ? 'warn' : 'off',
-        'no-debugger': import.meta.env.NODE_ENV === 'production' ? 'warn' : 'off',
+        'no-console': 'warn',
+        'no-debugger': 'warn',
     },
     overrides: [
         {
-            files: [
-                '**/__tests__/*.{j,t}s?(x)',
-                '**/tests/unit/**/*.spec.{j,t}s?(x)',
-            ],
+            files: ['src/**'],
         },
     ],
 };
