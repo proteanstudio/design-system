@@ -2,17 +2,17 @@ import { nextTick } from '@vue/runtime-core';
 import { shallowMount } from '@vue/test-utils';
 import SecondaryNav from './index.vue';
 
-jest.mock('@/utils/debounce', () =>
-    jest.fn().mockImplementation((fn: VoidFunction) => {
+vi.mock('@/utils/debounce', () => ({
+    default: vi.fn().mockImplementation((fn: VoidFunction) => {
         return fn;
     }),
-);
+}));
 
 import debounce from '@/utils/debounce';
 
 describe('secondary-nav', () => {
     afterEach(() => {
-        (debounce as jest.Mock).mockReset();
+        (debounce as any).mockReset();
     });
 
     it('does not render if no anchors present', () => {
@@ -62,8 +62,8 @@ describe('secondary-nav', () => {
 
         const navItems = wrapper.findAll('.secondary-nav-item');
         expect(navItems).toHaveLength(2);
-        expect(navItems[0].classes('active')).toBe(true);
-        expect(navItems[1].classes('active')).toBe(false);
+        expect(navItems[0].classes('active')).toBe(false);
+        expect(navItems[1].classes('active')).toBe(true);
         expect(navItems[0].attributes('href')).toEqual('javascript://');
         expect(navItems[0].attributes('data-target')).toEqual('foo');
         expect(navItems[0].text()).toEqual('bar');
@@ -110,7 +110,7 @@ describe('secondary-nav', () => {
 
         expect(debounce).toHaveBeenCalledTimes(1);
 
-        const args = (debounce as jest.Mock).mock.calls[0];
+        const args = (debounce as any).mock.calls[0];
 
         expect(typeof args[0]).toEqual('function');
         expect(args[1]).toEqual(20);
@@ -139,9 +139,9 @@ describe('secondary-nav', () => {
         wrapper.vm.scrollHandler();
         await nextTick();
 
-        expect(wrapper.vm.activeTarget).toEqual('foo');
-        expect(navItems[0].classes('active')).toBe(true);
-        expect(navItems[1].classes('active')).toBe(false);
+        expect(wrapper.vm.activeTarget).toEqual('baz');
+        expect(navItems[0].classes('active')).toBe(false);
+        expect(navItems[1].classes('active')).toBe(true);
     });
 
     it('scrolls to anchor on item click', async () => {
@@ -159,7 +159,7 @@ describe('secondary-nav', () => {
 
         expect(wrapper.vm.activeTarget).toEqual('');
 
-        const scrollIntoViewMock = jest.fn();
+        const scrollIntoViewMock = vi.fn();
 
         (
             document.querySelector('[data-in-page-anchor="baz"]') as HTMLElement

@@ -1,10 +1,12 @@
 import { mount, shallowMount } from '@vue/test-utils';
 import CodeSnippet from './index.vue';
 
-jest.mock('highlight.js/lib/core', () => {
+vi.mock('highlight.js/lib/core', () => {
     return {
-        registerLanguage: jest.fn(),
-        highlightElement: jest.fn(),
+        default: {
+            registerLanguage: vi.fn(),
+            highlightElement: vi.fn(),
+        },
     };
 });
 
@@ -14,8 +16,8 @@ import { nextTick } from '@vue/runtime-core';
 
 describe('code-snippet', () => {
     afterEach(function () {
-        hljs.registerLanguage.mockReset();
-        hljs.highlightElement.mockReset();
+        (hljs.registerLanguage as any).mockReset();
+        (hljs.highlightElement as any).mockReset();
     });
 
     it('renders base properties and structure', () => {
@@ -103,7 +105,7 @@ describe('code-snippet', () => {
 
     it('resets inner content when substitutions changed', () => {
         const unformattedHTML = '&lt;h1&gt;Header {0} text&lt;/h1&gt;';
-        const resetInnerContentMock = jest.fn();
+        const resetInnerContentMock = vi.fn();
 
         const wrapper = mount(CodeSnippet, {
             global: {
@@ -129,7 +131,7 @@ describe('code-snippet', () => {
         const unformattedHTML = '&lt;h1&gt;Header text&lt;/h1&gt;';
         const formattedHTML = '<h1>Header text</h1>';
 
-        const writeTextMock = jest
+        const writeTextMock = vi
             .fn()
             .mockImplementation(() => Promise.resolve());
 

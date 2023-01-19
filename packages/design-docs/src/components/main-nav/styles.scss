@@ -1,4 +1,4 @@
-@import '~protean-styles/styles/mixins';
+@import 'protean-styles/styles/mixins';
 
 .off-canvas-toggle {
     @include breakpoint(m, min) {

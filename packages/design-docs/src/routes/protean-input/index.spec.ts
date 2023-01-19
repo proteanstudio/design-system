@@ -269,25 +269,26 @@ describe('Protean Input Route', () => {
         /* eslint-enable */
 
         expect(wrapper.vm.demoType).toEqual('text');
-        expect(substitutions[0]).toEqual('text');
+        expect(substitutions[0]).toEqual('label=\"Field label\" \n');
+        expect(substitutions[1]).toEqual('text');
 
         expect(wrapper.vm.demoFormat).toEqual('');
-        expect(substitutions[1]).toEqual('');
+        expect(substitutions[2]).toEqual('');
 
         expect(wrapper.vm.demoMaxlength).toEqual('20');
-        expect(substitutions[2]).toEqual('\n maxlength="20"');
+        expect(substitutions[3]).toEqual('\n maxlength="20"');
 
         expect(wrapper.vm.demoSuppressMessages).toEqual(false);
-        expect(substitutions[3]).toEqual('');
-
-        expect(wrapper.vm.demoOptional).toEqual(false);
         expect(substitutions[4]).toEqual('');
 
-        expect(wrapper.vm.demoDisabled).toEqual(false);
+        expect(wrapper.vm.demoOptional).toEqual(false);
         expect(substitutions[5]).toEqual('');
 
-        expect(wrapper.vm.demoReadonly).toEqual(false);
+        expect(wrapper.vm.demoDisabled).toEqual(false);
         expect(substitutions[6]).toEqual('');
+
+        expect(wrapper.vm.demoReadonly).toEqual(false);
+        expect(substitutions[7]).toEqual('');
 
         wrapper.vm.demoType = 'numeric';
         wrapper.vm.demoFormat = 'integer';
@@ -304,12 +305,13 @@ describe('Protean Input Route', () => {
         ).substitutions;
         /* eslint-enable */
 
-        expect(substitutions[0]).toEqual('numeric');
-        expect(substitutions[1]).toEqual('\n format="integer"');
-        expect(substitutions[2]).toEqual('\n maxlength="10"');
-        expect(substitutions[3]).toEqual('\n suppress-messages');
-        expect(substitutions[4]).toEqual('\n optional');
-        expect(substitutions[5]).toEqual('\n disabled');
-        expect(substitutions[6]).toEqual('\n readonly');
+        expect(substitutions[0]).toEqual('label=\"Field label\" \n');
+        expect(substitutions[1]).toEqual('numeric');
+        expect(substitutions[2]).toEqual('\n format="integer"');
+        expect(substitutions[3]).toEqual('\n maxlength="10"');
+        expect(substitutions[4]).toEqual('\n suppress-messages');
+        expect(substitutions[5]).toEqual('\n optional');
+        expect(substitutions[6]).toEqual('\n disabled');
+        expect(substitutions[7]).toEqual('\n readonly');
     });
 });
