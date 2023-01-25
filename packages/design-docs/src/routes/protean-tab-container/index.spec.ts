@@ -18,7 +18,7 @@ const mountOptions = {
 
 describe('Protean Tabs Route', () => {
     it('renders', () => {
-        const wrapper = shallowMount(ProteanTabsRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanTabsRoute, mountOptions);
         expect(wrapper.find('h1').text()).toEqual('Tabs');
         const demoTabs = wrapper.find('protean-tab-container');
 
@@ -29,7 +29,7 @@ describe('Protean Tabs Route', () => {
     });
 
     it('updates demoValue on tab change', async () => {
-        const wrapper = shallowMount(ProteanTabsRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanTabsRoute, mountOptions);
 
         let demoTabs = wrapper.find('protean-tab-container');
 
