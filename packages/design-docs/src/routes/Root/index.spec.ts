@@ -29,7 +29,7 @@ const mountOptions = {
     },
 };
 
-describe.only('Root Route', () => {
+describe('Root Route', () => {
     beforeEach(() => {
         route.fullPath = defaultRoute.fullPath;
         route.name = defaultRoute.name;
@@ -134,7 +134,6 @@ describe.only('Root Route', () => {
         route.fullPath = 'foo';
         route.name = 'bar';
 
-        route;
         await nextTick();
 
         expect(wrapper.vm.showOffCanvas).toEqual(false);
