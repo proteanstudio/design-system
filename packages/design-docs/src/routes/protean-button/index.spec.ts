@@ -20,7 +20,7 @@ const mountOptions = {
 
 describe('Protean Button Route', () => {
     it('renders', () => {
-        const wrapper = shallowMount(ProteanButtonRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanButtonRoute, mountOptions);
 
         expect(wrapper.find('h1').text()).toEqual('Button');
 
@@ -37,7 +37,7 @@ describe('Protean Button Route', () => {
     });
 
     it('updates button disabled state on toggle change', async () => {
-        const wrapper = shallowMount(ProteanButtonRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanButtonRoute, mountOptions);
 
         const toggleWrapper = wrapper.find('.demo-toggle-disabled');
 
@@ -64,7 +64,7 @@ describe('Protean Button Route', () => {
     });
 
     it('updates button variant on select change', async () => {
-        const wrapper = shallowMount(ProteanButtonRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanButtonRoute, mountOptions);
 
         let selectWrapper = wrapper.find('.demo-select-variant');
         let demoButton = wrapper.find('.overview-demo-element')
