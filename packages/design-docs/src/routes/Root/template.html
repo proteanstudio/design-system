@@ -15,7 +15,7 @@
         />
     </router-link>
 </header>
-<main-nav
+<MainNav
     :showOffCanvas="showOffCanvas"
     :lightModeEnabled="lightModeEnabled"
     @hideOffCanvas="showOffCanvas = false"
@@ -25,5 +25,5 @@
     <div>
         <router-view />
     </div>
-    <secondary-nav></secondary-nav>
+    <SecondaryNav />
 </main>
