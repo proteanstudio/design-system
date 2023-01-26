@@ -21,7 +21,7 @@ describe('code-snippet', () => {
     });
 
     it('renders base properties and structure', () => {
-        const wrapper = shallowMount(CodeSnippet, {
+        const wrapper = shallowMount<any>(CodeSnippet, {
             global: {
                 stubs: ['protean-button', 'protean-icon'],
             },
@@ -46,7 +46,7 @@ describe('code-snippet', () => {
         const unformattedHTML = '&lt;h1&gt;Header text&lt;/h1&gt;';
         const formattedHTML = '<h1>Header text</h1>';
 
-        const wrapper = mount(CodeSnippet, {
+        const wrapper = mount<any>(CodeSnippet, {
             global: {
                 stubs: ['protean-button', 'protean-icon'],
             },
@@ -65,7 +65,7 @@ describe('code-snippet', () => {
     });
 
     it('correctly binds language', () => {
-        const wrapper = shallowMount(CodeSnippet, {
+        const wrapper = shallowMount<any>(CodeSnippet, {
             global: {
                 stubs: ['protean-button', 'protean-icon'],
             },
@@ -88,7 +88,7 @@ describe('code-snippet', () => {
         const formattedHTML =
             '<h1>Header 1 text</h1><p>Supporting content</p>--foo';
 
-        const wrapper = mount(CodeSnippet, {
+        const wrapper = mount<any>(CodeSnippet, {
             global: {
                 stubs: ['protean-button', 'protean-icon'],
             },
@@ -103,11 +103,10 @@ describe('code-snippet', () => {
         expect(wrapper.vm.parsedSnippet.trim()).toEqual(formattedHTML);
     });
 
-    it('resets inner content when substitutions changed', () => {
+    it('resets inner content when substitutions changed', async () => {
         const unformattedHTML = '&lt;h1&gt;Header {0} text&lt;/h1&gt;';
-        const resetInnerContentMock = vi.fn();
 
-        const wrapper = mount(CodeSnippet, {
+        const wrapper = mount<any>(CodeSnippet, {
             global: {
                 stubs: ['protean-button', 'protean-icon'],
             },
@@ -116,15 +115,13 @@ describe('code-snippet', () => {
             },
         });
 
-        /* wrapper.setProps is throwing an error (TypeError: Cannot read property 'nextSibling' of null). Calling watcher method directly*/
-        // await wrapper.setProps({ substitutions: ['1'] });
+        expect(wrapper.vm.parsedSnippet.trim()).not.toContain('substitution');
 
-        wrapper.vm.$options.methods.resetInnerContent = resetInnerContentMock;
+        wrapper.setProps({substitutions: ['substitution']});
 
-        wrapper.vm.$options.props.substitutions = ['1'];
-        wrapper.vm.$options.methods.resetInnerContentOnSubstitutionChange();
+        await nextTick();
 
-        expect(resetInnerContentMock).toHaveBeenCalledTimes(1);
+        expect(wrapper.vm.parsedSnippet.trim()).toContain('substitution');
     });
 
     it('copies snippet', async () => {
@@ -138,7 +135,7 @@ describe('code-snippet', () => {
         /* eslint-disable */
         (window.navigator as any).clipboard = { writeText: writeTextMock };
         /* eslint-enable */
-        const wrapper = mount(CodeSnippet, {
+        const wrapper = mount<any>(CodeSnippet, {
             global: {
                 stubs: ['protean-icon'],
             },
@@ -205,7 +202,7 @@ describe('code-snippet', () => {
   </ul>
 </protean-message>`;
 
-        const wrapper = shallowMount(CodeSnippet, {
+        const wrapper = shallowMount<any>(CodeSnippet, {
             global: {
                 stubs: ['protean-button', 'protean-icon'],
             },
