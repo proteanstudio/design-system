@@ -21,6 +21,8 @@ vi.mock('@/utils/debounce', () => ({
 
 describe('secondary-nav', () => {
     afterEach(() => {
+        route.fullPath = '';
+        route.name = '';
         (debounce as any).mockReset();
     });
 
@@ -50,7 +52,7 @@ describe('secondary-nav', () => {
         expect(anchors[0].dataset.label).toEqual('bar');
     });
 
-    it.only('renders with links if anchors present', async () => {
+    it('renders with links if anchors present', async () => {
         document.body.innerHTML = `
             <main>
                 <section data-in-page-anchor="foo" data-label="bar"></section>
@@ -79,10 +81,9 @@ describe('secondary-nav', () => {
         expect(navItems).toHaveLength(2);
         expect(navItems[0].classes('active')).toBe(false);
         expect(navItems[1].classes('active')).toBe(true);
-        expect(navItems[0].attributes('href')).toEqual('javascript://');
+        expect(navItems[0].attributes('href')).toEqual('javascript:void(0)');
         expect(navItems[0].attributes('data-target')).toEqual('foo');
         expect(navItems[0].text()).toEqual('bar');
-        expect(navItems[0].attributes('href')).toEqual('javascript://');
         expect(navItems[1].attributes('data-target')).toEqual('baz');
         expect(navItems[1].text()).toEqual('bam');
     });
@@ -114,6 +115,9 @@ describe('secondary-nav', () => {
     });
 
     it('scaffolds scroll listener', async () => {
+        const addListenerSpy = vi.spyOn(window, 'addEventListener');
+        const removeListenerSpy = vi.spyOn(window, 'removeEventListener');
+
         document.body.innerHTML = `
             <main>
                 <section data-in-page-anchor="foo" data-label="bar"></section>
@@ -121,14 +125,20 @@ describe('secondary-nav', () => {
             </main>
         `;
 
-        shallowMount(SecondaryNav);
+        const wrapper = shallowMount(SecondaryNav);
 
         expect(debounce).toHaveBeenCalledTimes(1);
+        expect(addListenerSpy).toHaveBeenCalledTimes(1);
+        expect(removeListenerSpy).toHaveBeenCalledTimes(0);
 
         const args = (debounce as any).mock.calls[0];
 
         expect(typeof args[0]).toEqual('function');
         expect(args[1]).toEqual(20);
+
+        wrapper.unmount();
+        expect(addListenerSpy).toHaveBeenCalledTimes(1);
+        expect(removeListenerSpy).toHaveBeenCalledTimes(1);
     });
 
     it('updates active target on window scroll', async () => {

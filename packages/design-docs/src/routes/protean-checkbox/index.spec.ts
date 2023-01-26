@@ -5,7 +5,6 @@ import ProteanCheckboxRoute from './index.vue';
 
 const mountOptions = {
     global: {
-        stubs: ['code-snippet', 'protean-checkbox'],
         directives: {
             prop: vProp,
         },
@@ -14,7 +13,18 @@ const mountOptions = {
 
 describe('Protean Checkbox Route', () => {
     it('renders', () => {
-        const wrapper = shallowMount<any>(ProteanCheckboxRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanCheckboxRoute, {
+            global: {
+                stubs: {
+                    CodeSnippet: {
+                        template: '<div><slot /></div>',
+                    },
+                },
+                directives: {
+                    prop: vProp,
+                },
+            },
+        });
 
         expect(wrapper.find('h1').text()).toEqual('Checkbox');
 

@@ -5,14 +5,11 @@ import ProteanSelectRoute from './index.vue';
 
 const mountOptions = {
     global: {
-        stubs: [
-            'code-snippet',
-            'protean-message',
-            'protean-checkbox',
-            'protean-select',
-            'protean-optgroup',
-            'protean-option',
-        ],
+        stubs: {
+            CodeSnippet: {
+                template: '<div><slot /></div>',
+            },
+        },
         directives: {
             prop: vProp,
         },
@@ -227,7 +224,13 @@ describe('Protean Select Route', () => {
     });
 
     it('builds correct code snippet substitutions', async () => {
-        const wrapper = shallowMount<any>(ProteanSelectRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanSelectRoute, {
+            global: {
+                directives: {
+                    prop: vProp,
+                },
+            },
+        });
 
         /* eslint-disable */
         let substitutions: string[] = (

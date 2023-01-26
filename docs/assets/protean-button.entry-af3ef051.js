@@ -1,0 +1,16 @@
+import{r,h as t,g as n}from"./index-e2c2285b-c4441d08.js";const e=`*{box-sizing:border-box}input,button{font-family:inherit;font-size:inherit}button{cursor:pointer;background:none;border:none}:host(.sr),:host(.sr) button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.sr,.sr button{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap}.hidden{display:none}:host([hidden]){display:none}.invisible{visibility:hidden}:host{display:inline-block}:host([full-width]){display:flex}:host([disabled]) button{cursor:not-allowed;opacity:var(--protean-button-disabled-opacity, 0.4)}button{color:inherit;cursor:pointer;width:100%;height:var(--protean-button-height, 42px);transition:background-color 0.2s ease-in-out, color 0.2s ease-in-out,
+        border 0.2s ease-in-out}button>div{display:flex;align-items:center;justify-content:center}:host([variant]) button{border-radius:var(--protean-button-border-radius, 2px)}:host([variant='primary']) button,:host([variant='secondary']) button{padding:0 1.25rem;border:2px solid;font-weight:600}:host([variant='primary']) button{background-color:var(--protean-button-primary-background-color, #c7b5fb);color:var(--protean-button-primary-text-color, #000000);border-color:var(--protean-button-primary-border-color, transparent)}:host([variant='secondary']) button{background-color:var(
+        --protean-button-secondary-background-color,
+        transparent
+    );color:var(--protean-button-secondary-text-color, inherit);border-color:var(--protean-button-secondary-border-color, #c7b5fb)}:host(:not([disabled])[variant='primary']) button:hover,:host(:not([disabled])[variant='primary']) button:focus{background-color:var(
+        --protean-button-primary-hover-background-color,
+        #7b57e4
+    );color:var(--protean-button-primary-hover-text-color, #ffffff);border-color:var(--protean-button-primary-hover-border-color, transparent)}:host(:not([disabled])[variant='secondary']) button:hover,:host(:not([disabled])[variant='secondary']) button:focus{background-color:var(
+        --protean-button-secondary-hover-background-color,
+        #7b57e4
+    );color:var(--protean-button-secondary-hover-text-color, #ffffff);border-color:var(
+        --protean-button-secondary-hover-border-color,
+        transparent
+    )}:host([variant='icon']) button{width:var(--protean-button-icon-size, 42px);background-color:var(--protean-button-icon-background-color);--protean-icon-stroke-primary:var(--protean-button-icon-stroke-color)}:host(:not([disabled])[variant='icon']) button:hover,:host(:not([disabled])[variant='icon']) button:focus{background-color:var(--protean-button-icon-hover-background-color);--protean-icon-hover-stroke-primary:var(
+        --protean-button-icon-hover-stroke-color
+    )}`,a=class{constructor(o){r(this,o),this.variant=void 0,this.type=void 0,this.disabled=void 0,this.fullWidth=void 0,this.a11yLabel=void 0}delegateFocus(o){o.target===this.hostElement&&this.hostElement.shadowRoot.querySelector("button").focus()}render(){return t("button",{type:this.type??"button",disabled:this.disabled,"aria-label":this.a11yLabel},t("div",null,t("slot",null)))}get hostElement(){return n(this)}};a.style=e;export{a as protean_button};

@@ -5,13 +5,11 @@ import ProteanMessageRoute from './index.vue';
 
 const mountOptions = {
     global: {
-        stubs: [
-            'code-snippet',
-            'protean-message',
-            'protean-checkbox',
-            'protean-select',
-            'protean-option',
-        ],
+        stubs: {
+            CodeSnippet: {
+                template: '<div><slot /></div>',
+            },
+        },
         directives: {
             prop: vProp,
         },
@@ -78,7 +76,13 @@ describe('Protean Message Route', () => {
     });
 
     it('correctly binds code snippet substitutions', async () => {
-        const wrapper = shallowMount<any>(ProteanMessageRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanMessageRoute, {
+            global: {
+                directives: {
+                    prop: vProp,
+                },
+            },
+        });
 
         /* eslint-disable */
         let substitutions: string[] = (

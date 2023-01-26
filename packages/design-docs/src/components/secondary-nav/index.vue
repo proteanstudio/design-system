@@ -23,7 +23,7 @@ function setSecondaryNavItems(): void {
     navItems.value = getAnchors()
         .map(item => {
             const path = item.dataset.inPageAnchor!;
-            const name = item.dataset.label ?? item.textContent?.trim() ?? '';
+            const name = item.dataset.label ?? item.textContent!.trim();
 
             return {
                 path,
@@ -82,7 +82,7 @@ watch(route, () => {
         <ul>
             <li v-for="item in navItems">
                 <a
-                    href="javascript://"
+                    href="javascript:void(0)"
                     class="secondary-nav-item"
                     :class="{ active: activeTarget === item.path }"
                     :data-target="item.path"

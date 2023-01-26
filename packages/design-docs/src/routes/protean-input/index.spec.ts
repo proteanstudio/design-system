@@ -5,14 +5,11 @@ import ProteanInputRoute from './index.vue';
 
 const mountOptions = {
     global: {
-        stubs: [
-            'code-snippet',
-            'protean-input',
-            'protean-checkbox',
-            'protean-select',
-            'protean-optgroup',
-            'protean-option',
-        ],
+        stubs: {
+            CodeSnippet: {
+                template: '<div><slot /></div>',
+            },
+        },
         directives: {
             prop: vProp,
         },
@@ -232,11 +229,11 @@ describe('Protean Input Route', () => {
 
         await typeSelectWrapper.trigger('change', {
             detail: {
-                value: 'date',
+                value: 'color',
             },
         });
 
-        expect(wrapper.vm.demoType).toEqual('date');
+        expect(wrapper.vm.demoType).toEqual('color');
     });
 
     it('updates demoFormat on select change', async () => {
@@ -260,7 +257,13 @@ describe('Protean Input Route', () => {
     });
 
     it('builds correct code snippet substitutions', async () => {
-        const wrapper = shallowMount<any>(ProteanInputRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanInputRoute, {
+            global: {
+                directives: {
+                    prop: vProp,
+                },
+            },
+        });
 
         /* eslint-disable */
         let substitutions: string[] = (

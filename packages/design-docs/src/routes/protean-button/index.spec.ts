@@ -4,14 +4,11 @@ import ProteanButtonRoute from './index.vue';
 
 const mountOptions = {
     global: {
-        stubs: [
-            'code-snippet',
-            'protean-button',
-            'protean-icon',
-            'protean-checkbox',
-            'protean-select',
-            'protean-option',
-        ],
+        stubs: {
+            CodeSnippet: {
+                template: '<div><slot /></div>',
+            },
+        },
         directives: {
             prop: vProp,
         },
@@ -64,7 +61,13 @@ describe('Protean Button Route', () => {
     });
 
     it('updates button variant on select change', async () => {
-        const wrapper = shallowMount<any>(ProteanButtonRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanButtonRoute, {
+            global: {
+                directives: {
+                    prop: vProp,
+                },
+            },
+        });
 
         let selectWrapper = wrapper.find('.demo-select-variant');
         let demoButton = wrapper.find('.overview-demo-element')

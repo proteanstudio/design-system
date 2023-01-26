@@ -4,12 +4,11 @@ import ProteanTabsRoute from './index.vue';
 
 const mountOptions = {
     global: {
-        stubs: [
-            'code-snippet',
-            'protean-checkbox',
-            'protean-tab-container',
-            'protean-tab-pane',
-        ],
+        stubs: {
+            CodeSnippet: {
+                template: '<div><slot /></div>',
+            },
+        },
         directives: {
             prop: vProp,
         },
