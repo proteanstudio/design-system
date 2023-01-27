@@ -187,7 +187,7 @@ export class ProteanInput {
         }
     };
 
-    onInputInput = (event: Event): void => {
+    onInputInput = (event: InputEvent): void => {
         event.stopPropagation();
 
         this.formattedValueObject = this.getFormattedValueObj(
