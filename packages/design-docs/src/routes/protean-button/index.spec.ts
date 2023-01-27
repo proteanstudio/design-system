@@ -97,12 +97,15 @@ describe('Protean Button Route', () => {
         expect(selectWrapper.attributes('value')).toEqual('icon');
         /* eslint-disable */
         expect((codeSnippet.vm as any).substitutions[0]).toEqual('icon');
-        expect((codeSnippet.vm as any).substitutions[2]).toEqual(
+        expect((codeSnippet.vm as any).substitutions[2]).toEqual('');
+        expect((codeSnippet.vm as any).substitutions[3]).toEqual(
             '\na11y-label="Button aria-label"',
         );
         /* eslint-enable */
         expect(wrapper.vm.demoAriaLabel).toEqual('Button aria-label');
-        expect(demoButton.a11yLabel).toEqual('Button aria-label');
+        expect(demoButton.getAttribute('a11y-label')).toEqual(
+            'Button aria-label',
+        );
 
         await selectWrapper.trigger('change', {
             detail: {

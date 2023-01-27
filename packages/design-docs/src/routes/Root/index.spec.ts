@@ -1,5 +1,6 @@
 import vProp from '@/directives/v-prop';
 import { shallowMount } from '@vue/test-utils';
+import { nextTick } from 'vue';
 import RootRoute from './index.vue';
 
 const mountOptions = {
@@ -32,7 +33,7 @@ describe('Root Route', () => {
 
         expect(wrapper.vm.showOffCanvas).toEqual(false);
         expect(wrapper.vm.lightModeEnabled).toEqual(false);
-        expect(document.documentElement.classList).not.toContain('light');
+        expect(document.documentElement.className).not.toContain('light');
     });
 
     it('binds home route name to main element', () => {
@@ -71,12 +72,13 @@ describe('Root Route', () => {
         expect(wrapper.find('main').classes('not-found')).toBe(true);
     });
 
-    it('sets lightModeEnabled from localStorage', () => {
+    it('sets lightModeEnabled from localStorage', async () => {
         localStorage.setItem('lightModeEnabled', 'true');
+        await nextTick();
         const wrapper = shallowMount(RootRoute, mountOptions);
 
         expect(wrapper.vm.lightModeEnabled).toEqual(true);
-        expect(document.documentElement.classList).toContain('light');
+        expect(document.documentElement.className).toContain('light');
 
         document.documentElement.classList.remove('light');
         localStorage.removeItem('lightModeEnabled');
@@ -87,7 +89,7 @@ describe('Root Route', () => {
 
         expect(localStorage.getItem('lightModeEnabled')).toBe(null);
         expect(wrapper.vm.lightModeEnabled).toEqual(false);
-        expect(document.documentElement.classList).not.toContain('light');
+        expect(document.documentElement.className).not.toContain('light');
 
         await wrapper
             .findComponent({ name: 'MainNav' })
@@ -99,7 +101,7 @@ describe('Root Route', () => {
 
         expect(localStorage.getItem('lightModeEnabled')).toEqual('true');
         expect(wrapper.vm.lightModeEnabled).toEqual(true);
-        expect(document.documentElement.classList).toContain('light');
+        expect(document.documentElement.className).toContain('light');
 
         await wrapper
             .findComponent({ name: 'MainNav' })
@@ -111,7 +113,7 @@ describe('Root Route', () => {
 
         expect(localStorage.getItem('lightModeEnabled')).toEqual('false');
         expect(wrapper.vm.lightModeEnabled).toEqual(false);
-        expect(document.documentElement.classList).not.toContain('light');
+        expect(document.documentElement.className).not.toContain('light');
 
         localStorage.removeItem('lightModeEnabled');
     });
@@ -133,11 +135,11 @@ describe('Root Route', () => {
 
         expect(wrapper.vm.showOffCanvas).toEqual(false);
 
-        await wrapper.findComponent({ name: 'ProteanButton' }).trigger('click');
+        await wrapper.find('.off-canvas-toggle').trigger('click');
 
         expect(wrapper.vm.showOffCanvas).toEqual(true);
 
-        await wrapper.findComponent({ name: 'ProteanButton' }).trigger('click');
+        await wrapper.find('.off-canvas-toggle').trigger('click');
 
         expect(wrapper.vm.showOffCanvas).toEqual(false);
     });
@@ -158,7 +160,8 @@ describe('Root Route', () => {
     });
 
     it.skip('gets correct logo-url', () => {
-        // require is stubbed by jest and returns an empty string for the path name
+        // require is stubbed by vitest and returns an empty string for the path name
+        // img element optimized out of test build
         const wrapper = shallowMount(RootRoute, mountOptions);
 
         expect(wrapper.vm.lightModeEnabled).toEqual(false);

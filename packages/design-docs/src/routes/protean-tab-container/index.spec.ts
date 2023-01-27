@@ -20,7 +20,7 @@ describe('Protean Tabs Route', () => {
     it('renders', () => {
         const wrapper = shallowMount(ProteanTabsRoute, mountOptions);
         expect(wrapper.find('h1').text()).toEqual('Tabs');
-        const demoTabs = wrapper.findComponent({ name: 'ProteanTabContainer' });
+        const demoTabs = wrapper.find('protean-tab-container');
 
         expect(wrapper.vm.demoName).toEqual('demo-name');
         expect(demoTabs.attributes('name')).toEqual('demo-name');
@@ -31,7 +31,7 @@ describe('Protean Tabs Route', () => {
     it('updates demoValue on tab change', async () => {
         const wrapper = shallowMount(ProteanTabsRoute, mountOptions);
 
-        let demoTabs = wrapper.findComponent({ name: 'ProteanTabContainer' });
+        let demoTabs = wrapper.find('protean-tab-container');
 
         expect(wrapper.vm.demoValue).toEqual('tab1');
         expect(demoTabs.attributes('value')).toEqual('tab1');
@@ -42,7 +42,7 @@ describe('Protean Tabs Route', () => {
             },
         });
 
-        demoTabs = wrapper.findComponent({ name: 'ProteanTabContainer' });
+        demoTabs = wrapper.find('protean-tab-container');
 
         expect(wrapper.vm.demoValue).toEqual('tab3');
         expect(demoTabs.attributes('value')).toEqual('tab3');

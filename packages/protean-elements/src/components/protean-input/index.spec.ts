@@ -789,12 +789,12 @@ describe('protean-input', () => {
         const inputElement = rootInstance.inputElement;
         expect(inputElement).toEqualAttribute('aria-expanded', null);
 
-        root.ariaExpanded = true;
+        root.a11yExpanded = true;
         await waitForChanges();
 
         expect(inputElement).toEqualAttribute('aria-expanded', 'true');
 
-        root.ariaExpanded = false;
+        root.a11yExpanded = false;
         await waitForChanges();
 
         expect(inputElement).toEqualAttribute('aria-expanded', 'false');

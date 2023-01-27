@@ -2,6 +2,8 @@ import { Options, Vue } from 'vue-class-component';
 import MainNav from '@/components/main-nav/index.vue';
 import SecondaryNav from '@/components/secondary-nav/index.vue';
 import { Watch } from 'vue-property-decorator';
+import logoImage from '@/assets/images/logo-dark-text.svg';
+import logoImageWhite from '@/assets/images/logo-white-text.svg';
 
 @Options({
     components: {
@@ -29,9 +31,7 @@ export default class Root extends Vue {
     }
 
     get logoURL(): string {
-        return require(`@/assets/images/logo-${
-            this.lightModeEnabled ? 'dark' : 'white'
-        }-text.svg`);
+        return this.lightModeEnabled ? logoImage : logoImageWhite;
     }
 
     get routeClassBinding(): string {

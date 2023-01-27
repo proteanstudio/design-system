@@ -6,10 +6,8 @@
     "author": "Protean Studio <admin@protean.studio>",
     "license": "MIT",
     "private": true,
-    "devDependencies": {
-        "yarn": "^1.22.10"
-    },
     "workspaces": [
         "packages/*"
-    ]
+    ],
+    "packageManager": "yarn@3.3.1"
 }

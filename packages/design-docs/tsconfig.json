@@ -3,20 +3,23 @@
         "target": "esnext",
         "module": "esnext",
         "strict": true,
-        "jsx": "preserve",
-        "importHelpers": true,
+        "jsx": "react",
         "moduleResolution": "node",
         "experimentalDecorators": true,
-        "skipLibCheck": true,
         "esModuleInterop": true,
+        "importHelpers": true,
+        "skipLibCheck": true,
         "allowSyntheticDefaultImports": true,
+        "useDefineForClassFields": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
         "sourceMap": true,
         "baseUrl": ".",
-        "types": ["webpack-env", "jest"],
+        "types": ["vitest/globals"],
         "paths": {
             "@/*": ["src/*"]
         },
-        "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+        "lib": ["esnext", "dom"]
     },
     "include": [
         "src/**/*.ts",

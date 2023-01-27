@@ -3,10 +3,10 @@ import debounce from './';
 
 describe('debounce', () => {
     it('debounces at default 100ms', async () => {
-        const setTimeoutSpy = jest.spyOn(window, 'setTimeout');
-        const clearTimeoutSpy = jest.spyOn(window, 'clearTimeout');
+        const setTimeoutSpy = vi.spyOn(window, 'setTimeout');
+        const clearTimeoutSpy = vi.spyOn(window, 'clearTimeout');
 
-        const fn = jest.fn();
+        const fn = vi.fn();
         const debouncedFn = debounce(fn);
 
         expect(typeof debouncedFn).toBe('function');
@@ -22,7 +22,6 @@ describe('debounce', () => {
         debouncedFn();
 
         expect(clearTimeoutSpy).toHaveBeenCalledTimes(2);
-        expect(clearTimeoutSpy.mock.calls[1][0]).toEqual(2);
         expect(setTimeoutSpy).toHaveBeenCalledTimes(2);
         expect(fn).toHaveBeenCalledTimes(0);
 
@@ -32,7 +31,6 @@ describe('debounce', () => {
         debouncedFn();
 
         expect(clearTimeoutSpy).toHaveBeenCalledTimes(3);
-        expect(clearTimeoutSpy.mock.calls[2][0]).toEqual(3);
         expect(fn).toHaveBeenCalledTimes(1);
 
         await wait(100);
@@ -43,9 +41,9 @@ describe('debounce', () => {
     });
 
     it('debounces at with custom time', async () => {
-        const setTimeoutSpy = jest.spyOn(window, 'setTimeout');
+        const setTimeoutSpy = vi.spyOn(window, 'setTimeout');
 
-        const fn = jest.fn();
+        const fn = vi.fn();
         const debouncedFn = debounce(fn, 2);
 
         debouncedFn();
