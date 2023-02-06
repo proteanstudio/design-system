@@ -8,15 +8,17 @@
         "build": "vite build && rm -rf ../../docs && mkdir ../../docs && cp -R dist/ ../../docs && cp ../../CNAME ../../docs",
         "test": "vitest run",
         "test:dev": "vitest watch",
+        "test:coverage": "vitest run --coverage",
         "lint": "eslint",
         "lint:fix": "eslint --fix src/",
         "format": "prettier -c 'src/**/*.{ts,vue,scss,spec.ts}'",
         "format:fix": "prettier --write 'src/**/*.{ts,vue,scss,spec.ts}'"
     },
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^5.48.2",
+        "@typescript-eslint/eslint-plugin": "^5.49.0",
         "@typescript-eslint/parser": "^5.48.2",
         "@vitejs/plugin-vue": "^4.0.0",
+        "@vitest/coverage-c8": "^0.28.2",
         "@vue/eslint-config-prettier": "^7.0.0",
         "@vue/eslint-config-typescript": "^11.0.2",
         "@vue/test-utils": "^2.2.7",
@@ -30,10 +32,8 @@
         "sass": "^1.57.1",
         "typescript": "^4.9.4",
         "vite": "^4.0.4",
-        "vitest": "^0.27.2",
+        "vitest": "^0.28.2",
         "vue": "^3.2.45",
-        "vue-class-component": "^8.0.0-rc.1",
-        "vue-property-decorator": "^10.0.0-rc.3",
         "vue-router": "^4.1.6"
     }
 }

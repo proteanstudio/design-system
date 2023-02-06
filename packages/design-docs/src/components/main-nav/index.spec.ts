@@ -1,31 +1,43 @@
 import vProp from '@/directives/v-prop';
+import { Dict } from '@/types';
 import { shallowMount } from '@vue/test-utils';
+import { ref } from 'vue';
 import MainNav from './index.vue';
 
+const routes = ref<Dict<string>[]>([]);
+
+vi.mock('vue-router', () => ({
+    useRouter: vi.fn(() => ({
+        getRoutes: () => routes.value,
+    })),
+}));
+
 describe('main-nav', () => {
+    beforeEach(() => {
+        routes.value = [];
+    });
+
     it('renders base properties and structure', () => {
-        const $router = {
-            getRoutes() {
-                return [
-                    {
-                        path: '/path-one/route-one',
-                        name: 'Route One',
-                    },
-                    {
-                        path: '/path-two/route-two',
-                        name: 'Route Two',
-                    },
-                ];
+        routes.value = [
+            {
+                path: '/path-one/route-one',
+                name: 'Route One',
             },
-        };
+            {
+                path: '/path-two/route-two',
+                name: 'Route Two',
+            },
+        ];
 
         const wrapper = shallowMount(MainNav, {
             global: {
-                mocks: {
-                    $router,
-                },
                 directives: {
                     prop: vProp,
+                },
+                stubs: {
+                    'router-link': {
+                        template: '<a><slot /></a>',
+                    },
                 },
             },
         });
@@ -54,46 +66,42 @@ describe('main-nav', () => {
     });
 
     it('correctly constructs sorted routes array', () => {
-        const $router = {
-            getRoutes() {
-                return [
-                    {
-                        path: '/home-should-not-be-mapped',
-                        name: 'Home',
-                    },
-                    {
-                        path: '/not-found-should-not-be-mapped',
-                        name: 'not-found',
-                    },
-                    {
-                        path: '/not-guidelines-or-elements/top-level',
-                        name: 'Top Level Route',
-                    },
-                    {
-                        path: '/guidelines/guideline-1',
-                        name: 'Guideline 1',
-                    },
-                    {
-                        path: '/guidelines/guideline-2',
-                        name: 'Guideline 2',
-                    },
-                    {
-                        path: '/elements/element',
-                        name: 'Element',
-                    },
-                ];
+        routes.value = [
+            {
+                path: '/home-should-not-be-mapped',
+                name: 'Home',
             },
-        };
+            {
+                path: '/not-found-should-not-be-mapped',
+                name: 'not-found',
+            },
+            {
+                path: '/not-guidelines-or-elements/top-level',
+                name: 'Top Level Route',
+            },
+            {
+                path: '/guidelines/guideline-1',
+                name: 'Guideline 1',
+            },
+            {
+                path: '/guidelines/guideline-2',
+                name: 'Guideline 2',
+            },
+            {
+                path: '/elements/element',
+                name: 'Element',
+            },
+        ];
 
-        const wrapper = shallowMount(MainNav, {
+        const wrapper = shallowMount<any>(MainNav, {
             global: {
-                stubs: [
-                    'router-link',
-                    'protean-click-elsewhere',
-                    'protean-checkbox',
-                ],
-                mocks: {
-                    $router,
+                directives: {
+                    prop: vProp,
+                },
+                stubs: {
+                    'router-link': {
+                        template: '<a><slot /></a>',
+                    },
                 },
             },
         });
@@ -133,42 +141,39 @@ describe('main-nav', () => {
     });
 
     it('renders sorted routes array', () => {
-        const $router = {
-            getRoutes() {
-                return [
-                    {
-                        path: '/home-should-not-be-mapped',
-                        name: 'Home',
-                    },
-                    {
-                        path: '/not-found-should-not-be-mapped',
-                        name: 'not-found',
-                    },
-                    {
-                        path: '/not-guidelines-or-elements/top-level',
-                        name: 'Top Level Route',
-                    },
-                    {
-                        path: '/guidelines/guideline-1',
-                        name: 'Guideline 1',
-                    },
-                    {
-                        path: '/guidelines/guideline-2',
-                        name: 'Guideline 2',
-                    },
-                    {
-                        path: '/elements/element',
-                        name: 'Element',
-                    },
-                ];
+        routes.value = [
+            {
+                path: '/home-should-not-be-mapped',
+                name: 'Home',
             },
-        };
+            {
+                path: '/not-found-should-not-be-mapped',
+                name: 'not-found',
+            },
+            {
+                path: '/not-guidelines-or-elements/top-level',
+                name: 'Top Level Route',
+            },
+            {
+                path: '/guidelines/guideline-1',
+                name: 'Guideline 1',
+            },
+            {
+                path: '/guidelines/guideline-2',
+                name: 'Guideline 2',
+            },
+            {
+                path: '/elements/element',
+                name: 'Element',
+            },
+        ];
 
         const wrapper = shallowMount(MainNav, {
             global: {
-                stubs: ['protean-checkbox'],
-                mocks: {
-                    $router,
+                stubs: {
+                    'router-link': {
+                        template: '<a><slot /></a>',
+                    },
                 },
                 directives: {
                     prop: vProp,
@@ -188,7 +193,7 @@ describe('main-nav', () => {
 
         const topGroupItems = topGroup.findAll('li');
         expect(topGroupItems).toHaveLength(1);
-        const topGroupFirstLink = topGroupItems[0].find('router-link');
+        const topGroupFirstLink = topGroupItems[0].find('a');
         expect(topGroupFirstLink.attributes('to')).toEqual(
             '/not-guidelines-or-elements/top-level',
         );
@@ -209,17 +214,12 @@ describe('main-nav', () => {
     });
 
     it('emits "hide-off-canvas" on click-elsewhere', async () => {
-        const $router = {
-            getRoutes() {
-                return [];
-            },
-        };
-
         const wrapper = shallowMount(MainNav, {
             global: {
-                stubs: ['router-link', 'protean-checkbox'],
-                mocks: {
-                    $router,
+                stubs: {
+                    'router-link': {
+                        template: '<a><slot /></a>',
+                    },
                 },
                 directives: {
                     prop: vProp,
@@ -238,18 +238,9 @@ describe('main-nav', () => {
     });
 
     it('emits "toggle-light-mode" on toggle click', async () => {
-        const $router = {
-            getRoutes() {
-                return [];
-            },
-        };
-
         const wrapper = shallowMount(MainNav, {
             global: {
                 stubs: ['router-link'],
-                mocks: {
-                    $router,
-                },
                 directives: {
                     prop: vProp,
                 },

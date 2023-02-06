@@ -1,7 +1,17 @@
 import vProp from '@/directives/v-prop';
 import { shallowMount } from '@vue/test-utils';
-import { nextTick } from 'vue';
+import { nextTick, reactive } from 'vue';
 import RootRoute from './index.vue';
+
+const defaultRoute = {
+    fullPath: '',
+    name: '',
+};
+const route = reactive(defaultRoute);
+
+vi.mock('vue-router', () => ({
+    useRoute: vi.fn(() => route),
+}));
 
 const mountOptions = {
     global: {
@@ -13,12 +23,6 @@ const mountOptions = {
             'router-link',
             'router-view',
         ],
-        mocks: {
-            $route: {
-                fullPath: '',
-                name: '',
-            },
-        },
         directives: {
             prop: vProp,
         },
@@ -26,8 +30,13 @@ const mountOptions = {
 };
 
 describe('Root Route', () => {
+    beforeEach(() => {
+        route.fullPath = defaultRoute.fullPath;
+        route.name = defaultRoute.name;
+    });
+
     it('renders', () => {
-        const wrapper = shallowMount(RootRoute, mountOptions);
+        const wrapper = shallowMount<any>(RootRoute, mountOptions);
         expect(wrapper.findComponent({ name: 'MainNav' })).not.toBeNull();
         expect(wrapper.findComponent({ name: 'SecondaryNav' })).not.toBeNull();
 
@@ -37,22 +46,20 @@ describe('Root Route', () => {
     });
 
     it('binds home route name to main element', () => {
-        mountOptions.global.mocks.$route = {
-            fullPath: '/',
-            name: 'Home',
-        };
-        const wrapper = shallowMount(RootRoute, mountOptions);
+        route.fullPath = '/';
+        route.name = 'Home';
+
+        const wrapper = shallowMount<any>(RootRoute, mountOptions);
 
         expect(wrapper.vm.routeClassBinding).toEqual('home');
         expect(wrapper.find('main').classes('home')).toBe(true);
     });
 
     it('binds nested route name to main element', () => {
-        mountOptions.global.mocks.$route = {
-            fullPath: '/guidelines/accessibility',
-            name: 'Accessibility',
-        };
-        const wrapper = shallowMount(RootRoute, mountOptions);
+        route.fullPath = '/guidelines/accessibility';
+        route.name = 'Accessibility';
+
+        const wrapper = shallowMount<any>(RootRoute, mountOptions);
 
         expect(wrapper.find('main').classes('accessibility')).toBe(true);
         expect(wrapper.vm.routeClassBinding).toEqual(
@@ -61,12 +68,10 @@ describe('Root Route', () => {
     });
 
     it('binds not-found route name to main element', () => {
-        mountOptions.global.mocks.$route = {
-            fullPath: '/eqwqweq/1232131123sas',
-            name: 'not-found',
-        };
+        route.fullPath = '/eqwqweq/1232131123sas';
+        route.name = 'not-found';
 
-        const wrapper = shallowMount(RootRoute, mountOptions);
+        const wrapper = shallowMount<any>(RootRoute, mountOptions);
 
         expect(wrapper.vm.routeClassBinding).toEqual('not-found');
         expect(wrapper.find('main').classes('not-found')).toBe(true);
@@ -75,7 +80,7 @@ describe('Root Route', () => {
     it('sets lightModeEnabled from localStorage', async () => {
         localStorage.setItem('lightModeEnabled', 'true');
         await nextTick();
-        const wrapper = shallowMount(RootRoute, mountOptions);
+        const wrapper = shallowMount<any>(RootRoute, mountOptions);
 
         expect(wrapper.vm.lightModeEnabled).toEqual(true);
         expect(document.documentElement.className).toContain('light');
@@ -85,7 +90,7 @@ describe('Root Route', () => {
     });
 
     it('updates lightModeEnabled on main-nav emission', async () => {
-        const wrapper = shallowMount(RootRoute, mountOptions);
+        const wrapper = shallowMount<any>(RootRoute, mountOptions);
 
         expect(localStorage.getItem('lightModeEnabled')).toBe(null);
         expect(wrapper.vm.lightModeEnabled).toEqual(false);
@@ -118,20 +123,24 @@ describe('Root Route', () => {
         localStorage.removeItem('lightModeEnabled');
     });
 
-    it('closes off canvas on routeChange', () => {
-        const wrapper = shallowMount(RootRoute, mountOptions);
+    it('closes off canvas on routeChange', async () => {
+        const wrapper = shallowMount<any>(RootRoute, mountOptions);
 
         expect(wrapper.vm.showOffCanvas).toEqual(false);
 
         wrapper.vm.showOffCanvas = true;
         expect(wrapper.vm.showOffCanvas).toEqual(true);
 
-        wrapper.vm.closeOffCanvas();
+        route.fullPath = 'foo';
+        route.name = 'bar';
+
+        await nextTick();
+
         expect(wrapper.vm.showOffCanvas).toEqual(false);
     });
 
     it('toggles off canvas on button-click', async () => {
-        const wrapper = shallowMount(RootRoute, mountOptions);
+        const wrapper = shallowMount<any>(RootRoute, mountOptions);
 
         expect(wrapper.vm.showOffCanvas).toEqual(false);
 
@@ -145,7 +154,7 @@ describe('Root Route', () => {
     });
 
     it('closes off canvas on main-nav emission', async () => {
-        const wrapper = shallowMount(RootRoute, mountOptions);
+        const wrapper = shallowMount<any>(RootRoute, mountOptions);
 
         expect(wrapper.vm.showOffCanvas).toEqual(false);
 
@@ -159,10 +168,8 @@ describe('Root Route', () => {
         expect(wrapper.vm.showOffCanvas).toEqual(false);
     });
 
-    it.skip('gets correct logo-url', () => {
-        // require is stubbed by vitest and returns an empty string for the path name
-        // img element optimized out of test build
-        const wrapper = shallowMount(RootRoute, mountOptions);
+    it('gets correct logo-url', () => {
+        const wrapper = shallowMount<any>(RootRoute, mountOptions);
 
         expect(wrapper.vm.lightModeEnabled).toEqual(false);
         expect(wrapper.vm.logoURL).toContain(

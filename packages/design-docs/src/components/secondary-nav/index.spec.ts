@@ -1,6 +1,17 @@
 import { nextTick } from '@vue/runtime-core';
 import { shallowMount } from '@vue/test-utils';
 import SecondaryNav from './index.vue';
+import debounce from '@/utils/debounce';
+import { reactive } from 'vue';
+
+const route = reactive({
+    fullPath: '',
+    name: '',
+});
+
+vi.mock('vue-router', () => ({
+    useRoute: vi.fn(() => route),
+}));
 
 vi.mock('@/utils/debounce', () => ({
     default: vi.fn().mockImplementation((fn: VoidFunction) => {
@@ -8,16 +19,17 @@ vi.mock('@/utils/debounce', () => ({
     }),
 }));
 
-import debounce from '@/utils/debounce';
-
 describe('secondary-nav', () => {
     afterEach(() => {
+        route.fullPath = '';
+        route.name = '';
         (debounce as any).mockReset();
     });
 
     it('does not render if no anchors present', () => {
-        const wrapper = shallowMount(SecondaryNav);
-        expect(wrapper.element.localName).toBe(undefined);
+        const wrapper = shallowMount<any>(SecondaryNav);
+
+        expect(wrapper.find('nav').exists()).toBe(false);
         expect(wrapper.vm.navItems).toEqual([]);
         expect(wrapper.vm.activeTarget).toEqual('');
     });
@@ -29,7 +41,7 @@ describe('secondary-nav', () => {
                 <section data-in-page-anchor="baz" data-label="bam"></section>
             </main>
         `;
-        const wrapper = shallowMount(SecondaryNav);
+        const wrapper = shallowMount<any>(SecondaryNav);
 
         const anchors = wrapper.vm.getAnchors();
 
@@ -47,16 +59,21 @@ describe('secondary-nav', () => {
                 <section data-in-page-anchor="baz" data-label="bam"></section>
             </main>
         `;
-        const wrapper = shallowMount(SecondaryNav);
+        const wrapper = shallowMount<any>(SecondaryNav);
 
-        wrapper.vm.onRouteChanged();
-        await nextTick(); // sync with $nextTick in component
+        route.fullPath = '/';
+        route.name = 'foo';
+
+        await nextTick(); // sync with nextTick in watcher
+        await nextTick(); // wait for ref updates
         await nextTick(); // wait for render side effect
 
+        const nav = wrapper.find<HTMLElement>('.secondary-nav');
+
         expect(wrapper.vm.navItems).toHaveLength(2);
-        expect(wrapper.element.localName).toEqual('nav');
-        expect(wrapper.element.className).toEqual('secondary-nav');
-        expect(wrapper.element.getAttribute('aria-label')).toEqual(
+        expect(nav.exists()).toBe(true);
+        expect(nav.element.className).toEqual('secondary-nav');
+        expect(nav.element.getAttribute('aria-label')).toEqual(
             'In-page navigation',
         );
 
@@ -64,10 +81,9 @@ describe('secondary-nav', () => {
         expect(navItems).toHaveLength(2);
         expect(navItems[0].classes('active')).toBe(false);
         expect(navItems[1].classes('active')).toBe(true);
-        expect(navItems[0].attributes('href')).toEqual('javascript://');
+        expect(navItems[0].attributes('href')).toEqual('javascript:void(0)');
         expect(navItems[0].attributes('data-target')).toEqual('foo');
         expect(navItems[0].text()).toEqual('bar');
-        expect(navItems[0].attributes('href')).toEqual('javascript://');
         expect(navItems[1].attributes('data-target')).toEqual('baz');
         expect(navItems[1].text()).toEqual('bam');
     });
@@ -81,7 +97,7 @@ describe('secondary-nav', () => {
                 <section data-in-page-anchor="baz">bam</section>
             </main>
         `;
-        const wrapper = shallowMount(SecondaryNav);
+        const wrapper = shallowMount<any>(SecondaryNav);
 
         wrapper.vm.setSecondaryNavItems();
 
@@ -99,6 +115,9 @@ describe('secondary-nav', () => {
     });
 
     it('scaffolds scroll listener', async () => {
+        const addListenerSpy = vi.spyOn(window, 'addEventListener');
+        const removeListenerSpy = vi.spyOn(window, 'removeEventListener');
+
         document.body.innerHTML = `
             <main>
                 <section data-in-page-anchor="foo" data-label="bar"></section>
@@ -106,14 +125,20 @@ describe('secondary-nav', () => {
             </main>
         `;
 
-        shallowMount(SecondaryNav);
+        const wrapper = shallowMount(SecondaryNav);
 
         expect(debounce).toHaveBeenCalledTimes(1);
+        expect(addListenerSpy).toHaveBeenCalledTimes(1);
+        expect(removeListenerSpy).toHaveBeenCalledTimes(0);
 
         const args = (debounce as any).mock.calls[0];
 
         expect(typeof args[0]).toEqual('function');
         expect(args[1]).toEqual(20);
+
+        wrapper.unmount();
+        expect(addListenerSpy).toHaveBeenCalledTimes(1);
+        expect(removeListenerSpy).toHaveBeenCalledTimes(1);
     });
 
     it('updates active target on window scroll', async () => {
@@ -124,7 +149,7 @@ describe('secondary-nav', () => {
             </main>
         `;
 
-        const wrapper = shallowMount(SecondaryNav);
+        const wrapper = shallowMount<any>(SecondaryNav);
 
         wrapper.vm.setSecondaryNavItems();
         await nextTick();
@@ -152,7 +177,7 @@ describe('secondary-nav', () => {
             </main>
         `;
 
-        const wrapper = shallowMount(SecondaryNav);
+        const wrapper = shallowMount<any>(SecondaryNav);
 
         wrapper.vm.setSecondaryNavItems();
         await nextTick();
