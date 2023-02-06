@@ -379,8 +379,7 @@ const demoAlignment = computed(() => {
                     </div>
                     <div class="prop-example">
                         <CodeSnippet language="css">
-                            --protean-checkbox-outline-color:
-                            var(--action-color);
+                            --protean-checkbox-outline-color: #aaaaaa;
                         </CodeSnippet>
                     </div>
                 </li>

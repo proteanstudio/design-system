@@ -41,12 +41,16 @@ input:focus + label .checkbox-symbol {
 .checkbox-outline {
     fill: transparent;
     stroke: var(--protean-checkbox-outline-color, #c7b5fb);
-    stroke-width: 2;
-    transition: fill 0.2s ease-in-out;
+    stroke-width: 3;
+    transition: fill 0.2s ease-in-out, stroke 0.2s ease-in-out;
 }
 
 :host([checked]) .checkbox-outline,
 :host([indeterminate]) .checkbox-outline {
+    --protean-checkbox-outline-color: var(
+        --protean-checkbox-checked-outer-color,
+        #c7b5fb
+    );
     fill: var(--protean-checkbox-checked-outer-color, #c7b5fb);
 }
 

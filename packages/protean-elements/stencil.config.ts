@@ -19,6 +19,7 @@ export const config: Config = {
     ],
     devServer: {
         port: 3333,
+        openBrowser: false,
     },
     hydratedFlag: {
         selector: 'attribute',

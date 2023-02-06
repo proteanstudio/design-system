@@ -237,9 +237,7 @@ function changeHandler(event: CustomEvent): void {
                     snippetOptions,
                 ]"
             >
-                {{
-                `<protean-select {0}{1}{2}>\n {3}\n</protean-select>`
-                }}
+                {{ `<protean-select {0}{1}{2}>\n {3}\n</protean-select>` }}
             </CodeSnippet>
         </div>
     </section>

@@ -10,7 +10,7 @@ describe('CSS Variables Route', () => {
                         template: '<div><slot /></div>',
                     },
                 },
-            }
+            },
         });
 
         expect(wrapper.find('h1').text()).toEqual('CSS variables');
