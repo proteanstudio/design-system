@@ -117,7 +117,7 @@ describe('code-snippet', () => {
 
         expect(wrapper.vm.parsedSnippet.trim()).not.toContain('substitution');
 
-        wrapper.setProps({substitutions: ['substitution']});
+        wrapper.setProps({ substitutions: ['substitution'] });
 
         await nextTick();
 

@@ -6,6 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { FormattedValue } from "@/utils/formatting/types";
+export { FormattedValue } from "@/utils/formatting/types";
 export namespace Components {
     interface ProteanButton {
         "a11yLabel": string;

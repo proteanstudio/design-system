@@ -202,7 +202,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                     </div>
                     <div class="prop-example">
                         <CodeSnippet language="css">
-                            --action-color: #c7b5fb;
+                            --action-color: #7b57e4;
                         </CodeSnippet>
                     </div>
                 </li>
@@ -217,7 +217,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                     </div>
                     <div class="prop-example">
                         <CodeSnippet language="css">
-                            --action-contrast-color: #000000;
+                            --action-contrast-color: #ffffff;
                         </CodeSnippet>
                     </div>
                 </li>
@@ -231,7 +231,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                     </div>
                     <div class="prop-example">
                         <CodeSnippet language="css">
-                            --action-hover-color: #7b57e4;
+                            --action-hover-color: #c7b5fb;
                         </CodeSnippet>
                     </div>
                 </li>
@@ -246,7 +246,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                     </div>
                     <div class="prop-example">
                         <CodeSnippet language="css">
-                            --action-hover-contrast-color: #ffffff;
+                            --action-hover-contrast-color: #000000;
                         </CodeSnippet>
                     </div>
                 </li>
@@ -575,6 +575,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                 --action-color: var(--brand-color-2);
                 --action-contrast-color: #ffffff;
                 --action-hover-color: #5a0d8d;
+                --action-hover-contrast-color: #000000;
         
                 --link-underline-color: var(--brand-color-2);
 
@@ -584,7 +585,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                 --protean-message-text-color: #000000;
                 --protean-message-border-color: #dadada;
         
-                --protean-button-icon-hover-background-color: rgba(114, 9, 183, 0.2);
+                --protean-button-icon-hover-background-color: rgba(110, 69, 228, 0.2);
         
                 --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.5);
                 --protean-dropdown-hover-background-color: #efefef;

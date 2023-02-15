@@ -225,7 +225,8 @@ const spamErrors = () => {
                 ]"
             >
                 {{`<protean-input
-                    {0}type="{1}" {2}{3}{4}{5}{6}{7}
+                    {0}type="{1}"
+                    {2}{3}{4}{5}{6}{7}
                 ></protean-input>
                 `}}
             </CodeSnippet>

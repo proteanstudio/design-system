@@ -4,7 +4,7 @@
         "allowUnreachableCode": false,
         "declaration": false,
         "experimentalDecorators": true,
-        "lib": ["dom", "es2021"],
+        "lib": ["dom", "esnext"],
         "moduleResolution": "node",
         "module": "esnext",
         "target": "es2021",
@@ -16,6 +16,7 @@
         "paths": {
             "@/*": ["src/*"]
         },
+        "skipLibCheck": true
     },
     "include": ["src"],
     "exclude": ["node_modules"]
