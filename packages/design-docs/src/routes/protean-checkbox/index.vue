@@ -86,7 +86,8 @@ const demoAlignment = computed(() => {
                 ]"
             >
                 {{`<protean-checkbox
-                    label="Checkbox label" {0}{1}{2}{3}
+                    label="Checkbox label"
+                    {0}{1}{2}{3}
                     alignment="{4}"
                 ></protean-checkbox>
                 `}}

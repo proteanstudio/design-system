@@ -65,6 +65,10 @@ function parseSnippet(snippetToParse: string): string {
         .reduce((acc, line) => {
             const trimmedLine = line.trim();
 
+            if (!trimmedLine) {
+                return acc;
+            }
+
             const hasClosingTag = !!trimmedLine.match(closingRegex);
             const hasOpeningTag = !!trimmedLine.match(openingRegex);
             const hasElse = !!trimmedLine.match('else');
