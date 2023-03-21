@@ -13,6 +13,7 @@
         "format": "yarn workspaces foreach -p run format",
         "lint": "yarn workspaces foreach -p run lint",
         "test": "yarn workspaces foreach -p run test --silent",
+        "build": "yarn workspaces foreach run build",
         "postinstall": "husky install"
     },
     "packageManager": "yarn@3.5.0",
