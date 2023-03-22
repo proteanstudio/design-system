@@ -5,7 +5,7 @@
     "scripts": {
         "start": "vite",
         "preview": "vite preview",
-        "build": "vite build && rm -rf ../../docs && mkdir ../../docs && cp -R dist/ ../../docs && cp ../../CNAME ../../docs",
+        "build": "vite build && rm -rf ../../docs && mkdir ../../docs && cp -R dist/ ../../docs && cp ../../CNAME ../../docs && cp ../../.nojekyll ../../docs",
         "test": "vitest run",
         "test:dev": "vitest watch",
         "test:coverage": "vitest run --coverage",
