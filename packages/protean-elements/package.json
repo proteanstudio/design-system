@@ -36,9 +36,5 @@
     "prettier": "^2.8.3",
     "puppeteer": "^19.6.3",
     "typescript": "^4.9.5"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
   }
 }
