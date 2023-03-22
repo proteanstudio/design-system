@@ -9,5 +9,17 @@
     "workspaces": [
         "packages/*"
     ],
-    "packageManager": "yarn@3.3.1"
+    "scripts": {
+        "format": "yarn workspaces foreach -p run format",
+        "lint": "yarn workspaces foreach -p run lint",
+        "test": "yarn workspaces foreach -p run test --silent",
+        "build": "yarn workspaces foreach run build",
+        "postinstall": "husky install"
+    },
+    "packageManager": "yarn@3.5.0",
+    "devDependencies": {
+        "@commitlint/cli": "^17.4.4",
+        "@commitlint/config-conventional": "^17.4.4",
+        "husky": "^8.0.3"
+    }
 }

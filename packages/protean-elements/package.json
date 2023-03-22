@@ -16,7 +16,7 @@
   "scripts": {
     "build": "stencil build",
     "start": "stencil build --dev --watch --serve",
-    "test": "stencil test --spec --e2e",
+    "test": "stencil test --spec --e2e --no-warnings",
     "test:dev": "stencil test --spec --e2e --watch",
     "generate": "stencil generate",
     "format": "prettier --check 'src'",
