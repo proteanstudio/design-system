@@ -14,7 +14,7 @@
         "format:fix": "prettier --write 'styles'"
     },
     "devDependencies": {
-        "prettier": "^2.4.1",
-        "sass": "^1.42.1"
+        "prettier": "^2.8.3",
+        "sass": "^1.57.1"
     }
 }

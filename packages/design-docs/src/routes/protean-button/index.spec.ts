@@ -4,14 +4,11 @@ import ProteanButtonRoute from './index.vue';
 
 const mountOptions = {
     global: {
-        stubs: [
-            'code-snippet',
-            'protean-button',
-            'protean-icon',
-            'protean-checkbox',
-            'protean-select',
-            'protean-option',
-        ],
+        stubs: {
+            CodeSnippet: {
+                template: '<div><slot /></div>',
+            },
+        },
         directives: {
             prop: vProp,
         },
@@ -20,7 +17,7 @@ const mountOptions = {
 
 describe('Protean Button Route', () => {
     it('renders', () => {
-        const wrapper = shallowMount(ProteanButtonRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanButtonRoute, mountOptions);
 
         expect(wrapper.find('h1').text()).toEqual('Button');
 
@@ -37,7 +34,7 @@ describe('Protean Button Route', () => {
     });
 
     it('updates button disabled state on toggle change', async () => {
-        const wrapper = shallowMount(ProteanButtonRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanButtonRoute, mountOptions);
 
         const toggleWrapper = wrapper.find('.demo-toggle-disabled');
 
@@ -64,7 +61,13 @@ describe('Protean Button Route', () => {
     });
 
     it('updates button variant on select change', async () => {
-        const wrapper = shallowMount(ProteanButtonRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanButtonRoute, {
+            global: {
+                directives: {
+                    prop: vProp,
+                },
+            },
+        });
 
         let selectWrapper = wrapper.find('.demo-select-variant');
         let demoButton = wrapper.find('.overview-demo-element')
@@ -97,12 +100,15 @@ describe('Protean Button Route', () => {
         expect(selectWrapper.attributes('value')).toEqual('icon');
         /* eslint-disable */
         expect((codeSnippet.vm as any).substitutions[0]).toEqual('icon');
-        expect((codeSnippet.vm as any).substitutions[2]).toEqual(
+        expect((codeSnippet.vm as any).substitutions[2]).toEqual('');
+        expect((codeSnippet.vm as any).substitutions[3]).toEqual(
             '\na11y-label="Button aria-label"',
         );
         /* eslint-enable */
         expect(wrapper.vm.demoAriaLabel).toEqual('Button aria-label');
-        expect(demoButton.a11yLabel).toEqual('Button aria-label');
+        expect(demoButton.getAttribute('a11y-label')).toEqual(
+            'Button aria-label',
+        );
 
         await selectWrapper.trigger('change', {
             detail: {

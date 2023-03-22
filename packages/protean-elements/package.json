@@ -16,7 +16,7 @@
   "scripts": {
     "build": "stencil build",
     "start": "stencil build --dev --watch --serve",
-    "test": "stencil test --spec --e2e",
+    "test": "stencil test --spec --e2e --no-warnings",
     "test:dev": "stencil test --spec --e2e --watch",
     "generate": "stencil generate",
     "format": "prettier --check 'src'",
@@ -25,19 +25,17 @@
     "lint:fix": "eslint --fix src/"
   },
   "devDependencies": {
-    "@stencil/core": "^2.8.1",
-    "@types/jest": "^26.0.21",
-    "@types/node": "^15.6.1",
-    "@types/puppeteer": "^5.4.4",
-    "@typescript-eslint/eslint-plugin": "^4.31.2",
-    "@typescript-eslint/parser": "^4.31.2",
-    "eslint": "^7.32.0",
-    "jest": "26.6.3",
-    "jest-cli": "26.6.3",
-    "prettier": "^2.4.1",
-    "puppeteer": "10.4.0",
-    "typescript": "^4.4.3",
-    "yarn": "^1.22.11"
+    "@stencil/core": "^3.0.0",
+    "@types/jest": "^27.0.3",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "eslint": "^8.33.0",
+    "jest": "^27.4.5",
+    "jest-cli": "^27.4.5",
+    "prettier": "^2.8.3",
+    "puppeteer": "^19.6.3",
+    "typescript": "^4.9.5"
   },
   "publishConfig": {
     "access": "public",

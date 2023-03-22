@@ -5,7 +5,8 @@ export default async function dispatchEvent(
     page: E2EPage,
     selector: string | string[],
     eventName: string,
-    eventInit?: (EventInit | CustomEventInit | KeyboardEventInit) & Dict<string>,
+    eventInit?: (EventInit | CustomEventInit | KeyboardEventInit) &
+        Dict<string>,
 ): Promise<void> {
     let parentSelector = selector;
     let childSelectors;

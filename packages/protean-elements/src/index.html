@@ -26,7 +26,7 @@
 
                 --action-color: #c7b5fb;
                 --action-contrast-color: #000000;
-                --action-hover-color: #7b57e4;
+                --action-hover-color: #6e45e4;
                 --action-hover-contrast-color: #fff;
 
                 --link-color: inherit;
@@ -192,6 +192,7 @@
         </style>
     </head>
     <body class="">
+        <protean-button variant="primary" full-width>Content</protean-button>
         <protean-button variant="primary">Content</protean-button>
         <protean-button variant="secondary">Content</protean-button>
         <protean-button variant="icon">
@@ -199,7 +200,7 @@
         </protean-button>
         <div class="flex">
             <protean-input
-                label="Label text"
+                label="With errors"
                 oninput="spamErrors(event)"
             ></protean-input>
             <protean-input label="Label text" type="phone"></protean-input>

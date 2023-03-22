@@ -45,7 +45,7 @@ export class ProteanInput {
     @Prop({ reflect: true }) readonly = false;
     @Prop({ reflect: true, attribute: 'a11y-label' }) a11yLabel: string;
     @Prop() ariaHasPopup: string;
-    @Prop() ariaExpanded: boolean | undefined;
+    @Prop() a11yExpanded: boolean | undefined;
     @Prop() ariaRole: string;
 
     guid = createGuid();
@@ -187,7 +187,7 @@ export class ProteanInput {
         }
     };
 
-    onInputInput = (event: Event): void => {
+    onInputInput = (event: InputEvent): void => {
         event.stopPropagation();
 
         this.formattedValueObject = this.getFormattedValueObj(
@@ -348,9 +348,9 @@ export class ProteanInput {
                         aria-describedby={this.descriptionId}
                         aria-haspopup={this.ariaHasPopup}
                         aria-expanded={
-                            this.ariaExpanded === undefined
+                            this.a11yExpanded === undefined
                                 ? null
-                                : `${this.ariaExpanded}`
+                                : `${this.a11yExpanded}`
                         }
                         onChange={this.onInputChange}
                         onInput={this.onInputInput}

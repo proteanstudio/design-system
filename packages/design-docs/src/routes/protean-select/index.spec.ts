@@ -5,14 +5,11 @@ import ProteanSelectRoute from './index.vue';
 
 const mountOptions = {
     global: {
-        stubs: [
-            'code-snippet',
-            'protean-message',
-            'protean-checkbox',
-            'protean-select',
-            'protean-optgroup',
-            'protean-option',
-        ],
+        stubs: {
+            CodeSnippet: {
+                template: '<div><slot /></div>',
+            },
+        },
         directives: {
             prop: vProp,
         },
@@ -21,7 +18,7 @@ const mountOptions = {
 
 describe('Protean Select Route', () => {
     it('renders', () => {
-        const wrapper = shallowMount(ProteanSelectRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanSelectRoute, mountOptions);
 
         expect(wrapper.find('h1').text()).toEqual('Select');
 
@@ -48,7 +45,7 @@ describe('Protean Select Route', () => {
     });
 
     it('gets demoErrors', () => {
-        const wrapper = shallowMount(ProteanSelectRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanSelectRoute, mountOptions);
 
         expect(wrapper.vm.demoErrorsList).toEqual(['Error #1']);
         expect(wrapper.vm.demoShowErrors).toEqual(false);
@@ -59,7 +56,7 @@ describe('Protean Select Route', () => {
     });
 
     it('gets snippetOptions', () => {
-        const wrapper = shallowMount(ProteanSelectRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanSelectRoute, mountOptions);
 
         expect(wrapper.vm.demoWithOptGroups).toEqual(false);
         expect(wrapper.vm.snippetOptions).toEqual(
@@ -77,7 +74,7 @@ describe('Protean Select Route', () => {
     });
 
     it('builds option string', () => {
-        const wrapper = shallowMount(ProteanSelectRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanSelectRoute, mountOptions);
 
         const options = [
             {
@@ -98,7 +95,7 @@ describe('Protean Select Route', () => {
     });
 
     it('renders correct demo element', async () => {
-        const wrapper = shallowMount(ProteanSelectRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanSelectRoute, mountOptions);
 
         let demoSelectWrapper = wrapper.find('.overview-demo-element');
 
@@ -116,7 +113,7 @@ describe('Protean Select Route', () => {
     });
 
     it('handles demo change event for single select', async () => {
-        const wrapper = shallowMount(ProteanSelectRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanSelectRoute, mountOptions);
 
         const demoSelectWrapper = wrapper.find('.overview-demo-element');
 
@@ -133,7 +130,7 @@ describe('Protean Select Route', () => {
     });
 
     it('handles demo change event for multi select', async () => {
-        const wrapper = shallowMount(ProteanSelectRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanSelectRoute, mountOptions);
 
         wrapper.vm.demoMultiple = true;
         await nextTick();
@@ -152,7 +149,7 @@ describe('Protean Select Route', () => {
     });
 
     it('updates demoWithOptgroups on toggle change', async () => {
-        const wrapper = shallowMount(ProteanSelectRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanSelectRoute, mountOptions);
         const optGroupToggleWrapper = wrapper.find('.demo-toggle-optgroups');
 
         expect(wrapper.vm.demoWithOptGroups).toEqual(false);
@@ -167,7 +164,7 @@ describe('Protean Select Route', () => {
     });
 
     it('updates demoMultiple on toggle change', async () => {
-        const wrapper = shallowMount(ProteanSelectRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanSelectRoute, mountOptions);
         const multipleToggleWrapper = wrapper.find('.demo-toggle-multiselect');
 
         expect(wrapper.vm.demoMultiple).toEqual(false);
@@ -182,7 +179,7 @@ describe('Protean Select Route', () => {
     });
 
     it('updates demoShowErrors on toggle change', async () => {
-        const wrapper = shallowMount(ProteanSelectRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanSelectRoute, mountOptions);
         const errorsToggleWrapper = wrapper.find('.demo-toggle-errors');
 
         expect(wrapper.vm.demoShowErrors).toEqual(false);
@@ -197,7 +194,7 @@ describe('Protean Select Route', () => {
     });
 
     it('updates demoOptional on toggle change', async () => {
-        const wrapper = shallowMount(ProteanSelectRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanSelectRoute, mountOptions);
         const optionalToggleWrapper = wrapper.find('.demo-toggle-optional');
 
         expect(wrapper.vm.demoOptional).toEqual(false);
@@ -212,7 +209,7 @@ describe('Protean Select Route', () => {
     });
 
     it('updates demoDisabled on toggle change', async () => {
-        const wrapper = shallowMount(ProteanSelectRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanSelectRoute, mountOptions);
         const disabledToggleWrapper = wrapper.find('.demo-toggle-disabled');
 
         expect(wrapper.vm.demoDisabled).toEqual(false);
@@ -227,7 +224,13 @@ describe('Protean Select Route', () => {
     });
 
     it('builds correct code snippet substitutions', async () => {
-        const wrapper = shallowMount(ProteanSelectRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanSelectRoute, {
+            global: {
+                directives: {
+                    prop: vProp,
+                },
+            },
+        });
 
         /* eslint-disable */
         let substitutions: string[] = (

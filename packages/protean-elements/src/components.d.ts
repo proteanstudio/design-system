@@ -6,10 +6,12 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { FormattedValue } from "@/utils/formatting/types";
+export { FormattedValue } from "@/utils/formatting/types";
 export namespace Components {
     interface ProteanButton {
         "a11yLabel": string;
         "disabled": boolean;
+        "fullWidth": boolean;
         "type": string;
         "variant": string;
     }
@@ -29,8 +31,8 @@ export namespace Components {
         "use": string;
     }
     interface ProteanInput {
+        "a11yExpanded": boolean | undefined;
         "a11yLabel": string;
-        "ariaExpanded": boolean | undefined;
         "ariaHasPopup": string;
         "ariaRole": string;
         "disabled": boolean;
@@ -84,6 +86,26 @@ export namespace Components {
         "selected": boolean;
         "value": string;
     }
+}
+export interface ProteanCheckboxCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLProteanCheckboxElement;
+}
+export interface ProteanClickElsewhereCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLProteanClickElsewhereElement;
+}
+export interface ProteanInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLProteanInputElement;
+}
+export interface ProteanSelectCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLProteanSelectElement;
+}
+export interface ProteanTabContainerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLProteanTabContainerElement;
 }
 declare global {
     interface HTMLProteanButtonElement extends Components.ProteanButton, HTMLStencilElement {
@@ -170,6 +192,7 @@ declare namespace LocalJSX {
     interface ProteanButton {
         "a11yLabel"?: string;
         "disabled"?: boolean;
+        "fullWidth"?: boolean;
         "type"?: string;
         "variant"?: string;
     }
@@ -180,19 +203,19 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "indeterminate"?: boolean;
         "label"?: string;
-        "onChange"?: (event: CustomEvent<any>) => void;
+        "onChange"?: (event: ProteanCheckboxCustomEvent<any>) => void;
         "variant"?: string;
     }
     interface ProteanClickElsewhere {
-        "onChange"?: (event: CustomEvent<any>) => void;
+        "onChange"?: (event: ProteanClickElsewhereCustomEvent<any>) => void;
     }
     interface ProteanIcon {
         "type"?: string;
         "use"?: string;
     }
     interface ProteanInput {
+        "a11yExpanded"?: boolean | undefined;
         "a11yLabel"?: string;
-        "ariaExpanded"?: boolean | undefined;
         "ariaHasPopup"?: string;
         "ariaRole"?: string;
         "disabled"?: boolean;
@@ -201,8 +224,8 @@ declare namespace LocalJSX {
         "hints"?: string[];
         "label"?: string;
         "maxlength"?: number;
-        "onChange"?: (event: CustomEvent<FormattedValue>) => void;
-        "onInput"?: (event: CustomEvent<FormattedValue>) => void;
+        "onChange"?: (event: ProteanInputCustomEvent<FormattedValue>) => void;
+        "onInput"?: (event: ProteanInputCustomEvent<FormattedValue>) => void;
         "optional"?: boolean;
         "readonly"?: boolean;
         "suppressMessages"?: boolean;
@@ -232,14 +255,14 @@ declare namespace LocalJSX {
         "errors"?: string[];
         "label"?: string;
         "multiple"?: boolean;
-        "onChange"?: (event: CustomEvent<any>) => void;
+        "onChange"?: (event: ProteanSelectCustomEvent<any>) => void;
         "optional"?: boolean;
         "selectedOptions"?: string[];
         "value"?: string;
     }
     interface ProteanTabContainer {
         "name"?: string;
-        "onChange"?: (event: CustomEvent<any>) => void;
+        "onChange"?: (event: ProteanTabContainerCustomEvent<any>) => void;
         "value"?: string;
     }
     interface ProteanTabPane {

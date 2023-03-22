@@ -8,10 +8,10 @@
     --brand-color-2: #7209b7;
     --brand-color-3: #ff5f40;
 
-    --action-color: #c7b5fb;
-    --action-contrast-color: #000000;
-    --action-hover-color: #7b57e4;
-    --action-hover-contrast-color: #fff;
+    --action-color: #6e45e4;
+    --action-contrast-color: #ffffff;
+    --action-hover-color: #c7b5fb;
+    --action-hover-contrast-color: #000000;
 
     --link-color: inherit;
     --link-hover-color: var(--link-color);
@@ -20,7 +20,7 @@
     --touch-zone-size: 42px;
     --disabled-opacity: 0.4;
 
-    --code-background-color: #393939;
+    --code-background-color: #2a2a2a;
 
     --protean-status-info: #0965b7; /* 5.9 #fff, 5.75 #fc, 2.94 #1a, 3.55 #00 */
     --protean-status-info-contrast: #ffffff;
@@ -50,7 +50,7 @@
     --protean-button-icon-size: var(--touch-zone-size);
     --protean-button-icon-background-color: transparent;
     --protean-button-icon-stroke-color: currentColor;
-    --protean-button-icon-hover-background-color: rgba(198, 181, 251, 0.4);
+    --protean-button-icon-hover-background-color: rgba(110, 69, 228, 0.4);
     --protean-button-icon-hover-stroke-color: currentColor;
     --protean-button-disabled-opacity: var(--disabled-opacity);
 
@@ -89,7 +89,7 @@
 
     --protean-checkbox-margin: 1rem;
     --protean-checkbox-disabled-opacity: var(--disabled-opacity);
-    --protean-checkbox-outline-color: var(--action-color);
+    --protean-checkbox-outline-color: #aaaaaa;
     --protean-checkbox-checked-outer-color: var(--action-color);
     --protean-checkbox-checked-inner-color: var(--action-contrast-color);
     --protean-checkbox-toggle-path-color: #535353;
@@ -102,6 +102,7 @@
         --action-color: var(--brand-color-2);
         --action-contrast-color: #ffffff;
         --action-hover-color: #5a0d8d;
+        --action-hover-contrast-color: #ffffff;
 
         --link-underline-color: var(--brand-color-2);
 
@@ -122,5 +123,7 @@
 
         --protean-tab-container-separator-color: #cdcdcd;
         --protean-tab-container-hover-background-color: #efefef;
+
+        --protean-checkbox-outline-color: var(--action-color);
     }
 }

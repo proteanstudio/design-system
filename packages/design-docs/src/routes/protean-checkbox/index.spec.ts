@@ -5,7 +5,6 @@ import ProteanCheckboxRoute from './index.vue';
 
 const mountOptions = {
     global: {
-        stubs: ['code-snippet', 'protean-checkbox'],
         directives: {
             prop: vProp,
         },
@@ -14,7 +13,18 @@ const mountOptions = {
 
 describe('Protean Checkbox Route', () => {
     it('renders', () => {
-        const wrapper = shallowMount(ProteanCheckboxRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanCheckboxRoute, {
+            global: {
+                stubs: {
+                    CodeSnippet: {
+                        template: '<div><slot /></div>',
+                    },
+                },
+                directives: {
+                    prop: vProp,
+                },
+            },
+        });
 
         expect(wrapper.find('h1').text()).toEqual('Checkbox');
 
@@ -36,7 +46,7 @@ describe('Protean Checkbox Route', () => {
     });
 
     it('toggles demo checkbox checked state on change', async () => {
-        const wrapper = shallowMount(ProteanCheckboxRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanCheckboxRoute, mountOptions);
 
         const demoCheckbox = wrapper.find('.overview-demo-element');
         let demoCheckboxElement = demoCheckbox.element as HTMLInputElement;
@@ -66,7 +76,7 @@ describe('Protean Checkbox Route', () => {
     });
 
     it('updates checkbox variant on toggle change', async () => {
-        const wrapper = shallowMount(ProteanCheckboxRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanCheckboxRoute, mountOptions);
 
         let toggleToggleWrapper = wrapper.find('.demo-toggle-toggle');
         let toggleToggleElement =
@@ -117,7 +127,7 @@ describe('Protean Checkbox Route', () => {
     });
 
     it('updates checkbox disabled state on toggle change', async () => {
-        const wrapper = shallowMount(ProteanCheckboxRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanCheckboxRoute, mountOptions);
 
         const toggleDisabledWrapper = wrapper.find('.demo-toggle-disabled');
         let toggleDisabledElement =
@@ -152,7 +162,7 @@ describe('Protean Checkbox Route', () => {
     });
 
     it('updates checkbox alignment on toggle change', async () => {
-        const wrapper = shallowMount(ProteanCheckboxRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanCheckboxRoute, mountOptions);
 
         const toggleAlignmentWrapper = wrapper.find('.demo-toggle-alignment');
         let toggleAlignmentElement =
@@ -187,7 +197,7 @@ describe('Protean Checkbox Route', () => {
     });
 
     it('updates indeterminate state on toggle change', async () => {
-        const wrapper = shallowMount(ProteanCheckboxRoute, mountOptions);
+        const wrapper = shallowMount<any>(ProteanCheckboxRoute, mountOptions);
 
         let demoCheckbox = wrapper.find('.overview-demo-element');
         let indeterminateToggleWrapper = wrapper.find(

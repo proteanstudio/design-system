@@ -55,7 +55,7 @@ describe('protean-select', () => {
         expect(proteanInput.suppressMessages).toEqual(true);
         expect(proteanInput.a11yLabel).toEqual(null);
         expect(proteanInput.ariaHasPopup).toEqual('listbox');
-        expect(proteanInput.ariaExpanded).toEqual(false);
+        expect(proteanInput.a11yExpanded).toEqual(false);
 
         const chevronIcon =
             root.shadowRoot.querySelector<HTMLProteanIconElement>(
@@ -107,7 +107,7 @@ describe('protean-select', () => {
         expect(proteanInput.disabled).toEqual(false);
         expect(proteanInput.value).toEqual(rootInstance.displayValue);
         expect(rootInstance.dropdownOpen).toEqual(false);
-        expect(proteanInput.ariaExpanded).toEqual(false);
+        expect(proteanInput.a11yExpanded).toEqual(false);
         expect(proteanInput.a11yLabel).toEqual(null);
 
         root.label = null;
@@ -123,7 +123,7 @@ describe('protean-select', () => {
         expect(proteanInput.optional).toEqual(false);
         expect(proteanInput.errors).toEqual(['error 1']);
         expect(proteanInput.disabled).toEqual(true);
-        expect(proteanInput.ariaExpanded).toEqual(true);
+        expect(proteanInput.a11yExpanded).toEqual(true);
     });
 
     it('passes certain properties to listbox', async () => {

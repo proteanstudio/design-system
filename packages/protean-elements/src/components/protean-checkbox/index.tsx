@@ -125,10 +125,10 @@ export class ProteanCheckbox {
             >
                 <rect
                     class="checkbox-outline"
-                    x="1"
-                    y="1"
-                    width="22"
-                    height="22"
+                    x="1.5"
+                    y="1.5"
+                    width="21"
+                    height="21"
                     rx="2"
                 ></rect>
                 {this.renderStandardFill()}

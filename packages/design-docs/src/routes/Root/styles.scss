@@ -20,6 +20,14 @@
     background-color: var(--body-background-color);
     z-index: 1;
 
+    .home-link {
+        display: block;
+        max-width: 242px;
+        flex: 0 1 242px;
+        padding-right: 42px;
+        margin: 0 auto;
+    }
+
     @include breakpoint(m, min) {
         display: none;
     }
@@ -27,14 +35,6 @@
     @media print {
         display: none;
     }
-}
-
-.home-link {
-    display: block;
-    max-width: 242px;
-    flex: 0 1 242px;
-    padding-right: 42px;
-    margin: 0 auto;
 }
 
 main {

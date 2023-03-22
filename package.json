@@ -6,10 +6,20 @@
     "author": "Protean Studio <admin@protean.studio>",
     "license": "MIT",
     "private": true,
-    "devDependencies": {
-        "yarn": "^1.22.10"
-    },
     "workspaces": [
         "packages/*"
-    ]
+    ],
+    "scripts": {
+        "format": "yarn workspaces foreach -p run format",
+        "lint": "yarn workspaces foreach -p run lint",
+        "test": "yarn workspaces foreach -p run test --silent",
+        "build": "yarn workspaces foreach run build",
+        "postinstall": "husky install"
+    },
+    "packageManager": "yarn@3.5.0",
+    "devDependencies": {
+        "@commitlint/cli": "^17.4.4",
+        "@commitlint/config-conventional": "^17.4.4",
+        "husky": "^8.0.3"
+    }
 }

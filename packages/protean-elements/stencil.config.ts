@@ -6,16 +6,20 @@ export const config: Config = {
         {
           type: 'dist',
           esmLoaderPath: '../loader',
+          empty: true,
           polyfills: false,
           collectionDir: null
         },
         {
             type: 'www',
+            polyfills: false,
+            empty: true,
             serviceWorker: null, // disable service workers
         },
     ],
     devServer: {
         port: 3333,
+        openBrowser: false,
     },
     hydratedFlag: {
         selector: 'attribute',

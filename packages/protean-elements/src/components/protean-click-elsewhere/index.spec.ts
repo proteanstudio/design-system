@@ -130,6 +130,7 @@ describe('protean-click-elsewhere', () => {
         expect(rootInstance.shadowEventTarget(event)).toEqual(button);
 
         const p = root.querySelector('p');
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (event.target as any) = p;
         event.composedPath = () => [];
 

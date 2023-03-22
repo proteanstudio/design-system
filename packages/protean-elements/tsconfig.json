@@ -4,10 +4,10 @@
         "allowUnreachableCode": false,
         "declaration": false,
         "experimentalDecorators": true,
-        "lib": ["dom", "ESNext"],
+        "lib": ["dom", "esnext"],
         "moduleResolution": "node",
         "module": "esnext",
-        "target": "esNext",
+        "target": "es2021",
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "jsx": "react",
@@ -16,6 +16,7 @@
         "paths": {
             "@/*": ["src/*"]
         },
+        "skipLibCheck": true
     },
     "include": ["src"],
     "exclude": ["node_modules"]
