@@ -1,6 +1,6 @@
 {
   "name": "protean-elements",
-  "version": "0.3.0",
+  "version": "0.4.1",
   "description": "Protean Studio Elements",
   "main": "./dist/protean-elements/protean-elements.esm.js",
   "module": "./dist/protean-elements/protean-elements.esm.js",
@@ -36,9 +36,5 @@
     "prettier": "^2.8.3",
     "puppeteer": "^19.6.3",
     "typescript": "^4.9.5"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
   }
 }
