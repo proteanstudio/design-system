@@ -108,7 +108,7 @@ watch(
     <code ref="codeElement" class="parsed-snippet" :class="language">
         <slot />
     </code>
-    <div class="copy-container" v-if="canCopy">
+    <div v-if="canCopy" class="copy-container">
         <code v-show="showCopyConfirmation" class="copy-confirmation">Copied to clipboard</code>
         <protean-button class="copy-snippet" a11y-label="Copy code snippet" variant="icon" @click="copySnippet">
             <protean-icon type="clipboard" />

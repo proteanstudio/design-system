@@ -43,16 +43,18 @@ const demoLevel = computed<string>(() => {
             >
                 <protean-option
                     v-for="type in demoTypes"
+                    :key="type"
                     :label="type"
                     :value="type"
-                    >{{ type }}</protean-option
                 >
+                    {{ type }}
+                </protean-option>
             </protean-select>
             <protean-checkbox
+                :checked.prop="demoIsStatus"
                 class="demo-toggle-level"
                 label="Show as status message"
                 variant="toggle"
-                v-prop:checked="demoIsStatus"
                 @change="demoIsStatus = $event.detail.checked"
             ></protean-checkbox>
         </div>

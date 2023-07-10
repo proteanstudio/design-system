@@ -75,12 +75,12 @@ watch(route, () => {
 </script>
 <template>
     <nav
-        class="secondary-nav"
         v-if="navItems.length > 0"
+        class="secondary-nav"
         aria-label="In-page navigation"
     >
         <ul>
-            <li v-for="item in navItems">
+            <li v-for="item in navItems" :key="item.name">
                 <a
                     href="javascript:void(0)"
                     class="secondary-nav-item"

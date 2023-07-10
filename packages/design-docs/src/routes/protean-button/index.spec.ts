@@ -1,4 +1,3 @@
-import vProp from '@/directives/v-prop';
 import { shallowMount } from '@vue/test-utils';
 import ProteanButtonRoute from './index.vue';
 
@@ -9,15 +8,12 @@ const mountOptions = {
                 template: '<div><slot /></div>',
             },
         },
-        directives: {
-            prop: vProp,
-        },
     },
 };
 
 describe('Protean Button Route', () => {
     it('renders', () => {
-        const wrapper = shallowMount<any>(ProteanButtonRoute, mountOptions);
+        const wrapper = shallowMount(ProteanButtonRoute, mountOptions);
 
         expect(wrapper.find('h1').text()).toEqual('Button');
 
@@ -34,7 +30,7 @@ describe('Protean Button Route', () => {
     });
 
     it('updates button disabled state on toggle change', async () => {
-        const wrapper = shallowMount<any>(ProteanButtonRoute, mountOptions);
+        const wrapper = shallowMount(ProteanButtonRoute, mountOptions);
 
         const toggleWrapper = wrapper.find('.demo-toggle-disabled');
 
@@ -61,13 +57,7 @@ describe('Protean Button Route', () => {
     });
 
     it('updates button variant on select change', async () => {
-        const wrapper = shallowMount<any>(ProteanButtonRoute, {
-            global: {
-                directives: {
-                    prop: vProp,
-                },
-            },
-        });
+        const wrapper = shallowMount(ProteanButtonRoute);
 
         let selectWrapper = wrapper.find('.demo-select-variant');
         let demoButton = wrapper.find('.overview-demo-element')
@@ -78,8 +68,8 @@ describe('Protean Button Route', () => {
         expect(demoButton.getAttribute('variant')).toEqual('primary');
         expect(selectWrapper.attributes('value')).toEqual('primary');
         /* eslint-disable */
-        expect((codeSnippet.vm as any).substitutions[0]).toEqual('primary');
-        expect((codeSnippet.vm as any).substitutions[2]).toEqual('');
+        expect(codeSnippet.vm.substitutions[0]).toEqual('primary');
+        expect(codeSnippet.vm.substitutions[2]).toEqual('');
         /* eslint-enable */
         expect(wrapper.vm.demoAriaLabel).toEqual(undefined);
         expect(demoButton.a11yLabel).toEqual(undefined);
@@ -99,9 +89,9 @@ describe('Protean Button Route', () => {
         expect(demoButton.getAttribute('variant')).toEqual('icon');
         expect(selectWrapper.attributes('value')).toEqual('icon');
         /* eslint-disable */
-        expect((codeSnippet.vm as any).substitutions[0]).toEqual('icon');
-        expect((codeSnippet.vm as any).substitutions[2]).toEqual('');
-        expect((codeSnippet.vm as any).substitutions[3]).toEqual(
+        expect(codeSnippet.vm.substitutions[0]).toEqual('icon');
+        expect(codeSnippet.vm.substitutions[2]).toEqual('');
+        expect(codeSnippet.vm.substitutions[3]).toEqual(
             '\na11y-label="Button aria-label"',
         );
         /* eslint-enable */
@@ -121,8 +111,8 @@ describe('Protean Button Route', () => {
         expect(wrapper.vm.demoVariant).toEqual('secondary');
 
         /* eslint-disable */
-        expect((codeSnippet.vm as any).substitutions[0]).toEqual('secondary');
-        expect((codeSnippet.vm as any).substitutions[2]).toEqual('');
+        expect(codeSnippet.vm.substitutions[0]).toEqual('secondary');
+        expect(codeSnippet.vm.substitutions[2]).toEqual('');
         /* eslint-enable */
         expect(wrapper.vm.demoAriaLabel).toEqual(undefined);
     });

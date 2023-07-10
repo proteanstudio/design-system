@@ -47,9 +47,9 @@ function toggleLightMode(event: CustomEvent): void {
 <template>
     <header class="mobile-banner">
         <protean-button
+            :a11y-label="'Toggle Menu'"
             variant="icon"
             class="off-canvas-toggle"
-            v-prop:a11yLabel="'Toggle Menu'"
             @click="showOffCanvas = !showOffCanvas"
         >
             <protean-icon type="menu"></protean-icon>
@@ -63,10 +63,10 @@ function toggleLightMode(event: CustomEvent): void {
         </router-link>
     </header>
     <MainNav
-        :showOffCanvas="showOffCanvas"
-        :lightModeEnabled="lightModeEnabled"
-        @hideOffCanvas="showOffCanvas = false"
-        @toggleLightMode="toggleLightMode"
+        :show-off-canvas="showOffCanvas"
+        :light-mode-enabled="lightModeEnabled"
+        @hide-off-canvas="showOffCanvas = false"
+        @toggle-light-mode="toggleLightMode"
     />
     <main :class="routeClassBinding" tabindex="-1">
         <div>

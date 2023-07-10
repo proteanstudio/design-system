@@ -18,7 +18,7 @@ const demoContent = computed<string>(() => {
 const demoAriaLabel = computed<string | undefined>(() => {
     if (demoVariant.value === 'icon') return 'Button aria-label';
 
-    return;
+    return undefined;
 });
 </script>
 <template>
@@ -31,15 +31,15 @@ const demoAriaLabel = computed<string | undefined>(() => {
         <h2 data-in-page-anchor="overview">Overview</h2>
         <div class="overview-demo">
             <protean-button
+                :full-width="demoFullWidth"
                 class="overview-demo-element"
                 :variant="demoVariant"
                 :disabled="demoDisabled"
-                v-prop:fullWidth="demoFullWidth"
                 :a11y-label="demoAriaLabel"
             >
                 <protean-icon
-                    class="demo-button-icon"
                     v-if="demoVariant === 'icon'"
+                    class="demo-button-icon"
                     type="chevron-down"
                 ></protean-icon>
                 <span v-else>Button text</span>
@@ -47,24 +47,24 @@ const demoAriaLabel = computed<string | undefined>(() => {
         </div>
         <div class="overview-demo-controls">
             <protean-checkbox
+                :checked.prop="demoDisabled"
                 class="demo-toggle-disabled"
                 label="Show as disabled"
                 variant="toggle"
-                v-prop:checked="demoDisabled"
                 @change="demoDisabled = $event.detail.checked"
             ></protean-checkbox>
             <protean-checkbox
+                :checked.prop="demoFullWidth"
                 class="demo-toggle-width"
                 label="Show as full width"
                 variant="toggle"
-                v-prop:checked="demoFullWidth"
                 @change="demoFullWidth = $event.detail.checked"
             ></protean-checkbox>
             <protean-select
                 class="demo-select-variant"
-                @change="demoVariant = $event.detail.value"
                 :value="demoVariant"
                 label="Button variant"
+                @change="demoVariant = $event.detail.value"
             >
                 <protean-option value="primary" label="primary">
                     primary

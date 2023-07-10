@@ -1,4 +1,3 @@
-import vProp from '@/directives/v-prop';
 import { Dict } from '@/types';
 import { shallowMount } from '@vue/test-utils';
 import { ref } from 'vue';
@@ -31,9 +30,6 @@ describe('main-nav', () => {
 
         const wrapper = shallowMount(MainNav, {
             global: {
-                directives: {
-                    prop: vProp,
-                },
                 stubs: {
                     'router-link': {
                         template: '<a><slot /></a>',
@@ -93,11 +89,8 @@ describe('main-nav', () => {
             },
         ];
 
-        const wrapper = shallowMount<any>(MainNav, {
+        const wrapper = shallowMount(MainNav, {
             global: {
-                directives: {
-                    prop: vProp,
-                },
                 stubs: {
                     'router-link': {
                         template: '<a><slot /></a>',
@@ -175,9 +168,6 @@ describe('main-nav', () => {
                         template: '<a><slot /></a>',
                     },
                 },
-                directives: {
-                    prop: vProp,
-                },
             },
         });
 
@@ -221,9 +211,6 @@ describe('main-nav', () => {
                         template: '<a><slot /></a>',
                     },
                 },
-                directives: {
-                    prop: vProp,
-                },
             },
         });
 
@@ -241,9 +228,6 @@ describe('main-nav', () => {
         const wrapper = shallowMount(MainNav, {
             global: {
                 stubs: ['router-link'],
-                directives: {
-                    prop: vProp,
-                },
             },
         });
 

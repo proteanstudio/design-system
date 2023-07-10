@@ -1,4 +1,3 @@
-import vProp from '@/directives/v-prop';
 import { shallowMount } from '@vue/test-utils';
 import { nextTick } from 'vue';
 import ProteanInputRoute from './index.vue';
@@ -10,15 +9,12 @@ const mountOptions = {
                 template: '<div><slot /></div>',
             },
         },
-        directives: {
-            prop: vProp,
-        },
     },
 };
 
 describe('Protean Input Route', () => {
     it('renders', () => {
-        const wrapper = shallowMount<any>(ProteanInputRoute, mountOptions);
+        const wrapper = shallowMount(ProteanInputRoute, mountOptions);
 
         expect(wrapper.find('h1').text()).toEqual('Input field');
         expect(Array.isArray(wrapper.vm.demoTypes)).toBe(true);
@@ -41,7 +37,7 @@ describe('Protean Input Route', () => {
     });
 
     it('gets correct formats', async () => {
-        const wrapper = shallowMount<any>(ProteanInputRoute, mountOptions);
+        const wrapper = shallowMount(ProteanInputRoute, mountOptions);
 
         expect(wrapper.vm.demoType).toEqual('text');
         expect(wrapper.vm.demoFormats).toEqual(undefined);
@@ -67,7 +63,7 @@ describe('Protean Input Route', () => {
     });
 
     it('gets correct errors', () => {
-        const wrapper = shallowMount<any>(ProteanInputRoute, mountOptions);
+        const wrapper = shallowMount(ProteanInputRoute, mountOptions);
 
         expect(wrapper.vm.demoErrorsList).toHaveLength(1);
         expect(wrapper.vm.demoShowErrors).toEqual(false);
@@ -79,7 +75,7 @@ describe('Protean Input Route', () => {
     });
 
     it('spams errors on demo input input event', async () => {
-        const wrapper = shallowMount<any>(ProteanInputRoute, mountOptions);
+        const wrapper = shallowMount(ProteanInputRoute, mountOptions);
 
         const demoInput = wrapper.find('.overview-demo-element');
 
@@ -107,7 +103,7 @@ describe('Protean Input Route', () => {
     });
 
     it('updates demoShowErrors on toggle change', async () => {
-        const wrapper = shallowMount<any>(ProteanInputRoute, mountOptions);
+        const wrapper = shallowMount(ProteanInputRoute, mountOptions);
 
         const showErrorsToggleWrapper = wrapper.find('.demo-toggle-errors');
 
@@ -123,7 +119,7 @@ describe('Protean Input Route', () => {
     });
 
     it('updates demoSuppressMessages on toggle change', async () => {
-        const wrapper = shallowMount<any>(ProteanInputRoute, mountOptions);
+        const wrapper = shallowMount(ProteanInputRoute, mountOptions);
 
         const suppressMessagesToggleWrapper = wrapper.find(
             '.demo-toggle-messages',
@@ -141,7 +137,7 @@ describe('Protean Input Route', () => {
     });
 
     it('updates demoOptional on toggle change', async () => {
-        const wrapper = shallowMount<any>(ProteanInputRoute, mountOptions);
+        const wrapper = shallowMount(ProteanInputRoute, mountOptions);
 
         const optionalToggleWrapper = wrapper.find('.demo-toggle-optional');
 
@@ -157,7 +153,7 @@ describe('Protean Input Route', () => {
     });
 
     it('updates demoOptional on toggle change', async () => {
-        const wrapper = shallowMount<any>(ProteanInputRoute, mountOptions);
+        const wrapper = shallowMount(ProteanInputRoute, mountOptions);
 
         const optionalToggleWrapper = wrapper.find('.demo-toggle-optional');
 
@@ -173,7 +169,7 @@ describe('Protean Input Route', () => {
     });
 
     it('updates demoDisabled on toggle change', async () => {
-        const wrapper = shallowMount<any>(ProteanInputRoute, mountOptions);
+        const wrapper = shallowMount(ProteanInputRoute, mountOptions);
 
         const disabledToggleWrapper = wrapper.find('.demo-toggle-disabled');
 
@@ -189,7 +185,7 @@ describe('Protean Input Route', () => {
     });
 
     it('updates demoReadonly on toggle change', async () => {
-        const wrapper = shallowMount<any>(ProteanInputRoute, mountOptions);
+        const wrapper = shallowMount(ProteanInputRoute, mountOptions);
 
         const readonlyToggleWrapper = wrapper.find('.demo-toggle-readonly');
 
@@ -205,7 +201,7 @@ describe('Protean Input Route', () => {
     });
 
     it('updates demoMaxlength on input change', async () => {
-        const wrapper = shallowMount<any>(ProteanInputRoute, mountOptions);
+        const wrapper = shallowMount(ProteanInputRoute, mountOptions);
 
         const maxlengthInputWrapper = wrapper.find('.demo-input-maxlength');
 
@@ -221,7 +217,7 @@ describe('Protean Input Route', () => {
     });
 
     it('updates demoType on select change', async () => {
-        const wrapper = shallowMount<any>(ProteanInputRoute, mountOptions);
+        const wrapper = shallowMount(ProteanInputRoute, mountOptions);
 
         const typeSelectWrapper = wrapper.find('.demo-select-type');
 
@@ -237,7 +233,7 @@ describe('Protean Input Route', () => {
     });
 
     it('updates demoFormat on select change', async () => {
-        const wrapper = shallowMount<any>(ProteanInputRoute, mountOptions);
+        const wrapper = shallowMount(ProteanInputRoute, mountOptions);
 
         wrapper.vm.demoType = 'date';
         await nextTick();
@@ -257,18 +253,12 @@ describe('Protean Input Route', () => {
     });
 
     it('builds correct code snippet substitutions', async () => {
-        const wrapper = shallowMount<any>(ProteanInputRoute, {
-            global: {
-                directives: {
-                    prop: vProp,
-                },
-            },
-        });
+        const wrapper = shallowMount(ProteanInputRoute);
 
         /* eslint-disable */
-        let substitutions: string[] = (
-            wrapper.findComponent({ name: 'CodeSnippet' }).vm as any
-        ).substitutions;
+        let substitutions: string[] = wrapper.findComponent({
+            name: 'CodeSnippet',
+        }).vm.substitutions;
         /* eslint-enable */
 
         expect(wrapper.vm.demoType).toEqual('text');
@@ -303,9 +293,9 @@ describe('Protean Input Route', () => {
         await nextTick();
 
         /* eslint-disable */
-        substitutions = (
-            wrapper.findComponent({ name: 'CodeSnippet' }).vm as any
-        ).substitutions;
+        substitutions = wrapper.findComponent({
+            name: 'CodeSnippet',
+        }).vm.substitutions;
         /* eslint-enable */
 
         expect(substitutions[0]).toEqual('label="Field label" \n');

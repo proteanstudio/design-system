@@ -1,5 +1,4 @@
-import vProp from '@/directives/v-prop';
-import { nextTick } from '@vue/runtime-dom';
+import { nextTick } from 'vue';
 import { shallowMount } from '@vue/test-utils';
 import ProteanMessageRoute from './index.vue';
 
@@ -10,15 +9,12 @@ const mountOptions = {
                 template: '<div><slot /></div>',
             },
         },
-        directives: {
-            prop: vProp,
-        },
     },
 };
 
 describe('Protean Message Route', () => {
     it('renders', () => {
-        const wrapper = shallowMount<any>(ProteanMessageRoute, mountOptions);
+        const wrapper = shallowMount(ProteanMessageRoute, mountOptions);
 
         expect(wrapper.find('h1').text()).toEqual('Message');
         expect(wrapper.vm.demoType).toEqual('info');
@@ -33,7 +29,7 @@ describe('Protean Message Route', () => {
     });
 
     it('gets correct level', () => {
-        const wrapper = shallowMount<any>(ProteanMessageRoute, mountOptions);
+        const wrapper = shallowMount(ProteanMessageRoute, mountOptions);
 
         expect(wrapper.vm.demoIsStatus).toEqual(false);
         expect(wrapper.vm.demoLevel).toEqual('alert');
@@ -44,7 +40,7 @@ describe('Protean Message Route', () => {
     });
 
     it('updates demoType on select change', async () => {
-        const wrapper = shallowMount<any>(ProteanMessageRoute, mountOptions);
+        const wrapper = shallowMount(ProteanMessageRoute, mountOptions);
 
         const typeSelectWrapper = wrapper.find('.demo-select-type');
 
@@ -60,7 +56,7 @@ describe('Protean Message Route', () => {
     });
 
     it('updates demoIsStatus on toggle change', async () => {
-        const wrapper = shallowMount<any>(ProteanMessageRoute, mountOptions);
+        const wrapper = shallowMount(ProteanMessageRoute, mountOptions);
 
         const levelToggleWrapper = wrapper.find('.demo-toggle-level');
 
@@ -76,18 +72,12 @@ describe('Protean Message Route', () => {
     });
 
     it('correctly binds code snippet substitutions', async () => {
-        const wrapper = shallowMount<any>(ProteanMessageRoute, {
-            global: {
-                directives: {
-                    prop: vProp,
-                },
-            },
-        });
+        const wrapper = shallowMount(ProteanMessageRoute);
 
         /* eslint-disable */
-        let substitutions: string[] = (
-            wrapper.findComponent({ name: 'CodeSnippet' }).vm as any
-        ).substitutions;
+        let substitutions: string[] = wrapper.findComponent({
+            name: 'CodeSnippet',
+        }).vm.substitutions;
         /* eslint-enable */
 
         expect(substitutions).toEqual(['info', 'alert']);
@@ -98,9 +88,8 @@ describe('Protean Message Route', () => {
         await nextTick();
 
         /* eslint-disable */
-        substitutions = (
-            wrapper.findComponent({ name: 'CodeSnippet' }).vm as any
-        ).substitutions;
+        substitutions = wrapper.findComponent({ name: 'CodeSnippet' }).vm
+            .substitutions;
         /* eslint-enable */
 
         expect(substitutions).toEqual(['error', 'status']);
