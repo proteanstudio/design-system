@@ -5773,6 +5773,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prettier@npm:3.0.0":
+  version: 3.0.0
+  resolution: "prettier@npm:3.0.0"
+  bin:
+    prettier: bin/prettier.cjs
+  checksum: 6a832876a1552dc58330d2467874e5a0b46b9ccbfc5d3531eb69d15684743e7f83dc9fbd202db6270446deba9c82b79d24383d09924c462b457136a759425e33
+  languageName: node
+  linkType: hard
+
 "prettier@npm:^2.8.3":
   version: 2.8.3
   resolution: "prettier@npm:2.8.3"
@@ -5849,8 +5858,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "protean-styles@workspace:packages/protean-styles"
   dependencies:
-    prettier: ^2.8.3
-    sass: ^1.57.1
+    prettier: 3.0.0
+    sass: ^1.63.6
   languageName: unknown
   linkType: soft
 
@@ -6184,7 +6193,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.57.1, sass@npm:^1.58.0":
+"sass@npm:^1.58.0":
   version: 1.58.0
   resolution: "sass@npm:1.58.0"
   dependencies:
@@ -6194,6 +6203,19 @@ __metadata:
   bin:
     sass: sass.js
   checksum: a7219634881d2de6441fb619787fb1a02e3fa0333fb715be26aa335ba49d6bdb4f1105d9df70a80a67200893022b08346745783dc49046095d94fc6e044492d6
+  languageName: node
+  linkType: hard
+
+"sass@npm:^1.63.6":
+  version: 1.63.6
+  resolution: "sass@npm:1.63.6"
+  dependencies:
+    chokidar: ">=3.0.0 <4.0.0"
+    immutable: ^4.0.0
+    source-map-js: ">=0.6.2 <2.0.0"
+  bin:
+    sass: sass.js
+  checksum: 3372319904658eeafaf78a09a6fcb3368a68e6d76fe3c43c2d009f4f72e475ab22b82ef483ef5c00fcda3ab00066846c0bd88c36b42771b855f6ab80c7eda541
   languageName: node
   linkType: hard
 
