@@ -1,7 +1,21 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { ProteanCheckbox } from '.';
+import fakeConsoleWarn from '@/test-helpers/mocks/consoleWarn';
 
 describe('protean-message', () => {
+    let teardowns: VoidFunction[] = [];
+
+    beforeEach(() => {
+        teardowns.push(fakeConsoleWarn());
+    });
+
+    afterEach(() => {
+        teardowns.forEach(fn => {
+            fn();
+        });
+        teardowns = [];
+    });
+
     it('renders', async () => {
         const { root, rootInstance } = await newSpecPage({
             components: [ProteanCheckbox],

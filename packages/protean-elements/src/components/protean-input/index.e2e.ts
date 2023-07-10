@@ -79,7 +79,7 @@ describe('protean-input', () => {
 
         expect(inputElement).toEqualAttribute('aria-label', 'aria-label text');
 
-        proteanInput.setProperty('label', 'a11yLabel text');
+        proteanInput.setProperty('label', 'label text');
         await waitForChanges();
 
         expect(inputElement).not.toHaveAttribute('aria-label');
