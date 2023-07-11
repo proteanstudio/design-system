@@ -70,7 +70,7 @@ function toggleLightMode(event: CustomEvent): void {
     />
     <main :class="routeClassBinding" tabindex="-1">
         <div>
-            <router-view />
+            <router-view></router-view>
         </div>
         <SecondaryNav />
     </main>
