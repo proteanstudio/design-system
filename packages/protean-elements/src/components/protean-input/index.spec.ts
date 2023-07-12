@@ -37,8 +37,22 @@ jest.mock('../../utils/formatting/generic', () => () => genericValue);
 import { ProteanInput, CursorData } from '.';
 import { FormattedValue } from '../../utils/formatting/types';
 import { newSpecPage } from '@stencil/core/testing';
+import fakeConsoleWarn from '@/test-helpers/mocks/consoleWarn';
 
 describe('protean-input', () => {
+    let teardowns: VoidFunction[] = [];
+
+    beforeEach(() => {
+        teardowns.push(fakeConsoleWarn());
+    });
+
+    afterEach(() => {
+        teardowns.forEach(fn => {
+            fn();
+        });
+        teardowns = [];
+    });
+
     it('builds static values', () => {
         const root = new ProteanInput();
 

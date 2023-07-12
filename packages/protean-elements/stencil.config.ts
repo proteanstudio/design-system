@@ -37,7 +37,6 @@ export const config: Config = {
         ],
         collectCoverageFrom: ['**/*.{ts,tsx}'],
         coverageDirectory: 'coverage',
-        browserDevtools: true,
         browserArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
         moduleNameMapper: {
             '@/(.*)': '<rootDir>/src/$1',

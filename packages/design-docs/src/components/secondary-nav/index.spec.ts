@@ -1,8 +1,9 @@
-import { nextTick } from '@vue/runtime-core';
+import { nextTick } from 'vue';
 import { shallowMount } from '@vue/test-utils';
 import SecondaryNav from './index.vue';
 import debounce from '@/utils/debounce';
 import { reactive } from 'vue';
+import { MockedFunction } from 'vitest';
 
 const route = reactive({
     fullPath: '',
@@ -23,11 +24,11 @@ describe('secondary-nav', () => {
     afterEach(() => {
         route.fullPath = '';
         route.name = '';
-        (debounce as any).mockReset();
+        (debounce as unknown as MockedFunction<VoidFunction>).mockReset();
     });
 
     it('does not render if no anchors present', () => {
-        const wrapper = shallowMount<any>(SecondaryNav);
+        const wrapper = shallowMount(SecondaryNav);
 
         expect(wrapper.find('nav').exists()).toBe(false);
         expect(wrapper.vm.navItems).toEqual([]);
@@ -41,7 +42,7 @@ describe('secondary-nav', () => {
                 <section data-in-page-anchor="baz" data-label="bam"></section>
             </main>
         `;
-        const wrapper = shallowMount<any>(SecondaryNav);
+        const wrapper = shallowMount(SecondaryNav);
 
         const anchors = wrapper.vm.getAnchors();
 
@@ -59,7 +60,7 @@ describe('secondary-nav', () => {
                 <section data-in-page-anchor="baz" data-label="bam"></section>
             </main>
         `;
-        const wrapper = shallowMount<any>(SecondaryNav);
+        const wrapper = shallowMount(SecondaryNav);
 
         route.fullPath = '/';
         route.name = 'foo';
@@ -97,7 +98,7 @@ describe('secondary-nav', () => {
                 <section data-in-page-anchor="baz">bam</section>
             </main>
         `;
-        const wrapper = shallowMount<any>(SecondaryNav);
+        const wrapper = shallowMount(SecondaryNav);
 
         wrapper.vm.setSecondaryNavItems();
 
@@ -131,7 +132,9 @@ describe('secondary-nav', () => {
         expect(addListenerSpy).toHaveBeenCalledTimes(1);
         expect(removeListenerSpy).toHaveBeenCalledTimes(0);
 
-        const args = (debounce as any).mock.calls[0];
+        const args: Array<unknown> = (
+            debounce as unknown as MockedFunction<VoidFunction>
+        ).mock.calls[0];
 
         expect(typeof args[0]).toEqual('function');
         expect(args[1]).toEqual(20);
@@ -149,7 +152,7 @@ describe('secondary-nav', () => {
             </main>
         `;
 
-        const wrapper = shallowMount<any>(SecondaryNav);
+        const wrapper = shallowMount(SecondaryNav);
 
         wrapper.vm.setSecondaryNavItems();
         await nextTick();
@@ -177,7 +180,7 @@ describe('secondary-nav', () => {
             </main>
         `;
 
-        const wrapper = shallowMount<any>(SecondaryNav);
+        const wrapper = shallowMount(SecondaryNav);
 
         wrapper.vm.setSecondaryNavItems();
         await nextTick();

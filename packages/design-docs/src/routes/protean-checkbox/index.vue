@@ -12,7 +12,7 @@ const demoIndeterminate = ref(false);
 const demoVariant = computed<string | undefined>(() => {
     if (demoIsToggle.value) return 'toggle';
 
-    return;
+    return undefined;
 });
 
 const demoAlignment = computed(() => {
@@ -30,10 +30,10 @@ const demoAlignment = computed(() => {
         <h2 data-in-page-anchor="overview">Overview</h2>
         <div class="overview-demo">
             <protean-checkbox
+                :checked.prop="demoChecked"
                 class="overview-demo-element"
                 label="Checkbox label"
                 :variant="demoVariant"
-                v-prop:checked="demoChecked"
                 :disabled="demoDisabled"
                 :alignment="demoAlignment"
                 :indeterminate="demoIndeterminate"
@@ -43,32 +43,32 @@ const demoAlignment = computed(() => {
         </div>
         <div class="overview-demo-controls">
             <protean-checkbox
+                :checked.prop="demoIsToggle"
                 class="demo-toggle-toggle"
                 label="Show as toggle"
                 variant="toggle"
-                v-prop:checked="demoIsToggle"
                 :disabled="demoIndeterminate"
                 @change="demoIsToggle = $event.detail.checked"
             ></protean-checkbox>
             <protean-checkbox
+                :checked.prop="demoDisabled"
                 class="demo-toggle-disabled"
                 label="Show as disabled"
                 variant="toggle"
-                v-prop:checked="demoDisabled"
                 @change="demoDisabled = $event.detail.checked"
             ></protean-checkbox>
             <protean-checkbox
+                :checked.prop="demoIsRightAligned"
                 class="demo-toggle-alignment"
                 label="Align to the right"
                 variant="toggle"
-                v-prop:checked="demoIsRightAligned"
                 @change="demoIsRightAligned = $event.detail.checked"
             ></protean-checkbox>
             <protean-checkbox
+                :checked.prop="demoIndeterminate"
                 class="demo-toggle-indeterminate"
                 label="Show as indeterminate"
                 variant="toggle"
-                v-prop:checked="demoIndeterminate"
                 :disabled="demoIsToggle"
                 @change="demoIndeterminate = $event.detail.checked"
             ></protean-checkbox>

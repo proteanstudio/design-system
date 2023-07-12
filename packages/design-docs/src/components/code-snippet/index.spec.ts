@@ -11,17 +11,17 @@ vi.mock('highlight.js/lib/core', () => {
 });
 
 import hljs from 'highlight.js/lib/core';
-import wait from '@/test-helpers/wait';
-import { nextTick } from '@vue/runtime-core';
+import { nextTick } from 'vue';
+import { MockedFunction } from 'vitest';
 
 describe('code-snippet', () => {
-    afterEach(function () {
-        (hljs.registerLanguage as any).mockReset();
-        (hljs.highlightElement as any).mockReset();
+    afterEach(() => {
+        (hljs.registerLanguage as MockedFunction<VoidFunction>).mockReset();
+        (hljs.highlightElement as MockedFunction<VoidFunction>).mockReset();
     });
 
     it('renders base properties and structure', () => {
-        const wrapper = shallowMount<any>(CodeSnippet, {
+        const wrapper = shallowMount(CodeSnippet, {
             global: {
                 stubs: ['protean-button', 'protean-icon'],
             },
@@ -46,7 +46,7 @@ describe('code-snippet', () => {
         const unformattedHTML = '&lt;h1&gt;Header text&lt;/h1&gt;';
         const formattedHTML = '<h1>Header text</h1>';
 
-        const wrapper = mount<any>(CodeSnippet, {
+        const wrapper = mount(CodeSnippet, {
             global: {
                 stubs: ['protean-button', 'protean-icon'],
             },
@@ -65,7 +65,7 @@ describe('code-snippet', () => {
     });
 
     it('correctly binds language', () => {
-        const wrapper = shallowMount<any>(CodeSnippet, {
+        const wrapper = shallowMount(CodeSnippet, {
             global: {
                 stubs: ['protean-button', 'protean-icon'],
             },
@@ -88,7 +88,7 @@ describe('code-snippet', () => {
         const formattedHTML =
             '<h1>Header 1 text</h1><p>Supporting content</p>--foo';
 
-        const wrapper = mount<any>(CodeSnippet, {
+        const wrapper = mount(CodeSnippet, {
             global: {
                 stubs: ['protean-button', 'protean-icon'],
             },
@@ -106,7 +106,7 @@ describe('code-snippet', () => {
     it('resets inner content when substitutions changed', async () => {
         const unformattedHTML = '&lt;h1&gt;Header {0} text&lt;/h1&gt;';
 
-        const wrapper = mount<any>(CodeSnippet, {
+        const wrapper = mount(CodeSnippet, {
             global: {
                 stubs: ['protean-button', 'protean-icon'],
             },
@@ -125,6 +125,7 @@ describe('code-snippet', () => {
     });
 
     it('copies snippet', async () => {
+        vi.useFakeTimers();
         const unformattedHTML = '&lt;h1&gt;Header text&lt;/h1&gt;';
         const formattedHTML = '<h1>Header text</h1>';
 
@@ -135,7 +136,7 @@ describe('code-snippet', () => {
         /* eslint-disable */
         (window.navigator as any).clipboard = { writeText: writeTextMock };
         /* eslint-enable */
-        const wrapper = mount<any>(CodeSnippet, {
+        const wrapper = mount(CodeSnippet, {
             global: {
                 stubs: ['protean-icon'],
             },
@@ -162,7 +163,8 @@ describe('code-snippet', () => {
 
         expect(copyConfirmation.isVisible()).toBe(true);
 
-        await wait(1500); //may need to abstract time
+        vi.advanceTimersByTime(1500); //may need to abstract time
+        await nextTick();
 
         expect(wrapper.vm.showCopyConfirmation).toEqual(false);
         expect(copyConfirmation.isVisible()).toBe(false);
@@ -170,6 +172,7 @@ describe('code-snippet', () => {
         /* eslint-disable */
         (window.navigator as any).clipboard = undefined;
         /* eslint-enable */
+        vi.useRealTimers();
     });
 
     it('parses and formats inner text for multiline html', async () => {
@@ -202,7 +205,7 @@ describe('code-snippet', () => {
   </ul>
 </protean-message>`;
 
-        const wrapper = shallowMount<any>(CodeSnippet, {
+        const wrapper = shallowMount(CodeSnippet, {
             global: {
                 stubs: ['protean-button', 'protean-icon'],
             },
