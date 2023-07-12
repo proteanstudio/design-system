@@ -1,16 +1,22 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { ProteanTabContainer } from '.';
 import fakeMutationObserver from '@/test-helpers/mocks/MutationObserver';
+import fakeConsoleWarn from '@/test-helpers/mocks/consoleWarn';
 import { ProteanTabPane } from '@/components/protean-tab-pane';
 
 describe('protean-tab-container', () => {
-    let teardown: VoidFunction;
-    beforeEach(function () {
-        teardown = fakeMutationObserver();
+    let teardowns: VoidFunction[] = [];
+
+    beforeEach(() => {
+        teardowns.push(fakeMutationObserver());
+        teardowns.push(fakeConsoleWarn());
     });
 
-    afterEach(function () {
-        teardown();
+    afterEach(() => {
+        teardowns.forEach(fn => {
+            fn();
+        });
+        teardowns = [];
     });
 
     it('renders tab controls with correct properties', async () => {

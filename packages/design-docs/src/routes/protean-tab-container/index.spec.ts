@@ -1,4 +1,3 @@
-import vProp from '@/directives/v-prop';
 import { shallowMount } from '@vue/test-utils';
 import ProteanTabsRoute from './index.vue';
 
@@ -9,15 +8,12 @@ const mountOptions = {
                 template: '<div><slot /></div>',
             },
         },
-        directives: {
-            prop: vProp,
-        },
     },
 };
 
 describe('Protean Tabs Route', () => {
     it('renders', () => {
-        const wrapper = shallowMount<any>(ProteanTabsRoute, mountOptions);
+        const wrapper = shallowMount(ProteanTabsRoute, mountOptions);
         expect(wrapper.find('h1').text()).toEqual('Tabs');
         const demoTabs = wrapper.find('protean-tab-container');
 
@@ -28,7 +24,7 @@ describe('Protean Tabs Route', () => {
     });
 
     it('updates demoValue on tab change', async () => {
-        const wrapper = shallowMount<any>(ProteanTabsRoute, mountOptions);
+        const wrapper = shallowMount(ProteanTabsRoute, mountOptions);
 
         let demoTabs = wrapper.find('protean-tab-container');
 

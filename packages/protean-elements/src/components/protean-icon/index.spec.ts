@@ -1,5 +1,6 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { ProteanIcon } from '.';
+import fakeConsoleWarn from '@/test-helpers/mocks/consoleWarn';
 
 describe('protean-icon', () => {
     it('renders', async () => {
@@ -44,10 +45,12 @@ describe('protean-icon', () => {
         );
     });
 
-    it('returns null icon when one not found in icon dict', async () => {
+    it('returns null icon when one not found in icon dict', () => {
+        const restoreConsoleWarn = fakeConsoleWarn();
         const rootInstance = new ProteanIcon();
 
         rootInstance.type = 'foo';
         expect(rootInstance.icon).toEqual(null);
+        restoreConsoleWarn();
     });
 });

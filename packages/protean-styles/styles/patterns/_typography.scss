@@ -80,7 +80,9 @@ a {
         left: 0;
         bottom: -3px;
         background-color: var(--link-underline-color);
-        transition: width 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+        transition:
+            width 0.2s ease-in-out,
+            font-weight 0.2s ease-in-out;
     }
 
     &.unstyled {

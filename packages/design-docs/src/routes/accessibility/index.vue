@@ -261,13 +261,22 @@
                 <li>
                     There are many ways to check contrast ratio. They are often
                     presented in a browser's developer tools and checkers can be
-                    found on many sites such as
+                    found on many sites such as our own
+                    <a
+                        href="https://contrast.tools/"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        contrast tools
+                    </a>
+                    and
                     <a
                         href="https://webaim.org/resources/contrastchecker/"
                         target="_blank"
                         rel="noreferrer"
-                        >WebAIM.</a
                     >
+                        WebAIM.
+                    </a>
                 </li>
             </ul>
         </section>

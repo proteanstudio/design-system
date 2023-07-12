@@ -153,7 +153,7 @@ function changeHandler(event: CustomEvent): void {
                 label="Select label"
                 :multiple="demoMultiple"
                 :value="demoValue"
-                :selectedOptions="demoSelectedOptions"
+                :selected-options="demoSelectedOptions"
                 :errors="demoErrors"
                 :optional="demoOptional"
                 :disabled="demoDisabled"
@@ -161,13 +161,15 @@ function changeHandler(event: CustomEvent): void {
             >
                 <protean-optgroup
                     v-for="{ label, children } in demoOptgroupOptions"
+                    :key="label"
                     :label="label"
                 >
                     <protean-option
-                        v-for="{ value, label } in children"
+                        v-for="{ value, label: childLabel } in children"
+                        :key="value"
                         :value="value"
-                        :label="label"
-                        >{{ label }}</protean-option
+                        :label="childLabel"
+                        >{{ childLabel }}</protean-option
                     >
                 </protean-optgroup>
             </protean-select>
@@ -177,7 +179,7 @@ function changeHandler(event: CustomEvent): void {
                 label="Select label"
                 :multiple="demoMultiple"
                 :value="demoValue"
-                :selectedOptions="demoSelectedOptions"
+                :selected-options="demoSelectedOptions"
                 :errors="demoErrors"
                 :optional="demoOptional"
                 :disabled="demoDisabled"
@@ -185,6 +187,7 @@ function changeHandler(event: CustomEvent): void {
             >
                 <protean-option
                     v-for="{ value, label } in demoFlatOptions"
+                    :key="value"
                     :value="value"
                     :label="label"
                     >{{ label }}</protean-option
@@ -193,38 +196,38 @@ function changeHandler(event: CustomEvent): void {
         </div>
         <div class="overview-demo-controls">
             <protean-checkbox
+                :checked.prop="demoWithOptGroups"
                 class="demo-toggle-optgroups"
                 label="Show with optgroups"
                 variant="toggle"
-                v-prop:checked="demoWithOptGroups"
                 @change="demoWithOptGroups = $event.detail.checked"
             ></protean-checkbox>
             <protean-checkbox
+                :checked.prop="demoMultiple"
                 class="demo-toggle-multiselect"
                 label="Show as multiselect"
                 variant="toggle"
-                v-prop:checked="demoMultiple"
                 @change="demoMultiple = $event.detail.checked"
             ></protean-checkbox>
             <protean-checkbox
+                :checked.prop="demoShowErrors"
                 class="demo-toggle-errors"
                 label="Show with validation errors"
                 variant="toggle"
-                v-prop:checked="demoShowErrors"
                 @change="demoShowErrors = $event.detail.checked"
             ></protean-checkbox>
             <protean-checkbox
+                :checked.prop="demoOptional"
                 class="demo-toggle-optional"
                 label="Show as optional"
                 variant="toggle"
-                v-prop:checked="demoOptional"
                 @change="demoOptional = $event.detail.checked"
             ></protean-checkbox>
             <protean-checkbox
+                :checked.prop="demoDisabled"
                 class="demo-toggle-disabled"
                 label="Show as disabled"
                 variant="toggle"
-                v-prop:checked="demoDisabled"
                 @change="demoDisabled = $event.detail.checked"
             ></protean-checkbox>
         </div>

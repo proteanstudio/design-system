@@ -42,7 +42,9 @@ input:focus + label .checkbox-symbol {
     fill: transparent;
     stroke: var(--protean-checkbox-outline-color, #c7b5fb);
     stroke-width: 3;
-    transition: fill 0.2s ease-in-out, stroke 0.2s ease-in-out;
+    transition:
+        fill 0.2s ease-in-out,
+        stroke 0.2s ease-in-out;
 }
 
 :host([checked]) .checkbox-outline,

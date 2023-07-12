@@ -76,7 +76,6 @@ const dateFormats = ref([
     'M/YY',
 ]);
 const colorCodeFormats = ref(['hex', 'hexa', 'rgb']);
-const apiFormat = ref('date');
 
 const demoFormats = computed<string[] | undefined>(() => {
     const formatMap: Dict<string[]> = {
@@ -117,12 +116,12 @@ const spamErrors = () => {
         <h2 data-in-page-anchor="overview">Overview</h2>
         <div class="overview-demo">
             <protean-input
+                :hints.prop="demoHints"
+                :errors.prop="demoErrors"
                 class="overview-demo-element"
                 :label="demoType === 'color' ? undefined : 'Field label'"
                 :type="demoType"
-                v-prop:hints="demoHints"
-                v-prop:errors="demoErrors"
-                :suppressMessages="demoSuppressMessages"
+                :suppress-messages="demoSuppressMessages"
                 :optional="demoOptional"
                 :disabled="demoDisabled"
                 :readonly="demoReadonly"
@@ -133,38 +132,38 @@ const spamErrors = () => {
         </div>
         <div class="overview-demo-controls">
             <protean-checkbox
+                :checked.prop="demoShowErrors"
                 class="demo-toggle-errors"
                 label="Populate validation errors"
                 variant="toggle"
-                v-prop:checked="demoShowErrors"
                 @change="demoShowErrors = $event.detail.checked"
             ></protean-checkbox>
             <protean-checkbox
+                :checked.prop="demoSuppressMessages"
                 class="demo-toggle-messages"
                 label="Hide hints and errors"
                 variant="toggle"
-                v-prop:checked="demoSuppressMessages"
                 @change="demoSuppressMessages = $event.detail.checked"
             ></protean-checkbox>
             <protean-checkbox
+                :checked.prop="demoOptional"
                 class="demo-toggle-optional"
                 label="Show as optional"
                 variant="toggle"
-                v-prop:checked="demoOptional"
                 @change="demoOptional = $event.detail.checked"
             ></protean-checkbox>
             <protean-checkbox
+                :checked.prop="demoDisabled"
                 class="demo-toggle-disabled"
                 label="Show as disabled"
                 variant="toggle"
-                v-prop:checked="demoDisabled"
                 @change="demoDisabled = $event.detail.checked"
             ></protean-checkbox>
             <protean-checkbox
+                :checked.prop="demoReadonly"
                 class="demo-toggle-readonly"
                 label="Show as readonly"
                 variant="toggle"
-                v-prop:checked="demoReadonly"
                 @change="demoReadonly = $event.detail.checked"
             ></protean-checkbox>
             <protean-input
@@ -178,31 +177,34 @@ const spamErrors = () => {
             ></protean-input>
             <protean-select
                 class="demo-select-type"
-                @change="demoType = $event.detail.value"
                 :value="demoType"
                 label="Input type"
+                @change="demoType = $event.detail.value"
             >
                 <protean-optgroup
                     v-for="{ label, children } in demoTypes"
+                    :key="label"
                     :label="label"
                 >
                     <protean-option
-                        v-for="{ value, label } in children"
+                        v-for="{ value, label: childLabel } in children"
+                        :key="value"
                         :value="value"
-                        :label="label"
-                        >{{ label }}</protean-option
+                        :label="childLabel"
+                        >{{ childLabel }}</protean-option
                     >
                 </protean-optgroup>
             </protean-select>
             <protean-select
+                v-if="demoFormats"
                 class="demo-select-format"
                 :value="demoFormat"
                 label="Input format"
-                v-if="demoFormats"
                 @change="demoFormat = $event.detail.value"
             >
                 <protean-option
                     v-for="format in demoFormats"
+                    :key="format"
                     :value="format"
                     :label="format"
                     >{{ format }}</protean-option
@@ -436,7 +438,7 @@ const spamErrors = () => {
                         <div>
                             <h5><code>date</code> formats:</h5>
                             <ul>
-                                <li v-for="format in dateFormats">
+                                <li v-for="format in dateFormats" :key="format">
                                     <code>{{ format }}</code>
                                 </li>
                             </ul>

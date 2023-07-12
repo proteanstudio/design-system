@@ -1,4 +1,3 @@
-import vProp from '@/directives/v-prop';
 import { shallowMount } from '@vue/test-utils';
 import { nextTick, reactive } from 'vue';
 import RootRoute from './index.vue';
@@ -23,9 +22,6 @@ const mountOptions = {
             'router-link',
             'router-view',
         ],
-        directives: {
-            prop: vProp,
-        },
     },
 };
 
@@ -36,7 +32,7 @@ describe('Root Route', () => {
     });
 
     it('renders', () => {
-        const wrapper = shallowMount<any>(RootRoute, mountOptions);
+        const wrapper = shallowMount(RootRoute, mountOptions);
         expect(wrapper.findComponent({ name: 'MainNav' })).not.toBeNull();
         expect(wrapper.findComponent({ name: 'SecondaryNav' })).not.toBeNull();
 
@@ -49,7 +45,7 @@ describe('Root Route', () => {
         route.fullPath = '/';
         route.name = 'Home';
 
-        const wrapper = shallowMount<any>(RootRoute, mountOptions);
+        const wrapper = shallowMount(RootRoute, mountOptions);
 
         expect(wrapper.vm.routeClassBinding).toEqual('home');
         expect(wrapper.find('main').classes('home')).toBe(true);
@@ -59,7 +55,7 @@ describe('Root Route', () => {
         route.fullPath = '/guidelines/accessibility';
         route.name = 'Accessibility';
 
-        const wrapper = shallowMount<any>(RootRoute, mountOptions);
+        const wrapper = shallowMount(RootRoute, mountOptions);
 
         expect(wrapper.find('main').classes('accessibility')).toBe(true);
         expect(wrapper.vm.routeClassBinding).toEqual(
@@ -71,7 +67,7 @@ describe('Root Route', () => {
         route.fullPath = '/eqwqweq/1232131123sas';
         route.name = 'not-found';
 
-        const wrapper = shallowMount<any>(RootRoute, mountOptions);
+        const wrapper = shallowMount(RootRoute, mountOptions);
 
         expect(wrapper.vm.routeClassBinding).toEqual('not-found');
         expect(wrapper.find('main').classes('not-found')).toBe(true);
@@ -80,7 +76,7 @@ describe('Root Route', () => {
     it('sets lightModeEnabled from localStorage', async () => {
         localStorage.setItem('lightModeEnabled', 'true');
         await nextTick();
-        const wrapper = shallowMount<any>(RootRoute, mountOptions);
+        const wrapper = shallowMount(RootRoute, mountOptions);
 
         expect(wrapper.vm.lightModeEnabled).toEqual(true);
         expect(document.documentElement.className).toContain('light');
@@ -90,7 +86,7 @@ describe('Root Route', () => {
     });
 
     it('updates lightModeEnabled on main-nav emission', async () => {
-        const wrapper = shallowMount<any>(RootRoute, mountOptions);
+        const wrapper = shallowMount(RootRoute, mountOptions);
 
         expect(localStorage.getItem('lightModeEnabled')).toBe(null);
         expect(wrapper.vm.lightModeEnabled).toEqual(false);
@@ -124,7 +120,7 @@ describe('Root Route', () => {
     });
 
     it('closes off canvas on routeChange', async () => {
-        const wrapper = shallowMount<any>(RootRoute, mountOptions);
+        const wrapper = shallowMount(RootRoute, mountOptions);
 
         expect(wrapper.vm.showOffCanvas).toEqual(false);
 
@@ -140,7 +136,7 @@ describe('Root Route', () => {
     });
 
     it('toggles off canvas on button-click', async () => {
-        const wrapper = shallowMount<any>(RootRoute, mountOptions);
+        const wrapper = shallowMount(RootRoute, mountOptions);
 
         expect(wrapper.vm.showOffCanvas).toEqual(false);
 
@@ -154,7 +150,7 @@ describe('Root Route', () => {
     });
 
     it('closes off canvas on main-nav emission', async () => {
-        const wrapper = shallowMount<any>(RootRoute, mountOptions);
+        const wrapper = shallowMount(RootRoute, mountOptions);
 
         expect(wrapper.vm.showOffCanvas).toEqual(false);
 
@@ -169,7 +165,7 @@ describe('Root Route', () => {
     });
 
     it('gets correct logo-url', () => {
-        const wrapper = shallowMount<any>(RootRoute, mountOptions);
+        const wrapper = shallowMount(RootRoute, mountOptions);
 
         expect(wrapper.vm.lightModeEnabled).toEqual(false);
         expect(wrapper.vm.logoURL).toContain(

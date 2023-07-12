@@ -5,14 +5,16 @@ import fakeMutationObserver from '@/test-helpers/mocks/MutationObserver';
 import { ProteanInput } from '../protean-input';
 import { ProteanIcon } from '../protean-icon';
 import fakeConsoleError from '@/test-helpers/mocks/consoleError';
+import fakeConsoleWarn from '@/test-helpers/mocks/consoleWarn';
 
 describe('protean-select', () => {
     let teardowns: VoidFunction[] = [];
-    beforeEach(function () {
+    beforeEach(() => {
         teardowns.push(fakeMutationObserver());
+        teardowns.push(fakeConsoleWarn());
     });
 
-    afterEach(function () {
+    afterEach(() => {
         teardowns.forEach(fn => {
             fn();
         });

@@ -20,7 +20,7 @@ interface MainNavGroup {
 }
 
 defineEmits(['hide-off-canvas', 'toggle-light-mode']);
-const props = withDefaults(defineProps<MainNavProps>(), {
+withDefaults(defineProps<MainNavProps>(), {
     showOffCanvas: false,
     lightModeEnabled: false,
 });
@@ -77,8 +77,8 @@ const sortedRoutes = computed<MainNavGroup[]>(() => {
         aria-label="Main navigation"
     >
         <protean-click-elsewhere
-            @change.self="$emit('hide-off-canvas')"
             class="nav-content"
+            @change.self="$emit('hide-off-canvas')"
         >
             <router-link to="/" class="home-link unstyled">
                 <img
@@ -86,11 +86,15 @@ const sortedRoutes = computed<MainNavGroup[]>(() => {
                     alt="Protean Design System"
                 />
             </router-link>
-            <div v-for="(group, index) in sortedRoutes" class="nav-group">
+            <div
+                v-for="(group, index) in sortedRoutes"
+                :key="index"
+                class="nav-group"
+            >
                 <h2
                     v-if="group.title"
-                    class="heading-3"
                     :id="`nav-group-${index}-heading`"
+                    class="heading-3"
                 >
                     {{ group.title }}
                 </h2>
@@ -99,7 +103,7 @@ const sortedRoutes = computed<MainNavGroup[]>(() => {
                         group.title ? `nav-group-${index}-heading` : undefined
                     "
                 >
-                    <li v-for="item in group.children">
+                    <li v-for="item in group.children" :key="item.name">
                         <router-link :to="item.path">{{
                             item.name
                         }}</router-link>
@@ -107,11 +111,11 @@ const sortedRoutes = computed<MainNavGroup[]>(() => {
                 </ul>
             </div>
             <protean-checkbox
+                :checked.prop="lightModeEnabled"
                 class="light-mode-toggle"
                 label="Light mode"
                 variant="toggle"
                 alignment="right"
-                v-prop:checked="lightModeEnabled"
                 @change="$emit('toggle-light-mode', $event)"
             ></protean-checkbox>
         </protean-click-elsewhere>
