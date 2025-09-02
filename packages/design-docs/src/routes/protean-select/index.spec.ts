@@ -222,11 +222,9 @@ describe('Protean Select Route', () => {
     it('builds correct code snippet substitutions', async () => {
         const wrapper = shallowMount(ProteanSelectRoute);
 
-        /* eslint-disable */
         let substitutions: string[] = wrapper.findComponent({
             name: 'CodeSnippet',
         }).vm.substitutions;
-        /* eslint-enable */
 
         expect(substitutions[0]).toEqual('');
         expect(substitutions[1]).toEqual('');
@@ -239,11 +237,9 @@ describe('Protean Select Route', () => {
 
         await nextTick();
 
-        /* eslint-disable */
         substitutions = wrapper.findComponent({
             name: 'CodeSnippet',
         }).vm.substitutions;
-        /* eslint-enable */
 
         expect(substitutions[0]).toEqual(' multiple');
         expect(substitutions[1]).toEqual(' optional');

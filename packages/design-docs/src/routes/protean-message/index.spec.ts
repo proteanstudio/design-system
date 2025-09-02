@@ -74,11 +74,9 @@ describe('Protean Message Route', () => {
     it('correctly binds code snippet substitutions', async () => {
         const wrapper = shallowMount(ProteanMessageRoute);
 
-        /* eslint-disable */
         let substitutions: string[] = wrapper.findComponent({
             name: 'CodeSnippet',
         }).vm.substitutions;
-        /* eslint-enable */
 
         expect(substitutions).toEqual(['info', 'alert']);
 
@@ -87,10 +85,8 @@ describe('Protean Message Route', () => {
 
         await nextTick();
 
-        /* eslint-disable */
         substitutions = wrapper.findComponent({ name: 'CodeSnippet' }).vm
             .substitutions;
-        /* eslint-enable */
 
         expect(substitutions).toEqual(['error', 'status']);
     });

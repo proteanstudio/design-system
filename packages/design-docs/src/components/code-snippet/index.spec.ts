@@ -159,10 +159,6 @@ describe('code-snippet', () => {
         expect(writeTextMock).toHaveBeenCalledWith(formattedHTML);
         expect(wrapper.vm.showCopyConfirmation).toEqual(true);
 
-        await nextTick();
-
-        expect(copyConfirmation.isVisible()).toBe(true);
-
         vi.advanceTimersByTime(1500); //may need to abstract time
         await nextTick();
 

@@ -2,7 +2,7 @@ export default function debounce(
     fn: VoidFunction,
     threshold = 100,
 ): VoidFunction {
-    let timeout: number;
+    let timeout: NodeJS.Timeout;
 
     return function (): void {
         clearTimeout(timeout);

@@ -39,7 +39,7 @@ onMounted(() => {
 });
 
 const parsedSnippet = computed<string>(() => {
-    let newSnippet = snippet.value;
+    let newSnippet: string = snippet.value;
     if (Array.isArray(props.substitutions)) {
         newSnippet = newSnippet.replace(/({[0-9]})/g, sub => {
             return props.substitutions?.[parseInt(sub[1])] ?? '';
