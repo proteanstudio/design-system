@@ -91,25 +91,27 @@ describe('protean-input', () => {
         });
 
         const inputElement = await find('protean-input >>> input');
-        const optionalSpan = await find('protean-input >>> .optional-tag');
+        let optionalSpan = await find('protean-input >>> .optional-tag');
 
         expect(inputElement).toEqualAttribute('aria-required', 'true');
-        expect(optionalSpan).toBeNull;
+        expect(optionalSpan).toBeNull();
 
         const proteanInput = await find('protean-input');
 
         proteanInput.setProperty('optional', true);
         await waitForChanges();
+        optionalSpan = await find('protean-input >>> .optional-tag');
 
         expect(inputElement).toEqualAttribute('aria-required', 'false');
-        expect(optionalSpan).not.toBeNull;
+        expect(optionalSpan).not.toBeNull();
 
         proteanInput.setProperty('ariaHasPopup', 'listbox');
         proteanInput.setProperty('optional', false);
         await waitForChanges();
+        optionalSpan = await find('protean-input >>> .optional-tag');
 
         expect(inputElement).not.toHaveAttribute('aria-required');
-        expect(optionalSpan).toBeNull;
+        expect(optionalSpan).toBeNull();
     });
 
     it('handles readonly binding', async () => {

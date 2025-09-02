@@ -49,7 +49,7 @@ export default function formatGeneric(value = '', format = ''): FormattedValue {
                 return acc;
             }
 
-            value[valueIndex].includes(item) && valueIndex++;
+            if (value[valueIndex].includes(item)) valueIndex++;
 
             return {
                 value: acc.value,

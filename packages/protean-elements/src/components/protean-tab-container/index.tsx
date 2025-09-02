@@ -43,7 +43,7 @@ export class ProteanTabContainer {
         const isValidValue =
             this.tabs?.some(tab => tab.value === this.value) ?? true;
 
-        return isValidValue ? this.value : this.tabs[0]?.value ?? '';
+        return isValidValue ? this.value : (this.tabs[0]?.value ?? '');
     }
 
     @Event({ eventName: 'change', bubbles: false }) change: EventEmitter;

@@ -18,6 +18,9 @@ export namespace Components {
     interface ProteanCheckbox {
         "a11yLabel": string;
         "alignment": 'left' | 'right';
+        /**
+          * @default false
+         */
         "checked": boolean;
         "disabled": boolean;
         "indeterminate": boolean;
@@ -35,6 +38,9 @@ export namespace Components {
         "a11yLabel": string;
         "ariaHasPopup": string;
         "ariaRole": string;
+        /**
+          * @default false
+         */
         "disabled": boolean;
         "errors": string[];
         "format": string;
@@ -42,6 +48,9 @@ export namespace Components {
         "label": string;
         "maxlength": number;
         "optional": boolean;
+        /**
+          * @default false
+         */
         "readonly": boolean;
         "suppressMessages": boolean;
         "type": string;
@@ -69,12 +78,18 @@ export namespace Components {
         "disabled": boolean;
         "errors": string[];
         "label": string;
+        /**
+          * @default false
+         */
         "multiple": boolean;
         "optional": boolean;
         "selectedOptions": string[];
         "value": string;
     }
     interface ProteanTabContainer {
+        /**
+          * @default ''
+         */
         "name": string;
         "value": string;
     }
@@ -82,6 +97,9 @@ export namespace Components {
         "guid": number;
         "index": number;
         "label": string;
+        /**
+          * @default ''
+         */
         "name": string;
         "selected": boolean;
         "value": string;
@@ -114,13 +132,35 @@ declare global {
         prototype: HTMLProteanButtonElement;
         new (): HTMLProteanButtonElement;
     };
+    interface HTMLProteanCheckboxElementEventMap {
+        "change": any;
+    }
     interface HTMLProteanCheckboxElement extends Components.ProteanCheckbox, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLProteanCheckboxElementEventMap>(type: K, listener: (this: HTMLProteanCheckboxElement, ev: ProteanCheckboxCustomEvent<HTMLProteanCheckboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLProteanCheckboxElementEventMap>(type: K, listener: (this: HTMLProteanCheckboxElement, ev: ProteanCheckboxCustomEvent<HTMLProteanCheckboxElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLProteanCheckboxElement: {
         prototype: HTMLProteanCheckboxElement;
         new (): HTMLProteanCheckboxElement;
     };
+    interface HTMLProteanClickElsewhereElementEventMap {
+        "change": any;
+    }
     interface HTMLProteanClickElsewhereElement extends Components.ProteanClickElsewhere, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLProteanClickElsewhereElementEventMap>(type: K, listener: (this: HTMLProteanClickElsewhereElement, ev: ProteanClickElsewhereCustomEvent<HTMLProteanClickElsewhereElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLProteanClickElsewhereElementEventMap>(type: K, listener: (this: HTMLProteanClickElsewhereElement, ev: ProteanClickElsewhereCustomEvent<HTMLProteanClickElsewhereElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLProteanClickElsewhereElement: {
         prototype: HTMLProteanClickElsewhereElement;
@@ -132,7 +172,19 @@ declare global {
         prototype: HTMLProteanIconElement;
         new (): HTMLProteanIconElement;
     };
+    interface HTMLProteanInputElementEventMap {
+        "change": FormattedValue;
+        "input": FormattedValue;
+    }
     interface HTMLProteanInputElement extends Components.ProteanInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLProteanInputElementEventMap>(type: K, listener: (this: HTMLProteanInputElement, ev: ProteanInputCustomEvent<HTMLProteanInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLProteanInputElementEventMap>(type: K, listener: (this: HTMLProteanInputElement, ev: ProteanInputCustomEvent<HTMLProteanInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLProteanInputElement: {
         prototype: HTMLProteanInputElement;
@@ -156,13 +208,35 @@ declare global {
         prototype: HTMLProteanOptionElement;
         new (): HTMLProteanOptionElement;
     };
+    interface HTMLProteanSelectElementEventMap {
+        "change": any;
+    }
     interface HTMLProteanSelectElement extends Components.ProteanSelect, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLProteanSelectElementEventMap>(type: K, listener: (this: HTMLProteanSelectElement, ev: ProteanSelectCustomEvent<HTMLProteanSelectElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLProteanSelectElementEventMap>(type: K, listener: (this: HTMLProteanSelectElement, ev: ProteanSelectCustomEvent<HTMLProteanSelectElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLProteanSelectElement: {
         prototype: HTMLProteanSelectElement;
         new (): HTMLProteanSelectElement;
     };
+    interface HTMLProteanTabContainerElementEventMap {
+        "change": any;
+    }
     interface HTMLProteanTabContainerElement extends Components.ProteanTabContainer, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLProteanTabContainerElementEventMap>(type: K, listener: (this: HTMLProteanTabContainerElement, ev: ProteanTabContainerCustomEvent<HTMLProteanTabContainerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLProteanTabContainerElementEventMap>(type: K, listener: (this: HTMLProteanTabContainerElement, ev: ProteanTabContainerCustomEvent<HTMLProteanTabContainerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLProteanTabContainerElement: {
         prototype: HTMLProteanTabContainerElement;
@@ -199,6 +273,9 @@ declare namespace LocalJSX {
     interface ProteanCheckbox {
         "a11yLabel"?: string;
         "alignment"?: 'left' | 'right';
+        /**
+          * @default false
+         */
         "checked"?: boolean;
         "disabled"?: boolean;
         "indeterminate"?: boolean;
@@ -218,6 +295,9 @@ declare namespace LocalJSX {
         "a11yLabel"?: string;
         "ariaHasPopup"?: string;
         "ariaRole"?: string;
+        /**
+          * @default false
+         */
         "disabled"?: boolean;
         "errors"?: string[];
         "format"?: string;
@@ -227,6 +307,9 @@ declare namespace LocalJSX {
         "onChange"?: (event: ProteanInputCustomEvent<FormattedValue>) => void;
         "onInput"?: (event: ProteanInputCustomEvent<FormattedValue>) => void;
         "optional"?: boolean;
+        /**
+          * @default false
+         */
         "readonly"?: boolean;
         "suppressMessages"?: boolean;
         "type"?: string;
@@ -254,6 +337,9 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "errors"?: string[];
         "label"?: string;
+        /**
+          * @default false
+         */
         "multiple"?: boolean;
         "onChange"?: (event: ProteanSelectCustomEvent<any>) => void;
         "optional"?: boolean;
@@ -261,6 +347,9 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface ProteanTabContainer {
+        /**
+          * @default ''
+         */
         "name"?: string;
         "onChange"?: (event: ProteanTabContainerCustomEvent<any>) => void;
         "value"?: string;
@@ -269,6 +358,9 @@ declare namespace LocalJSX {
         "guid"?: number;
         "index"?: number;
         "label"?: string;
+        /**
+          * @default ''
+         */
         "name"?: string;
         "selected"?: boolean;
         "value"?: string;

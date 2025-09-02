@@ -1099,8 +1099,6 @@ describe('protean-select', () => {
 
         expect(handleSelectionMock).toHaveBeenCalledTimes(0);
 
-        rootInstance.optionElements[0].localName = 'protean-option';
-
         fakeClickEvent = {
             target: rootInstance.optionElements[0],
         };
