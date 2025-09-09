@@ -50,6 +50,7 @@ const parsedSnippet = computed<string>(() => {
 
 function resetInnerContent(): void {
     const element = codeElement.value!;
+    element.removeAttribute('data-highlighted');
     element.innerHTML = parsedSnippet.value
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');

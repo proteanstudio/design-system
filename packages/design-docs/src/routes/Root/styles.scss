@@ -26,6 +26,10 @@
         flex: 0 1 242px;
         padding-right: 42px;
         margin: 0 auto;
+
+        img {
+            height: 100%;
+        }
     }
 
     @include breakpoint(m, min) {

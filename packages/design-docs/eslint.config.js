@@ -4,6 +4,7 @@ import tsEslint from 'typescript-eslint';
 import pluginVue from 'eslint-plugin-vue';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import globals from 'globals';
+import path from 'path';
 
 export default defineConfig(
     eslint.configs.recommended,
@@ -19,6 +20,9 @@ export default defineConfig(
             parserOptions: {
                 ecmaVersion: 'latest',
                 parser: '@typescript-eslint/parser',
+                tsconfigRootDir: path.resolve(
+                    `${import.meta.dirname}/packages/design-docs/`,
+                ),
                 extraFileExtensions: ['.vue'],
             },
             globals: {

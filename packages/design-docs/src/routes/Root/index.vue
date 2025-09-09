@@ -12,11 +12,12 @@ const lightModeEnabled = ref<boolean>(false);
 const route = useRoute();
 
 onMounted(() => {
-    const lightModeStorageItem =
-        localStorage.getItem('lightModeEnabled') === 'true';
+    const lightModeSetting =
+        localStorage.getItem('lightModeEnabled') === 'true' ||
+        window.matchMedia?.('(prefers-color-scheme: light)').matches;
 
-    if (lightModeStorageItem) {
-        lightModeEnabled.value = lightModeStorageItem;
+    if (lightModeSetting) {
+        lightModeEnabled.value = true;
         document.documentElement.classList.add('light');
     }
 });
@@ -57,6 +58,7 @@ function toggleLightMode(event: CustomEvent): void {
         <router-link to="/" class="home-link unstyled">
             <img
                 :src="logoURL"
+                width="242"
                 class="protean-logo"
                 alt="Protean Design System"
             />

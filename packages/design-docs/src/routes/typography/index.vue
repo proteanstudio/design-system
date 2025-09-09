@@ -79,25 +79,25 @@
             <section class="scale-example">
                 <div class="heading-2">Heading 2</div>
                 <p>
-                    <code>2rem | 600 | margin: 1rem 0 0 0.5rem</code>
+                    <code>2rem | 700 | margin: 1rem 0 0 0.5rem</code>
                 </p>
                 <p>
-                    <code>1.75rem | 600 | margin-bottom: 0.25rem</code>
+                    <code>1.75rem | 700 | margin-bottom: 0.25rem</code>
                 </p>
             </section>
             <section class="scale-example">
                 <div class="heading-3">Heading 3</div>
                 <p>
-                    <code>1.5rem | 500 | margin: 0 0 1rem</code>
+                    <code>1.5rem | 700 | margin: 0 0 1rem</code>
                 </p>
                 <p>
-                    <code>1.25rem | 500 | margin-bottom: 0.5rem</code>
+                    <code>1.25rem | 700 | margin-bottom: 0.5rem</code>
                 </p>
             </section>
             <section class="scale-example">
                 <div class="heading-4">Heading 4</div>
                 <p>
-                    <code>1.125rem | 600 | margin: 0 0 0 0.5rem</code>
+                    <code>1.125rem | 700 | margin: 0 0 0 0.5rem</code>
                 </p>
             </section>
             <section class="scale-example">
