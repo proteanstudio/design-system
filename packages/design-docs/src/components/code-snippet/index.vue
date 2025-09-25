@@ -39,7 +39,7 @@ onMounted(() => {
 });
 
 const parsedSnippet = computed<string>(() => {
-    let newSnippet = snippet.value;
+    let newSnippet: string = snippet.value;
     if (Array.isArray(props.substitutions)) {
         newSnippet = newSnippet.replace(/({[0-9]})/g, sub => {
             return props.substitutions?.[parseInt(sub[1])] ?? '';
@@ -50,6 +50,7 @@ const parsedSnippet = computed<string>(() => {
 
 function resetInnerContent(): void {
     const element = codeElement.value!;
+    element.removeAttribute('data-highlighted');
     element.innerHTML = parsedSnippet.value
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');

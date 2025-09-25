@@ -82,7 +82,7 @@ const sortedRoutes = computed<MainNavGroup[]>(() => {
         >
             <router-link to="/" class="home-link unstyled">
                 <img
-                    src="@/assets/images/logo-symbol.svg"
+                    src="@/assets/images/logo.webp"
                     alt="Protean Design System"
                 />
             </router-link>

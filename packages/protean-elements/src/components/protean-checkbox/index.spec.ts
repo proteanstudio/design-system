@@ -44,7 +44,7 @@ describe('protean-message', () => {
         expect(checkboxSymbol).toHaveClass('standard');
 
         const checkboxFill = root.shadowRoot.querySelector('.checkbox-fill');
-        expect(checkboxFill).toBeNull;
+        expect(checkboxFill).toBeNull();
 
         const labelText = root.shadowRoot.querySelector('.label-text');
         expect(labelText.textContent).toEqual('test label');

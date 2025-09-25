@@ -31,7 +31,7 @@ const demoAriaLabel = computed<string | undefined>(() => {
         <h2 data-in-page-anchor="overview">Overview</h2>
         <div class="overview-demo">
             <protean-button
-                :full-width="demoFullWidth"
+                :full-width="demoFullWidth || null"
                 class="overview-demo-element"
                 :variant="demoVariant"
                 :disabled="demoDisabled"

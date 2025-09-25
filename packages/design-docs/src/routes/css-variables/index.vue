@@ -105,7 +105,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                     </div>
                     <div class="prop-example">
                         <CodeSnippet language="css">
-                            --font-family: 'Quicksand', 'Heiti SC', sans-serif;
+                            --font-family: 'Space Grotesk', sans-serif;
                         </CodeSnippet>
                     </div>
                 </li>
@@ -118,7 +118,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                     </div>
                     <div class="prop-example">
                         <CodeSnippet language="css">
-                            --body-text-color: #fafafa;
+                            --body-text-color: #f1f1f1;
                         </CodeSnippet>
                     </div>
                 </li>
@@ -286,7 +286,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                     </div>
                     <div class="prop-example">
                         <CodeSnippet language="css">
-                            --link-underline-color: var(--brand-color-1);
+                            --link-underline-color: var(--brand-color-4);
                         </CodeSnippet>
                     </div>
                 </li>
@@ -511,7 +511,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                     <div class="prop-example">
                         <CodeSnippet language="css">
                             --protean-dropdown-box-shadow: 0 3px 5px -2px
-                            rgba(255, 255, 255, 0.7);
+                            rgb(255, 255, 255, 0.7);
                         </CodeSnippet>
                     </div>
                 </li>
@@ -574,7 +574,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
 
                 --action-color: var(--brand-color-2);
                 --action-contrast-color: #ffffff;
-                --action-hover-color: #5a0d8d;
+                --action-hover-color: var(--brand-color-1);
                 --action-hover-contrast-color: #000000;
         
                 --link-underline-color: var(--brand-color-2);
@@ -585,9 +585,9 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                 --protean-message-text-color: #000000;
                 --protean-message-border-color: #dadada;
         
-                --protean-button-icon-hover-background-color: rgba(110, 69, 228, 0.2);
+                --protean-button-icon-hover-background-color: rgb(42, 99, 8, 0.2);
         
-                --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.5);
+                --protean-dropdown-box-shadow: 0 3px 5px -2px rgb(0, 0, 0, 0.5);
                 --protean-dropdown-hover-background-color: #efefef;
         
                 --protean-select-separator-color: #dadada;

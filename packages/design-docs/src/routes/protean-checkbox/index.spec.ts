@@ -42,9 +42,8 @@ describe('Protean Checkbox Route', () => {
 
         expect(wrapper.vm.demoChecked).toEqual(false);
         expect(demoCheckboxElement.checked).toEqual(false);
-        /* eslint-disable */
+
         expect(codeSnippet.vm.substitutions[1]).toEqual('');
-        /* eslint-enable */
 
         await demoCheckbox.trigger('change', {
             detail: {
@@ -58,9 +57,8 @@ describe('Protean Checkbox Route', () => {
 
         expect(wrapper.vm.demoChecked).toEqual(true);
         expect(demoCheckboxElement.checked).toEqual(true);
-        /* eslint-disable */
+
         expect(codeSnippet.vm.substitutions[1]).toEqual('\n checked');
-        /* eslint-enable */
     });
 
     it('updates checkbox variant on toggle change', async () => {
@@ -82,9 +80,8 @@ describe('Protean Checkbox Route', () => {
         expect(indeterminateToggleElement.getAttribute('disabled')).toEqual(
             'false',
         );
-        /* eslint-disable */
+
         expect(codeSnippet.vm.substitutions[0]).toEqual('');
-        /* eslint-enable */
 
         await toggleToggleWrapper.trigger('change', {
             detail: {
@@ -107,9 +104,8 @@ describe('Protean Checkbox Route', () => {
         expect(indeterminateToggleElement.getAttribute('disabled')).toEqual(
             'true',
         );
-        /* eslint-disable */
+
         expect(codeSnippet.vm.substitutions[0]).toEqual('\n variant="toggle"');
-        /* eslint-enable */
     });
 
     it('updates checkbox disabled state on toggle change', async () => {
@@ -124,9 +120,8 @@ describe('Protean Checkbox Route', () => {
         expect(wrapper.vm.demoDisabled).toEqual(false);
         expect(demoCheckbox.attributes('disabled')).toEqual('false');
         expect(toggleDisabledElement.checked).toEqual(false);
-        /* eslint-disable */
+
         expect(codeSnippet.vm.substitutions[2]).toEqual('');
-        /* eslint-enable */
 
         await toggleDisabledWrapper.trigger('change', {
             detail: {
@@ -142,9 +137,8 @@ describe('Protean Checkbox Route', () => {
         expect(wrapper.vm.demoDisabled).toEqual(true);
         expect(demoCheckbox.attributes('disabled')).toEqual('true');
         expect(toggleDisabledElement.checked).toEqual(true);
-        /* eslint-disable */
+
         expect(codeSnippet.vm.substitutions[2]).toEqual('\n disabled');
-        /* eslint-enable */
     });
 
     it('updates checkbox alignment on toggle change', async () => {
@@ -159,9 +153,8 @@ describe('Protean Checkbox Route', () => {
         expect(wrapper.vm.demoAlignment).toEqual('left');
         expect(demoCheckbox.getAttribute('alignment')).toEqual('left');
         expect(toggleAlignmentElement.checked).toEqual(false);
-        /* eslint-disable */
+
         expect(codeSnippet.vm.substitutions[4]).toEqual('left');
-        /* eslint-enable */
 
         await toggleAlignmentWrapper.trigger('change', {
             detail: {
@@ -177,9 +170,8 @@ describe('Protean Checkbox Route', () => {
         expect(wrapper.vm.demoAlignment).toEqual('right');
         expect(demoCheckbox.getAttribute('alignment')).toEqual('right');
         expect(toggleAlignmentElement.checked).toEqual(true);
-        /* eslint-disable */
+
         expect(codeSnippet.vm.substitutions[4]).toEqual('right');
-        /* eslint-enable */
     });
 
     it('updates indeterminate state on toggle change', async () => {
@@ -199,9 +191,8 @@ describe('Protean Checkbox Route', () => {
             (indeterminateToggleWrapper.element as HTMLInputElement).checked,
         ).toEqual(false);
         expect(toggleToggleElement.attributes('disabled')).toEqual('false');
-        /* eslint-disable */
+
         expect(codeSnippet.vm.substitutions[3]).toEqual('');
-        /* eslint-enable */
 
         await indeterminateToggleWrapper.trigger('change', {
             detail: {
@@ -220,9 +211,8 @@ describe('Protean Checkbox Route', () => {
             (indeterminateToggleWrapper.element as HTMLInputElement).checked,
         ).toEqual(true);
         expect(toggleToggleElement.attributes('disabled')).toEqual('true');
-        /* eslint-disable */
+
         expect(codeSnippet.vm.substitutions[3]).toEqual('\n indeterminate');
-        /* eslint-enable */
 
         wrapper.vm.demoIsToggle = true;
         await nextTick();
@@ -230,8 +220,6 @@ describe('Protean Checkbox Route', () => {
         indeterminateToggleWrapper = wrapper.find('.demo-toggle-indeterminate');
         codeSnippet = wrapper.findComponent({ name: 'CodeSnippet' });
 
-        /* eslint-disable */
         expect(codeSnippet.vm.substitutions[3]).toEqual('');
-        /* eslint-enable */
     });
 });

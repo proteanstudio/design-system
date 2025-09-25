@@ -382,7 +382,10 @@ describe('protean-input', () => {
             html: '<protean-input></protean-input>',
         });
 
-        expect(rootInstance.formattedValueObject).toBeUndefined;
+        expect(rootInstance.formattedValueObject).toEqual({
+            value: '',
+            formattedValue: '',
+        });
 
         rootInstance.inputElement.value = 'test value';
 
@@ -474,8 +477,11 @@ describe('protean-input', () => {
             html: '<protean-input></protean-input>',
         });
 
-        expect(rootInstance.formattedValueObject).toBeUndefined;
-        expect(rootInstance.cursorData).toBeUndefined;
+        expect(rootInstance.formattedValueObject).toEqual({
+            value: '',
+            formattedValue: '',
+        });
+        expect(rootInstance.cursorData).toBeUndefined();
 
         const value = 'test value';
         rootInstance.inputElement.value = value;
@@ -530,10 +536,10 @@ describe('protean-input', () => {
             html: '<protean-input></protean-input>',
         });
 
-        expect(rootInstance.messageContainer.style.height).toBeUndefined;
+        expect(rootInstance.messageContainer.style.height).toEqual('');
 
         rootInstance.inputElement.dispatchEvent(new Event('focus'));
-        expect(rootInstance.messageContainer.style.height).toBeUndefined;
+        expect(rootInstance.messageContainer.style.height).toEqual('0px');
         expect(rootInstance.isFocused).toEqual(true);
 
         root.hints = ['1'];
@@ -550,10 +556,10 @@ describe('protean-input', () => {
             html: '<protean-input></protean-input>',
         });
 
-        expect(rootInstance.messageContainer.style.height).toBeUndefined;
+        expect(rootInstance.messageContainer.style.height).toEqual('');
 
         rootInstance.inputElement.dispatchEvent(new Event('blur'));
-        expect(rootInstance.messageContainer.style.height).toBeUndefined;
+        expect(rootInstance.messageContainer.style.height).toEqual('');
         expect(rootInstance.isFocused).toEqual(false);
 
         root.hints = ['1'];
@@ -697,25 +703,25 @@ describe('protean-input', () => {
         });
 
         let labelElement = root.shadowRoot.querySelector('label');
-        expect(labelElement).toBeNull;
+        expect(labelElement).toBeNull();
 
         let optionalSpan = root.shadowRoot.querySelector('.optional-tag');
-        expect(optionalSpan).toBeNull;
+        expect(optionalSpan).toBeNull();
 
         root.label = 'label text';
         await waitForChanges();
         labelElement = root.shadowRoot.querySelector('label');
-        expect(labelElement).not.toBeNull;
+        expect(labelElement).not.toBeNull();
         expect(labelElement.textContent).toEqual('label text');
 
         optionalSpan = root.shadowRoot.querySelector('.optional-tag');
-        expect(optionalSpan).toBeNull;
+        expect(optionalSpan).toBeNull();
 
         root.optional = true;
         await waitForChanges();
 
         optionalSpan = root.shadowRoot.querySelector('.optional-tag');
-        expect(optionalSpan).not.toBeNull;
+        expect(optionalSpan).not.toBeNull();
         expect(optionalSpan.textContent).toEqual(' (optional)');
     });
 

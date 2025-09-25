@@ -53,7 +53,7 @@ function scrollHandler(): void {
     activeTarget.value = activeElement?.dataset.inPageAnchor ?? '';
 }
 
-const scrollListener: VoidFunction = debounce(scrollHandler, 20);
+const scrollListener = debounce(scrollHandler, 20);
 
 onMounted(() => {
     window.addEventListener('scroll', scrollListener, {

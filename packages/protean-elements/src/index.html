@@ -12,17 +12,18 @@
         <script nomodule src="/build/protean-elements.js"></script>
 
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 
             :root {
-                --font-family: 'Quicksand', 'Heiti SC', sans-serif;
-                --body-text-color: #fafafa;
+                --font-family: 'Space Grotesk', sans-serif;
+                --body-text-color: #f1f1f1;
                 --body-background-color: #1a1a1a;
                 --body-font-size: 1rem;
 
-                --brand-color-1: #f72585;
-                --brand-color-2: #7209b7;
-                --brand-color-3: #ff5f40;
+                --brand-color-1: #280d3f;
+                --brand-color-2: #2a6308;
+                --brand-color-3: #c7a50a;
+                --brand-color-4: #e38001;
 
                 --action-color: #c7b5fb;
                 --action-contrast-color: #000000;
@@ -31,7 +32,7 @@
 
                 --link-color: inherit;
                 --link-hover-color: var(--link-color);
-                --link-underline-color: var(--brand-color-1);
+                --link-underline-color: var(--brand-color-4);
 
                 --touch-zone-size: 42px;
                 --disabled-opacity: 0.4;
@@ -116,7 +117,8 @@
                 --protean-dropdown-text-color: var(--body-text-color);
                 --protean-dropdown-border-color: currentColor;
                 --protean-dropdown-border-width: 0 1px 1px;
-                --protean-dropdown-box-shadow: 0 3px 5px -2px rgba(255, 255, 255, 0.7);
+                --protean-dropdown-box-shadow: 0 3px 5px -2px
+                    rgba(255, 255, 255, 0.7);
                 --protean-dropdown-hover-background-color: #353535;
                 --protean-dropdown-hover-text-color: inherit;
 
@@ -175,8 +177,11 @@
                 pointer-events: none;
             }
 
+            * {
+                font-family: var(--font-family);
+            }
+
             body {
-                font-family: 'Quicksand', 'Heiti SC', sans-serif;
                 color: var(--body-text-color);
                 background-color: var(--body-background-color);
             }

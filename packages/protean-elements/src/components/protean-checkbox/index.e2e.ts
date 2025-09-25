@@ -26,7 +26,7 @@ describe('protean-checkbox', () => {
         const checkboxFill = await find(
             'protean-checkbox >>> .checkbox-symbol',
         );
-        expect(checkboxFill).toBeNull;
+        expect(checkboxFill).not.toBeNull();
 
         const innerLabelText = await find('protean-checkbox >>> .label-text');
         expect(innerLabelText.textContent).toEqual('test label');

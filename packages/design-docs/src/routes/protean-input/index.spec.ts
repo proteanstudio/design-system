@@ -255,11 +255,9 @@ describe('Protean Input Route', () => {
     it('builds correct code snippet substitutions', async () => {
         const wrapper = shallowMount(ProteanInputRoute);
 
-        /* eslint-disable */
         let substitutions: string[] = wrapper.findComponent({
             name: 'CodeSnippet',
         }).vm.substitutions;
-        /* eslint-enable */
 
         expect(wrapper.vm.demoType).toEqual('text');
         expect(substitutions[0]).toEqual('label="Field label" \n');
@@ -292,11 +290,9 @@ describe('Protean Input Route', () => {
         wrapper.vm.demoReadonly = true;
         await nextTick();
 
-        /* eslint-disable */
         substitutions = wrapper.findComponent({
             name: 'CodeSnippet',
         }).vm.substitutions;
-        /* eslint-enable */
 
         expect(substitutions[0]).toEqual('label="Field label" \n');
         expect(substitutions[1]).toEqual('numeric');

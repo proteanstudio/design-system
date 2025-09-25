@@ -10,16 +10,16 @@
         "packages/*"
     ],
     "scripts": {
-        "format": "yarn workspaces foreach -p run format",
-        "lint": "yarn workspaces foreach -p run lint",
-        "test": "yarn workspaces foreach -p run test --silent",
+        "format": "yarn workspaces foreach --all run format",
+        "lint": "yarn workspaces foreach --all run lint",
+        "test": "yarn workspaces foreach --all run test --silent",
         "build": "yarn workspaces foreach run build",
         "postinstall": "husky install"
     },
-    "packageManager": "yarn@3.6.1",
+    "packageManager": "yarn@4.9.4",
     "devDependencies": {
-        "@commitlint/cli": "^17.6.6",
-        "@commitlint/config-conventional": "^17.6.6",
-        "husky": "^8.0.3"
+        "@commitlint/cli": "^19.8.1",
+        "@commitlint/config-conventional": "^19.8.1",
+        "husky": "^9.1.7"
     }
 }

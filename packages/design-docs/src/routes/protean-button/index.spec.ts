@@ -67,10 +67,10 @@ describe('Protean Button Route', () => {
         expect(wrapper.vm.demoVariant).toEqual('primary');
         expect(demoButton.getAttribute('variant')).toEqual('primary');
         expect(selectWrapper.attributes('value')).toEqual('primary');
-        /* eslint-disable */
+
         expect(codeSnippet.vm.substitutions[0]).toEqual('primary');
         expect(codeSnippet.vm.substitutions[2]).toEqual('');
-        /* eslint-enable */
+
         expect(wrapper.vm.demoAriaLabel).toEqual(undefined);
         expect(demoButton.a11yLabel).toEqual(undefined);
 
@@ -88,13 +88,13 @@ describe('Protean Button Route', () => {
         expect(wrapper.vm.demoVariant).toEqual('icon');
         expect(demoButton.getAttribute('variant')).toEqual('icon');
         expect(selectWrapper.attributes('value')).toEqual('icon');
-        /* eslint-disable */
+
         expect(codeSnippet.vm.substitutions[0]).toEqual('icon');
         expect(codeSnippet.vm.substitutions[2]).toEqual('');
         expect(codeSnippet.vm.substitutions[3]).toEqual(
             '\na11y-label="Button aria-label"',
         );
-        /* eslint-enable */
+
         expect(wrapper.vm.demoAriaLabel).toEqual('Button aria-label');
         expect(demoButton.getAttribute('a11y-label')).toEqual(
             'Button aria-label',
@@ -110,10 +110,9 @@ describe('Protean Button Route', () => {
 
         expect(wrapper.vm.demoVariant).toEqual('secondary');
 
-        /* eslint-disable */
         expect(codeSnippet.vm.substitutions[0]).toEqual('secondary');
         expect(codeSnippet.vm.substitutions[2]).toEqual('');
-        /* eslint-enable */
+
         expect(wrapper.vm.demoAriaLabel).toEqual(undefined);
     });
 });

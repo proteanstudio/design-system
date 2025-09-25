@@ -4,11 +4,11 @@ export const config: Config = {
     namespace: 'protean-elements',
     outputTargets: [
         {
-          type: 'dist',
-          esmLoaderPath: '../loader',
-          empty: true,
-          polyfills: false,
-          collectionDir: null
+            type: 'dist',
+            esmLoaderPath: '../loader',
+            empty: true,
+            polyfills: false,
+            collectionDir: null,
         },
         {
             type: 'www',
