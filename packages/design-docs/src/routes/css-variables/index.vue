@@ -151,13 +151,13 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                     <div class="prop-info">
                         <h4 class="prop-name">--brand-color-1</h4>
                         <div class="prop-desc">
-                            The first of our three brand colors to be leveraged
+                            The first of our four brand colors to be leveraged
                             when color contrast allows.
                         </div>
                     </div>
                     <div class="prop-example">
                         <CodeSnippet language="css">
-                            --brand-color-1: #f72585;
+                            --brand-color-1: #280d3f;
                         </CodeSnippet>
                     </div>
                 </li>
@@ -165,13 +165,13 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                     <div class="prop-info">
                         <h4 class="prop-name">--brand-color-2</h4>
                         <div class="prop-desc">
-                            The second of our three brand colors to be leveraged
+                            The second of our four brand colors to be leveraged
                             when color contrast allows.
                         </div>
                     </div>
                     <div class="prop-example">
                         <CodeSnippet language="css">
-                            --brand-color-2: #7209b7;
+                            --brand-color-2: #2a6308;
                         </CodeSnippet>
                     </div>
                 </li>
@@ -179,13 +179,27 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                     <div class="prop-info">
                         <h4 class="prop-name">--brand-color-3</h4>
                         <div class="prop-desc">
-                            The third of our three brand colors to be leveraged
+                            The third of our four brand colors to be leveraged
                             when color contrast allows.
                         </div>
                     </div>
                     <div class="prop-example">
                         <CodeSnippet language="css">
-                            --brand-color-3: #ff5f40;
+                            --brand-color-3: #c7a50a;
+                        </CodeSnippet>
+                    </div>
+                </li>
+                <li class="prop-item">
+                    <div class="prop-info">
+                        <h4 class="prop-name">--brand-color-4</h4>
+                        <div class="prop-desc">
+                            The fourth of our four brand colors to be leveraged
+                            when color contrast allows.
+                        </div>
+                    </div>
+                    <div class="prop-example">
+                        <CodeSnippet language="css">
+                            --brand-color-4: #e38001;
                         </CodeSnippet>
                     </div>
                 </li>
@@ -202,7 +216,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                     </div>
                     <div class="prop-example">
                         <CodeSnippet language="css">
-                            --action-color: #7b57e4;
+                            --action-color: #6e45e4;
                         </CodeSnippet>
                     </div>
                 </li>
@@ -328,7 +342,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                     </div>
                     <div class="prop-example">
                         <CodeSnippet language="css">
-                            --code-background-color: #393939;
+                            --code-background-color: #2a2a2a;
                         </CodeSnippet>
                     </div>
                 </li>
@@ -543,7 +557,7 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
                     </div>
                     <div class="prop-example">
                         <CodeSnippet language="css">
-                            --protean-dropdown-hover-text-color: #353535;
+                            --protean-dropdown-hover-text-color: inherit;
                         </CodeSnippet>
                     </div>
                 </li>
@@ -571,31 +585,23 @@ import CodeSnippet from '@/components/code-snippet/index.vue';
             &.light {
                 --body-text-color: #1a1a1a;
                 --body-background-color: #fdfdfd;
-
                 --action-color: var(--brand-color-2);
                 --action-contrast-color: #ffffff;
                 --action-hover-color: var(--brand-color-1);
-                --action-hover-contrast-color: #000000;
-        
+                --action-hover-contrast-color: #ffffff;
                 --link-underline-color: var(--brand-color-2);
-
                 --code-background-color: #f2f2f2;
-        
                 --protean-message-background-color: #f7f7f7;
                 --protean-message-text-color: #000000;
                 --protean-message-border-color: #dadada;
-        
                 --protean-button-icon-hover-background-color: rgb(42, 99, 8, 0.2);
-        
                 --protean-dropdown-box-shadow: 0 3px 5px -2px rgb(0, 0, 0, 0.5);
                 --protean-dropdown-hover-background-color: #efefef;
-        
                 --protean-select-separator-color: #dadada;
-        
                 --protean-checkbox-toggle-path-color: #979797;
-        
                 --protean-tab-container-separator-color: #cdcdcd;
                 --protean-tab-container-hover-background-color: #efefef;
+                --protean-checkbox-outline-color: var(--action-color);
             }
         }`
             }}

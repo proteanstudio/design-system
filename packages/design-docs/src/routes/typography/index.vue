@@ -9,11 +9,54 @@
     </p>
     <section class="typography-content">
         <h2 data-in-page-anchor="typefaces">Typefaces</h2>
-        <section>
-            <h3>Quicksand</h3>
+        <section class="specimen prata">
+            <h3>Prata</h3>
             <p>
-                Quicksand is a versatile, geometric sans-serif typeface that
-                provides clear headings and readable body text.
+                Prata is a Didone serif typeface reserved for heading level 1
+                (<code>h1</code>, <code>.heading-1</code>) to provide a strong
+                visual anchor for content.
+            </p>
+            <div class="type-gallery">
+                <div class="weight-example-container">
+                    <span class="weight-example regular">Aa</span>
+                    <span>Regular</span>
+                    400
+                </div>
+                <div class="pangram-container">
+                    <div class="pangram uppercase">
+                        ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                    </div>
+                    <div class="pangram">abcdefghijklmnopqrstuvwxyz</div>
+                    <div class="pangram">0123456789</div>
+                </div>
+            </div>
+        </section>
+        <section class="specimen sen">
+            <h3>Sen</h3>
+            <p>
+                Sen is a versatile, geometric sans-serif typeface that provides
+                clear headings.
+            </p>
+            <div class="type-gallery">
+                <div class="weight-example-container">
+                    <span class="weight-example bold">Aa</span>
+                    <span>Bold</span>
+                    700
+                </div>
+                <div class="pangram-container">
+                    <div class="pangram uppercase">
+                        ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                    </div>
+                    <div class="pangram">abcdefghijklmnopqrstuvwxyz</div>
+                    <div class="pangram">0123456789</div>
+                </div>
+            </div>
+        </section>
+        <section class="specimen">
+            <h3>Space Grotesk</h3>
+            <p>
+                Space Grotesk is a proportial sans-serif typeface that provides
+                readable body text across a range of content lengths.
             </p>
             <div class="type-gallery">
                 <div class="weight-example-container">
