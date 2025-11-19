@@ -1,12 +1,32 @@
 .typography {
+    .specimen {
+        margin: 1rem 0 3rem;
+
+        --specimen-font-family: var(--font-family);
+
+        &.prata {
+            --specimen-font-family: 'Prata', serif;
+        }
+
+        &.sen {
+            --specimen-font-family: 'Sen', sans-serif;
+        }
+
+        h3,
+        .weight-example,
+        .pangram {
+            --font-family: var(--specimen-font-family);
+        }
+    }
+
     .type-gallery {
         display: flex;
         flex-flow: row wrap;
         border-image: linear-gradient(
                 to bottom,
                 var(--brand-color-3),
-                var(--brand-color-4),
-                var(--brand-color-2)
+                var(--brand-color-2),
+                var(--brand-color-1)
             )
             1 100%;
         border-image-width: 0 0 0 4px;
@@ -28,15 +48,19 @@
         &.light {
             font-weight: 300;
         }
+
         &.regular {
             font-weight: 400;
         }
+
         &.medium {
             font-weight: 500;
         }
+
         &.semibold {
             font-weight: 600;
         }
+
         &.bold {
             font-weight: 700;
         }
@@ -51,6 +75,7 @@
 
     .scale-example {
         margin-bottom: 3rem;
+
         p {
             margin: 0.25rem 0;
         }
